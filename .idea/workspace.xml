@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment="Init Project">
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/hebk/model/list/List.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/hebk/model/node/Node.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/hebk/model/queue/Queue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/hebk/model/stack/Stack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment="[init] datamodell">
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +76,7 @@
       <workItem from="1667760742384" duration="1990000" />
       <workItem from="1667762750058" duration="500000" />
       <workItem from="1667763681591" duration="251000" />
-      <workItem from="1667764684957" duration="1418000" />
+      <workItem from="1667764684957" duration="1514000" />
     </task>
     <task id="LOCAL-00001" summary="Init Project">
       <created>1667762862125</created>
@@ -103,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667763856728</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="[init] datamodell">
+      <created>1667766151287</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667766151287</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,7 +125,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Init Project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Init Project" />
+    <MESSAGE value="[init] datamodell" />
+    <option name="LAST_COMMIT_MESSAGE" value="[init] datamodell" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
