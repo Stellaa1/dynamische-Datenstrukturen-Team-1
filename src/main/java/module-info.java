@@ -1,8 +1,8 @@
-module com.example.demo {
+module de.hebk {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens com.example.demo to javafx.fxml;
-    exports com.example.demo;
+    opens de.hebk to javafx.fxml;
+    exports de.hebk;
 }
