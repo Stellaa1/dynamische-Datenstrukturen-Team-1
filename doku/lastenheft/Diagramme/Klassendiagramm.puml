@@ -63,7 +63,7 @@ class GameControl{
 }
 class Question{
 -question : String
--answers : String
+-answers : String[]
 -difficulty : int
 }
 class PlayerData{
