@@ -1,27 +1,149 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
+class App {
+-gameControl : GameControl
++{static}main() : void
+}
+class Player{
+-name : String
+-games : ArrayList<Spiel>
+-picture : ImageIcon
+-playerData : PlayerData
+}
+class Game{
+-score : int
+-difficulty : int
+-revive : boolean
+-fiftyPercent : boolean
+-audience : boolean
+-telephone : boolean
+-switchQuestion : int
+-questionNumber : int
+-cheatInfinityJoker : boolean
+-cheatDiagram : boolean
+-cheatInfinityRevive : boolean
+-cheatFiftyFifty : boolean
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
++useRevive(): void
++useFiftyPercent(): void
++useTelephone(): void
++useSwitchQuestion():void
++useAudience(): void
++askAQuestion(int difficulty): void
++multiplayer(): void
++singleplayer(): void
++questionMaker(): void
++reverse(): void
 
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
+}
+class Node<T>{
+-first: Node<T>
 
-class ArrayList {
-Object[] elementData
-size()
++isEmpty(): boolean
++enqueue(T pObject): void
++dequeue(): void
++front(): T
+}
+class GameControl{
+-storage : Storage
+-player : ArrayList<Player>
+-gui : GUI
+-gameLength : int
+-cheatInfinityJoker : boolean
+-cheatDiagram : boolean
+-cheatInfinityRevive : boolean
+-cheatFiftyFifty : boolean
+
++startGame() : void
++createPlayer(): void
++showTopTen() : void
++options() : void
++choosePlayer() : void
+}
+class Question{
+-question : String
+-answers : String[]
+-difficulty : int
+}
+class PlayerData{
+- games : arrayList<Game>
+- score : int
+- jonas : Achievement
+- veteran : Achievement
+- smaarten: Achievement
+- gunterJauch : Achievement
+- mafiaTenbrock : Achievement
+
+}
+class Achievement{
+-description : String
+-mame : String
+-boolean achieved
++conditions() : void
+}
+class Storage{
+-questions : ArrayList<Question>
+
+getQuestion(int difficulty) : Question
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+
+
+class Stack<T>{
+-first : Node
+
++isEmpty(): boolean
++push(T pObject): void
++pop(): void
++top(): T
 }
+class Queue<T>{
+-first: Node<T>
+
++isEmpty(): boolean
++enqueue(T pObject): void
++dequeue(): void
++front(): T
+}
+
+class List<T>{
+-first: Node<T>
+-currentNode: Node<T>
+
++isEmpty(): boolean
++hasAccess(): boolean
++next(): void
++toFirst(): void
++toLast(): void
++getObject(): T
++setObject(): void
++append(T pContext): void
++insert(T pContext): void
++contact(List<T> pList): void
++remove(): void
+}
+List --> Node
+Stack --> Node
+Queue --> Node
+
+Storage::questions --* "0...*"Question
+GameControl::startGame --> Game : Starts
+
+Player::games --> Game : stores
+
+Game::multiplayer --> List : uses
+Game::singleplayer --> List : uses
+Game::reverse --> Queue : uses
+Game::questions --> Stack : uses
+GameControl::storage --> "1"Storage
+GameControl::player --> "0..*"Player
+Storage::games --> "0...*"Game
+Player::playerData --> PlayerData
+PlayerData::jonas --> Achievement
+PlayerData::smaarten --> Achievment
+App::gameControl --> GameControl
+
+
 
 @enduml
