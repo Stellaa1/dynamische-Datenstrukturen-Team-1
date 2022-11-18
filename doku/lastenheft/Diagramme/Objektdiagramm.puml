@@ -1,16 +1,66 @@
 @startuml
-'https://plantuml.com/object-diagram
+object storage
+object gameControl
+object user
+object game
+object questions1
+object playerData
+object achievementJonas
+object achievementGunterJauch
+object achievementMafiaTenbrock
+object achievementSmaarten
+object achievementVeteran
 
-object London
-object Washington
-object Berlin
-object NewYork
+user : name = "Dummy"
+user : picture = imageIcon
+user : playerData = playerData
 
-map CapitalCity {
- UK *-> London
- USA *--> Washington
- Germany *---> Berlin
-}
+questions1 : question = "was ist die giftigste Schlage der Welt"
+questions1 : answer[1] = "Inlandtaipan"
+questions1 : difficulty = 8
 
-NewYork --> CapitalCity::USA
+game : score = 20
+game : difficulty = 3
+game : revive = true
+game : fiftyPercent = true
+game : audience = true
+game : telephone = true
+game : switchQuestion = 4
+game : questionNumber = 20
+game : cheatInfinityJoker = false
+game : cheatDiagram = false
+game : cheatInfinityRevive = false
+game : cheatFiftyFifty = false
+
+storage : questions[1] = questions1
+
+achievementJonas : description = "Erreiche 10 Punkte"
+achievementJonas : mame : "Jonas"
+achievementJonas : boolean achieved = true
+
+achievementVeteran : description = "Erreiche 20 Punkte""
+achievementVeteran : mame = "Veteran"
+achievementVeteran : achieved = true
+
+achievementSmaarten : description = "Erreiche 30 Punkte"
+achievementSmaarten : mame = "Smaarten"
+achievementSmaarten : achieved = true
+
+achievementMafiaTenbrock :description = "Nutze Cheats"
+achievementMafiaTenbrock : name = "Mafia Tenbrock"
+achievementMafiaTenbrock : achieved = true
+
+achievementGunterJauch : description = "erreiche 30 Punkte ohen Joker oder Cheats"
+achievementGunterJauch : name = "GunterJauch"
+achievementGunterJauch : achieved = true
+
+playerData : game[1] = game
+playerData :  score = int
+playerData :  jonas = achievementJonas
+playerData : veteran = achievementVeteran
+playerData : smaarten = achievementSmaarten
+playerData :  gunterJauch = achievementGunterJauch
+playerData :  mafiaTenbrock = achievementMafiaTenbrock
+
+
 @enduml
