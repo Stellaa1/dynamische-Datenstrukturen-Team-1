@@ -46,7 +46,7 @@ achievementSmaarten : description = "Erreiche 30 Punkte"
 achievementSmaarten : mame = "Smaarten"
 achievementSmaarten : achieved = true
 
-achievementMafiaTenbrock :description = "Nutze Cheats"
+achievementMafiaTenbrock :  description = "Nutze Cheats"
 achievementMafiaTenbrock : name = "Mafia Tenbrock"
 achievementMafiaTenbrock : achieved = true
 
