@@ -128,18 +128,18 @@ Stack --* Node
 Queue --* Node
 Node --* Node
 
-Storage::questions --o "0...*"Question
+Storage::questions --o "0...*"Question : -questions : List
 GameControl::startGame --> Game : Starts
 
-PlayerData --o "0...*"Game : stores in a List
-Player --* "1"PlayerData : playerData
+PlayerData --o "0...*"Game :  -gameList : List
+Player --* "1"PlayerData : -playerData
 Game::multiplayer --> List : list = List
 Game::singleplayer --> List : list = List
 Game::reverse --> Queue : list = Queue
 Game::questions --> Stack : list = Stack
-GameControl::storage --* "1"Storage
-GameControl::player --o "0..*"Player : List
-Storage::games --o "0...*"Game
+GameControl::storage --* "1"Storage: -storage
+GameControl::player --o "0..*"Player : -playerList : List
+Storage::games --o "0...*"Game : -games : List
 App --* "1"GameControl
 
 
