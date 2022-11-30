@@ -2,14 +2,11 @@
 'https://plantuml.com/class-diagram
 
 class App {
--gameControl : GameControl
 +{static}main() : void
 }
 class Player{
 -name : String
--games : ArrayList<Spiel>
 -picture : ImageIcon
--playerData : PlayerData
 }
 class Game{
 -score : int
@@ -24,6 +21,7 @@ class Game{
 -cheatDiagram : boolean
 -cheatInfinityRevive : boolean
 -cheatFiftyFifty : boolean
+-list : MotherList<Question>
 
 +useRevive(): void
 +useFiftyPercent(): void
@@ -38,7 +36,7 @@ class Game{
 
 }
 class Node<T>{
--first: Node<T>
+-next: Node<T>
 
 +isEmpty(): boolean
 +enqueue(T pObject): void
@@ -67,13 +65,15 @@ class Question{
 -difficulty : int
 }
 class PlayerData{
-- games : arrayList<Game>
 - score : int
 - jonas : Achievement
 - veteran : Achievement
 - smaarten: Achievement
 - gunterJauch : Achievement
 - mafiaTenbrock : Achievement
+
+}
+abstract class MotherList<T>{
 
 }
 class Achievement{
@@ -90,7 +90,7 @@ getQuestion(int difficulty) : Question
 
 
 
-class Stack<T>{
+class Stack<T> extends MotherList{
 -first : Node
 
 +isEmpty(): boolean
@@ -98,7 +98,7 @@ class Stack<T>{
 +pop(): void
 +top(): T
 }
-class Queue<T>{
+class Queue<T> extends MotherList{
 -first: Node<T>
 
 +isEmpty(): boolean
@@ -107,7 +107,7 @@ class Queue<T>{
 +front(): T
 }
 
-class List<T>{
+class List<T> extends MotherList{
 -first: Node<T>
 -currentNode: Node<T>
 
@@ -123,27 +123,24 @@ class List<T>{
 +contact(List<T> pList): void
 +remove(): void
 }
-List --> Node
-Stack --> Node
-Queue --> Node
+List --* Node
+Stack --* Node
+Queue --* Node
+Node --* Node
 
-Storage::questions --* "0...*"Question
+Storage::questions --o "0...*"Question : -questions : List
 GameControl::startGame --> Game : Starts
 
-Player::games --> Game : stores
-
-Game::multiplayer --> List : uses
-Game::singleplayer --> List : uses
-Game::reverse --> Queue : uses
-Game::questions --> Stack : uses
-GameControl::storage --> "1"Storage
-GameControl::player --> "0..*"Player
-Storage::games --> "0...*"Game
-Player::playerData --> PlayerData
-PlayerData::jonas --> Achievement
-PlayerData::smaarten --> Achievment
-App::gameControl --> GameControl
-
+PlayerData --o "0...*"Game :  -gameList : List
+Player --* "1"PlayerData : -playerData
+Game::multiplayer --> List : list = List
+Game::singleplayer --> List : list = List
+Game::reverse --> Queue : list = Queue
+Game::questions --> Stack : list = Stack
+GameControl::storage --* "1"Storage: -storage
+GameControl::player --o "0..*"Player : -playerList : List
+Storage::games --o "0...*"Game : -games : List
+App --* "1"GameControl
 
 
 @enduml
