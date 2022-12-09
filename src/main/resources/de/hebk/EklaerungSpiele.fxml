@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2F346E;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fill="WHITE" layoutX="264.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SPIELE ">
+         <font>
+            <Font name="Sylfaen" size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="288.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REVERSE">
+         <font>
+            <Font name="Sylfaen" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="259.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUESTIONMAKER ">
+         <font>
+            <Font name="Sylfaen" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="271.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MULTIPLAYER">
+         <font>
+            <Font name="Sylfaen" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="288.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NORMAL">
+         <font>
+            <Font name="Sylfaen" size="13.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="291.0" fitWidth="299.0" layoutX="-26.0" layoutY="142.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" rotate="-14.0">
+         <image>
+            <Image url="@Images/game-controller.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="14.0" layoutY="362.0" mnemonicParsing="false" style="-fx-background-radius: 0; -fx-background-color: #575B95;" text="ZURÜCK" textFill="WHITE">
+         <font>
+            <Font name="Sylfaen" size="12.0" />
+         </font>
+      </Button>
+      <Text fill="WHITE" layoutX="77.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Die erste Frage wird gestellt und die dazugehörige Antworten gezeigt. Der Spieler kann seiner Meinung nach die richtige Antwort anklicken oder wenn er nicht weiter weiß ein von dem Joker nutzen. Wenn er die Antwort richtig beantwortet, wird die nächste Frage angezeigt, bei falscher Antwort, verliert der Spieler. Seine Punktanzahl und der Platz in Top 10 wird ihm angezeigt und er kann zurück in das Menu gehen." textAlignment="CENTER" wrappingWidth="474.74202728271484">
+         <font>
+            <Font name="Sylfaen" size="10.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="78.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Der Reverse Modus funktioniert genau wie der normale Modus aus. Der einzige Unterschied ist, dass man erst mit den schwierigsten Fragen anfängt, d.h. dass man z.B. mit Frage 15 anfängt und später mit Frage 1 endet. Die Fragen werden so lange gestellt bis der Spieler gewinnt bzw. verliert. Am Ende kann der Spieler seine Punkten und den Platz in Top 10 sehen, danach kann der Spieler zurück in das Menu gehen. " textAlignment="CENTER" wrappingWidth="474.7420272827147">
+         <font>
+            <Font name="Sylfaen" size="10.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="78.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Die Spieler können ihren Namen eingeben und auch die Profilbilder aussuchen. Wenn beide Spieler fertig sind, können die auf weiter klicken. Der erste Spieler kriegt eine Frage, wenn er die Frage beantwortet, egal ob richtig oder falsch, soll er den Surface an den nächsten Spieler weitergeben. Die Spieler spielen solange, bis jeder seine Fragen beantwortet. Am Ende werden die Punkte gezählt und der Highscore angezeigt. Der Spieler mit meisten Punkten hat gewonnen. " textAlignment="CENTER" wrappingWidth="474.74202728271445">
+         <font>
+            <Font name="Sylfaen" size="10.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="77.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Die Spieler können hier auch ihren Namen eingeben und ein Profilbild aussuchen. Der Modus funktioniert hier aber ganz anders. Der erste Spieler erstellt 10 Fragen und dazugehörige Antworten. Danach wird der Surface dem andern Spieler gegeben und er beantwortet die Fragen. Auch wenn er die Frage falsch beantwortet, kriegt er die nächste. Wenn der Spieler mit allen Fragen durch ist, werden die Punkten gezählt und jetzt kann er die 10 Fragen für den ersten Spieler erstellen, der er auch beantwortet. Am Ende werden die Punkten von beiden Spielern miteinander verglichen und der, der die größte Punktzahl hat, gewinnt" textAlignment="CENTER" wrappingWidth="474.7420272827142">
+         <font>
+            <Font name="Sylfaen" size="10.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

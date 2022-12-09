@@ -164,7 +164,7 @@ Es gibt nur zwei Anforderungen: die Hauptfunktion und eine Hilfefunktion. Der am
 | F1     | start game          | Das Spiel wird gestartet                                                                                                                        |
 | F2     | use revive          | Nachdem man das Spielt verliert, kann man den Joker Revive nutzen, um weiterspielen zu können.                                                  |
 | F3     | use fifty percent   | Zwei von den falschen Fragen werden zufällig ausgewählt und ausgeschaltet                                                                       |
-| F4     | use telephone       | Ein Audiospur wird abgespielt, die die richtige Antwort sagt (A/B/C/D)                                                                          |
+| F4     | use telephone       | Ein Audiospur wird abgespielt, die die richtige Antwort wied  gesagt (A/B/C/D)                                                                  |
 | F5     | use change question | Wenn man die Antwort nicht weißt, kann man eine neue Frage kriegen                                                                              |
 | F6     | use audience        | Ein Diagramm mit vier Balken wird angezeigt. Je schwerer die Frage ist, desto großer die Wahrscheinlichkeit, dass das Publikum falsch antwortet |
 | F7     | ask question        | Die Fragen werden schwere je weiter man kommt. der int Schwierigkeit zählt die gestellten Fragen und passt dem Schwierigkeitsgrad an.           |
