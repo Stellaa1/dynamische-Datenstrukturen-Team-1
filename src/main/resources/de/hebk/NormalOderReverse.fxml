@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2F346E;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fill="WHITE" layoutX="240.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SPIELEN" textAlignment="CENTER">
+         <font>
+            <Font name="Sylfaen" size="30.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="309.0" fitWidth="321.0" layoutX="146.0" layoutY="64.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/game-controller.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="207.0" layoutY="201.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="185.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="REVERSE" textFill="WHITE">
+         <font>
+            <Font name="Sylfaen" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="206.0" layoutY="151.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="185.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="NORMAL" textFill="WHITE">
+         <font>
+            <Font name="Sylfaen" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="14.0" layoutY="362.0" mnemonicParsing="false" style="-fx-background-radius: 0; -fx-background-color: #575B95;" text="ZURÜCK" textFill="WHITE">
+         <font>
+            <Font name="Sylfaen" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
