@@ -135,6 +135,52 @@
                               </Pane>
                            </children>
                         </Pane>
+                        <Pane layoutX="10.0" layoutY="143.0" prefHeight="118.0" prefWidth="1060.0" style="-fx-background-color: #575B95;">
+                           <children>
+                              <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/game-controller.png" />
+                                 </image>
+                              </ImageView>
+                              <Text fill="WHITE" layoutX="126.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Achievement" wrappingWidth="202.6785430908203">
+                                 <font>
+                                    <Font name="System Bold" size="21.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#a4a4a4" layoutX="124.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How to unlock" wrappingWidth="202.6785430908203">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Text>
+                              <Pane layoutX="767.0" layoutY="7.0" prefHeight="32.0" prefWidth="274.0" style="-fx-background-color: #161832;">
+                                 <children>
+                                    <Text fill="#ffc100" layoutY="25.0" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MEDIUM" textAlignment="CENTER" wrappingWidth="273.83119201660156">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="767.0" layoutY="44.0" prefHeight="32.0" prefWidth="274.0" style="-fx-background-color: #161832;">
+                                 <children>
+                                    <Text fill="#ff003f" layoutY="25.0" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="❌ NOT OWNED" textAlignment="CENTER" wrappingWidth="273.83119201660156">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="767.0" layoutY="81.0" prefHeight="32.0" prefWidth="274.0" style="-fx-background-color: #161832;">
+                                 <children>
+                                    <Text fill="#a4a4a4" layoutY="25.0" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Keine Informationen" textAlignment="CENTER" wrappingWidth="273.83119201660156">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
                      </children>
                   </VBox>
                </children></AnchorPane>
