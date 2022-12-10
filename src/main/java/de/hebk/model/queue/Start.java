@@ -1,6 +1,6 @@
-package de.hebk;
+package de.hebk.model.queue;
 
-import de.hebk.model.list.List;
+import de.hebk.model.queue.model.list.List;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
