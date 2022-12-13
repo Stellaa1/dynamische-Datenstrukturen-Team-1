@@ -1,6 +1,7 @@
 package de.hebk;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class CSVReader {
     /**
      * Methode, um ein Array aus allen Werten von dem Attribut mit Index 'attribut_Index' zu erstellen.
      @param path > der Pfad der CSV Datei.
-     @param attribut_Index > Index von dem gewählten Array. Dieser ist der ausgegeben Wert aus der Methode getcolumn() in Menu.
+     @param attribut_Index > Index von dem gewählten Array. Dieser ist der ausgegebene Wert aus der Methode getcolumn() in Menu.
      @return endvalues > String[]
      */
 
@@ -63,6 +64,47 @@ public class CSVReader {
         return endValues;
     }
 
+    public de.hebk.model.list.List<String[]> read2(String path, int attribut_Index) {
+        de.hebk.model.list.List<String[]> l = new de.hebk.model.list.List<>();
+        try {
+            Path p = Paths.get(path);
+            if (p.toFile().isFile()) {
+                BufferedReader b = new BufferedReader(new FileReader(path));
+                l.toFirst();
+                while ((line = b.readLine()) != null) {
+                    values = line.split(",");
+                    colums = line.split(",").length;
+                    stringValues.add(Arrays.toString(values));
+                    endArray.add(values);
+                    l.toFirst();
+                    l.append(values);
+                    System.out.println(Arrays.toString(values));
+                }
+
+                endValues = new String[stringValues.size() - 1];
+
+                for (int i = 1; i < stringValues.size(); i++) {
+                    endValues[i - 1] = endArray.get(i)[attribut_Index].toString();
+                }
+
+                b.close();
+            }else{
+                System.out.println("File does not Exist!");
+                endValues = null;
+            }
+
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+
+        } catch (Exception e) {
+
+        }
+
+        System.out.println(l.toString());
+        return l;
+    }
+
 
     /**
      * Methode, um eine Datei aus dem Array 'v' zu schreiben.
@@ -72,7 +114,7 @@ public class CSVReader {
 
     /**
      * Methode, um eine Datei aus dem Array 'v' zu schreiben.
-     @param path > der Pfad, wo die CSV Datei geschrieben wird.
+     @param relativePath > der Pfad, wo die CSV Datei geschrieben wird.
      @param v > sortiertes Array mit allen Werten aus dem gewählten Attribut
      */
 

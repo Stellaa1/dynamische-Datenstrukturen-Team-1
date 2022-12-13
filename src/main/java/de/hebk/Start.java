@@ -27,6 +27,6 @@ public class Start extends Application {
         Fragen f = new Fragen(16,"Geschichte");
         f.generateQuestions();
         List<String> l = new List<>();
-        //launch();
+        launch();
     }
 }

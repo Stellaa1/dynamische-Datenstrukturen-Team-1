@@ -56,7 +56,7 @@ public class GUI {
         Start.currentScene = screen;
     }
 
-    public void close() throws Exception {
+    public void closeNotification() throws Exception {
         System.out.println("STARTED");
         loadScreen("WillstDuWirklichSchliessen.fxml");
     }
@@ -65,6 +65,10 @@ public class GUI {
         System.out.println(Start.currentScene);
         System.out.println(Start.previousScene);
         loadScreen(Start.previousScene);
+    }
+
+    public void close(){
+        System.exit(0);
     }
 
 }
