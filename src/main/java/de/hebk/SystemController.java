@@ -4,8 +4,8 @@ import java.io.*;
 
 public class SystemController {
 
-    DataStore dataStore = new DataStore();
-    User user = new User();
+    private DataStore dataStore = new DataStore();
+    private User user = new User();
 
     public void saveData() {
         try {
