@@ -15,7 +15,7 @@ public class DataStore implements Serializable {
     public int searchForUser(String name){
         int index = -1;
         for (int i = 0; i< names.size(); i++){
-            if (name.equals(names.get(i))){
+            if (name.equals(names.get(i).getContext())){
                 index = i;
                 loadUser(i);
                 break;
