@@ -14,7 +14,7 @@ public class Start extends Application {
     public void start(Stage stage) throws Exception {
         mainStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("GUI.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1920,1280);
+        Scene scene = new Scene(fxmlLoader.load(), 1920,1480);
         stage.setTitle("GUI.fxml");
         stage.setScene(scene);
         stage.show();
@@ -25,6 +25,8 @@ public class Start extends Application {
         Fragen f = new Fragen(16,"Geschichte");
         f.generateQuestions();
         List<String> l = new List<>();
-        //launch();
+        launch();
+        //SystemController s = new SystemController();
+        //s.loadData();
     }
 }

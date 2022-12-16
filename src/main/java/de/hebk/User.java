@@ -5,7 +5,7 @@ import de.hebk.model.list.List;
 public class User {
     private String name;
     private String password;
-    private List<String> achievements;
+    private List<String> achievements = new List<>();
 
     public String getName(){
         return name;
