@@ -2,7 +2,9 @@ package de.hebk;
 
 import de.hebk.model.list.List;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String name;
     private String password;
     private List<String> achievements = new List<>();

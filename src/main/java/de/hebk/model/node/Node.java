@@ -1,10 +1,12 @@
 package de.hebk.model.node;
 
+import java.io.Serializable;
+
 /**
  * Generic Node
  * @param <T>
  */
-public class Node<T> {
+public class Node<T> implements Serializable {
 
     private T context;
     private Node<T> next;
