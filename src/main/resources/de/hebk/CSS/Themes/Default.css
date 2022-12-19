@@ -1,0 +1,15 @@
+.main_Panel{
+    -fx-background-color: #2F346E;
+}
+
+.button{
+    -fx-background-color: #575B95;
+    -fx-background-radius: 0;
+    -fx-text-fill: white;
+}
+
+.button_close{
+    -fx-background-color: #575B95;
+    -fx-background-radius: 0;
+    -fx-text-fill: white;
+}

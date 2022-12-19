@@ -2,6 +2,8 @@ package de.hebk.model.list;
 
 import de.hebk.model.node.Node;
 
+import java.io.Serializable;
+
 /**
  * Objekte der Klasse List verwalten beliebig viele, linear angeordnete Objekte. Auf
  * höchstens ein Listenobjekt, aktuelles Objekt genannt, kann jeweils zugegriffen
@@ -14,7 +16,7 @@ import de.hebk.model.node.Node;
  * vor dem aktuellen Objekt ein Listenobjekt eingefügt werden
  * @param <T>
  */
-public class List<T> {
+public class List<T> implements Serializable {
     private Node<T> first;
     private Node<T> aktuelleNode;
     private int size = 0;
@@ -93,6 +95,30 @@ public class List<T> {
         ret = temp;
 
         return ret;
+    }
+
+    public boolean find(T value){
+        boolean f = false;
+
+        Node<T> temp = first;
+
+        if (temp == null){
+            return false;
+        }
+
+        if (temp.getContext() == value){
+            return true;
+        }
+
+        while(temp.getNext() != null){
+            if (temp.getContext() == value){
+                f = true;
+                break;
+            }
+            temp = temp.getNext();
+        }
+
+        return f;
     }
 
     /**
