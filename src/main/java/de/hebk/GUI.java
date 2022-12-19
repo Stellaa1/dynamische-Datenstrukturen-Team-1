@@ -1,27 +1,28 @@
 package de.hebk;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
 public class GUI extends SystemController {
 
+    String local_Profile_Picure = "src/main/resources/de/hebk/Images/blank-profile-picture-973460_960_720.webp";
+
     DataStore dataStore = new DataStore();
     @FXML
     private Button button;
-
+    @FXML
     private Button activator;
     @FXML
     private ImageView imagePer;
@@ -31,13 +32,14 @@ public class GUI extends SystemController {
     private TextField nameField;
     @FXML
     private TextField passwordField;
-
+    @FXML
+    private Text warningText;
+    @FXML
+    private Text availabilityText;
     @FXML
     private Pane achievementPane;
-
     @FXML
     private VBox achievementsFrame;
-
     @FXML
     ImageView profileImage1;
     @FXML
@@ -133,11 +135,49 @@ public class GUI extends SystemController {
         //super.loadData();
         String s = super.randomName();
         nameField.setText(s);
+        showAvailabilityText();
+        checkAvailabilityName();
     }
 
     public void generatePassword(){
         String s = super.randomName();
         passwordField.setText(s);
+        hideAvailabilityText();
+    }
+
+    public void showAvailabilityText(){
+        availabilityText.setVisible(true);
+        checkAvailabilityName();
+    }
+
+    public void hideAvailabilityText(){
+        availabilityText.setVisible(false);
+    }
+
+    public void checkAvailabilityName(){
+
+        if (!checkValidName(nameField.getText())){
+            availabilityText.setText("(✕) Mindestens 3 Zeichen erfordert");
+            availabilityText.setStyle("-fx-fill: rgb(255,140,0)");
+            return;
+        }
+
+        if (users.get(0) == null){
+            availabilityText.setText("(✓) Gültiger Name");
+            availabilityText.setStyle("-fx-fill: rgb(0,255,140)");
+            return;
+        }
+
+        for (int i = 0; i < users.size(); i++){
+            if (users.get(i).getContext().getName().equals(nameField.getText())){
+                availabilityText.setText("(✕) Ungültiger Name");
+                availabilityText.setStyle("-fx-fill: rgb(255,0,80)");
+                break;
+            } else{
+                availabilityText.setText("(✓) Gültiger Name");
+                availabilityText.setStyle("-fx-fill: rgb(0,255,140)");
+            }
+        }
     }
 
     public void openMenu() throws Exception {
@@ -147,23 +187,38 @@ public class GUI extends SystemController {
 
     public void createUser() throws Exception {
 
-        int index = 1;//super.dataStore.searchForUser(nameField.getText());
+        int index = searchForUser(nameField.getText());
+
+        System.out.println(users.toString());
+        System.out.println(index + " index");
+
+        if (index != -1){
+            loadScreen("Warning.fxml");
+            System.out.println(warningText);
+            System.out.println(passwordField);
+            warningText.setText("Es gibt einen registrierten Nutzer mit dem selben Namen, bitte nehmen sie einen anderen Namen");
+            return;
+        }
 
         if (!super.checkValidName(nameField.getText())){
-            loadScreen("EinloggenFehler.fxml");
+            loadScreen("Warning.fxml");
             return;
         }
 
         if (!super.checkValidPassword(passwordField.getText())){
-            loadScreen("EinloggenFehler.fxml");
+            loadScreen("Warning.fxml");
             return;
         }
 
-        loadScreen("Profilbilder1.fxml");
         User u = new User();
-        u.setName("Player");
-        u.setPassword("Password");
+        u.setName(nameField.getText());
+        u.setPassword(passwordField.getText());
         users.append(u);
+
+        loadScreen("Menu.fxml");
+
+        //handle_ProfileImages(new MouseEvent(), u);
+
         System.out.println(users.toString() + " S");
         super.saveData();
 
@@ -188,16 +243,69 @@ public class GUI extends SystemController {
 
 
     public void handle_ProfileImages(MouseEvent event) throws Exception {
+
         if (event.getSource() == profileImage1){
-            System.out.println("IMAGE1");
-            System.out.println(profileImage1.getImage().getUrl());
-            super.saveData();
+            local_Profile_Picure = profileImage1.getImage().getUrl();
+        }
+
+        if (event.getSource() == profileImage2){
+            local_Profile_Picure = profileImage2.getImage().getUrl();
+        }
+
+        if (event.getSource() == profileImage3){
+            local_Profile_Picure = profileImage3.getImage().getUrl();
+        }
+
+        if (event.getSource() == profileImage4){
+            local_Profile_Picure = profileImage4.getImage().getUrl();
+        }
+
+        if (event.getSource() == profileImage5){
+            local_Profile_Picure = profileImage5.getImage().getUrl();
+        }
+
+        if (event.getSource() == profileImage6){
+            local_Profile_Picure = profileImage6.getImage().getUrl();
+        }
+
+        if (event.getSource() == profileImage7){
+            local_Profile_Picure = profileImage7.getImage().getUrl();
+        }
+
+        if (event.getSource() == profileImage8){
+            local_Profile_Picure = profileImage8.getImage().getUrl();
+        }
+
+        if (event.getSource() == profileImage9){
+            local_Profile_Picure = profileImage9.getImage().getUrl();
+        }
+
+        if (event.getSource() == profileImage10){
+            local_Profile_Picure = profileImage10.getImage().getUrl();
         }
 
         if (event.getSource() == profileImage11){
-            System.out.println("IMAGE11");
-            System.out.println(profileImage11.getImage().getUrl());
+            local_Profile_Picure = profileImage10.getImage().getUrl();
         }
 
+        if (event.getSource() == profileImage12){
+            local_Profile_Picure = profileImage12.getImage().getUrl();
+        }
+
+        if (event.getSource() == profileImage13){
+            local_Profile_Picure = profileImage13.getImage().getUrl();
+        }
+
+        if (event.getSource() == profileImage14){
+            local_Profile_Picure = profileImage14.getImage().getUrl();
+        }
+
+        if (event.getSource() == profileImage15){
+            local_Profile_Picure = profileImage15.getImage().getUrl();
+        }
+
+        //local_Player.setProfilePicture(imageUrl);
+        super.saveData();
+        loadScreen("Menu.fxml");
     }
 }
