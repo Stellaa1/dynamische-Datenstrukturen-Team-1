@@ -1,46 +1,97 @@
-package de.hebk.model.stack;
+package org.example.model;
 
-
-import de.hebk.model.node.Node;
-
-/**
- *
- * @param <T>
- */
 public class Stack<T> {
     private Node<T> first;
 
     /**
-     * Die Anfrage liefert den Wert true, wenn der Stapel keine
-     * Objekte enthält, sonst liefert sie den Wert false.
+     * Checks if the list is empty
+     * @return true or false
      */
     public boolean isEmpty(){
-        //TODO fill
-        return true;
+
+        return first == null;
     }
 
     /**
      * Das Objekt pObject wird oben auf den Stapel gelegt. Falls
-     * pObject gleich null ist, bleibt der Stapel unverändert
+     * pObject gleich null ist, bleibt der Stapel unverändert.
+     * @param pInhalt
      */
-    public void push(T pObjekt){
-        //TODO fill
+    public void push(T pInhalt){
+        if(pInhalt!=null){
+            Node<T> tmp;
+
+            if(first!=null) {
+                tmp = first;
+                first = new Node(pInhalt);
+                first.setNext(tmp);
+                tmp = first.getNext();
+
+            }else{
+                first=new Node<T>(pInhalt);
+            }
+
+
+        }
     }
 
     /**
      * Das zuletzt eingefügte Objekt wird von dem Stapel entfernt.
-     * Falls der Stapel leer ist, bleibt er unverändert.
+     * Falls der Stapel leer ist, bleibt er unverändert
+     * @return
      */
-    public void pop(){
-        //TODO fill
+    public T pop(){
+        if(!isEmpty()){
+            first=first.getNext();
+        }
+        return null;
     }
 
     /**
      * Die Anfrage liefert das oberste Stapelobjekt. Der Stapel bleibt
      * unverändert. Falls der Stapel leer ist, wird null zurückgegeben.
+     * @return
      */
     public T top(){
-        //TODO fill
-        return this.first.getContext();
+        if(isEmpty()){
+            return null;
+        }else{
+            return first.getContext();
+        }
     }
+
+    public T last(){
+        Node<T> tmp = first;
+        if(isEmpty()){
+            return null;
+        }else{
+            while(tmp.getNext() != null){
+                tmp = tmp.getNext();
+            }
+            return tmp.getContext();
+        }
+    }
+
+    /**
+     * Returns String representation of List
+     * @return
+     */
+    public String toString(){
+        String ret = "[";
+        Node tmp = first;
+
+        while (tmp != null){
+            if(tmp.getNext() == null){
+                ret = ret + tmp.getContext();
+            }else {
+                ret = ret + tmp.getContext() + ";";
+            }
+            tmp = tmp.getNext();
+        }
+
+
+        ret = ret + "]";
+        return ret;
+    }
+
 }
