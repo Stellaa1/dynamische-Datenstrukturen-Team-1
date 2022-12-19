@@ -7,6 +7,7 @@ import java.io.Serializable;
 public class User implements Serializable {
     private String name;
     private String password;
+    private String profilePicture;
     private List<String> achievements = new List<>();
 
     public String getName(){
@@ -15,6 +16,10 @@ public class User implements Serializable {
 
     public String getPassword(){
         return password;
+    }
+
+    public String getProfilePicture(){
+        return profilePicture;
     }
 
     public List<String> getAchievements(){
@@ -27,6 +32,10 @@ public class User implements Serializable {
 
     public void setPassword(String p){
         password = p;
+    }
+
+    public void setProfilePicture(String p){
+        profilePicture = p;
     }
 
     public void setAchievements(List<String> a){
