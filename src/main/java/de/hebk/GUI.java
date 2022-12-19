@@ -33,8 +33,6 @@ public class GUI extends SystemController {
     @FXML
     private TextField passwordField;
     @FXML
-    private Text warningText;
-    @FXML
     private Text availabilityText;
     @FXML
     private Pane achievementPane;
@@ -135,8 +133,8 @@ public class GUI extends SystemController {
         //super.loadData();
         String s = super.randomName();
         nameField.setText(s);
-        showAvailabilityText();
         checkAvailabilityName();
+        showAvailabilityText();
     }
 
     public void generatePassword(){
@@ -146,8 +144,8 @@ public class GUI extends SystemController {
     }
 
     public void showAvailabilityText(){
-        availabilityText.setVisible(true);
         checkAvailabilityName();
+        availabilityText.setVisible(true);
     }
 
     public void hideAvailabilityText(){
@@ -194,9 +192,7 @@ public class GUI extends SystemController {
 
         if (index != -1){
             loadScreen("Warning.fxml");
-            System.out.println(warningText);
             System.out.println(passwordField);
-            warningText.setText("Es gibt einen registrierten Nutzer mit dem selben Namen, bitte nehmen sie einen anderen Namen");
             return;
         }
 

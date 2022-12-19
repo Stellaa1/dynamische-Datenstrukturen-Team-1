@@ -25,12 +25,12 @@
             <Font name="Sylfaen" size="54.0" />
          </font>
       </Button>
-      <TextField fx:id="nameField" layoutX="659.0" layoutY="538.0" prefHeight="62.0" prefWidth="512.0" promptText="     BENUTZERNAME" style="-fx-background-color: #575B95; -fx-background-radius: 0; -fx-text-fill: white;">
+      <TextField fx:id="nameField" layoutX="659.0" layoutY="538.0" onKeyTyped="#checkAvailabilityName" onMouseClicked="#showAvailabilityText" prefHeight="62.0" prefWidth="512.0" promptText="     BENUTZERNAME" style="-fx-background-color: #575B95; -fx-background-radius: 0; -fx-text-fill: white;">
          <font>
             <Font size="44.0" />
          </font>
       </TextField>
-      <TextField fx:id="passwordField" layoutX="659.0" layoutY="660.0" prefHeight="62.0" prefWidth="512.0" promptText="          PASSWORT" style="-fx-background-color: #575B95; -fx-background-radius: 0; -fx-text-fill: white;">
+      <TextField fx:id="passwordField" layoutX="659.0" layoutY="660.0" onMouseClicked="#hideAvailabilityText" prefHeight="62.0" prefWidth="512.0" promptText="          PASSWORT" style="-fx-background-color: #575B95; -fx-background-radius: 0; -fx-text-fill: white;">
          <font>
             <Font size="44.0" />
          </font>
@@ -45,5 +45,10 @@
             <Image url="@Images/Dice.png" />
          </image>
       </ImageView>
+      <Text fx:id="availabilityText" layoutX="1193.0" layoutY="600.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="541.19384765625">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

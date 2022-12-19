@@ -14,17 +14,21 @@ public class SystemController{
 
     static List<User> users = new List<>();
 
-    public void saveData() throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream("DataStore.dat");
-        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(bufferedOutputStream);
+    public void saveData() {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("DataStore.dat");
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(bufferedOutputStream);
 
-        System.out.println(users.toString());
-        dataStore.users = users;
+            System.out.println(users.toString());
+            dataStore.users = users;
 
-        objectOutputStream.writeObject(dataStore);
-        objectOutputStream.close();
-        System.out.println(version);
+            objectOutputStream.writeObject(dataStore);
+            objectOutputStream.close();
+        } catch (Exception e){
+            System.out.println("<Bug> Save Data");
+        }
+
 
     }
 
@@ -49,11 +53,11 @@ public class SystemController{
             System.out.println(version);
 
         } catch (IOException d) {
-            d.printStackTrace();
+            System.out.println("<Bug> Load Data");
         } catch (ClassNotFoundException d2) {
-            d2.printStackTrace();
+            System.out.println("<Bug> Load Data");
         } catch (Exception m) {
-
+            System.out.println("<Bug> Load Data");
         }
     }
 
