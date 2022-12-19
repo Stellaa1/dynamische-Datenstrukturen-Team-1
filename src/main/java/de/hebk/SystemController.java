@@ -38,7 +38,12 @@ public class SystemController{
             DataStore data = (DataStore) objectInputStream.readObject();
 
             users = data.users;
+            dataStore.users = data.users;
             System.out.println(users.toString() + " users");
+
+            for (int i = 0; i < users.size(); i++) {
+                System.out.println(users.get(i).getContext().getName());
+            }
 
             objectInputStream.close();
             System.out.println(version);
@@ -52,6 +57,18 @@ public class SystemController{
         }
     }
 
+
+    public int searchForUser(String name){
+        int index = -1;
+        for (int i = 0; i< users.size(); i++){
+            if (name.equals(users.get(i).getContext().getName())){
+                index = i;
+                //loadUser(i);
+                break;
+            }
+        }
+        return index;
+    }
 
     public String randomName() {
         Texts texts = new Texts();
