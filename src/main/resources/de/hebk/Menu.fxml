@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" style="-fx-background-color: #2F346E;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" style="-fx-background-color: #2F346E;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
       <ImageView fitHeight="1163.0" fitWidth="1163.0" layoutX="671.0" layoutY="44.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -15,7 +15,7 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#49529d" height="1291.0" layoutY="-9.0" stroke="#49529d" strokeType="INSIDE" width="564.0" />
-      <Button layoutX="111.0" layoutY="80.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="241.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="SPIELEN" textFill="WHITE">
+      <Button layoutX="111.0" layoutY="80.0" mnemonicParsing="false" onAction="#showHowManyQuestions" prefHeight="81.0" prefWidth="241.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="SPIELEN" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="43.0" />
          </font>
@@ -25,7 +25,7 @@
             <Font name="Sylfaen" size="45.0" />
          </font>
       </Button>
-      <ImageView fitHeight="79.0" fitWidth="129.0" layoutX="29.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="79.0" fitWidth="129.0" layoutX="29.0" layoutY="80.0" onMouseClicked="#showHowManyQuestions" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/game-controller.png" />
          </image>
