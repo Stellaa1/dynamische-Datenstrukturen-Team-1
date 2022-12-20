@@ -235,7 +235,19 @@ public class List<T> implements Serializable {
      * bleibt die Liste unverändert
      */
     public void concat(List<T> pList){
-        //TODO fill
+        if (pList == null || pList.isEmpty()){
+            return;
+        }
+
+        if (isEmpty()){
+            first = pList.first;
+        }
+
+        Node<T> temp = first;
+        while(temp.getNext() != null){
+            temp = temp.getNext();
+        }
+        temp.setNext(pList.first);
     }
 
     /**
@@ -257,14 +269,12 @@ public class List<T> implements Serializable {
         }
 
         if (aktuelleNode.getNext() == null){
-            System.out.println(aktuelleNode.getContext() + " removed");
             temp.setNext(null);
             aktuelleNode = null;
             size--;
             return;
         }
 
-        System.out.println(aktuelleNode.getContext() + " removed");
         temp.setNext(aktuelleNode.getNext());
         aktuelleNode = temp;
         size--;
