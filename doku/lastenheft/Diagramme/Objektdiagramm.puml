@@ -1,5 +1,5 @@
 @startuml
-object storage
+object dataStore
 object gameControl
 object user
 object game
