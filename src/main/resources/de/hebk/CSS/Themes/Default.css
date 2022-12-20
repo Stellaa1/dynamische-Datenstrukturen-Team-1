@@ -13,3 +13,11 @@
     -fx-background-radius: 0;
     -fx-text-fill: white;
 }
+
+.button_2{
+    -fx-background-color: #7C83C2;
+}
+
+.button_3{
+    -fx-background-color: #515AAD;
+}
