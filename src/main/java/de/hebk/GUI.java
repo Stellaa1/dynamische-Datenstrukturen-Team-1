@@ -228,6 +228,10 @@ public class GUI extends SystemController {
         //super.saveData();
     }
 
+    public void showHowManyQuestions() throws Exception{
+        loadScreen("Fragenzahl.fxml");
+    }
+
     public void showProfilePicture2() throws Exception{
         loadScreen("Profilbilder2.fxml");
     }
