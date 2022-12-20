@@ -21,3 +21,28 @@
 .button_3{
     -fx-background-color: #515AAD;
 }
+
+.button_4{
+    -fx-background-color: #49529d;
+    -fx-text-fill: White;
+}
+
+.rectangle{
+    -fx-fill: #49529d;
+}
+
+.rectangle_2{
+    -fx-fill: #7C83C2;
+}
+
+.rectangle_3{
+    -fx-fill: #2F346E;
+}
+
+.Text{
+    -fx-background-color: orange;
+}
+
+.text-area {
+    -fx-text-fill: rgb(0,0,0);
+}
