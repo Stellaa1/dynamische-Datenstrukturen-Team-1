@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -101,7 +100,7 @@ public class GUI extends SystemController {
 
 
 
-    public void loadScreen(String screen) throws Exception{
+    public void loadScene(String screen) throws Exception{
         Start.previousScene = Start.mainStage.getTitle();
         FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource(screen));
         Scene scene = new Scene(fxmlLoader.load(), 1920,1280);
@@ -112,21 +111,21 @@ public class GUI extends SystemController {
     }
 
     public void showMainMenu() throws Exception{
-        loadScreen("GUI.fxml");
+        loadScene("GUI.fxml");
     }
     public void closeNotification() throws Exception {
-        loadScreen("WillstDuWirklichSchliessen.fxml");
+        loadScene("WillstDuWirklichSchliessen.fxml");
     }
 
     public void showPreviousScene() throws Exception {
         System.out.println(Start.currentScene);
         System.out.println(Start.previousScene);
-        loadScreen(Start.previousScene);
+        loadScene(Start.previousScene);
     }
 
     public void showEinloggen() throws Exception{
         super.loadData();
-        loadScreen("Regestrieren.fxml");
+        loadScene("Regestrieren.fxml");
     }
 
     public void generateName(){
@@ -179,7 +178,7 @@ public class GUI extends SystemController {
     }
 
     public void openMenu() throws Exception {
-        loadScreen("Menu.fxml");
+        loadScene("Menu.fxml");
     }
 
 
@@ -191,18 +190,18 @@ public class GUI extends SystemController {
         System.out.println(index + " index");
 
         if (index != -1){
-            loadScreen("Warning.fxml");
+            loadScene("Warning.fxml");
             System.out.println(passwordField);
             return;
         }
 
         if (!super.checkValidName(nameField.getText())){
-            loadScreen("Warning.fxml");
+            loadScene("Warning.fxml");
             return;
         }
 
         if (!super.checkValidPassword(passwordField.getText())){
-            loadScreen("Warning.fxml");
+            loadScene("Warning.fxml");
             return;
         }
 
@@ -211,7 +210,7 @@ public class GUI extends SystemController {
         u.setPassword(passwordField.getText());
         users.append(u);
 
-        loadScreen("Menu.fxml");
+        loadScene("Menu.fxml");
 
         //handle_ProfileImages(new MouseEvent(), u);
 
@@ -229,11 +228,11 @@ public class GUI extends SystemController {
     }
 
     public void showHowManyQuestions() throws Exception{
-        loadScreen("Fragenzahl.fxml");
+        loadScene("Fragenzahl.fxml");
     }
 
     public void showProfilePicture2() throws Exception{
-        loadScreen("Profilbilder2.fxml");
+        loadScene("Profilbilder2.fxml");
     }
 
     public void close() throws IOException {
@@ -306,6 +305,6 @@ public class GUI extends SystemController {
 
         //local_Player.setProfilePicture(imageUrl);
         super.saveData();
-        loadScreen("Menu.fxml");
+        loadScene("Menu.fxml");
     }
 }
