@@ -77,7 +77,8 @@ public class GUI extends SystemController {
     ImageView profileImage19;
     @FXML
     ImageView profileImage20;
-
+    @FXML
+    private ImageView questionImage;
 
 
 
