@@ -20,7 +20,7 @@
             <Font name="Sylfaen" size="43.0" />
          </font>
       </Button>
-      <Button layoutX="26.0" layoutY="1186.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="510.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="SCHLIESSEN" textFill="WHITE">
+      <Button layoutX="26.0" layoutY="1160.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="510.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="SCHLIESSEN" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="45.0" />
          </font>
