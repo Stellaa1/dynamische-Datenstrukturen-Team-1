@@ -16,8 +16,8 @@ user : picture = imageIcon
 user : playerData = playerData
 
 questions1 : question = "was ist die giftigste Schlage der Welt"
-questions1 : answer[1] = "Inlandtaipan"
 questions1 : difficulty = 8
+questions1 : options = [Weimar → Berlin → Dessau → Gotha]
 
 game : score = 20
 game : difficulty = 3
