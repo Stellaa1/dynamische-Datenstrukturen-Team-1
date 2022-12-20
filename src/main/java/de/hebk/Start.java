@@ -16,7 +16,7 @@ public class Start extends Application implements Serializable {
     public void start(Stage stage) throws Exception {
         mainStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("GUI.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1920,1480);
+        Scene scene = new Scene(fxmlLoader.load(), 1920,1280);
         stage.setTitle("GUI.fxml");
         stage.setScene(scene);
         stage.show();

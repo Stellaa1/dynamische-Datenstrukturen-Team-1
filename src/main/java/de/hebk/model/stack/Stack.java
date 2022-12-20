@@ -1,4 +1,6 @@
-package org.example.model;
+package de.hebk.model.stack;
+
+import de.hebk.model.node.Node;
 
 public class Stack<T> {
     private Node<T> first;
@@ -23,12 +25,14 @@ public class Stack<T> {
 
             if(first!=null) {
                 tmp = first;
-                first = new Node(pInhalt);
+                first = new Node<T>();
+                first.setContext(pInhalt);
                 first.setNext(tmp);
                 tmp = first.getNext();
 
             }else{
-                first=new Node<T>(pInhalt);
+                first=new Node<T>();
+                first.setContext(pInhalt);
             }
 
 

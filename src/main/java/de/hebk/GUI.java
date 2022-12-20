@@ -126,7 +126,7 @@ public class GUI extends SystemController {
 
     public void showEinloggen() throws Exception{
         super.loadData();
-        loadScreen("Einloggen.fxml");
+        loadScreen("Regestrieren.fxml");
     }
 
     public void generateName(){
