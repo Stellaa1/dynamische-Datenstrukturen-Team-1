@@ -46,7 +46,7 @@ public class Stack<T> {
      */
     public T pop(){
         if(!isEmpty()){
-            first=first.getNext();
+            first = first.getNext();
         }
         return null;
     }
@@ -81,21 +81,21 @@ public class Stack<T> {
      * @return
      */
     public String toString(){
-        String ret = "[";
+        String valueToReturn = "[";
         Node tmp = first;
 
         while (tmp != null){
             if(tmp.getNext() == null){
-                ret = ret + tmp.getContext();
+                valueToReturn = valueToReturn + tmp.getContext();
             }else {
-                ret = ret + tmp.getContext() + ";";
+                valueToReturn = valueToReturn + tmp.getContext() + " → ";
             }
             tmp = tmp.getNext();
         }
 
 
-        ret = ret + "]";
-        return ret;
+        valueToReturn = valueToReturn + "]";
+        return valueToReturn;
     }
 
 }
