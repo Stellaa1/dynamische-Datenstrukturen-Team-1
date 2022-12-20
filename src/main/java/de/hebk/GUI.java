@@ -232,6 +232,10 @@ public class GUI extends SystemController {
         loadScene("Fragenzahl.fxml");
     }
 
+    public void showGame() throws Exception{
+        loadScene("Normal10.fxml");
+    }
+
     public void showProfilePicture2() throws Exception{
         loadScene("Profilbilder2.fxml");
     }
