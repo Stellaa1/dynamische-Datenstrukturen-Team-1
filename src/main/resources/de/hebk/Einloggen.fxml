@@ -20,7 +20,7 @@
             <Font name="Sylfaen" size="95.0" />
          </font>
       </Text>
-      <Button layoutX="33.0" layoutY="1149.0" mnemonicParsing="false" onAction="#showPreviousScene" prefHeight="96.0" prefWidth="360.0" style="-fx-background-radius: 0; -fx-background-color: #575B95;" text="ZURÜCK" textFill="WHITE">
+      <Button layoutX="33.0" layoutY="1149.0" mnemonicParsing="false" onAction="#showMainMenu" prefHeight="96.0" prefWidth="360.0" style="-fx-background-radius: 0; -fx-background-color: #575B95;" text="ZURÜCK" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="54.0" />
          </font>
@@ -37,12 +37,12 @@
       </TextField>
       <ImageView fitHeight="86.0" fitWidth="320.0" layoutX="559.0" layoutY="544.0" onMouseClicked="#generateName" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Images/Würfel.png" />
+            <Image url="@Images/Dice.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="86.0" fitWidth="320.0" layoutX="559.0" layoutY="671.0" onMouseClicked="#generatePassword" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="86.0" fitWidth="86.0" layoutX="559.0" layoutY="671.0" onMouseClicked="#generatePassword" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Images/Würfel.png" />
+            <Image url="@Images/Dice.png" />
          </image>
       </ImageView>
    </children>

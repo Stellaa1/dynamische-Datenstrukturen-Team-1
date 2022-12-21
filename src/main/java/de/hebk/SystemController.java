@@ -4,61 +4,44 @@ package de.hebk;
 import de.hebk.model.list.List;
 import javafx.scene.control.TextField;
 
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.FileInputStream;
-import java.io.BufferedInputStream;
-import java.io.ObjectInputStream;
-public class SystemController {
+import java.io.*;
 
-    public static DataStore dataStore = new DataStore();
-    private User user = new User();
+public class SystemController{
 
-    List<String> names = new List<>();
-
-    List<String> passwords = new List<>();
-    List<List<String>> achievements = new List<>();
-
-    public void saveData() {
-        try {
-
-            FileOutputStream f = new FileOutputStream("ver.dat");
-            BufferedOutputStream b = new BufferedOutputStream(f);
-            ObjectOutputStream o = new ObjectOutputStream(b);
-
-            dataStore.setNames(this.names);
-            dataStore.setPasswords(this.passwords);
+    String version = "";
+    DataStore dataStore = new DataStore();
 
 
-            o.writeObject(dataStore);
-            o.close();
-            System.out.println(dataStore.getNames().toString() + " saved");
-            System.out.println(this.names.toString());
+    static List<User> users = new List<>();
 
-        } catch (IOException d) {
-            d.printStackTrace();
-        }
+    public void saveData() throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream("DataStore.dat");
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(bufferedOutputStream);
+
+        System.out.println(users.toString());
+        dataStore.users = users;
+
+        objectOutputStream.writeObject(dataStore);
+        objectOutputStream.close();
+        System.out.println(version);
+
     }
 
     public void loadData() {
         try {
 
-            FileInputStream f2 = new FileInputStream("ver.dat");
-            BufferedInputStream b2 = new BufferedInputStream(f2);
-            ObjectInputStream obj2 = new ObjectInputStream(b2);
+            FileInputStream fileInputStream = new FileInputStream("DataStore.dat");
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+            ObjectInputStream objectInputStream = new ObjectInputStream(bufferedInputStream);
 
-            DataStore dataStore = (DataStore) obj2.readObject();
-            System.out.println(dataStore.getNames());
+            DataStore data = (DataStore) objectInputStream.readObject();
 
-            this.names = dataStore.getNames();
-            this.passwords = dataStore.getPasswords();
+            users = data.users;
+            System.out.println(users.toString() + " users");
 
-
-
-            obj2.close();
-
+            objectInputStream.close();
+            System.out.println(version);
 
         } catch (IOException d) {
             d.printStackTrace();
@@ -102,5 +85,27 @@ public class SystemController {
         return null;
     }
 
+    public boolean checkValidName(String s){
+        boolean v = false;
+
+        if (s.length() > 2){
+            v = true;
+        }
+
+
+        return v;
+    }
+
+
+    public boolean checkValidPassword(String s){
+        boolean v = false;
+
+        if (s.length() > 2){
+            v = true;
+        }
+
+
+        return v;
+    }
 
 }

@@ -6,7 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Start extends Application {
+import java.io.Serializable;
+
+public class Start extends Application implements Serializable {
     public static Stage mainStage;
     public static String currentScene;
     public static String previousScene;
@@ -26,7 +28,6 @@ public class Start extends Application {
         f.generateQuestions();
         List<String> l = new List<>();
         launch();
-        //SystemController s = new SystemController();
         //s.loadData();
     }
 }

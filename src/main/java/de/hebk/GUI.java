@@ -1,18 +1,24 @@
 package de.hebk;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class GUI {
-    Font font = Font.font("Times New Roman");
+import java.io.IOException;
+
+public class GUI extends SystemController {
+
+    DataStore dataStore = new DataStore();
     @FXML
     private Button button;
 
@@ -32,8 +38,51 @@ public class GUI {
     @FXML
     private VBox achievementsFrame;
 
+    @FXML
+    ImageView profileImage1;
+    @FXML
+    ImageView profileImage2;
+    @FXML
+    ImageView profileImage3;
+    @FXML
+    ImageView profileImage4;
+    @FXML
+    ImageView profileImage5;
+    @FXML
+    ImageView profileImage6;
+    @FXML
+    ImageView profileImage7;
+    @FXML
+    ImageView profileImage8;
+    @FXML
+    ImageView profileImage9;
+    @FXML
+    ImageView profileImage10;
+    @FXML
+    ImageView profileImage11;
+    @FXML
+    ImageView profileImage12;
+    @FXML
+    ImageView profileImage13;
+    @FXML
+    ImageView profileImage14;
+    @FXML
+    ImageView profileImage15;
+    @FXML
+    ImageView profileImage16;
+    @FXML
+    ImageView profileImage17;
+    @FXML
+    ImageView profileImage18;
+    @FXML
+    ImageView profileImage19;
+    @FXML
+    ImageView profileImage20;
 
-    private SystemController systemController = new SystemController();
+
+
+
+    //private SystemController systemController = new SystemController();
     @FXML
     public void onHelloButtonClick() throws Exception{
         //welcomeText.setText("Welcome to JavaFX Application!");
@@ -62,8 +111,10 @@ public class GUI {
         Start.currentScene = screen;
     }
 
+    public void showMainMenu() throws Exception{
+        loadScreen("GUI.fxml");
+    }
     public void closeNotification() throws Exception {
-        System.out.println("STARTED");
         loadScreen("WillstDuWirklichSchliessen.fxml");
     }
 
@@ -74,44 +125,79 @@ public class GUI {
     }
 
     public void showEinloggen() throws Exception{
-        systemController.loadData();
+        super.loadData();
         loadScreen("Einloggen.fxml");
-        System.out.println(systemController.names.toString());
     }
 
     public void generateName(){
-        String s = systemController.randomName();
+        //super.loadData();
+        String s = super.randomName();
         nameField.setText(s);
     }
 
     public void generatePassword(){
-        String s = systemController.randomName();
+        String s = super.randomName();
         passwordField.setText(s);
     }
 
+    public void openMenu() throws Exception {
+        loadScreen("Menu.fxml");
+    }
 
-    public void createUser(){
 
-        int index = systemController.dataStore.searchForUser(nameField.getText());
+    public void createUser() throws Exception {
+
+        int index = 1;//super.dataStore.searchForUser(nameField.getText());
+
+        if (!super.checkValidName(nameField.getText())){
+            loadScreen("EinloggenFehler.fxml");
+            return;
+        }
+
+        if (!super.checkValidPassword(passwordField.getText())){
+            loadScreen("EinloggenFehler.fxml");
+            return;
+        }
+
+        loadScreen("Profilbilder1.fxml");
+        User u = new User();
+        u.setName("Player");
+        u.setPassword("Password");
+        users.append(u);
+        System.out.println(users.toString() + " S");
+        super.saveData();
 
         if (index == -1){
             User user = new User();
             user.setName(nameField.getText());
             user.setPassword(passwordField.getText());
             user.getAchievements().append("START");
-            systemController.names.append(user.getName());
-            systemController.passwords.append(user.getPassword());
-            systemController.achievements.append(user.getAchievements());
-            System.out.println("USER CREATED");
-            systemController.saveData();
         }
 
-        System.out.println(systemController.names.toString());
-
+        //super.saveData();
     }
 
-    public void close(){
+    public void showProfilePicture2() throws Exception{
+        loadScreen("Profilbilder2.fxml");
+    }
+
+    public void close() throws IOException {
+        super.saveData();
         System.exit(0);
     }
 
+
+    public void handle_ProfileImages(MouseEvent event) throws Exception {
+        if (event.getSource() == profileImage1){
+            System.out.println("IMAGE1");
+            System.out.println(profileImage1.getImage().getUrl());
+            super.saveData();
+        }
+
+        if (event.getSource() == profileImage11){
+            System.out.println("IMAGE11");
+            System.out.println(profileImage11.getImage().getUrl());
+        }
+
+    }
 }

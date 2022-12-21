@@ -1,0 +1,25 @@
+.main_Panel{
+    -fx-background-color: rgb(26,26,26);
+}
+
+.button{
+    -fx-background-color: #0d0d0d;
+    -fx-background-radius: 29;
+    -fx-text-fill: linear-gradient(to top, rgb(255,100,0), #de1c1c);
+    -fx-border-color: linear-gradient(to top, rgb(255,100,0), #de1c1c);
+    -fx-border-width: 5;
+    -fx-border-radius: 20;
+}
+
+.button_close{
+    -fx-background-color: #0d0d0d;
+    -fx-background-radius: 20;
+    -fx-text-fill: linear-gradient(to top, rgb(255, 47, 0), #ff0000);
+    -fx-border-color: linear-gradient(to top, rgb(255, 47, 0), #ff0000);
+    -fx-border-width: 5;
+    -fx-border-radius: 20;
+}
+
+.logo_image{
+    -fx-image: url("//Images\Special_Dark_Images\Who_Wants_To_Be_A_Millionaire_logo_logotype.png");
+}
