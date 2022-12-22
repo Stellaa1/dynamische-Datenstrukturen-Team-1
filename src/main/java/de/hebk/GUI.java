@@ -296,6 +296,8 @@ public class GUI extends SystemController {
             setQuestionAndAnswers();
         }
 
+        newVB.getChildren().clear();
+
         for (int i = 0; i < game.fragen.getAnzahl(); i++){
             Text questionText = new Text();
             questionText.setText((i + 1) + " ⬩ " + s[i] + " " + game.currency);
