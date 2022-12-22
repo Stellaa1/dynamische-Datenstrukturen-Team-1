@@ -2,7 +2,6 @@ package de.hebk;
 
 
 import de.hebk.model.list.List;
-import javafx.scene.control.TextField;
 
 import java.io.*;
 
@@ -127,6 +126,22 @@ public class SystemController{
 
 
         return v;
+    }
+
+
+    public boolean checkAnswer(Fragen f, String question, String answer){
+        boolean check = false;
+        System.out.println("FALSE");
+        System.out.println(answer);
+        for (int i = 0; i < f.getQuestions().size(); i++) {
+            Question current = f.getQuestions().get(i).getContext();
+            if (current.getQuestion().equals(question) && current.getOptions().get(0).getContext().equals(answer)){
+                check = true;
+                System.out.println("TRUE");
+                break;
+            }
+        }
+        return check;
     }
 
 }

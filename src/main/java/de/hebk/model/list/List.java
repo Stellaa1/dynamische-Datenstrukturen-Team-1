@@ -35,7 +35,7 @@ public class List<T> implements Serializable {
      * gibt, sonst liefert sie den Wert false.
      * @return
      */
-    public  boolean hasAccess(){
+    public boolean hasAccess(){
         return aktuelleNode != null;
     }
 
@@ -77,17 +77,25 @@ public class List<T> implements Serializable {
         }
     }
 
+    public void moveCurrent(int i){
+        setCurrent(get(i));
+    }
+
 
     public int size(){
         return size;
     }
     public Node<T> get(int index){
         Node<T> ret = null;
+
         if (index > size){
             ret = null;
         }
 
         Node<T> temp = first;
+
+
+
         for (int i = 0; i< index; i++){
             temp = temp.getNext();
         }

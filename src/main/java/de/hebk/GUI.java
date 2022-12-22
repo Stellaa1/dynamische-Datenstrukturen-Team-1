@@ -1,21 +1,31 @@
 package de.hebk;
 
+import de.hebk.model.list.List;
+import javafx.css.converter.PaintConverter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
+import javax.security.auth.callback.TextInputCallback;
 import java.io.IOException;
 
 public class GUI extends SystemController {
 
+
+    Game game;
+    Fragen f;
     String local_Profile_Picure = "src/main/resources/de/hebk/Images/blank-profile-picture-973460_960_720.webp";
 
     DataStore dataStore = new DataStore();
@@ -29,6 +39,8 @@ public class GUI extends SystemController {
     private AnchorPane mainPanel;
     @FXML
     private TextField nameField;
+    @FXML
+    private VBox newVB;
     @FXML
     private TextField passwordField;
     @FXML
@@ -79,7 +91,18 @@ public class GUI extends SystemController {
     ImageView profileImage20;
     @FXML
     private ImageView questionImage;
-
+    @FXML
+    private VBox questionsVBox;
+    @FXML
+    private TextArea questionBox;
+    @FXML
+    private Button answer_button1;
+    @FXML
+    private Button answer_button2;
+    @FXML
+    private Button answer_button3;
+    @FXML
+    private Button answer_button4;
 
 
     //private SystemController systemController = new SystemController();
@@ -119,8 +142,6 @@ public class GUI extends SystemController {
     }
 
     public void showPreviousScene() throws Exception {
-        System.out.println(Start.currentScene);
-        System.out.println(Start.previousScene);
         loadScene(Start.previousScene);
     }
 
@@ -191,18 +212,18 @@ public class GUI extends SystemController {
         System.out.println(index + " index");
 
         if (index != -1){
-            loadScene("Warning.fxml");
+            loadScene("Fehler_Einloggen.fxml");
             System.out.println(passwordField);
             return;
         }
 
         if (!super.checkValidName(nameField.getText())){
-            loadScene("Warning.fxml");
+            loadScene("Fehler_Einloggen.fxml");
             return;
         }
 
         if (!super.checkValidPassword(passwordField.getText())){
-            loadScene("Warning.fxml");
+            loadScene("Fehler_Einloggen.fxml");
             return;
         }
 
@@ -234,6 +255,138 @@ public class GUI extends SystemController {
 
     public void showGame() throws Exception{
         loadScene("Normal10.fxml");
+
+    }
+
+    public void startGame(){
+
+        String[] values1 = {"100", "500", "2500", "10000", "25000", "75000", "150000", "250000", "500000", "1000000"};
+        String[] values2 = {"100", "250", "500", "1000", "2500", "5000", "7500", "10000", "25000", "50000", "100000", "150000", "250000", "500000", "1000000"};
+        String[] values3 = {"100", "150", "250", "500", "1000", "2500", "5000", "7500", "10000", "15000", "25000", "350000", "50000", "750000", "1000000", "150000", "225000", "350000", "500000", "1000000"};
+
+        f = new Fragen(15,"Geschichte");
+        f.generateQuestions();
+        game = new Game();
+        game.index_frage = 0;
+        game.fragen = f;
+        game.currency = "¥";
+
+        String[] s = values1;
+        int tg = 61;
+
+        if (game.fragen.getAnzahl() == 10){
+            tg = 61;
+            newVB.setSpacing(40);
+            s = values1;
+        }
+
+        if (game.fragen.getAnzahl() == 15){
+            tg = 42;
+            newVB.setSpacing(25);
+            s = values2;
+        }
+
+        if (game.fragen.getAnzahl() == 20){
+            tg = 34;
+            newVB.setSpacing(15);
+            s = values3;
+        }
+
+        if (game.index_frage < f.getAnzahl()){
+            setQuestionAndAnswers();
+        }
+
+        for (int i = 0; i < game.fragen.getAnzahl(); i++){
+            Text questionText = new Text();
+            questionText.setText((i + 1) + " ⬩ " + s[i] + " " + game.currency);
+            questionText.setId("questionText_" + i);
+            questionText.setWrappingWidth(618.65087890625);
+            System.out.println(questionText.getTextAlignment());
+            questionText.setTextAlignment(TextAlignment.CENTER);
+            questionText.setFill(Paint.valueOf("#ffffff"));
+            Font questionText_Font = Font.font("Arial",tg);
+            questionText.setFont(questionText_Font);
+            newVB.getChildren().add(questionText);
+        }
+    }
+
+    public void setQuestionAndAnswers(){
+        if (game.index_frage >= f.getAnzahl()){
+            return;
+        }
+
+
+
+        List<String> options = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions();
+        questionBox.setText(game.fragen.getQuestions().get(game.index_frage).getContext().getQuestion());
+
+        int x;
+        x = (int) (Math.random() * options.size());
+        answer_button1.setText(options.get(x).getContext());
+
+        x = (int) (Math.random() * options.size());
+        answer_button2.setText(options.get(x).getContext());
+
+        while (answer_button1.getText().equals(answer_button2.getText())){
+            x = (int) (Math.random() * options.size());
+            answer_button2.setText(options.get(x).getContext());
+        }
+
+        x = (int) (Math.random() * options.size());
+        answer_button3.setText(options.get(x).getContext());
+
+        while (answer_button1.getText().equals(answer_button2.getText()) || answer_button1.getText().equals(answer_button3.getText()) || answer_button2.getText().equals(answer_button3.getText())){
+            x = (int) (Math.random() * options.size());
+            answer_button3.setText(options.get(x).getContext());
+        }
+
+        x = (int) (Math.random() * options.size());
+        answer_button4.setText(options.get(x).getContext());
+
+        while (answer_button1.getText().equals(answer_button2.getText()) || answer_button1.getText().equals(answer_button3.getText()) || answer_button1.getText().equals(answer_button4.getText()) || answer_button2.getText().equals(answer_button3.getText()) || answer_button2.getText().equals(answer_button4.getText()) || answer_button3.getText().equals(answer_button4.getText())){
+            x = (int) (Math.random() * options.size());
+            answer_button4.setText(options.get(x).getContext());
+        }
+
+    }
+    public void addQuestions(){
+        for (int i = 0; i < 5; i++){
+            Text questionText = new Text();
+            questionText.setText(i + " ⬩ € 150");
+            questionText.setId("questionText_" + i);
+            Font questionText_Font = Font.font("Arial",52);
+            questionText.setFont(questionText_Font);
+            newVB.getChildren().add(questionText);
+        }
+    }
+
+    public void getAnswer1(){
+        if (super.checkAnswer(f, questionBox.getText(), answer_button1.getText())){
+            game.index_frage++;
+            setQuestionAndAnswers();
+            return;
+        }
+    }
+
+    public void getAnswer2(){
+        if (super.checkAnswer(f, questionBox.getText(), answer_button2.getText())){
+            game.index_frage++;
+            setQuestionAndAnswers();
+        }
+    }
+
+    public void getAnswer3(){
+        if (super.checkAnswer(f, questionBox.getText(), answer_button3.getText())){
+            game.index_frage++;
+            setQuestionAndAnswers();
+        }
+    }
+
+    public void getAnswer4(){
+        if (super.checkAnswer(f, questionBox.getText(), answer_button4.getText())){
+            game.index_frage++;
+            setQuestionAndAnswers();
+        }
     }
 
     public void showProfilePicture2() throws Exception{

@@ -16,9 +16,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
-      <ImageView fitHeight="1282.0" fitWidth="1928.0" layoutX="1.0" pickOnBounds="true">
+      <ImageView fitHeight="1140.0" fitWidth="1894.0" layoutX="5.0" layoutY="40.0" pickOnBounds="true">
          <image>
             <Image url="@Images/Background1.jpg" />
          </image>
@@ -26,7 +26,8 @@
             <ColorAdjust brightness="-0.8" />
          </effect>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#49529d" height="1284.0" layoutX="1.0" stroke="#49529d" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_3" width="1279.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#49529d" height="1140.0" layoutX="1281.0" layoutY="40.0" opacity="0.17" stroke="#49529d" strokeType="INSIDE" strokeWidth="0.0" width="619.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#49529d" height="1280.0" layoutX="1.0" stroke="#49529d" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_3" width="1279.0" />
       <Text fill="WHITE" layoutX="68.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NORMAL" textAlignment="CENTER">
          <font>
             <Font name="Sylfaen" size="27.0" />
@@ -42,87 +43,24 @@
             <Image url="@Images/smartphone.png" />
          </image>
       </ImageView>
-      <VBox layoutX="1278.0" layoutY="36.0" prefHeight="1214.0" prefWidth="642.0" spacing="40.0">
-         <children>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="1 ⬩ € 100" textAlignment="CENTER" wrappingWidth="641.05078125">
-               <font>
-                  <Font name="Arial" size="52.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="10.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="1 ⬩ € 100" textAlignment="CENTER" wrappingWidth="641.05078125">
-               <font>
-                  <Font name="Arial" size="52.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="10.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="1 ⬩ € 100" textAlignment="CENTER" wrappingWidth="641.05078125">
-               <font>
-                  <Font name="Arial" size="52.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="10.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="1 ⬩ € 100" textAlignment="CENTER" wrappingWidth="641.05078125">
-               <font>
-                  <Font name="Arial" size="52.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="10.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="1 ⬩ € 100" textAlignment="CENTER" wrappingWidth="641.05078125">
-               <font>
-                  <Font name="Arial" size="52.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="10.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="1 ⬩ € 100" textAlignment="CENTER" wrappingWidth="641.05078125">
-               <font>
-                  <Font name="Arial" size="52.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="10.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="1 ⬩ € 100" textAlignment="CENTER" wrappingWidth="641.05078125">
-               <font>
-                  <Font name="Arial" size="52.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="10.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="1 ⬩ € 100" textAlignment="CENTER" wrappingWidth="641.05078125">
-               <font>
-                  <Font name="Arial" size="52.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="10.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="1 ⬩ € 100" textAlignment="CENTER" wrappingWidth="641.05078125">
-               <font>
-                  <Font name="Arial" size="52.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="10.0" layoutY="524.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="1 ⬩ € 100" textAlignment="CENTER" wrappingWidth="641.05078125">
-               <font>
-                  <Font name="Arial" size="52.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="10.0" layoutY="583.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="1 ⬩ € 100" textAlignment="CENTER" wrappingWidth="641.05078125">
-               <font>
-                  <Font name="Arial" size="52.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="10.0" layoutY="641.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="1 ⬩ € 100" textAlignment="CENTER" wrappingWidth="641.05078125">
-               <font>
-                  <Font name="Arial" size="52.0" />
-               </font>
-            </Text>
-         </children>
-      </VBox>
-      <ImageView accessibleRole="BUTTON" fitHeight="41.0" fitWidth="38.0" layoutX="12.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+      <VBox fx:id="newVB" layoutX="1278.0" layoutY="75.0" prefHeight="1070.0" prefWidth="351.0" spacing="25.0" />
+      <ImageView accessibleRole="BUTTON" fitHeight="41.0" fitWidth="38.0" layoutX="12.0" layoutY="80.0" onMouseClicked="#startGame" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/cogwheel.png" />
          </image>
       </ImageView>
       <Line endX="100.0" startX="-100.0" />
-      <Button layoutX="66.0" layoutY="938.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="558.0" styleClass="button_4" text="Antwort 1" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="answer_button1" layoutX="66.0" layoutY="938.0" mnemonicParsing="false" onAction="#getAnswer1" prefHeight="82.0" prefWidth="558.0" styleClass="button_4" text="Antwort 1" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="43.0" />
          </font>
       </Button>
-      <Button layoutX="666.0" layoutY="938.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="558.0" styleClass="button_4" text="Antwort 2" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="answer_button2" layoutX="666.0" layoutY="938.0" mnemonicParsing="false" onAction="#getAnswer2" prefHeight="82.0" prefWidth="558.0" styleClass="button_4" text="Antwort 2" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="43.0" />
          </font>
       </Button>
-      <TextArea cache="true" editable="false" layoutX="66.0" layoutY="644.0" mouseTransparent="true" prefHeight="234.0" prefWidth="1157.0" styleClass="text-area" wrapText="true">
+      <TextArea fx:id="questionBox" cache="true" editable="false" layoutX="66.0" layoutY="644.0" mouseTransparent="true" prefHeight="234.0" prefWidth="1157.0" text="tegfdv" wrapText="true">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
@@ -141,12 +79,12 @@
             </Lighting>
          </effect>
       </TextArea>
-      <Button layoutX="66.0" layoutY="1050.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="558.0" styleClass="button_4" text="Antwort 3" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="answer_button3" layoutX="66.0" layoutY="1050.0" mnemonicParsing="false" onAction="#getAnswer3" prefHeight="82.0" prefWidth="558.0" styleClass="button_4" text="Antwort 3" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="43.0" />
          </font>
       </Button>
-      <Button layoutX="666.0" layoutY="1050.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="558.0" styleClass="button_4" text="Antwort 4" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="answer_button4" layoutX="666.0" layoutY="1050.0" mnemonicParsing="false" onAction="#getAnswer4" prefHeight="82.0" prefWidth="558.0" styleClass="button_4" text="Antwort 4" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="43.0" />
          </font>
@@ -172,5 +110,6 @@
          </image>
       </ImageView>
       <ImageView fx:id="questionImage" fitHeight="474.0" fitWidth="632.0" layoutX="317.0" layoutY="54.0" pickOnBounds="true" />
+      <VBox fx:id="questionsVBox" layoutX="217.0" layoutY="91.0" prefHeight="200.0" prefWidth="100.0" />
    </children>
 </AnchorPane>
