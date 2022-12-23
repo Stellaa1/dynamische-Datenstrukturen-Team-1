@@ -1,32 +1,42 @@
 package de.hebk;
 
 import de.hebk.model.list.List;
-import javafx.css.converter.PaintConverter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-import javax.security.auth.callback.TextInputCallback;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 
 public class GUI extends SystemController {
 
 
     Game game;
-    Fragen f;
-    String local_Profile_Picure = "src/main/resources/de/hebk/Images/blank-profile-picture-973460_960_720.webp";
+    static int temp_FragenAnzahl;
+    static String temp_category;
+    static int temp_difficultyValue;
+    static int temp_difficultyRange;
+    static int temp_incrementValue;
+    static int temp_incrementRange;
+    static String temp_currency;
 
     DataStore dataStore = new DataStore();
     @FXML
@@ -89,6 +99,7 @@ public class GUI extends SystemController {
     ImageView profileImage19;
     @FXML
     ImageView profileImage20;
+
     @FXML
     private ImageView questionImage;
     @FXML
@@ -103,9 +114,49 @@ public class GUI extends SystemController {
     private Button answer_button3;
     @FXML
     private Button answer_button4;
+    @FXML
+    private TextField topicTitle;
+    @FXML
+    private Text topicText;
+    @FXML
+    private Polygon nextTopicTrigger;
+    @FXML
+    private CheckBox advancedGameSettingsOptions;
 
-
-    //private SystemController systemController = new SystemController();
+    @FXML
+    private TextField minimum_DifficultyField;
+    @FXML
+    private TextField maximum_DifficultyField;
+    @FXML
+    private TextField incrementValueField;
+    @FXML
+    private TextField incrementRangeField;
+    @FXML
+    private Text incrementValueText;
+    @FXML
+    private Text incrementRangeText;
+    @FXML
+    private ImageView currency_Dice;
+    @FXML
+    private Text currencyText;
+    @FXML
+    private TextField currencyField;
+    @FXML
+    private ImageView anmelden_Image;
+    @FXML
+    private TextField anmelden_Benutzername;
+    @FXML
+    private TextField anmelden_Password;
+    @FXML
+    private TextField anmelden_PasswortWiederholen;
+    @FXML
+    private ImageView menu_UserImage;
+    @FXML
+    private Text menu_UserName;
+    @FXML
+    private Rectangle loader_Menu;
+    @FXML
+    private Rectangle loader_Game_Normal;
     @FXML
     public void onHelloButtonClick() throws Exception{
         //welcomeText.setText("Welcome to JavaFX Application!");
@@ -145,7 +196,7 @@ public class GUI extends SystemController {
         loadScene(Start.previousScene);
     }
 
-    public void showEinloggen() throws Exception{
+    public void showRegister() throws Exception{
         super.loadData();
         loadScene("Regestrieren.fxml");
     }
@@ -204,16 +255,17 @@ public class GUI extends SystemController {
     }
 
 
+    public void showSettings() throws Exception{
+        loadScene("Einstellungen.fxml");
+    }
+
+
     public void createUser() throws Exception {
 
         int index = searchForUser(nameField.getText());
 
-        System.out.println(users.toString());
-        System.out.println(index + " index");
-
         if (index != -1){
             loadScene("Fehler_Einloggen.fxml");
-            System.out.println(passwordField);
             return;
         }
 
@@ -231,6 +283,7 @@ public class GUI extends SystemController {
         u.setName(nameField.getText());
         u.setPassword(passwordField.getText());
         users.append(u);
+        local_User = u;
 
         loadScene("Menu.fxml");
 
@@ -249,78 +302,205 @@ public class GUI extends SystemController {
         //super.saveData();
     }
 
-    public void showHowManyQuestions() throws Exception{
-        loadScene("Fragenzahl.fxml");
+    public void showLogIn() throws Exception{
+        super.loadData();
+        loadScene("Anmelden.fxml");
     }
 
-    public void showGame() throws Exception{
-        loadScene("Normal10.fxml");
+    public void logIn() throws Exception{
+        int index = searchForUser(anmelden_Benutzername.getText());
 
-    }
-
-    public void startGame(){
-
-        String[] values1 = {"100", "500", "2500", "10000", "25000", "75000", "150000", "250000", "500000", "1000000"};
-        String[] values2 = {"100", "250", "500", "1000", "2500", "5000", "7500", "10000", "25000", "50000", "100000", "150000", "250000", "500000", "1000000"};
-        String[] values3 = {"100", "150", "250", "500", "1000", "2500", "5000", "7500", "10000", "15000", "25000", "350000", "50000", "750000", "1000000", "150000", "225000", "350000", "500000", "1000000"};
-
-        f = new Fragen(15,"Geschichte");
-        f.generateQuestions();
-        game = new Game();
-        game.index_frage = 0;
-        game.fragen = f;
-        game.currency = "¥";
-
-        String[] s = values1;
-        int tg = 61;
-
-        if (game.fragen.getAnzahl() == 10){
-            tg = 61;
-            newVB.setSpacing(40);
-            s = values1;
+        if (index == -1){
+            loadScene("Fehler_Einloggen.fxml");
+            return;
         }
 
-        if (game.fragen.getAnzahl() == 15){
-            tg = 42;
-            newVB.setSpacing(25);
-            s = values2;
-        }
-
-        if (game.fragen.getAnzahl() == 20){
-            tg = 34;
-            newVB.setSpacing(15);
-            s = values3;
-        }
-
-        if (game.index_frage < f.getAnzahl()){
-            setQuestionAndAnswers();
-        }
-
-        newVB.getChildren().clear();
-
-        for (int i = 0; i < game.fragen.getAnzahl(); i++){
-            Text questionText = new Text();
-            questionText.setText((i + 1) + " ⬩ " + s[i] + " " + game.currency);
-            questionText.setId("questionText_" + i);
-            questionText.setWrappingWidth(618.65087890625);
-            System.out.println(questionText.getTextAlignment());
-            questionText.setTextAlignment(TextAlignment.CENTER);
-            questionText.setFill(Paint.valueOf("#ffffff"));
-            Font questionText_Font = Font.font("Arial",tg);
-            questionText.setFont(questionText_Font);
-            newVB.getChildren().add(questionText);
-        }
-    }
-
-    public void setQuestionAndAnswers(){
-        if (game.index_frage >= f.getAnzahl()){
+        if (!anmelden_Password.getText().equals(anmelden_PasswortWiederholen.getText())){
+            loadScene("Fehler_Einloggen.fxml");
             return;
         }
 
 
+        User u = users.get(index).getContext();
+        if (!anmelden_Password.getText().equals(u.getPassword())){
+            loadScene("Fehler_Einloggen.fxml");
+            return;
+        }
+        local_User = u;
+
+        loadScene("Menu.fxml");
+    }
+
+    public void loadUserInMenu() throws FileNotFoundException {
+        loader_Menu.setVisible(false);
+        FileInputStream inputStream = new FileInputStream(local_User.getProfilePicture());
+        Image image = new Image(inputStream);
+        menu_UserImage.setImage(image);
+        menu_UserName.setText(local_User.getName());
+    }
+
+    public void showProfilePicture1() throws Exception{
+        loadScene("Profilbilder1.fxml");
+    }
+    public void showProfilePicture2() throws Exception{
+        loadScene("Profilbilder2.fxml");
+    }
+
+    public void logOut() throws Exception{
+        local_User = null;
+        loadScene("GUI.fxml");
+    }
+
+    public void showHowManyQuestions() throws Exception{
+        loadScene("Fragenzahl.fxml");
+    }
+
+    public void showGame_Settings1_1() throws Exception{
+        loadScene("Game_Settings1.fxml");
+        temp_FragenAnzahl = 10;
+    }
+
+    public void showGame_Settings1_2() throws Exception{
+        loadScene("Game_Settings1.fxml");
+        temp_FragenAnzahl = 15;
+    }
+
+    public void showGame_Settings1_3() throws Exception{
+        loadScene("Game_Settings1.fxml");
+        temp_FragenAnzahl = 20;
+    }
+
+    public void nextTopic(){
+        try {
+            for (int i = 0; i < csvFiles_Questions.length; i++){
+                if (topicText.getText().equals(csvFiles_Questions[i])){
+                        topicText.setText(csvFiles_Questions[i + 1]);
+                        break;
+                }
+            }
+        } catch (Exception e){
+            topicText.setText(csvFiles_Questions[0]);
+        }
+        topicTitle.setText("doku/Fragen/" + topicText.getText() + ".csv");
+    }
+
+    public void showGame_Settings2() throws Exception{
+        loadScene("Game_Settings2.fxml");
+        temp_category = topicText.getText().toString();
+    }
+
+    public void modifyAdvancedOptions(){
+        incrementRangeField.setVisible(advancedGameSettingsOptions.isSelected());
+        incrementRangeText.setVisible(advancedGameSettingsOptions.isSelected());
+        incrementValueField.setVisible(advancedGameSettingsOptions.isSelected());
+        incrementValueText.setVisible(advancedGameSettingsOptions.isSelected());
+        currencyField.setVisible(advancedGameSettingsOptions.isSelected());
+        currency_Dice.setVisible(advancedGameSettingsOptions.isSelected());
+        currencyText.setVisible(advancedGameSettingsOptions.isSelected());
+    }
+
+    public void generateCurrency(){
+        int x = (int) (Math.random() * currencies.length);
+        currencyField.setText(currencies[x]);
+    }
+
+    public void showGame() throws Exception{
+        try {
+            temp_difficultyValue = Integer.parseInt(maximum_DifficultyField.getText());
+            temp_difficultyRange = Integer.parseInt(minimum_DifficultyField.getText());
+            temp_incrementValue = Integer.parseInt(incrementValueField.getText());
+            temp_incrementRange = Integer.parseInt(incrementRangeField.getText());
+            temp_currency = currencyField.getText();
+        } catch (Exception e){
+            temp_difficultyValue = 20;
+            temp_difficultyRange = 0;
+            temp_incrementValue = 2;
+            temp_incrementRange = 2;
+            temp_currency = "€";
+        }
+
+
+        //game.fragen.gameSettings.setDifficultyRange(Integer.parseInt(minimum_DifficultyField.getText()));
+        //game.fragen.gameSettings.setDifficultyValue(Integer.parseInt(maximum_DifficultyField.getText()));
+        //game.fragen.gameSettings.setIncrementValue(Integer.parseInt(incrementValueField.getText()));
+        //game.fragen.gameSettings.setIncrementRange(Integer.parseInt(incrementRangeField.getText()));
+
+        loadScene("Normal10.fxml");
+    }
+
+    public void startGame() throws Exception {
+        loader_Game_Normal.setVisible(false);
+
+        try {
+            game = new Game();
+            game.fragen = new Fragen();
+            game.fragen.gameSettings.setCategory(temp_category);
+            game.fragen.gameSettings.setQuestion_Amount(temp_FragenAnzahl);
+            game.fragen.gameSettings.setDifficultyValue(temp_difficultyValue);
+            game.fragen.gameSettings.setDifficultyRange(temp_difficultyRange);
+            game.fragen.gameSettings.setIncrementValue(temp_incrementValue);
+            game.fragen.gameSettings.setIncrementRange(temp_incrementRange);
+
+            game.fragen.generateQuestions();
+            game.index_frage = 0;
+            game.fragen.gameSettings.setCurrency(temp_currency);
+
+            String[] s = values1;
+            int tg = 61;
+
+            if (game.fragen.gameSettings.getQuestion_Amount() == 10){
+                tg = 61;
+                newVB.setSpacing(40);
+                s = values1;
+            }
+
+            if (game.fragen.gameSettings.getQuestion_Amount() == 15){
+                tg = 42;
+                newVB.setSpacing(25);
+                s = values2;
+            }
+
+            if (game.fragen.gameSettings.getQuestion_Amount() == 20){
+                tg = 34;
+                newVB.setSpacing(15);
+                s = values3;
+            }
+
+            if (game.index_frage < game.fragen.gameSettings.getQuestion_Amount()){
+                setQuestionAndAnswers();
+            }
+
+            newVB.getChildren().clear();
+
+            for (int i = 0; i < game.fragen.gameSettings.getQuestion_Amount(); i++){
+                Text questionText = new Text();
+                questionText.setText((i + 1) + " ⬩ " + s[i] + " " + game.fragen.gameSettings.getCurrency());
+                questionText.setId("questionText_" + i);
+                questionText.setWrappingWidth(618.65087890625);
+                System.out.println(questionText.getTextAlignment());
+                questionText.setTextAlignment(TextAlignment.CENTER);
+                questionText.setFill(Paint.valueOf("#ffffff"));
+                Font questionText_Font = Font.font("Arial",tg);
+                questionText.setFont(questionText_Font);
+                newVB.getChildren().add(questionText);
+            }
+        } catch(Exception e){
+            loadScene("Fehler_Game.fxml");
+        }
+
+    }
+
+    public void setQuestionAndAnswers(){
+        if (game.index_frage >= game.fragen.gameSettings.getQuestion_Amount()){
+            return;
+        }
 
         List<String> options = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions();
         questionBox.setText(game.fragen.getQuestions().get(game.index_frage).getContext().getQuestion());
+
+        for (int i = 0; i < game.fragen.gameSettings.getQuestion_Amount(); i++){
+            System.out.println(game.fragen.getQuestions().get(i).getContext().getOptions().toString());
+        }
 
         int x;
         x = (int) (Math.random() * options.size());
@@ -350,6 +530,30 @@ public class GUI extends SystemController {
             answer_button4.setText(options.get(x).getContext());
         }
 
+        if (options.find("Keine von genannten")){
+            String s = answer_button4.getText();
+
+            if (s.equals("Keine von genannten")){
+                return;
+            }
+
+            if (answer_button1.getText().equals("Keine von genannten")){
+                answer_button1.setText(s);
+                answer_button4.setText("Keine von genannten");
+                return;
+            }
+
+            if (answer_button2.getText().equals("Keine von genannten")){
+                answer_button2.setText(s);
+                answer_button4.setText("Keine von genannten");
+                return;
+            }
+
+            if (answer_button3.getText().equals("Keine von genannten")){
+                answer_button3.setText(s);
+                answer_button4.setText("Keine von genannten");
+            }
+        }
     }
     public void addQuestions(){
         for (int i = 0; i < 5; i++){
@@ -363,36 +567,31 @@ public class GUI extends SystemController {
     }
 
     public void getAnswer1(){
-        if (super.checkAnswer(f, questionBox.getText(), answer_button1.getText())){
+        if (super.checkAnswer(game.fragen, questionBox.getText(), answer_button1.getText())){
             game.index_frage++;
             setQuestionAndAnswers();
-            return;
         }
     }
 
     public void getAnswer2(){
-        if (super.checkAnswer(f, questionBox.getText(), answer_button2.getText())){
+        if (super.checkAnswer(game.fragen, questionBox.getText(), answer_button2.getText())){
             game.index_frage++;
             setQuestionAndAnswers();
         }
     }
 
     public void getAnswer3(){
-        if (super.checkAnswer(f, questionBox.getText(), answer_button3.getText())){
+        if (super.checkAnswer(game.fragen, questionBox.getText(), answer_button3.getText())){
             game.index_frage++;
             setQuestionAndAnswers();
         }
     }
 
     public void getAnswer4(){
-        if (super.checkAnswer(f, questionBox.getText(), answer_button4.getText())){
+        if (super.checkAnswer(game.fragen, questionBox.getText(), answer_button4.getText())){
             game.index_frage++;
             setQuestionAndAnswers();
         }
-    }
-
-    public void showProfilePicture2() throws Exception{
-        loadScene("Profilbilder2.fxml");
     }
 
     public void close() throws IOException {
@@ -403,67 +602,90 @@ public class GUI extends SystemController {
 
     public void handle_ProfileImages(MouseEvent event) throws Exception {
 
+        String local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/Unbenannt.PNG";
+
         if (event.getSource() == profileImage1){
-            local_Profile_Picure = profileImage1.getImage().getUrl();
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/1.PNG";
         }
 
         if (event.getSource() == profileImage2){
-            local_Profile_Picure = profileImage2.getImage().getUrl();
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/2.PNG";
         }
 
         if (event.getSource() == profileImage3){
-            local_Profile_Picure = profileImage3.getImage().getUrl();
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/3.PNG";
         }
 
         if (event.getSource() == profileImage4){
-            local_Profile_Picure = profileImage4.getImage().getUrl();
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/4.PNG";
         }
 
         if (event.getSource() == profileImage5){
-            local_Profile_Picure = profileImage5.getImage().getUrl();
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/5.PNG";
         }
 
         if (event.getSource() == profileImage6){
-            local_Profile_Picure = profileImage6.getImage().getUrl();
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/6.PNG";
         }
 
         if (event.getSource() == profileImage7){
-            local_Profile_Picure = profileImage7.getImage().getUrl();
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/7.PNG";
         }
 
         if (event.getSource() == profileImage8){
-            local_Profile_Picure = profileImage8.getImage().getUrl();
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/8.PNG";
         }
 
         if (event.getSource() == profileImage9){
-            local_Profile_Picure = profileImage9.getImage().getUrl();
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/9.PNG";
         }
 
         if (event.getSource() == profileImage10){
-            local_Profile_Picure = profileImage10.getImage().getUrl();
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/10.PNG";
         }
 
         if (event.getSource() == profileImage11){
-            local_Profile_Picure = profileImage10.getImage().getUrl();
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/11.PNG";
         }
 
         if (event.getSource() == profileImage12){
-            local_Profile_Picure = profileImage12.getImage().getUrl();
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/12.PNG";
         }
 
         if (event.getSource() == profileImage13){
-            local_Profile_Picure = profileImage13.getImage().getUrl();
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/13.PNG";
         }
 
         if (event.getSource() == profileImage14){
-            local_Profile_Picure = profileImage14.getImage().getUrl();
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/14.PNG";
         }
 
         if (event.getSource() == profileImage15){
-            local_Profile_Picure = profileImage15.getImage().getUrl();
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/15.PNG";
         }
 
-        //local_Player.setProfilePicture(imageUrl);
+        if (event.getSource() == profileImage16){
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/16.PNG";
+        }
+
+        if (event.getSource() == profileImage17){
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/17.PNG";
+        }
+
+        if (event.getSource() == profileImage18){
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/18.PNG";
+        }
+
+        if (event.getSource() == profileImage19){
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/GG.PNG";
+        }
+
+        if (event.getSource() == profileImage20){
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/Unbenannt.PNG";
+        }
+
+        local_User.setProfilePicture(local_Profile_Picure);
+        openMenu();
         super.saveData();
         loadScene("Menu.fxml");
     }
