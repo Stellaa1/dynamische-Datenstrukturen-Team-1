@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class User implements Serializable {
     private String name;
     private String password;
-    private String profilePicture;
+    private String profilePicture = "src/main/resources/de/hebk/Profilbilder/Unbenannt.PNG";
     private List<String> achievements = new List<>();
 
     public String getName(){
