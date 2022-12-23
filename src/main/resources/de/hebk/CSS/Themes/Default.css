@@ -47,6 +47,11 @@
     -fx-background-color: orange;
 }
 
+.Text2{
+    -fx-fill: #868686;
+    -fx-text-fill: #868686;
+}
+
 .text-area {
     -fx-text-fill: rgb(0,0,0);
 }
@@ -54,5 +59,11 @@
 .text-field1{
     -fx-background-color: #575B95;
     -fx-background-radius: 0;
+    -fx-text-fill: white;
+}
+
+.text-field2{
+    -fx-background-color: #575B95;
+    -fx-background-radius: 10;
     -fx-text-fill: white;
 }
