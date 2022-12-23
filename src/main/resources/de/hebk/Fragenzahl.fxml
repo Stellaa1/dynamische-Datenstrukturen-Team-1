@@ -19,7 +19,7 @@
             <Font name="Sylfaen" size="84.0" />
          </font>
       </Text>
-      <Button layoutX="542.0" layoutY="270.0" mnemonicParsing="false" onAction="#showGame" prefHeight="219.0" prefWidth="723.0" styleClass="button_1" text="10" textFill="WHITE">
+      <Button layoutX="542.0" layoutY="270.0" mnemonicParsing="false" onAction="#showGame_Settings1_1" prefHeight="219.0" prefWidth="723.0" styleClass="button_1" text="10" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="96.0" />
          </font>
@@ -34,12 +34,12 @@
             <Font name="Sylfaen" size="40.0" />
          </font>
       </Button>
-      <Button layoutX="542.0" layoutY="550.0" mnemonicParsing="false" prefHeight="219.0" prefWidth="723.0" styleClass="button_2" text="15" textFill="WHITE">
+      <Button layoutX="542.0" layoutY="550.0" mnemonicParsing="false" onAction="#showGame_Settings1_2" prefHeight="219.0" prefWidth="723.0" styleClass="button_2" text="15" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="96.0" />
          </font>
       </Button>
-      <Button layoutX="542.0" layoutY="830.0" mnemonicParsing="false" prefHeight="219.0" prefWidth="723.0" styleClass="button_3" text="20" textFill="WHITE">
+      <Button layoutX="542.0" layoutY="830.0" mnemonicParsing="false" onAction="#showGame_Settings1_3" prefHeight="219.0" prefWidth="723.0" styleClass="button_3" text="20" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="96.0" />
          </font>
