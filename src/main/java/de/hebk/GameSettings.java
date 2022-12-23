@@ -1,0 +1,69 @@
+package de.hebk;
+
+public class GameSettings{
+
+    private int question_Amount = 10;
+    private String category = "Allgemein";
+    private int difficultyValue = 20;
+    private int difficultyRange = 0;
+    private int incrementValue = 2;
+    private int incrementRange = 2;
+    private String currency;
+
+
+    public int getQuestion_Amount() {
+        return question_Amount;
+    }
+
+    public void setQuestion_Amount(int question_Amount) {
+        this.question_Amount = question_Amount;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public int getDifficultyValue() {
+        return difficultyValue;
+    }
+
+    public void setDifficultyValue(int difficultyValue) {
+        this.difficultyValue = difficultyValue;
+    }
+
+    public int getDifficultyRange() {
+        return difficultyRange;
+    }
+
+    public void setDifficultyRange(int difficultyRange) {
+        this.difficultyRange = difficultyRange;
+    }
+
+    public int getIncrementValue() {
+        return incrementValue;
+    }
+
+    public void setIncrementValue(int incrementValue) {
+        this.incrementValue = incrementValue;
+    }
+
+    public int getIncrementRange() {
+        return incrementRange;
+    }
+
+    public void setIncrementRange(int incrementRange) {
+        this.incrementRange = incrementRange;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+}
