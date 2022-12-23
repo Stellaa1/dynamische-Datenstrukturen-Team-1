@@ -5,13 +5,13 @@ import de.hebk.model.list.List;
 
 import java.io.*;
 
-public class SystemController{
+public class SystemController extends Texts{
 
     String version = "";
     DataStore dataStore = new DataStore();
 
-
     static List<User> users = new List<>();
+    static User local_User;
 
     public void saveData() {
         try {
