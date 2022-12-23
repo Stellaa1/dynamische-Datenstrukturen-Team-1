@@ -86,22 +86,16 @@ public class List<T> implements Serializable {
         return size;
     }
     public Node<T> get(int index){
-        Node<T> ret = null;
-
+        Node<T> ret;
         if (index > size){
             ret = null;
         }
 
         Node<T> temp = first;
-
-
-
         for (int i = 0; i< index; i++){
             temp = temp.getNext();
         }
-
         ret = temp;
-
         return ret;
     }
 
