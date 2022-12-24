@@ -31,6 +31,28 @@
     -fx-text-fill: White;
 }
 
+.button_answer{
+    -fx-background-color: #49529d;
+    -fx-text-fill: White;
+}
+
+.button_answer:hover{
+    -fx-background-color: #ff8c00;
+    -fx-text-fill: White;
+}
+
+.button_lost{
+    -fx-background-color: null;
+    -fx-text-fill: White;
+    -fx-border-color: white;
+    -fx-border-radius: 0;
+    -fx-border-width: 5;
+}
+
+.button_lost:hover{
+    -fx-background-color: #383853;
+}
+
 .rectangle{
     -fx-fill: #49529d;
 }
@@ -41,6 +63,10 @@
 
 .rectangle_3{
     -fx-fill: #2F346E;
+}
+
+.rectangle_4{
+    -fx-fill: #000000;
 }
 
 .Text{
