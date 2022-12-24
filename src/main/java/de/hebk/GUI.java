@@ -24,10 +24,16 @@ import javafx.scene.text.TextAlignment;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GUI extends SystemController {
 
-
+    Timer timer = new Timer();
+    TimerTask timertask;
+    long beforeTimer;
+    long afterRun;
     Game game;
     static String temp_gameMode;
     static int temp_FragenAnzahl;
@@ -158,6 +164,8 @@ public class GUI extends SystemController {
     @FXML
     private Rectangle loader_Game_Normal;
     @FXML
+    private Rectangle loader_Game_Normal2;
+    @FXML
     private Button gameMode_Normal;
     @FXML
     private Button gameMode_Reverse;
@@ -167,6 +175,13 @@ public class GUI extends SystemController {
     private Button amount_Questions15;
     @FXML
     private Button amount_Questions20;
+    @FXML
+    private Text youLostText;
+    @FXML
+    private Button returnToMenu;
+    @FXML
+    private Text timeText;
+
     @FXML
     public void onHelloButtonClick() throws Exception{
         //welcomeText.setText("Welcome to JavaFX Application!");
@@ -355,6 +370,32 @@ public class GUI extends SystemController {
         loadScene("Menu.fxml");
     }
 
+    public void counter() throws Exception{
+        try {
+            beforeTimer = System.currentTimeMillis();
+            timer = new Timer();
+            final int[] time = {30};
+            timertask = new TimerTask() {
+                @Override
+                public void run() {
+                    if (time[0] >= 0){
+                        System.out.println(time[0]);
+                        afterRun = System.currentTimeMillis();
+                        timeText.setText("Zeit - " + ((int) 30 - (afterRun - beforeTimer) / 1000));
+                        time[0] -= 1;
+                    }
+                    if (time[0] == -1){
+                        timer.cancel();
+                        endGame();
+                    }
+                }
+            };
+            timer.schedule(timertask, 0, 1000);
+        } catch (Exception e){
+        }
+
+    }
+
     public void loadUserInMenu() throws FileNotFoundException {
         loader_Menu.setVisible(false);
         FileInputStream inputStream = new FileInputStream(local_User.getProfilePicture());
@@ -505,7 +546,8 @@ public class GUI extends SystemController {
 
     }
 
-    public void setQuestionAndAnswers(){
+    public void setQuestionAndAnswers() throws Exception{
+        counter();
         if (game.index_frage >= game.fragen.gameSettings.getQuestion_Amount()){
             return;
         }
@@ -581,32 +623,123 @@ public class GUI extends SystemController {
         }
     }
 
-    public void getAnswer1(){
+    public void animateButton(Button b, String t){
+        if (t.equals("Normal")){
+            b.setStyle("-fx-background-color: rgb(73,82,157)");
+        }
+
+        if (t.equals("Trigger")){
+            b.setStyle("-fx-background-color: rgb(255,140,0)");
+        }
+
+        if (t.equals("Answer")){
+            b.setStyle("-fx-background-color: rgb(0,255,140)");
+        }
+
+        if (t.equals("Wrong")){
+            b.setStyle("-fx-background-color: rgb(255,0,40)");
+        }
+    }
+
+    public Button getCorrectAnswerFromButtons(){
+        String answer = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(0).getContext();
+        Button button = null;
+
+        if (answer_button1.getText().equals(answer)){
+            button = answer_button1;
+        }
+
+        if (answer_button2.getText().equals(answer)){
+            button = answer_button2;
+        }
+
+        if (answer_button3.getText().equals(answer)){
+            button = answer_button3;
+        }
+
+        if (answer_button4.getText().equals(answer)){
+            button = answer_button4;
+        }
+
+        return button;
+    }
+
+    public void endGame(){
+        youLostText.setVisible(true);
+        returnToMenu.setVisible(true);
+        loader_Game_Normal2.setOpacity(0.65);
+        loader_Game_Normal2.setVisible(true);
+    }
+
+    public Button animateResult() throws Exception{
+        Button b = getCorrectAnswerFromButtons();
+        timer.cancel();
+        Thread.sleep(2000);
+        animateButton(b, "Answer");
+        return b;
+    }
+
+    public void getAnswer1() throws Exception{
+        Button b = animateResult();
+        if (!b.getText().equals(answer_button1.getText())){
+            endGame();
+            animateButton(answer_button1, "Wrong");
+            return;
+        }
+
         if (super.checkAnswer(game.fragen, questionBox.getText(), answer_button1.getText())){
             game.index_frage++;
             setQuestionAndAnswers();
+            animateButton(answer_button1, "Normal");
         }
+        answer_button1.setStyle("");
     }
 
-    public void getAnswer2(){
+    public void getAnswer2() throws Exception{
+        Button b = animateResult();
+        if (!b.getText().equals(answer_button2.getText())){
+            endGame();
+            animateButton(answer_button2, "Wrong");
+            return;
+        }
+
         if (super.checkAnswer(game.fragen, questionBox.getText(), answer_button2.getText())){
             game.index_frage++;
             setQuestionAndAnswers();
+            animateButton(answer_button2, "Normal");
         }
+        answer_button2.setStyle("");
     }
 
-    public void getAnswer3(){
+    public void getAnswer3() throws Exception{
+        Button b = animateResult();
+        if (!b.getText().equals(answer_button3.getText())){
+            endGame();
+            animateButton(answer_button3, "Wrong");
+            return;
+        }
+
         if (super.checkAnswer(game.fragen, questionBox.getText(), answer_button3.getText())){
             game.index_frage++;
             setQuestionAndAnswers();
+            animateButton(answer_button3, "Normal");
         }
+        answer_button3.setStyle("");
     }
 
-    public void getAnswer4(){
+    public void getAnswer4() throws Exception{
+        Button b = animateResult();
+        if (!b.getText().equals(answer_button4.getText())){
+            endGame();
+            animateButton(answer_button4, "Wrong");
+            return;
+        }
         if (super.checkAnswer(game.fragen, questionBox.getText(), answer_button4.getText())){
             game.index_frage++;
             setQuestionAndAnswers();
+            animateButton(answer_button4, "Normal");
         }
+        answer_button4.setStyle("");
     }
 
     public void close() throws IOException {
