@@ -182,6 +182,7 @@ public class GUI extends SystemController {
     @FXML
     private Text timeText;
 
+    
     @FXML
     public void onHelloButtonClick() throws Exception{
         //welcomeText.setText("Welcome to JavaFX Application!");
