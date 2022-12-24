@@ -2,6 +2,7 @@ package de.hebk;
 
 public class GameSettings{
 
+    private String gameMode;
     private int question_Amount = 10;
     private String category = "Allgemein";
     private int difficultyValue = 20;
@@ -10,6 +11,13 @@ public class GameSettings{
     private int incrementRange = 2;
     private String currency;
 
+    public String getGameMode() {
+        return gameMode;
+    }
+
+    public void setGameMode(String gameMode) {
+        this.gameMode = gameMode;
+    }
 
     public int getQuestion_Amount() {
         return question_Amount;
