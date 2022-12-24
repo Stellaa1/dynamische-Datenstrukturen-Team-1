@@ -162,6 +162,12 @@ public class GUI extends SystemController {
     @FXML
     private Button gameMode_Reverse;
     @FXML
+    private Button amount_Questions10;
+    @FXML
+    private Button amount_Questions15;
+    @FXML
+    private Button amount_Questions20;
+    @FXML
     public void onHelloButtonClick() throws Exception{
         //welcomeText.setText("Welcome to JavaFX Application!");
         System.out.println(achievementPane);
@@ -375,21 +381,6 @@ public class GUI extends SystemController {
 
     public void showHowManyQuestions() throws Exception{
         loadScene("Fragenzahl.fxml");
-    }
-
-    public void showGame_Settings1_1() throws Exception{
-        loadScene("Game_Settings1.fxml");
-        temp_FragenAnzahl = 10;
-    }
-
-    public void showGame_Settings1_2() throws Exception{
-        loadScene("Game_Settings1.fxml");
-        temp_FragenAnzahl = 15;
-    }
-
-    public void showGame_Settings1_3() throws Exception{
-        loadScene("Game_Settings1.fxml");
-        temp_FragenAnzahl = 20;
     }
 
     public void nextTopic(){
@@ -626,19 +617,31 @@ public class GUI extends SystemController {
     public void handle_gameModes(MouseEvent event) throws Exception {
         if (event.getSource() == gameMode_Normal){
             temp_gameMode = "Normal";
-            showHowManyQuestions();
         }
 
         if (event.getSource() == gameMode_Reverse){
             temp_gameMode = "Reverse";
-            showHowManyQuestions();
         }
+        showHowManyQuestions();
+    }
+
+    public void handle_HowManyQuestions(MouseEvent event) throws Exception {
+        if (event.getSource() == amount_Questions10){
+            temp_FragenAnzahl = 10;
+        }
+
+        if (event.getSource() == amount_Questions15){
+            temp_FragenAnzahl = 15;
+        }
+
+        if (event.getSource() == amount_Questions20){
+            temp_FragenAnzahl = 20;
+        }
+        loadScene("Game_Settings1.fxml");
     }
 
     public void handle_ProfileImages(MouseEvent event) throws Exception {
-
         String local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/Unbenannt.PNG";
-
         if (event.getSource() == profileImage1){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/1.PNG";
         }
