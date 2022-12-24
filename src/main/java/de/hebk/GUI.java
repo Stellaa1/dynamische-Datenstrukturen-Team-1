@@ -24,12 +24,12 @@ import javafx.scene.text.TextAlignment;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Objects;
 
 public class GUI extends SystemController {
 
 
     Game game;
+    static String temp_gameMode;
     static int temp_FragenAnzahl;
     static String temp_category;
     static int temp_difficultyValue;
@@ -157,6 +157,10 @@ public class GUI extends SystemController {
     private Rectangle loader_Menu;
     @FXML
     private Rectangle loader_Game_Normal;
+    @FXML
+    private Button gameMode_Normal;
+    @FXML
+    private Button gameMode_Reverse;
     @FXML
     public void onHelloButtonClick() throws Exception{
         //welcomeText.setText("Welcome to JavaFX Application!");
@@ -307,6 +311,20 @@ public class GUI extends SystemController {
         loadScene("Anmelden.fxml");
     }
 
+    public void logIn_showProfilePicture() throws FileNotFoundException {
+        int index = searchForUser(anmelden_Benutzername.getText());
+
+        if (index != -1){
+            FileInputStream inputStream = new FileInputStream(users.get(index).getContext().getProfilePicture());
+            Image image = new Image(inputStream);
+            anmelden_Image.setImage(image);
+        } else{
+            FileInputStream inputStream = new FileInputStream("src/main/resources/de/hebk/Profilbilder/Unbenannt.PNG");
+            Image image = new Image(inputStream);
+            anmelden_Image.setImage(image);
+        }
+    }
+
     public void logIn() throws Exception{
         int index = searchForUser(anmelden_Benutzername.getText());
 
@@ -349,6 +367,10 @@ public class GUI extends SystemController {
     public void logOut() throws Exception{
         local_User = null;
         loadScene("GUI.fxml");
+    }
+
+    public void showGameModes() throws Exception{
+        loadScene("NormalOderReverse.fxml");
     }
 
     public void showHowManyQuestions() throws Exception{
@@ -412,6 +434,7 @@ public class GUI extends SystemController {
             temp_incrementRange = Integer.parseInt(incrementRangeField.getText());
             temp_currency = currencyField.getText();
         } catch (Exception e){
+            temp_gameMode = "Normal";
             temp_difficultyValue = 20;
             temp_difficultyRange = 0;
             temp_incrementValue = 2;
@@ -434,6 +457,7 @@ public class GUI extends SystemController {
         try {
             game = new Game();
             game.fragen = new Fragen();
+            game.fragen.gameSettings.setGameMode(temp_gameMode);
             game.fragen.gameSettings.setCategory(temp_category);
             game.fragen.gameSettings.setQuestion_Amount(temp_FragenAnzahl);
             game.fragen.gameSettings.setDifficultyValue(temp_difficultyValue);
@@ -599,6 +623,17 @@ public class GUI extends SystemController {
         System.exit(0);
     }
 
+    public void handle_gameModes(MouseEvent event) throws Exception {
+        if (event.getSource() == gameMode_Normal){
+            temp_gameMode = "Normal";
+            showHowManyQuestions();
+        }
+
+        if (event.getSource() == gameMode_Reverse){
+            temp_gameMode = "Reverse";
+            showHowManyQuestions();
+        }
+    }
 
     public void handle_ProfileImages(MouseEvent event) throws Exception {
 
