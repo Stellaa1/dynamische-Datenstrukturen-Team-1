@@ -3,6 +3,9 @@ package de.hebk.model.list;
 import de.hebk.model.node.Node;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.ListIterator;
 
 /**
  * Objekte der Klasse List verwalten beliebig viele, linear angeordnete Objekte. Auf
@@ -29,6 +32,7 @@ public class List<T> implements Serializable {
     public boolean isEmpty(){
         return first == null;
     }
+
 
     /**
      * Die Anfrage liefert den Wert true, wenn es ein aktuelles Objekt

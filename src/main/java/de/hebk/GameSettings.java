@@ -3,6 +3,8 @@ package de.hebk;
 public class GameSettings{
 
     private String gameMode;
+
+    private int reward = 0;
     private int question_Amount = 10;
     private String category = "Allgemein";
     private int difficultyValue = 20;
@@ -17,6 +19,14 @@ public class GameSettings{
 
     public void setGameMode(String gameMode) {
         this.gameMode = gameMode;
+    }
+
+    public int getReward() {
+        return reward;
+    }
+
+    public void setReward(int reward) {
+        this.reward = reward;
     }
 
     public int getQuestion_Amount() {

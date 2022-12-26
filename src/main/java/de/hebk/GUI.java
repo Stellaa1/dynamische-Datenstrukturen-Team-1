@@ -1,13 +1,14 @@
 package de.hebk;
 
 import de.hebk.model.list.List;
+import de.hebk.model.stack.Stack;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -24,9 +25,7 @@ import javafx.scene.text.TextAlignment;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class GUI extends SystemController {
 
@@ -166,6 +165,8 @@ public class GUI extends SystemController {
     @FXML
     private Rectangle loader_Game_Normal2;
     @FXML
+    private Rectangle loader_Top10;
+    @FXML
     private Button gameMode_Normal;
     @FXML
     private Button gameMode_Reverse;
@@ -178,10 +179,24 @@ public class GUI extends SystemController {
     @FXML
     private Text youLostText;
     @FXML
+    private Text pointsText;
+    @FXML
     private Button returnToMenu;
     @FXML
     private Text timeText;
     @FXML
+    private TableView<User> topTable;
+    @FXML
+    private TableColumn<User, String> topTable_Index;
+    @FXML
+    private TableColumn<User, String> topTable_Name;
+    @FXML
+    private TableColumn<User, Integer> topTable_Played;
+    @FXML
+    private TableColumn<User, Integer> topTable_Won;
+    @FXML
+    private TableColumn<User, Integer> topTable_Points;
+
     static private final Text[] VALUES = new Text[20];
 
     
@@ -382,7 +397,6 @@ public class GUI extends SystemController {
                 @Override
                 public void run() {
                     if (time[0] >= 0){
-                        System.out.println(time[0]);
                         afterRun = System.currentTimeMillis();
                         timeText.setText("Zeit - " + ((int) 30 - (afterRun - beforeTimer) / 1000));
                         time[0] -= 1;
@@ -530,31 +544,66 @@ public class GUI extends SystemController {
 
             newVB.getChildren().clear();
 
-            for (int i = 0; i < game.fragen.gameSettings.getQuestion_Amount(); i++){
-                Text questionText = new Text();
-                questionText.setText((i + 1) + " ⬩ " + s[i] + " " + game.fragen.gameSettings.getCurrency());
-                questionText.setWrappingWidth(618.65087890625);
-                questionText.setTextAlignment(TextAlignment.CENTER);
-                questionText.setFill(Paint.valueOf("#ffffff"));
-                Font questionText_Font = Font.font("Arial",tg);
-                questionText.setFont(questionText_Font);
-                System.out.println(i + " " + VALUES[i]);
-                VALUES[i] = questionText;
-                System.out.println(i + " " + VALUES[i]);
-                newVB.getChildren().add(questionText);
+            if (game.fragen.gameSettings.getGameMode().equals("Normal")){
+                for (int i = 0; i < game.fragen.gameSettings.getQuestion_Amount(); i++){
+                    Text questionText = new Text();
+                    questionText.setText((i + 1) + " ⬩ " + s[i] + " " + game.fragen.gameSettings.getCurrency());
+                    questionText.setWrappingWidth(618.65087890625);
+                    questionText.setTextAlignment(TextAlignment.CENTER);
+                    questionText.setFill(Paint.valueOf("#ffffff"));
+                    Font questionText_Font = Font.font("Arial",tg);
+                    questionText.setFont(questionText_Font);
+                    System.out.println(i + " " + VALUES[i]);
+                    VALUES[i] = questionText;
+                    System.out.println(i + " " + VALUES[i]);
+                    newVB.getChildren().add(questionText);
+                }
+
+                if (game.index_frage < game.fragen.gameSettings.getQuestion_Amount()){
+                    setQuestionAndAnswers();
+                }
+
             }
+
+            if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
+                System.out.println("REVERSE");
+                for (int i = 0; i < game.fragen.gameSettings.getQuestion_Amount(); i++){
+                    Text questionText = new Text();
+                    questionText.setText((game.fragen.gameSettings.getQuestion_Amount() - i) + " ⬩ " + s[(game.fragen.gameSettings.getQuestion_Amount() - i - (1))] + " " + game.fragen.gameSettings.getCurrency());
+                    questionText.setWrappingWidth(618.65087890625);
+                    questionText.setTextAlignment(TextAlignment.CENTER);
+                    questionText.setFill(Paint.valueOf("#ffffff"));
+                    Font questionText_Font = Font.font("Arial",tg);
+                    questionText.setFont(questionText_Font);
+                    System.out.println(i + " " + VALUES[i]);
+                    VALUES[i] = questionText;
+                    System.out.println(i + " " + VALUES[i]);
+                    newVB.getChildren().add(questionText);
+                }
+
+                if (game.index_frage < game.fragen.gameSettings.getQuestion_Amount()){
+                    setQuestionAndAnswers();
+                }
+
+            }
+
         } catch(Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
             loadScene("Fehler_Game.fxml");
         }
 
-        if (game.index_frage < game.fragen.gameSettings.getQuestion_Amount()){
-            setQuestionAndAnswers();
-        }
+
 
     }
 
     public void setQuestionAndAnswers() throws Exception{
+        game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(game.index_frage).getContext().getDifficulty());
+        if (VALUES[game.index_frage] == null){
+            System.out.println("Player Won");
+            local_User.setPoints(local_User.getPoints() + game.index_frage - 1);
+            return;
+        }
+
         counter();
         if (game.index_frage != 0){
             VALUES[game.index_frage - 1].setStyle("-fx-fill: white");
@@ -564,8 +613,18 @@ public class GUI extends SystemController {
             return;
         }
 
-        List<String> options = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions();
-        questionBox.setText(game.fragen.getQuestions().get(game.index_frage).getContext().getQuestion());
+        List<String> options = null;
+
+        if (game.fragen.gameSettings.getGameMode().equals("Normal")){
+            options = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions();
+            questionBox.setText(game.fragen.getQuestions().get(game.index_frage).getContext().getQuestion());
+        }
+
+        if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
+            options = game.fragen.getQuestions().get(game.fragen.gameSettings.getQuestion_Amount() - 1 - game.index_frage).getContext().getOptions();
+            questionBox.setText(game.fragen.getQuestions().get(game.fragen.gameSettings.getQuestion_Amount() - 1 - game.index_frage).getContext().getQuestion());
+        }
+
 
         for (int i = 0; i < game.fragen.gameSettings.getQuestion_Amount(); i++){
             System.out.println(game.fragen.getQuestions().get(i).getContext().getOptions().toString());
@@ -654,7 +713,15 @@ public class GUI extends SystemController {
     }
 
     public Button getCorrectAnswerFromButtons(){
-        String answer = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(0).getContext();
+        String answer = null;
+        if (game.fragen.gameSettings.getGameMode().equals("Normal")){
+            answer = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(0).getContext();
+        }
+
+        if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
+            answer = game.fragen.getQuestions().get(game.fragen.gameSettings.getQuestion_Amount() - 1 -  game.index_frage).getContext().getOptions().get(0).getContext();
+        }
+
         Button button = null;
 
         if (answer_button1.getText().equals(answer)){
@@ -677,7 +744,12 @@ public class GUI extends SystemController {
     }
 
     public void endGame(){
+        local_User.setPoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
+        local_User.setPlayed(local_User.getPlayed() + 1);
+        local_User.setLost(local_User.getLost() + 1);
         youLostText.setVisible(true);
+        pointsText.setText("PUNKTE: " + game.fragen.gameSettings.getReward());
+        pointsText.setVisible(true);
         returnToMenu.setVisible(true);
         loader_Game_Normal2.setOpacity(0.65);
         loader_Game_Normal2.setVisible(true);
@@ -752,6 +824,29 @@ public class GUI extends SystemController {
             animateButton(answer_button4, "Normal");
         }
         answer_button4.setStyle("");
+    }
+
+
+    public void showTop10() throws Exception{
+        loadScene("Top10.fxml");
+    }
+
+    public void setTop10(){
+        loader_Top10.setVisible(false);
+        Stack<User> top10 = calculateTop10();
+        ObservableList<User> observableList = FXCollections.observableArrayList();
+
+        for (int i = 0; i < top10.size(); i++){
+            observableList.add(top10.get(i).getContext());
+        }
+
+        topTable_Name.setCellValueFactory(new PropertyValueFactory<User, String>("Name"));
+        topTable_Played.setCellValueFactory(new PropertyValueFactory<User, Integer>("played"));
+        topTable_Won.setCellValueFactory(new PropertyValueFactory<User, Integer>("won"));
+        topTable_Points.setCellValueFactory(new PropertyValueFactory<User, Integer>("points"));
+
+
+        topTable.setItems(observableList);
     }
 
     public void close() throws IOException {

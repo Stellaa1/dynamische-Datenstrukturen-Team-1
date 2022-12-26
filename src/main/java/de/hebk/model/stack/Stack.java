@@ -4,6 +4,7 @@ import de.hebk.model.node.Node;
 
 public class Stack<T> {
     private Node<T> first;
+    private int size = 0;
 
     /**
      * Checks if the list is empty
@@ -12,6 +13,23 @@ public class Stack<T> {
     public boolean isEmpty(){
 
         return first == null;
+    }
+
+    public int size(){
+        return size;
+    }
+    public Node<T> get(int index){
+        Node<T> ret;
+        if (index > size){
+            ret = null;
+        }
+
+        Node<T> temp = first;
+        for (int i = 0; i< index; i++){
+            temp = temp.getNext();
+        }
+        ret = temp;
+        return ret;
     }
 
     /**
@@ -29,10 +47,11 @@ public class Stack<T> {
                 first.setContext(pInhalt);
                 first.setNext(tmp);
                 tmp = first.getNext();
-
+                size++;
             }else{
                 first=new Node<T>();
                 first.setContext(pInhalt);
+                size++;
             }
 
 

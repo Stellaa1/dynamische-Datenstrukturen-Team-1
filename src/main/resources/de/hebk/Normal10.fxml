@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
       <ImageView fitHeight="1140.0" fitWidth="1894.0" layoutX="5.0" layoutY="40.0" pickOnBounds="true">
          <image>
@@ -116,7 +116,7 @@
             <Font size="46.0" />
          </font>
       </Text>
-      <Rectangle fx:id="loader_Game_Normal2" arcHeight="5.0" arcWidth="5.0" height="1280.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_4" visible="false" width="1920.0" />
+      <Rectangle fx:id="loader_Game_Normal2" arcHeight="5.0" arcWidth="5.0" height="1280.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_4" visible="false" width="1920.0" />
       <Rectangle fx:id="loader_Game_Normal" arcHeight="5.0" arcWidth="5.0" height="1280.0" onMouseMoved="#startGame" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1920.0" />
       <Text fx:id="youLostText" fill="WHITE" layoutX="526.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DU HAST VERLOREN" visible="false">
          <font>
@@ -128,5 +128,10 @@
             <Font name="Sylfaen" size="43.0" />
          </font>
       </Button>
+      <Text fx:id="pointsText" fill="WHITE" layoutX="936.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text2" visible="false">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
