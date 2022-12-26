@@ -24,14 +24,6 @@ public class Start extends Application implements Serializable {
 
 
     public static void main(String[] args) {
-        //Fragen f = new Fragen(16,"Geschichte");
-       // f.generateQuestions();
-        //List<String> l = new List<>();
-        Fragen f = new Fragen();
-        f.gameSettings.setDifficultyValue(10);
-        f.gameSettings.setDifficultyRange(0);
-        f.generateQuestions();
         launch();
-        //s.loadData();
     }
 }
