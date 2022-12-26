@@ -181,6 +181,8 @@ public class GUI extends SystemController {
     private Button returnToMenu;
     @FXML
     private Text timeText;
+    @FXML
+    static private final Text[] VALUES = new Text[20];
 
     
     @FXML
@@ -224,7 +226,7 @@ public class GUI extends SystemController {
 
     public void showRegister() throws Exception{
         super.loadData();
-        loadScene("Regestrieren.fxml");
+        loadScene("Registrieren.fxml");
     }
 
     public void generateName(){
@@ -485,6 +487,7 @@ public class GUI extends SystemController {
     }
 
     public void startGame() throws Exception {
+        System.out.println("startGame()");
         loader_Game_Normal.setVisible(false);
 
         try {
@@ -523,32 +526,40 @@ public class GUI extends SystemController {
                 s = values3;
             }
 
-            if (game.index_frage < game.fragen.gameSettings.getQuestion_Amount()){
-                setQuestionAndAnswers();
-            }
+
 
             newVB.getChildren().clear();
 
             for (int i = 0; i < game.fragen.gameSettings.getQuestion_Amount(); i++){
                 Text questionText = new Text();
                 questionText.setText((i + 1) + " ⬩ " + s[i] + " " + game.fragen.gameSettings.getCurrency());
-                questionText.setId("questionText_" + i);
                 questionText.setWrappingWidth(618.65087890625);
-                System.out.println(questionText.getTextAlignment());
                 questionText.setTextAlignment(TextAlignment.CENTER);
                 questionText.setFill(Paint.valueOf("#ffffff"));
                 Font questionText_Font = Font.font("Arial",tg);
                 questionText.setFont(questionText_Font);
+                System.out.println(i + " " + VALUES[i]);
+                VALUES[i] = questionText;
+                System.out.println(i + " " + VALUES[i]);
                 newVB.getChildren().add(questionText);
             }
         } catch(Exception e){
+            System.out.println(Arrays.toString(e.getStackTrace()));
             loadScene("Fehler_Game.fxml");
+        }
+
+        if (game.index_frage < game.fragen.gameSettings.getQuestion_Amount()){
+            setQuestionAndAnswers();
         }
 
     }
 
     public void setQuestionAndAnswers() throws Exception{
         counter();
+        if (game.index_frage != 0){
+            VALUES[game.index_frage - 1].setStyle("-fx-fill: white");
+        }
+        VALUES[game.index_frage].setStyle("-fx-fill: #ff8c00");
         if (game.index_frage >= game.fragen.gameSettings.getQuestion_Amount()){
             return;
         }
