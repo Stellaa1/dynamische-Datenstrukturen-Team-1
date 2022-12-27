@@ -36,6 +36,7 @@
     -fx-text-fill: White;
 }
 
+
 .button_answer:hover{
     -fx-background-color: #ff8c00;
     -fx-text-fill: White;
@@ -51,6 +52,14 @@
 
 .button_lost:hover{
     -fx-background-color: #383853;
+}
+
+.button_Top10{
+    -fx-background-color: linear-gradient(to top right, #ec008c, #fc6767);
+}
+
+.button_TopAll{
+    -fx-background-color: linear-gradient(to top right, #ffa500, #ffd600);
 }
 
 .rectangle{

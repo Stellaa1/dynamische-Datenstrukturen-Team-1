@@ -976,14 +976,14 @@ public class GUI extends SystemController {
     }
 
     public void showTop10() throws Exception{
-        loadScene("Top10.fxml");
+        loadScene("TopAll.fxml");
     }
 
     public void showTop10_Reverse() throws Exception{
-        loadScene("Top10Reverse.fxml");
+        loadScene("TopAllReverse.fxml");
     }
 
-    public void setTop10(){
+    public void setTopAll(){
         loader_Top10.setVisible(false);
         Stack<User> top10 = calculateTop10("Normal");
         ObservableList<User> observableList = FXCollections.observableArrayList();
@@ -1001,7 +1001,7 @@ public class GUI extends SystemController {
         topTable.setItems(observableList);
     }
 
-    public void setTop10_Reverse(){
+    public void setTopAll_Reverse(){
         loader_Top10_Reverse.setVisible(false);
         Stack<User> top10 = calculateTop10("Reverse");
         ObservableList<User> observableList = FXCollections.observableArrayList();

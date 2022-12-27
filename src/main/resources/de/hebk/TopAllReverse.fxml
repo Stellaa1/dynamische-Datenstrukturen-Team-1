@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
     <children>
         <Text fill="WHITE" layoutX="816.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOP 10 - Reverse">
             <font>
@@ -22,7 +22,7 @@
                 <Image url="@Images/top-10.png" />
             </image>
         </ImageView>
-        <TableView fx:id="topTable_Reverse" layoutX="210.0" layoutY="195.0" prefHeight="835.0" prefWidth="1501.0" style="-fx-background-color: #49529d;">
+        <TableView fx:id="topTable_Reverse" layoutX="210.0" layoutY="195.0" prefHeight="835.0" prefWidth="1501.0" styleClass="button_3">
             <columns>
                 <TableColumn fx:id="topTable_Index_Reverse" prefWidth="370.0" styleClass="button_4">
                     <graphic>
@@ -75,6 +75,6 @@
                 <Font name="Sylfaen" size="28.0" />
             </font>
         </Button>
-        <Rectangle fx:id="loader_Top10_Reverse" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1280.0" onMouseMoved="#setTop10_Reverse" opacity="0.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangle" width="1920.0" />
+        <Rectangle fx:id="loader_Top10_Reverse" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1280.0" onMouseMoved="#setTopAll_Reverse" opacity="0.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangle" width="1920.0" />
     </children>
 </AnchorPane>
