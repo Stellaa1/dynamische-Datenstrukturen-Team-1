@@ -177,7 +177,7 @@ public class SystemController extends Texts{
             s.countSort(points, points.length);
 
             for (int i = 0; i < points.length; i++){
-                for (int x = i; x < users.size(); x++){
+                for (int x = 0; x < users.size(); x++){
                     if (users.get(x).getContext().getReversePoints() == points[i] && !top10.find(users.get(x).getContext())){
                         top10.push(users.get(i).getContext());
                         break;
