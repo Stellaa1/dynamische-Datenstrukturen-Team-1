@@ -84,6 +84,11 @@
     -fx-text-fill: #868686;
 }
 
+.Text3{
+    -fx-fill: #ffffff;
+    -fx-text-fill: #ffffff;
+}
+
 .text-area {
     -fx-text-fill: rgb(0,0,0);
 }

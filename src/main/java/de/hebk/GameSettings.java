@@ -13,6 +13,8 @@ public class GameSettings{
     private int incrementRange = 2;
     private String currency;
 
+    private boolean autoConfirm;
+
     public String getGameMode() {
         return gameMode;
     }
@@ -83,5 +85,13 @@ public class GameSettings{
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public boolean isAutoConfirm() {
+        return autoConfirm;
+    }
+
+    public void setAutoConfirm(boolean autoConfirm) {
+        this.autoConfirm = autoConfirm;
     }
 }

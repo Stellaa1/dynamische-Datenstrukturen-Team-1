@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.Light.Distant?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
       <ImageView fitHeight="1140.0" fitWidth="1894.0" layoutX="5.0" layoutY="40.0" pickOnBounds="true">
          <image>
@@ -133,50 +134,61 @@
             <Font name="System Bold" size="29.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="438.0" layoutX="395.0" layoutY="175.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_5" width="438.0" />
-      <Text fill="WHITE" layoutX="497.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DEINE ANTWORT:">
+      <Rectangle fx:id="result_Box" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="438.0" layoutX="395.0" layoutY="175.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_5" visible="false" width="438.0" />
+      <Text fx:id="result_Title" fill="WHITE" layoutX="391.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DEINE ANTWORT:" textAlignment="CENTER" visible="false" wrappingWidth="438.0">
          <font>
             <Font name="System Bold" size="29.0" />
          </font></Text>
-      <Text fill="#aeaeae" layoutX="399.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ANTWORT" textAlignment="CENTER" wrappingWidth="425.26904296875">
+      <Text fx:id="result_Answer" fill="#aeaeae" layoutX="399.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ANTWORT" textAlignment="CENTER" visible="false" wrappingWidth="425.26904296875">
          <font>
             <Font size="21.0" />
          </font>
       </Text>
-      <ImageView fitHeight="73.0" fitWidth="303.0" layoutX="368.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/Untitled-3.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="73.0" fitWidth="399.0" layoutX="422.0" layoutY="521.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="result_Option3_Box" fitHeight="73.0" fitWidth="399.0" layoutX="422.0" layoutY="521.0" onMouseClicked="#endGame" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Images/Untitled-2.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="506.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="JA">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Text>
-      <Text fill="#5e5e5e" layoutX="466.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIST DU SICHER?" textAlignment="CENTER" wrappingWidth="295.26904296875">
+      <Text fx:id="result_Confirm" fill="#5e5e5e" layoutX="393.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIST DU SICHER?" textAlignment="CENTER" visible="false" wrappingWidth="438.0">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="535.0" layoutY="569.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WEGGEHEN">
+      <Text fx:id="result_Option3" fill="WHITE" layoutX="535.0" layoutY="569.0" onMouseClicked="#endGame" strokeType="OUTSIDE" strokeWidth="0.0" text="WEGGEHEN" visible="false">
          <font>
             <Font name="System Bold" size="31.0" />
          </font>
       </Text>
-      <ImageView fitHeight="73.0" fitWidth="303.0" layoutX="561.0" layoutY="449.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+      <ImageView fx:id="result_Option1_Box" fitHeight="55.0" fitWidth="240.0" layoutX="399.0" layoutY="457.0" onMouseClicked="#answer" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@Images/Untitled-3.png" />
+            <Image url="@Images/Untitled-5.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="686.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NEIN">
+      <ImageView fx:id="result_Option2_Box" fitHeight="55.0" fitWidth="240.0" layoutX="599.0" layoutY="458.0" onMouseClicked="#hide_Confirm_Box" pickOnBounds="true" preserveRatio="true" rotate="180.0" visible="false">
+         <image>
+            <Image url="@Images/Untitled-5.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="result_Option2" fill="WHITE" layoutX="686.0" layoutY="493.0" onMouseClicked="#hide_Confirm_Box" strokeType="OUTSIDE" strokeWidth="0.0" text="NEIN" visible="false">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
+      <Text fx:id="result_Option1" fill="WHITE" layoutX="501.0" layoutY="494.0" onMouseClicked="#answer" strokeType="OUTSIDE" strokeWidth="0.0" text="JA" visible="false">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="result_Option4_Box" fitHeight="73.0" fitWidth="399.0" layoutX="422.0" layoutY="447.0" onMouseClicked="#continueGame" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Images/Untitled-2.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="result_Option4" fill="WHITE" layoutX="558.0" layoutY="496.0" onMouseClicked="#continueGame" strokeType="OUTSIDE" strokeWidth="0.0" text="WEITER" visible="false">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font>
+      </Text>
+      <CheckBox fx:id="autoConfirm" layoutX="14.0" layoutY="147.0" mnemonicParsing="false" onMouseClicked="#changeGameAutoConfirm" styleClass="Text3" text="AUTOMATISCHES ANTWORTEN" textFill="WHITE" />
    </children>
 </AnchorPane>

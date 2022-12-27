@@ -210,6 +210,33 @@ public class GUI extends SystemController {
     private TableColumn<User, Integer> topTable_Won_Reverse;
     @FXML
     private TableColumn<User, Integer> topTable_Points_Reverse;
+    @FXML
+    private Rectangle result_Box;
+    @FXML
+    private Text result_Title;
+    @FXML
+    private Text result_Answer;
+    @FXML
+    private Text result_Option1;
+    @FXML
+    private Text result_Option2;
+    @FXML
+    private Text result_Option3;
+    @FXML
+    private Text result_Option4;
+    @FXML
+    private Text result_Confirm;
+    @FXML
+    private ImageView result_Option1_Box;
+    @FXML
+    private ImageView result_Option2_Box;
+    @FXML
+    private ImageView result_Option3_Box;
+    @FXML
+    private ImageView result_Option4_Box;
+    @FXML
+    private CheckBox autoConfirm;
+    String[] s = values1;
 
     static private final Text[] VALUES = new Text[20];
 
@@ -512,7 +539,7 @@ public class GUI extends SystemController {
         //game.fragen.gameSettings.setIncrementValue(Integer.parseInt(incrementValueField.getText()));
         //game.fragen.gameSettings.setIncrementRange(Integer.parseInt(incrementRangeField.getText()));
 
-        loadScene("Normal10.fxml");
+        loadScene("Main_Game.fxml");
     }
 
     public void startGame() throws Exception {
@@ -533,7 +560,7 @@ public class GUI extends SystemController {
             game.index_frage = 0;
             game.fragen.gameSettings.setCurrency(temp_currency);
 
-            String[] s = values1;
+
             int tg = 61;
 
             if (game.fragen.gameSettings.getQuestion_Amount() == 10){
@@ -778,6 +805,9 @@ public class GUI extends SystemController {
     }
 
     public void endGame(){
+        if (result_Box.isVisible()){
+            hide_Confirm_Box();
+        }
         if (game.fragen.gameSettings.getGameMode().equals("Normal")){
             local_User.setPoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
             local_User.setPlayed(local_User.getPlayed() + 1);
@@ -796,81 +826,145 @@ public class GUI extends SystemController {
         loader_Game_Normal2.setVisible(true);
     }
 
+    public void confirm(){
+        hide_Confirm_Box();
+        result_Box.setVisible(true);
+        result_Title.setText("DEINE ANTWORT:");
+        result_Title.setVisible(true);
+        result_Answer.setVisible(true);
+        result_Confirm.setText("BIST DU SICHER?");
+        result_Confirm.setVisible(true);
+        result_Option1_Box.setVisible(true);
+        result_Option1.setVisible(true);
+        result_Option2_Box.setVisible(true);
+        result_Option2.setVisible(true);
+        result_Option3_Box.setVisible(true);
+        result_Option3.setVisible(true);
+    }
+
+    public void confirm2(){
+        hide_Confirm_Box();
+        result_Box.setVisible(true);
+        result_Title.setVisible(true);
+        result_Answer.setVisible(true);
+       //if (game.fragen.gameSettings.getGameMode().equals("Normal")){
+            //result_Confirm.setText(s[game.index_frage] + " " + game.fragen.gameSettings.getCurrency());
+            result_Confirm.setText("PUNKTE: " + game.fragen.gameSettings.getReward());
+        //}
+        //if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
+            //result_Confirm.setText(s[(game.fragen.gameSettings.getQuestion_Amount() - game.index_frage - (1))] + " " + game.fragen.gameSettings.getCurrency());
+        //}
+        result_Confirm.setVisible(true);
+        result_Option3_Box.setVisible(true);
+        result_Option3.setVisible(true);
+        result_Option4_Box.setVisible(true);
+        result_Option4.setVisible(true);
+    }
+
+    public void hide_Confirm_Box(){
+        result_Box.setVisible(false);
+        result_Title.setVisible(false);
+        result_Answer.setVisible(false);
+        result_Confirm.setVisible(false);
+        result_Option1_Box.setVisible(false);
+        result_Option1.setVisible(false);
+        result_Option2_Box.setVisible(false);
+        result_Option2.setVisible(false);
+        result_Option3_Box.setVisible(false);
+        result_Option3.setVisible(false);
+        result_Option4.setVisible(false);
+        result_Option4_Box.setVisible(false);
+    }
+
+    public void continueGame() throws Exception {
+        hide_Confirm_Box();
+        Button b = getCorrectAnswerFromButtons();
+        game.index_frage++;
+        setQuestionAndAnswers();
+        animateButton(b, "Normal");
+        b.setStyle("");
+    }
+
     public Button animateResult() throws Exception{
         Button b = getCorrectAnswerFromButtons();
         timer.cancel();
-        Thread.sleep(2000);
         animateButton(b, "Answer");
         return b;
     }
 
-    public void getAnswer1() throws Exception{
+    public void answer() throws Exception {
+        hide_Confirm_Box();
         Button b = animateResult();
-        if (!b.getText().equals(answer_button1.getText())){
+        if (!b.getText().equals(result_Answer.getText())){
+            Button b2 = null;
+            if (answer_button1.getText().equals(result_Answer.getText())){
+                b2 = answer_button1;
+            }
+            if (answer_button2.getText().equals(result_Answer.getText())){
+                b2 = answer_button2;
+            }
+            if (answer_button3.getText().equals(result_Answer.getText())){
+                b2 = answer_button3;
+            }            if (answer_button4.getText().equals(result_Answer.getText())){
+                b2 = answer_button4;
+            }
             endGame();
-            animateButton(answer_button1, "Wrong");
+            animateButton(b, "Answer");
+            animateButton(b2, "Wrong");
             return;
         }
 
-        if (super.checkAnswer(game.fragen, questionBox.getText(), answer_button1.getText())){
-            game.index_frage++;
-            setQuestionAndAnswers();
-            animateButton(answer_button1, "Normal");
+        if (super.checkAnswer(game.fragen, questionBox.getText(), result_Answer.getText())){
+            System.out.println("Reward " + game.fragen.gameSettings.getReward());
             changeReward();
+            System.out.println("Reward " + game.fragen.gameSettings.getReward());
+            confirm2();
         }
-        answer_button1.setStyle("");
+        b.setStyle("");
+    }
+
+    public void changeGameAutoConfirm(){
+        game.fragen.gameSettings.setAutoConfirm(autoConfirm.isSelected());
+    }
+    public void getAnswer1() throws Exception{
+        answerFunction(answer_button1);
     }
 
     public void getAnswer2() throws Exception{
-        Button b = animateResult();
-        if (!b.getText().equals(answer_button2.getText())){
-            endGame();
-            animateButton(answer_button2, "Wrong");
-            return;
-        }
-
-        if (super.checkAnswer(game.fragen, questionBox.getText(), answer_button2.getText())){
-            game.index_frage++;
-            setQuestionAndAnswers();
-            animateButton(answer_button2, "Normal");
-            changeReward();
-        }
-        answer_button2.setStyle("");
+        answerFunction(answer_button2);
     }
 
     public void getAnswer3() throws Exception{
-        Button b = animateResult();
-        if (!b.getText().equals(answer_button3.getText())){
-            endGame();
-            animateButton(answer_button3, "Wrong");
-            return;
-        }
-
-        if (super.checkAnswer(game.fragen, questionBox.getText(), answer_button3.getText())){
-            game.index_frage++;
-            setQuestionAndAnswers();
-            animateButton(answer_button3, "Normal");
-            changeReward();
-        }
-        answer_button3.setStyle("");
+        answerFunction(answer_button3);
     }
 
     public void getAnswer4() throws Exception{
-        Button b = animateResult();
-        if (!b.getText().equals(answer_button4.getText())){
-            endGame();
-            animateButton(answer_button4, "Wrong");
-            return;
-        }
-        if (super.checkAnswer(game.fragen, questionBox.getText(), answer_button4.getText())){
-            game.index_frage++;
-            setQuestionAndAnswers();
-            animateButton(answer_button4, "Normal");
-            changeReward();
-        }
-        answer_button4.setStyle("");
+        answerFunction(answer_button4);
     }
 
+    public void answerFunction(Button b) throws Exception {
+        if (!game.fragen.gameSettings.isAutoConfirm()){
+            b.setStyle("");
+            result_Answer.setText(b.getText());
+            confirm();
+        } else {
+            Button b2 = getCorrectAnswerFromButtons();
+            if (!b.getText().equals(b2.getText())){
+                endGame();
+                animateButton(b2, "Answer");
+                animateButton(b, "Wrong");
+                return;
+            }
+
+            if (super.checkAnswer(game.fragen, questionBox.getText(), b.getText())){
+                game.index_frage++;
+                setQuestionAndAnswers();
+                animateButton(b, "Normal");
+                changeReward();
+            }
+        }
+        b.setStyle("");
+    }
     public void changeReward(){
         if (game.fragen.gameSettings.getGameMode().equals("Normal")){
             game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(game.index_frage).getContext().getDifficulty());
