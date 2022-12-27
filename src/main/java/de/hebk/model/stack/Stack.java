@@ -32,6 +32,30 @@ public class Stack<T> {
         return ret;
     }
 
+    public boolean find(T value){
+        boolean f = false;
+
+        Node<T> temp = first;
+
+        if (temp == null){
+            return false;
+        }
+
+        if (temp.getContext() == value){
+            return true;
+        }
+
+        while(temp.getNext() != null){
+            if (temp.getContext() == value){
+                f = true;
+                break;
+            }
+            temp = temp.getNext();
+        }
+
+        return f;
+    }
+
     /**
      * Das Objekt pObject wird oben auf den Stapel gelegt. Falls
      * pObject gleich null ist, bleibt der Stapel unverändert.

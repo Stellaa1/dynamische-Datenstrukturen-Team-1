@@ -167,6 +167,8 @@ public class GUI extends SystemController {
     @FXML
     private Rectangle loader_Top10;
     @FXML
+    private Rectangle loader_Top10_Reverse;
+    @FXML
     private Button gameMode_Normal;
     @FXML
     private Button gameMode_Reverse;
@@ -196,6 +198,18 @@ public class GUI extends SystemController {
     private TableColumn<User, Integer> topTable_Won;
     @FXML
     private TableColumn<User, Integer> topTable_Points;
+    @FXML
+    private TableView<User> topTable_Reverse;
+    @FXML
+    private TableColumn<User, String> topTable_Index_Reverse;
+    @FXML
+    private TableColumn<User, String> topTable_Name_Reverse;
+    @FXML
+    private TableColumn<User, Integer> topTable_Played_Reverse;
+    @FXML
+    private TableColumn<User, Integer> topTable_Won_Reverse;
+    @FXML
+    private TableColumn<User, Integer> topTable_Points_Reverse;
 
     static private final Text[] VALUES = new Text[20];
 
@@ -501,7 +515,6 @@ public class GUI extends SystemController {
     }
 
     public void startGame() throws Exception {
-        System.out.println("startGame()");
         loader_Game_Normal.setVisible(false);
 
         try {
@@ -597,10 +610,29 @@ public class GUI extends SystemController {
     }
 
     public void setQuestionAndAnswers() throws Exception{
-        game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(game.index_frage).getContext().getDifficulty());
+        System.out.println("Reward: " + game.fragen.gameSettings.getReward());
+        //if (game.fragen.gameSettings.getGameMode().equals("Normal")){
+            //game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(game.index_frage).getContext().getDifficulty());
+        //}
+
+        //if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
+            //game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(game.fragen.getQuestions().size() - 1 - game.index_frage).getContext().getDifficulty());
+        //}
+
+        System.out.println("Reward: " + game.fragen.gameSettings.getReward());
+
         if (VALUES[game.index_frage] == null){
             System.out.println("Player Won");
-            local_User.setPoints(local_User.getPoints() + game.index_frage - 1);
+            if (game.fragen.gameSettings.getGameMode().equals("Normal")){
+                local_User.setPoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
+                local_User.setPlayed(local_User.getPlayed() + 1);
+                local_User.setWon(local_User.getWon() + 1);
+            }
+            if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
+                local_User.setReversePoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
+                local_User.setPlayed_Reverse(local_User.getPlayed_Reverse() + 1);
+                local_User.setWon_Reverse(local_User.getWon_Reverse() + 1);
+            }
             return;
         }
 
@@ -682,6 +714,7 @@ public class GUI extends SystemController {
                 answer_button4.setText("Keine von genannten");
             }
         }
+        System.out.println("Reward: " + game.fragen.gameSettings.getReward());
     }
     public void addQuestions(){
         for (int i = 0; i < 5; i++){
@@ -744,9 +777,16 @@ public class GUI extends SystemController {
     }
 
     public void endGame(){
-        local_User.setPoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
-        local_User.setPlayed(local_User.getPlayed() + 1);
-        local_User.setLost(local_User.getLost() + 1);
+        if (game.fragen.gameSettings.getGameMode().equals("Normal")){
+            local_User.setPoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
+            local_User.setPlayed(local_User.getPlayed() + 1);
+            local_User.setLost(local_User.getLost() + 1);
+        }
+        if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
+            local_User.setReversePoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
+            local_User.setPlayed_Reverse(local_User.getPlayed_Reverse() + 1);
+            local_User.setLost_Reverse(local_User.getLost_Reverse() + 1);
+        }
         youLostText.setVisible(true);
         pointsText.setText("PUNKTE: " + game.fragen.gameSettings.getReward());
         pointsText.setVisible(true);
@@ -775,6 +815,7 @@ public class GUI extends SystemController {
             game.index_frage++;
             setQuestionAndAnswers();
             animateButton(answer_button1, "Normal");
+            changeReward();
         }
         answer_button1.setStyle("");
     }
@@ -791,6 +832,7 @@ public class GUI extends SystemController {
             game.index_frage++;
             setQuestionAndAnswers();
             animateButton(answer_button2, "Normal");
+            changeReward();
         }
         answer_button2.setStyle("");
     }
@@ -807,6 +849,7 @@ public class GUI extends SystemController {
             game.index_frage++;
             setQuestionAndAnswers();
             animateButton(answer_button3, "Normal");
+            changeReward();
         }
         answer_button3.setStyle("");
     }
@@ -822,18 +865,32 @@ public class GUI extends SystemController {
             game.index_frage++;
             setQuestionAndAnswers();
             animateButton(answer_button4, "Normal");
+            changeReward();
         }
         answer_button4.setStyle("");
     }
 
+    public void changeReward(){
+        if (game.fragen.gameSettings.getGameMode().equals("Normal")){
+            game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(game.index_frage).getContext().getDifficulty());
+        }
+
+        if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
+            game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(game.fragen.getQuestions().size() - 1 - game.index_frage).getContext().getDifficulty());
+        }
+    }
 
     public void showTop10() throws Exception{
         loadScene("Top10.fxml");
     }
 
+    public void showTop10_Reverse() throws Exception{
+        loadScene("Top10Reverse.fxml");
+    }
+
     public void setTop10(){
         loader_Top10.setVisible(false);
-        Stack<User> top10 = calculateTop10();
+        Stack<User> top10 = calculateTop10("Normal");
         ObservableList<User> observableList = FXCollections.observableArrayList();
 
         for (int i = 0; i < top10.size(); i++){
@@ -847,6 +904,24 @@ public class GUI extends SystemController {
 
 
         topTable.setItems(observableList);
+    }
+
+    public void setTop10_Reverse(){
+        loader_Top10_Reverse.setVisible(false);
+        Stack<User> top10 = calculateTop10("Reverse");
+        ObservableList<User> observableList = FXCollections.observableArrayList();
+
+        for (int i = 0; i < top10.size(); i++){
+            observableList.add(top10.get(i).getContext());
+        }
+
+        topTable_Name_Reverse.setCellValueFactory(new PropertyValueFactory<User, String>("Name"));
+        topTable_Played_Reverse.setCellValueFactory(new PropertyValueFactory<User, Integer>("played_Reverse"));
+        topTable_Won_Reverse.setCellValueFactory(new PropertyValueFactory<User, Integer>("won_Reverse"));
+        topTable_Points_Reverse.setCellValueFactory(new PropertyValueFactory<User, Integer>("reversePoints"));
+
+
+        topTable_Reverse.setItems(observableList);
     }
 
     public void close() throws IOException {

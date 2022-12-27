@@ -5,6 +5,7 @@ import de.hebk.model.list.List;
 import de.hebk.model.stack.Stack;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SystemController extends Texts{
@@ -147,32 +148,43 @@ public class SystemController extends Texts{
     }
 
 
-    public Stack<User> calculateTop10(){
+    public Stack<User> calculateTop10(String type){
         Stack<User> top10 = new Stack<>();
         int[] points = new int[users.size()];
 
-        for (int i = 0; i < users.size(); i++){
-            points[i] = users.get(i).getContext().getPoints();
-        }
-
-        Sorter s = new Sorter();
-        s.countSort(points, points.length);
-
-        System.out.println(Arrays.toString(points));
-
-        for (int x : points){
+        if (type.equals("Normal")){
             for (int i = 0; i < users.size(); i++){
-                if (users.get(i).getContext().getPoints() == x){
-                    top10.push(users.get(i).getContext());
+                points[i] = users.get(i).getContext().getPoints();
+            }
+            Sorter s = new Sorter();
+            s.countSort(points, points.length);
+
+            for (int i = 0; i < points.length; i++){
+                for (int x = 0; x < users.size(); x++){
+                    if (users.get(x).getContext().getPoints() == points[i] && !top10.find(users.get(x).getContext())){
+                        top10.push(users.get(i).getContext());
+                        break;
+                    }
                 }
             }
         }
 
-        System.out.println(top10.toString());
+        if (type.equals("Reverse")){
+            for (int i = 0; i < users.size(); i++){
+                points[i] = users.get(i).getContext().getReversePoints();
+            }
+            Sorter s = new Sorter();
+            s.countSort(points, points.length);
 
+            for (int i = 0; i < points.length; i++){
+                for (int x = i; x < users.size(); x++){
+                    if (users.get(x).getContext().getReversePoints() == points[i] && !top10.find(users.get(x).getContext())){
+                        top10.push(users.get(i).getContext());
+                        break;
+                    }
+                }
+            }
+        }
         return top10;
     }
-
-
-
 }

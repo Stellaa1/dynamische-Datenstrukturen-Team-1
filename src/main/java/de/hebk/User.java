@@ -11,6 +11,7 @@ public class User implements Serializable {
     private List<String> achievements = new List<>();
     private int points, reversePoints = 0;
     private int played, won, lost = 0;
+    private int played_Reverse, won_Reverse, lost_Reverse = 0;
 
 
     public String getName(){
@@ -83,5 +84,29 @@ public class User implements Serializable {
 
     public void setLost(int lost) {
         this.lost = lost;
+    }
+
+    public int getPlayed_Reverse() {
+        return played_Reverse;
+    }
+
+    public void setPlayed_Reverse(int played_Reverse) {
+        this.played_Reverse = played_Reverse;
+    }
+
+    public int getWon_Reverse() {
+        return won_Reverse;
+    }
+
+    public void setWon_Reverse(int won_Reverse) {
+        this.won_Reverse = won_Reverse;
+    }
+
+    public int getLost_Reverse() {
+        return lost_Reverse;
+    }
+
+    public void setLost_Reverse(int lost_Reverse) {
+        this.lost_Reverse = lost_Reverse;
     }
 }
