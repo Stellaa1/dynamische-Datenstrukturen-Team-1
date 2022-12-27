@@ -213,7 +213,8 @@ public class GUI extends SystemController {
 
     static private final Text[] VALUES = new Text[20];
 
-    
+
+
     @FXML
     public void onHelloButtonClick() throws Exception{
         //welcomeText.setText("Welcome to JavaFX Application!");

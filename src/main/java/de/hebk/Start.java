@@ -23,7 +23,7 @@ public class Start extends Application implements Serializable {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         launch();
     }
 }

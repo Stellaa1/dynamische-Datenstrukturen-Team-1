@@ -69,6 +69,12 @@
     -fx-fill: #000000;
 }
 
+.rectangle_5{
+    -fx-fill: linear-gradient(to top right, #02021c, #0b0b56);
+    -fx-stroke: linear-gradient(to top right, #0b0b56, #02021c);
+    -fx-stroke-width: 5;
+}
+
 .Text{
     -fx-background-color: orange;
 }
