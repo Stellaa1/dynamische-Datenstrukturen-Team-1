@@ -60,7 +60,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="1717.0" layoutY="1150.0" mnemonicParsing="false" onAction="#showTop10_Reverse" prefHeight="58.0" prefWidth="185.0" text="REVERSE" textFill="WHITE">
+      <Button layoutX="1717.0" layoutY="1150.0" mnemonicParsing="false" onAction="#showTopAll_Reverse" prefHeight="58.0" prefWidth="185.0" text="REVERSE" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="28.0" />
          </font>
@@ -70,8 +70,8 @@
             <Font name="Sylfaen" size="28.0" />
          </font>
       </Button>
-      <Rectangle fx:id="loader_Top10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1280.0" onMouseMoved="#setTopAll" opacity="0.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangle" width="1920.0" />
-      <Text fill="WHITE" layoutX="826.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOP 10 - Normal">
+      <Rectangle fx:id="loader_TopAll" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1280.0" onMouseMoved="#setTopAll" opacity="0.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangle" width="1920.0" />
+      <Text fill="WHITE" layoutX="826.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOP All - Normal">
          <font>
             <Font name="Sylfaen" size="45.0" />
          </font>

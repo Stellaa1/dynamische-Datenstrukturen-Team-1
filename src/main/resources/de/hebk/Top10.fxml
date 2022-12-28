@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
       <Text fx:id="availabilityText" layoutX="1193.0" layoutY="600.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="541.19384765625">
          <font>
             <Font size="31.0" />
          </font>
       </Text>
-      <ImageView fx:id="image_Top1" fitHeight="105.0" fitWidth="105.0" layoutX="161.0" layoutY="84.0" pickOnBounds="true">
+      <ImageView fx:id="image_Top1" fitHeight="105.0" fitWidth="105.0" layoutX="161.0" layoutY="84.0" pickOnBounds="true" visible="false">
          <image>
             <Image url="@Profilbilder/Unbenannt.PNG" />
          </image>
@@ -23,15 +25,21 @@
             <Image url="@Images/medal.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="303.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOP PLAYER" textAlignment="CENTER" wrappingWidth="480.212890625">
+      <Text fx:id="player_Top1" fill="WHITE" layoutX="303.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top1" text="Name" textAlignment="CENTER" visible="false" wrappingWidth="480.212890625">
          <font>
             <Font name="System Bold" size="47.0" />
          </font>
+         <effect>
+            <Glow level="0.58" />
+         </effect>
       </Text>
-      <Text fx:id="played_Top1" fill="WHITE" layoutX="841.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="played_Top1" fill="WHITE" layoutX="841.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top1" textAlignment="CENTER" visible="false" wrappingWidth="207.212890625">
          <font>
-            <Font size="47.0" />
+            <Font name="Arial Black" size="47.0" />
          </font>
+         <effect>
+            <Glow level="0.58" />
+         </effect>
       </Text>
       <Text fill="WHITE" layoutX="841.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GESPIELT" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
@@ -43,295 +51,314 @@
             <Font name="System Bold" size="47.0" />
          </font>
       </Text>
-      <Text fx:id="won_Top1" fill="WHITE" layoutX="1217.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="won_Top1" fill="WHITE" layoutX="1217.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top1" textAlignment="CENTER" visible="false" wrappingWidth="207.212890625">
          <font>
-            <Font size="47.0" />
+            <Font name="Arial Black" size="47.0" />
          </font>
+         <effect>
+            <Glow level="0.58" />
+         </effect>
       </Text>
       <Text fill="WHITE" layoutX="1512.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PUNKTE" textAlignment="CENTER" wrappingWidth="323.212890625">
          <font>
             <Font name="System Bold" size="47.0" />
          </font>
       </Text>
-      <Text fx:id="points_Top1" fill="WHITE" layoutX="1570.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="points_Top1" fill="WHITE" layoutX="1570.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top1" textAlignment="CENTER" visible="false" wrappingWidth="207.212890625">
          <font>
-            <Font size="47.0" />
+            <Font name="System Bold" size="47.0" />
          </font>
+         <effect>
+            <Glow level="0.58" />
+         </effect>
       </Text>
       <Text fill="WHITE" layoutX="439.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SPIELER" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font name="System Bold" size="47.0" />
          </font>
       </Text>
-      <ImageView fx:id="image_Top2" fitHeight="105.0" fitWidth="105.0" layoutX="161.0" layoutY="194.0" pickOnBounds="true">
+      <ImageView fx:id="image_Top2" fitHeight="105.0" fitWidth="105.0" layoutX="161.0" layoutY="194.0" pickOnBounds="true" visible="false">
          <image>
             <Image url="@Profilbilder/Unbenannt.PNG" />
          </image>
       </ImageView>
-      <ImageView fx:id="medal_Top2" fitHeight="65.0" fitWidth="65.0" layoutX="56.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="medal_Top2" fitHeight="65.0" fitWidth="65.0" layoutX="56.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Images/gold-medal.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="303.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOP PLAYER" textAlignment="CENTER" wrappingWidth="480.212890625">
+      <Text fx:id="player_Top2" fill="WHITE" layoutX="303.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top2" textAlignment="CENTER" visible="false" wrappingWidth="480.212890625">
          <font>
             <Font name="System Bold" size="47.0" />
          </font>
+         <effect>
+            <Glow level="0.45" />
+         </effect>
       </Text>
-      <Text fx:id="played_Top2" fill="WHITE" layoutX="841.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="played_Top2" fill="WHITE" layoutX="841.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top2" textAlignment="CENTER" visible="false" wrappingWidth="207.212890625">
          <font>
-            <Font size="47.0" />
+            <Font name="System Bold" size="47.0" />
          </font>
+         <effect>
+            <Glow level="0.45" />
+         </effect>
       </Text>
-      <Text fx:id="won_Top2" fill="WHITE" layoutX="1217.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="won_Top2" fill="WHITE" layoutX="1217.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top2" textAlignment="CENTER" visible="false" wrappingWidth="207.212890625">
          <font>
-            <Font size="47.0" />
+            <Font name="System Bold" size="47.0" />
          </font>
+         <effect>
+            <Glow level="0.45" />
+         </effect>
       </Text>
-      <Text fx:id="points_Top2" fill="WHITE" layoutX="1570.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="points_Top2" fill="WHITE" layoutX="1570.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top2" textAlignment="CENTER" visible="false" wrappingWidth="207.212890625">
          <font>
-            <Font size="47.0" />
+            <Font name="System Bold" size="47.0" />
          </font>
+         <effect>
+            <Glow level="0.45" />
+         </effect>
       </Text>
-      <ImageView fx:id="image_Top3" fitHeight="105.0" fitWidth="105.0" layoutX="161.0" layoutY="304.0" pickOnBounds="true">
+      <ImageView fx:id="image_Top3" fitHeight="105.0" fitWidth="105.0" layoutX="161.0" layoutY="304.0" pickOnBounds="true" visible="false">
          <image>
             <Image url="@Profilbilder/Unbenannt.PNG" />
          </image>
       </ImageView>
-      <ImageView fx:id="medal_Top3" fitHeight="65.0" fitWidth="65.0" layoutX="56.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="medal_Top3" fitHeight="65.0" fitWidth="65.0" layoutX="56.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Images/medal-silver.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="303.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOP PLAYER" textAlignment="CENTER" wrappingWidth="480.212890625">
+      <Text fx:id="player_Top3" fill="WHITE" layoutX="303.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top3" textAlignment="CENTER" visible="false" wrappingWidth="480.212890625">
          <font>
             <Font name="System Bold" size="47.0" />
          </font>
       </Text>
-      <Text fx:id="played_Top3" fill="WHITE" layoutX="841.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="played_Top3" fill="WHITE" layoutX="841.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top3" textAlignment="CENTER" visible="false" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="won_Top3" fill="WHITE" layoutX="1217.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="won_Top3" fill="WHITE" layoutX="1217.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top3" textAlignment="CENTER" visible="false" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="points_Top3" fill="WHITE" layoutX="1570.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="points_Top3" fill="WHITE" layoutX="1570.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top3" textAlignment="CENTER" visible="false" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <ImageView fx:id="image_Top4" fitHeight="105.0" fitWidth="105.0" layoutX="161.0" layoutY="414.0" pickOnBounds="true">
+      <ImageView fx:id="image_Top4" fitHeight="105.0" fitWidth="105.0" layoutX="161.0" layoutY="414.0" pickOnBounds="true" visible="false">
          <image>
             <Image url="@Profilbilder/Unbenannt.PNG" />
          </image>
       </ImageView>
-      <ImageView fx:id="medal_Top4" fitHeight="65.0" fitWidth="65.0" layoutX="56.0" layoutY="434.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="medal_Top4" fitHeight="65.0" fitWidth="65.0" layoutX="56.0" layoutY="434.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Images/bronze-medal.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="303.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOP PLAYER" textAlignment="CENTER" wrappingWidth="480.212890625">
+      <Text fx:id="player_Top4" fill="WHITE" layoutX="303.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="480.212890625">
          <font>
             <Font name="System Bold" size="47.0" />
          </font>
       </Text>
-      <Text fx:id="played_Top4" fill="WHITE" layoutX="841.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="played_Top4" fill="WHITE" layoutX="841.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="won_Top4" fill="WHITE" layoutX="1217.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="won_Top4" fill="WHITE" layoutX="1217.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="points_Top4" fill="WHITE" layoutX="1570.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="points_Top4" fill="WHITE" layoutX="1570.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <ImageView fx:id="image_Top5" fitHeight="105.0" fitWidth="105.0" layoutX="161.0" layoutY="524.0" pickOnBounds="true">
+      <ImageView fx:id="image_Top5" fitHeight="105.0" fitWidth="105.0" layoutX="161.0" layoutY="524.0" pickOnBounds="true" visible="false">
          <image>
             <Image url="@Profilbilder/Unbenannt.PNG" />
          </image>
       </ImageView>
-      <ImageView fx:id="medal_Top5" fitHeight="65.0" fitWidth="65.0" layoutX="56.0" layoutY="544.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="medal_Top5" fitHeight="65.0" fitWidth="65.0" layoutX="56.0" layoutY="544.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Images/bronze-medal.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="303.0" layoutY="596.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOP PLAYER" textAlignment="CENTER" wrappingWidth="480.212890625">
+      <Text fx:id="player_Top5" fill="WHITE" layoutX="303.0" layoutY="596.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="480.212890625">
          <font>
             <Font name="System Bold" size="47.0" />
          </font>
       </Text>
-      <Text fx:id="played_Top5" fill="WHITE" layoutX="841.0" layoutY="596.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="played_Top5" fill="WHITE" layoutX="841.0" layoutY="596.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="won_Top5" fill="WHITE" layoutX="1217.0" layoutY="596.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="won_Top5" fill="WHITE" layoutX="1217.0" layoutY="596.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="points_Top5" fill="WHITE" layoutX="1570.0" layoutY="596.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="points_Top5" fill="WHITE" layoutX="1570.0" layoutY="596.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <ImageView fx:id="image_Top6" fitHeight="105.0" fitWidth="105.0" layoutX="160.0" layoutY="634.0" pickOnBounds="true">
+      <ImageView fx:id="image_Top6" fitHeight="105.0" fitWidth="105.0" layoutX="160.0" layoutY="634.0" pickOnBounds="true" visible="false">
          <image>
             <Image url="@Profilbilder/Unbenannt.PNG" />
          </image>
       </ImageView>
-      <ImageView fx:id="medal_Top6" fitHeight="65.0" fitWidth="65.0" layoutX="55.0" layoutY="654.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="medal_Top6" fitHeight="65.0" fitWidth="65.0" layoutX="55.0" layoutY="654.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Images/bronze-medal.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="302.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOP PLAYER" textAlignment="CENTER" wrappingWidth="480.212890625">
+      <Text fx:id="player_Top6" fill="WHITE" layoutX="302.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="480.212890625">
          <font>
             <Font name="System Bold" size="47.0" />
          </font>
       </Text>
-      <Text fx:id="played_Top6" fill="WHITE" layoutX="840.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="played_Top6" fill="WHITE" layoutX="840.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="won_Top6" fill="WHITE" layoutX="1216.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="won_Top6" fill="WHITE" layoutX="1216.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="points_Top6" fill="WHITE" layoutX="1569.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="points_Top6" fill="WHITE" layoutX="1569.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <ImageView fx:id="image_Top7" fitHeight="105.0" fitWidth="105.0" layoutX="160.0" layoutY="744.0" pickOnBounds="true">
+      <ImageView fx:id="image_Top7" fitHeight="105.0" fitWidth="105.0" layoutX="160.0" layoutY="744.0" pickOnBounds="true" visible="false">
          <image>
             <Image url="@Profilbilder/Unbenannt.PNG" />
          </image>
       </ImageView>
-      <ImageView fx:id="medal_Top7" fitHeight="65.0" fitWidth="65.0" layoutX="55.0" layoutY="764.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="medal_Top7" fitHeight="65.0" fitWidth="65.0" layoutX="55.0" layoutY="764.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Images/bronze-medal.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="302.0" layoutY="816.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOP PLAYER" textAlignment="CENTER" wrappingWidth="480.212890625">
+      <Text fx:id="player_Top7" fill="WHITE" layoutX="302.0" layoutY="816.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="480.212890625">
          <font>
             <Font name="System Bold" size="47.0" />
          </font>
       </Text>
-      <Text fx:id="played_Top7" fill="WHITE" layoutX="840.0" layoutY="816.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="played_Top7" fill="WHITE" layoutX="840.0" layoutY="816.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="won_Top7" fill="WHITE" layoutX="1216.0" layoutY="816.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="won_Top7" fill="WHITE" layoutX="1216.0" layoutY="816.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="points_Top7" fill="WHITE" layoutX="1569.0" layoutY="816.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="points_Top7" fill="WHITE" layoutX="1569.0" layoutY="816.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <ImageView fx:id="image_Top8" fitHeight="105.0" fitWidth="105.0" layoutX="161.0" layoutY="854.0" pickOnBounds="true">
+      <ImageView fx:id="image_Top8" fitHeight="105.0" fitWidth="105.0" layoutX="161.0" layoutY="854.0" pickOnBounds="true" visible="false">
          <image>
             <Image url="@Profilbilder/Unbenannt.PNG" />
          </image>
       </ImageView>
-      <ImageView fx:id="medal_Top8" fitHeight="65.0" fitWidth="65.0" layoutX="56.0" layoutY="874.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="medal_Top8" fitHeight="65.0" fitWidth="65.0" layoutX="56.0" layoutY="874.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Images/bronze-medal.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="303.0" layoutY="926.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOP PLAYER" textAlignment="CENTER" wrappingWidth="480.212890625">
+      <Text fx:id="player_Top8" fill="WHITE" layoutX="303.0" layoutY="926.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="480.212890625">
          <font>
             <Font name="System Bold" size="47.0" />
          </font>
       </Text>
-      <Text fx:id="played_Top8" fill="WHITE" layoutX="841.0" layoutY="926.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="played_Top8" fill="WHITE" layoutX="841.0" layoutY="926.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="won_Top8" fill="WHITE" layoutX="1217.0" layoutY="926.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="won_Top8" fill="WHITE" layoutX="1217.0" layoutY="926.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="points_Top8" fill="WHITE" layoutX="1570.0" layoutY="926.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="points_Top8" fill="WHITE" layoutX="1570.0" layoutY="926.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <ImageView fx:id="image_Top9" fitHeight="105.0" fitWidth="105.0" layoutX="160.0" layoutY="964.0" pickOnBounds="true">
+      <ImageView fx:id="image_Top9" fitHeight="105.0" fitWidth="105.0" layoutX="160.0" layoutY="964.0" pickOnBounds="true" visible="false">
          <image>
             <Image url="@Profilbilder/Unbenannt.PNG" />
          </image>
       </ImageView>
-      <ImageView fx:id="medal_Top9" fitHeight="65.0" fitWidth="65.0" layoutX="55.0" layoutY="984.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="medal_Top9" fitHeight="65.0" fitWidth="65.0" layoutX="55.0" layoutY="984.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Images/bronze-medal.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="302.0" layoutY="1036.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOP PLAYER" textAlignment="CENTER" wrappingWidth="480.212890625">
+      <Text fx:id="player_Top9" fill="WHITE" layoutX="302.0" layoutY="1036.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="480.212890625">
          <font>
             <Font name="System Bold" size="47.0" />
          </font>
       </Text>
-      <Text fx:id="played_Top9" fill="WHITE" layoutX="840.0" layoutY="1036.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="played_Top9" fill="WHITE" layoutX="840.0" layoutY="1036.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="won_Top9" fill="WHITE" layoutX="1216.0" layoutY="1036.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="won_Top9" fill="WHITE" layoutX="1216.0" layoutY="1036.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="points_Top9" fill="WHITE" layoutX="1569.0" layoutY="1036.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="points_Top9" fill="WHITE" layoutX="1569.0" layoutY="1036.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <ImageView fx:id="image_Top10" fitHeight="105.0" fitWidth="105.0" layoutX="160.0" layoutY="1074.0" pickOnBounds="true">
+      <ImageView fx:id="image_Top10" fitHeight="105.0" fitWidth="105.0" layoutX="160.0" layoutY="1074.0" pickOnBounds="true" visible="false">
          <image>
             <Image url="@Profilbilder/Unbenannt.PNG" />
          </image>
       </ImageView>
-      <ImageView fx:id="medal_Top10" fitHeight="65.0" fitWidth="65.0" layoutX="55.0" layoutY="1094.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="medal_Top10" fitHeight="65.0" fitWidth="65.0" layoutX="55.0" layoutY="1094.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Images/bronze-medal.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="302.0" layoutY="1146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOP PLAYER" textAlignment="CENTER" wrappingWidth="480.212890625">
+      <Text fx:id="player_Top10" fill="WHITE" layoutX="302.0" layoutY="1146.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="480.212890625">
          <font>
             <Font name="System Bold" size="47.0" />
          </font>
       </Text>
-      <Text fx:id="played_Top10" fill="WHITE" layoutX="840.0" layoutY="1146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="played_Top10" fill="WHITE" layoutX="840.0" layoutY="1146.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="won_Top10" fill="WHITE" layoutX="1216.0" layoutY="1146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="won_Top10" fill="WHITE" layoutX="1216.0" layoutY="1146.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="points_Top10" fill="WHITE" layoutX="1569.0" layoutY="1146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="105" textAlignment="CENTER" wrappingWidth="207.212890625">
+      <Text fx:id="points_Top10" fill="WHITE" layoutX="1569.0" layoutY="1146.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="207.212890625">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
+      <Rectangle fx:id="loader_Top10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1280.0" onMouseMoved="#setTop10" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1920.0" />
    </children>
 </AnchorPane>

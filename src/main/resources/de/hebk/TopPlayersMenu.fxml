@@ -19,7 +19,7 @@
             <Font name="Sylfaen" size="84.0" />
          </font>
       </Text>
-      <Button fx:id="amount_Questions10" layoutX="542.0" layoutY="354.0" mnemonicParsing="false" onMouseClicked="#handle_HowManyQuestions" prefHeight="219.0" prefWidth="723.0" styleClass="button_Top10" text="TOP 10" textAlignment="CENTER" textFill="WHITE">
+      <Button layoutX="542.0" layoutY="354.0" mnemonicParsing="false" onAction="#showTop10" onMouseClicked="#handle_HowManyQuestions" prefHeight="219.0" prefWidth="723.0" styleClass="button_Top10" text="TOP 10" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="96.0" />
          </font>
@@ -29,7 +29,7 @@
             <Image url="@Images/speisekarte.png" />
          </image>
       </ImageView>
-      <Button fx:id="amount_Questions15" layoutX="542.0" layoutY="666.0" mnemonicParsing="false" onMouseClicked="#handle_HowManyQuestions" prefHeight="219.0" prefWidth="723.0" styleClass="button_TopAll" text="TOP SPIELER" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="amount_Questions15" layoutX="542.0" layoutY="666.0" mnemonicParsing="false" onAction="#showTopAll" onMouseClicked="#handle_HowManyQuestions" prefHeight="219.0" prefWidth="723.0" styleClass="button_TopAll" text="TOP SPIELER" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="63.0" />
          </font>

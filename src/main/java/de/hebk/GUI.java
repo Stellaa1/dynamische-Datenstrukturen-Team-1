@@ -169,6 +169,10 @@ public class GUI extends SystemController {
     @FXML
     private Rectangle loader_Top10_Reverse;
     @FXML
+    private Rectangle loader_TopAll;
+    @FXML
+    private Rectangle loader_TopAll_Reverse;
+    @FXML
     private Button gameMode_Normal;
     @FXML
     private Button gameMode_Reverse;
@@ -236,6 +240,132 @@ public class GUI extends SystemController {
     private ImageView result_Option4_Box;
     @FXML
     private CheckBox autoConfirm;
+
+    @FXML
+    private ImageView medal_Top1;
+    @FXML
+    private ImageView medal_Top2;
+    @FXML
+    private ImageView medal_Top3;
+    @FXML
+    private ImageView medal_Top4;
+    @FXML
+    private ImageView medal_Top5;
+    @FXML
+    private ImageView medal_Top6;
+    @FXML
+    private ImageView medal_Top7;
+    @FXML
+    private ImageView medal_Top8;
+    @FXML
+    private ImageView medal_Top9;
+    @FXML
+    private ImageView medal_Top10;
+    @FXML
+    private ImageView image_Top1;
+    @FXML
+    private ImageView image_Top2;
+    @FXML
+    private ImageView image_Top3;
+    @FXML
+    private ImageView image_Top4;
+    @FXML
+    private ImageView image_Top5;
+    @FXML
+    private ImageView image_Top6;
+    @FXML
+    private ImageView image_Top7;
+    @FXML
+    private ImageView image_Top8;
+    @FXML
+    private ImageView image_Top9;
+    @FXML
+    private ImageView image_Top10;
+
+    @FXML
+    private Text player_Top1;
+    @FXML
+    private Text player_Top2;
+    @FXML
+    private Text player_Top3;
+    @FXML
+    private Text player_Top4;
+    @FXML
+    private Text player_Top5;
+    @FXML
+    private Text player_Top6;
+    @FXML
+    private Text player_Top7;
+    @FXML
+    private Text player_Top8;
+    @FXML
+    private Text player_Top9;
+    @FXML
+    private Text player_Top10;
+
+    @FXML
+    private Text played_Top1;
+    @FXML
+    private Text played_Top2;
+    @FXML
+    private Text played_Top3;
+    @FXML
+    private Text played_Top4;
+    @FXML
+    private Text played_Top5;
+    @FXML
+    private Text played_Top6;
+    @FXML
+    private Text played_Top7;
+    @FXML
+    private Text played_Top8;
+    @FXML
+    private Text played_Top9;
+    @FXML
+    private Text played_Top10;
+
+    @FXML
+    private Text won_Top1;
+    @FXML
+    private Text won_Top2;
+    @FXML
+    private Text won_Top3;
+    @FXML
+    private Text won_Top4;
+    @FXML
+    private Text won_Top5;
+    @FXML
+    private Text won_Top6;
+    @FXML
+    private Text won_Top7;
+    @FXML
+    private Text won_Top8;
+    @FXML
+    private Text won_Top9;
+    @FXML
+    private Text won_Top10;
+
+    @FXML
+    private Text points_Top1;
+    @FXML
+    private Text points_Top2;
+    @FXML
+    private Text points_Top3;
+    @FXML
+    private Text points_Top4;
+    @FXML
+    private Text points_Top5;
+    @FXML
+    private Text points_Top6;
+    @FXML
+    private Text points_Top7;
+    @FXML
+    private Text points_Top8;
+    @FXML
+    private Text points_Top9;
+    @FXML
+    private Text points_Top10;
+
     String[] s = values1;
 
     static private final Text[] VALUES = new Text[20];
@@ -975,21 +1105,246 @@ public class GUI extends SystemController {
         }
     }
 
+
+    public void showTopPlayersMenu() throws Exception{
+        loadScene("TopPlayersMenu.fxml");
+    }
+
+
     public void showTop10() throws Exception{
-        loadScene("TopAll.fxml");
+        loadScene("Top10.fxml");
     }
 
     public void showTop10_Reverse() throws Exception{
+        loadScene("Top10Reverse.fxml");
+    }
+
+    public void showTopAll() throws Exception{
+        loadScene("TopAll.fxml");
+    }
+
+    public void showTopAll_Reverse() throws Exception{
         loadScene("TopAllReverse.fxml");
     }
 
-    public void setTopAll(){
+    public void setTop10() throws FileNotFoundException {
         loader_Top10.setVisible(false);
         Stack<User> top10 = calculateTop10("Normal");
+        int x = 0;
+
+        try {
+            boolean t = (top10.get(x).getContext() == null ? true : false);
+            System.out.println(t);
+
+            if (!t){
+                medal_Top1.setVisible(true);
+                image_Top1.setVisible(true);
+                player_Top1.setVisible(true);
+                played_Top1.setVisible(true);
+                won_Top1.setVisible(true);
+                points_Top1.setVisible(true);
+                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                Image image = new Image(inputStream);
+                image_Top1.setImage(image);
+                player_Top1.setText(users.get(x).getContext().getName());
+                played_Top1.setText("" + users.get(x).getContext().getPlayed());
+                won_Top1.setText("" + users.get(x).getContext().getWon());
+                points_Top1.setText("" + users.get(x).getContext().getPoints());
+            }
+
+            x = 1;
+            t = (top10.get(x).getContext() == null ? true : false);
+            System.out.println(t);
+
+            if (!t){
+                medal_Top2.setVisible(true);
+                image_Top2.setVisible(true);
+                player_Top2.setVisible(true);
+                played_Top2.setVisible(true);
+                won_Top2.setVisible(true);
+                points_Top2.setVisible(true);
+                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                Image image = new Image(inputStream);
+                image_Top2.setImage(image);
+                player_Top2.setText(users.get(x).getContext().getName());
+                played_Top2.setText("" + users.get(x).getContext().getPlayed());
+                won_Top2.setText("" + users.get(x).getContext().getWon());
+                points_Top2.setText("" + users.get(x).getContext().getPoints());
+            }
+
+
+            x = 2;
+            t = (top10.get(x).getContext() == null ? true : false);
+            System.out.println(t);
+
+            if (!t){
+                medal_Top3.setVisible(true);
+                image_Top3.setVisible(true);
+                player_Top3.setVisible(true);
+                played_Top3.setVisible(true);
+                won_Top3.setVisible(true);
+                points_Top3.setVisible(true);
+                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                Image image = new Image(inputStream);
+                image_Top3.setImage(image);
+                player_Top3.setText(users.get(x).getContext().getName());
+                played_Top3.setText("" + users.get(x).getContext().getPlayed());
+                won_Top3.setText("" + users.get(x).getContext().getWon());
+                points_Top3.setText("" + users.get(x).getContext().getPoints());
+            }
+
+
+            x = 3;
+            t = (top10.get(x).getContext() == null ? true : false);
+
+            if (!t){
+                medal_Top4.setVisible(true);
+                image_Top4.setVisible(true);
+                player_Top4.setVisible(true);
+                played_Top4.setVisible(true);
+                won_Top4.setVisible(true);
+                points_Top4.setVisible(true);
+                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                Image image = new Image(inputStream);
+                image_Top4.setImage(image);
+                player_Top4.setText(users.get(x).getContext().getName());
+                played_Top4.setText("" + users.get(x).getContext().getPlayed());
+                won_Top4.setText("" + users.get(x).getContext().getWon());
+                points_Top4.setText("" + users.get(x).getContext().getPoints());
+            }
+
+
+            x = 4;
+            t = (top10.get(x).getContext() == null ? true : false);
+
+            if (!t){
+                medal_Top5.setVisible(true);
+                image_Top5.setVisible(true);
+                player_Top5.setVisible(true);
+                played_Top5.setVisible(true);
+                won_Top5.setVisible(true);
+                points_Top5.setVisible(true);
+                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                Image image = new Image(inputStream);
+                image_Top5.setImage(image);
+                player_Top5.setText(users.get(x).getContext().getName());
+                played_Top5.setText("" + users.get(x).getContext().getPlayed());
+                won_Top5.setText("" + users.get(x).getContext().getWon());
+                points_Top5.setText("" + users.get(x).getContext().getPoints());
+            }
+
+
+            x = 5;
+            t = (top10.get(x).getContext() == null ? true : false);
+
+            if (!t){
+                medal_Top6.setVisible(true);
+                image_Top6.setVisible(true);
+                player_Top6.setVisible(true);
+                played_Top6.setVisible(true);
+                won_Top6.setVisible(true);
+                points_Top6.setVisible(true);
+                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                Image image = new Image(inputStream);
+                image_Top6.setImage(image);
+                player_Top6.setText(users.get(x).getContext().getName());
+                played_Top6.setText("" + users.get(x).getContext().getPlayed());
+                won_Top6.setText("" + users.get(x).getContext().getWon());
+                points_Top6.setText("" + users.get(x).getContext().getPoints());
+            }
+
+
+            x = 6;
+            t = (top10.get(x).getContext() == null ? true : false);
+
+            if (!t){
+                medal_Top7.setVisible(true);
+                image_Top7.setVisible(true);
+                player_Top7.setVisible(true);
+                played_Top7.setVisible(true);
+                won_Top7.setVisible(true);
+                points_Top7.setVisible(true);
+                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                Image image = new Image(inputStream);
+                image_Top7.setImage(image);
+                player_Top7.setText(users.get(x).getContext().getName());
+                played_Top7.setText("" + users.get(x).getContext().getPlayed());
+                won_Top7.setText("" + users.get(x).getContext().getWon());
+                points_Top7.setText("" + users.get(x).getContext().getPoints());
+            }
+
+
+            x = 7;
+            t = (top10.get(x).getContext() == null ? true : false);
+
+            if (!t){
+                medal_Top8.setVisible(true);
+                image_Top8.setVisible(true);
+                player_Top8.setVisible(true);
+                played_Top8.setVisible(true);
+                won_Top8.setVisible(true);
+                points_Top8.setVisible(true);
+                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                Image image = new Image(inputStream);
+                image_Top8.setImage(image);
+                player_Top8.setText(users.get(x).getContext().getName());
+                played_Top8.setText("" + users.get(x).getContext().getPlayed());
+                won_Top8.setText("" + users.get(x).getContext().getWon());
+                points_Top8.setText("" + users.get(x).getContext().getPoints());
+            }
+
+
+            x = 8;
+            t = (top10.get(x).getContext() == null ? true : false);
+
+            if (!t){
+                medal_Top9.setVisible(true);
+                image_Top9.setVisible(true);
+                player_Top9.setVisible(true);
+                played_Top9.setVisible(true);
+                won_Top9.setVisible(true);
+                points_Top9.setVisible(true);
+                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                Image image = new Image(inputStream);
+                image_Top9.setImage(image);
+                player_Top9.setText(users.get(x).getContext().getName());
+                played_Top9.setText("" + users.get(x).getContext().getPlayed());
+                won_Top9.setText("" + users.get(x).getContext().getWon());
+                points_Top9.setText("" + users.get(x).getContext().getPoints());
+            }
+
+
+            x = 0;
+            t = (top10.get(x).getContext() == null ? true : false);
+
+            if (!t){
+                medal_Top10.setVisible(true);
+                image_Top10.setVisible(true);
+                player_Top10.setVisible(true);
+                played_Top10.setVisible(true);
+                won_Top10.setVisible(true);
+                points_Top10.setVisible(true);
+                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                Image image = new Image(inputStream);
+                image_Top10.setImage(image);
+                player_Top10.setText(users.get(x).getContext().getName());
+                played_Top10.setText("" + users.get(x).getContext().getPlayed());
+                won_Top10.setText("" + users.get(x).getContext().getWon());
+                points_Top10.setText("" + users.get(x).getContext().getPoints());
+            }
+        } catch (Exception e){
+            return;
+        }
+
+    }
+
+    public void setTopAll(){
+        loader_TopAll.setVisible(false);
+        Stack<User> topAll = calculateTop10("Normal");
         ObservableList<User> observableList = FXCollections.observableArrayList();
 
-        for (int i = 0; i < top10.size(); i++){
-            observableList.add(top10.get(i).getContext());
+        for (int i = 0; i < topAll.size(); i++){
+            observableList.add(topAll.get(i).getContext());
         }
 
         topTable_Name.setCellValueFactory(new PropertyValueFactory<User, String>("Name"));
@@ -1002,12 +1357,12 @@ public class GUI extends SystemController {
     }
 
     public void setTopAll_Reverse(){
-        loader_Top10_Reverse.setVisible(false);
-        Stack<User> top10 = calculateTop10("Reverse");
+        loader_TopAll_Reverse.setVisible(false);
+        Stack<User> topAll_Reverse = calculateTop10("Reverse");
         ObservableList<User> observableList = FXCollections.observableArrayList();
 
-        for (int i = 0; i < top10.size(); i++){
-            observableList.add(top10.get(i).getContext());
+        for (int i = 0; i < topAll_Reverse.size(); i++){
+            observableList.add(topAll_Reverse.get(i).getContext());
         }
 
         topTable_Name_Reverse.setCellValueFactory(new PropertyValueFactory<User, String>("Name"));

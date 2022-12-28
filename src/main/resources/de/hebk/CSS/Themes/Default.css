@@ -98,6 +98,22 @@
     -fx-text-fill: #ffffff;
 }
 
+.Text_Top1{
+    -fx-fill: linear-gradient(to top right, #0048ff, #00eaff);
+    -fx-text-fill: linear-gradient(to top right, #0048ff, #00eaff);
+}
+
+.Text_Top2{
+    -fx-fill: linear-gradient(to top right, #ffde00, #fff400);
+    -fx-text-fill: #ffffff;
+}
+
+.Text_Top3{
+    -fx-fill: linear-gradient(to top right, #b7b7b7, #d7d7d7);
+    -fx-text-fill: #ffffff;
+}
+
+
 .text-area {
     -fx-text-fill: rgb(0,0,0);
 }
