@@ -4,6 +4,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
@@ -51,12 +52,12 @@
          </image>
       </ImageView>
       <Line endX="100.0" startX="-100.0" />
-      <Button fx:id="answer_button1" layoutX="66.0" layoutY="938.0" mnemonicParsing="false" onAction="#getAnswer1" prefHeight="82.0" prefWidth="558.0" styleClass="button_answer" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="answer_button1" layoutX="66.0" layoutY="938.0" mnemonicParsing="false" onAction="#getAnswer1" prefHeight="82.0" prefWidth="558.0" styleClass="button_answer" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Sylfaen" size="43.0" />
          </font>
       </Button>
-      <Button fx:id="answer_button2" layoutX="666.0" layoutY="938.0" mnemonicParsing="false" onAction="#getAnswer2" prefHeight="82.0" prefWidth="558.0" styleClass="button_answer" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="answer_button2" layoutX="666.0" layoutY="938.0" mnemonicParsing="false" onAction="#getAnswer2" prefHeight="82.0" prefWidth="558.0" styleClass="button_answer" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Sylfaen" size="43.0" />
          </font>
@@ -80,12 +81,12 @@
             </Lighting>
          </effect>
       </TextArea>
-      <Button fx:id="answer_button3" layoutX="66.0" layoutY="1050.0" mnemonicParsing="false" onAction="#getAnswer3" prefHeight="82.0" prefWidth="558.0" styleClass="button_answer" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="answer_button3" layoutX="66.0" layoutY="1050.0" mnemonicParsing="false" onAction="#getAnswer3" prefHeight="82.0" prefWidth="558.0" styleClass="button_answer" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Sylfaen" size="43.0" />
          </font>
       </Button>
-      <Button fx:id="answer_button4" layoutX="666.0" layoutY="1050.0" mnemonicParsing="false" onAction="#getAnswer4" prefHeight="82.0" prefWidth="558.0" styleClass="button_answer" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="answer_button4" layoutX="666.0" layoutY="1050.0" mnemonicParsing="false" onAction="#getAnswer4" prefHeight="82.0" prefWidth="558.0" styleClass="button_answer" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Sylfaen" size="43.0" />
          </font>
@@ -97,17 +98,7 @@
       </ImageView>
       <ImageView accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="1031.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Images/exchange.png" />
-         </image>
-      </ImageView>
-      <ImageView accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="966.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true">
-         <image>
             <Image url="@Images/people.png" />
-         </image>
-      </ImageView>
-      <ImageView accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="901.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/revive.png" />
          </image>
       </ImageView>
       <ImageView fx:id="questionImage" fitHeight="474.0" fitWidth="632.0" layoutX="317.0" layoutY="54.0" pickOnBounds="true" />
@@ -154,7 +145,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Text>
-      <Text fx:id="result_Option3" fill="WHITE" layoutX="535.0" layoutY="569.0" onMouseClicked="#endGame" strokeType="OUTSIDE" strokeWidth="0.0" text="WEGGEHEN" visible="false">
+      <Text fx:id="result_Option3" fill="WHITE" layoutX="535.0" layoutY="569.0" onMouseClicked="#walkAway" strokeType="OUTSIDE" strokeWidth="0.0" text="WEGGEHEN" visible="false">
          <font>
             <Font name="System Bold" size="31.0" />
          </font>
@@ -190,5 +181,30 @@
          </font>
       </Text>
       <CheckBox fx:id="autoConfirm" layoutX="14.0" layoutY="147.0" mnemonicParsing="false" onMouseClicked="#changeGameAutoConfirm" styleClass="Text3" text="AUTOMATISCHES ANTWORTEN" textFill="WHITE" />
+      <Button fx:id="replay_Button" layoutX="714.0" layoutY="499.0" mnemonicParsing="false" onAction="#replay" prefHeight="82.0" prefWidth="558.0" styleClass="button_replay" text="WIEDERHOLEN" textAlignment="CENTER" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Sylfaen" size="43.0" />
+         </font>
+      </Button>
+      <Text fx:id="revive_Warning_Text" fill="#d0d0d0" layoutX="715.0" layoutY="780.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text2" text="PUNKTE WERDEN AUF 0 EINGESETZT" textAlignment="CENTER" textOrigin="BOTTOM" visible="false" wrappingWidth="532.13671875">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Text>
+      <Button fx:id="revive_Button" contentDisplay="TOP" graphicTextGap="5.0" layoutX="714.0" layoutY="603.0" mnemonicParsing="false" onAction="#revive" prefHeight="82.0" prefWidth="558.0" styleClass="button_revive" text="REVIVE" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Sylfaen" size="43.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/revive.png" />
+               </image>
+               <effect>
+                  <Glow level="0.48" />
+               </effect>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
