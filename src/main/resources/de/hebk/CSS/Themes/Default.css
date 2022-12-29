@@ -50,8 +50,34 @@
     -fx-border-width: 5;
 }
 
+.button_replay{
+    -fx-background-color: null;
+    -fx-text-fill: White;
+    -fx-border-color: white;
+    -fx-border-radius: 0;
+    -fx-border-width: 5;
+}
+
+.button_revive{
+    -fx-background-color: null;
+    -fx-border-color: linear-gradient(to top right, #ffa500, #ffd600);
+    -fx-text-fill: linear-gradient(to top right, #ffa500, #ffd600);
+    -fx-border-radius: 0;
+    -fx-border-width: 5;
+}
+
 .button_lost:hover{
     -fx-background-color: #383853;
+}
+
+.button_replay:hover{
+    -fx-background-color: #383853;
+}
+
+.button_revive:hover{
+    -fx-background-color: linear-gradient(to top right, #ffa500, #ffd600);
+    -fx-border-color: white;
+    -fx-text-fill: white;
 }
 
 .button_Top10{
