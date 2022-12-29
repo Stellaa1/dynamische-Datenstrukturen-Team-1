@@ -156,13 +156,16 @@ public class SystemController extends Texts{
             for (int i = 0; i < users.size(); i++){
                 points[i] = users.get(i).getContext().getPoints();
             }
+            System.out.println(Arrays.toString(points));
+
             Sorter s = new Sorter();
             s.countSort(points, points.length);
+            System.out.println(Arrays.toString(points) + " sorted");
 
             for (int i = 0; i < points.length; i++){
                 for (int x = 0; x < users.size(); x++){
                     if (users.get(x).getContext().getPoints() == points[i] && !top10.find(users.get(x).getContext())){
-                        top10.push(users.get(i).getContext());
+                        top10.push(users.get(x).getContext());
                         break;
                     }
                 }
@@ -170,6 +173,7 @@ public class SystemController extends Texts{
         }
 
         if (type.equals("Reverse")){
+
             for (int i = 0; i < users.size(); i++){
                 points[i] = users.get(i).getContext().getReversePoints();
             }
@@ -179,7 +183,7 @@ public class SystemController extends Texts{
             for (int i = 0; i < points.length; i++){
                 for (int x = 0; x < users.size(); x++){
                     if (users.get(x).getContext().getReversePoints() == points[i] && !top10.find(users.get(x).getContext())){
-                        top10.push(users.get(i).getContext());
+                        top10.push(users.get(x).getContext());
                         break;
                     }
                 }
