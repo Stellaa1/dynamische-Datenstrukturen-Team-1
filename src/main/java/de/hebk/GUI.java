@@ -365,6 +365,8 @@ public class GUI extends SystemController {
     private Text points_Top9;
     @FXML
     private Text points_Top10;
+    @FXML
+    private ImageView joker_fifty_fifty;
 
     private String[] s = values1;
 
@@ -774,6 +776,7 @@ public class GUI extends SystemController {
     }
 
     public void setQuestionAndAnswers() throws Exception{
+        resetButtons();
         if (VALUES[game.index_frage] == null){
             System.out.println("Player Won");
             if (game.fragen.gameSettings.getGameMode().equals("Normal")){
@@ -992,6 +995,10 @@ public class GUI extends SystemController {
         answer_button2.setStyle("");
         answer_button3.setStyle("");
         answer_button4.setStyle("");
+        answer_button1.setDisable(false);
+        answer_button2.setDisable(false);
+        answer_button3.setDisable(false);
+        answer_button4.setDisable(false);
     }
 
     public void resetValues(){
@@ -1007,7 +1014,6 @@ public class GUI extends SystemController {
         hideEndGame();
         setGame();
         setQuestionAndAnswers();
-        resetButtons();
         resetValues();
     }
 
@@ -1016,6 +1022,29 @@ public class GUI extends SystemController {
         game.fragen.gameSettings.setReward(0);
         resetButtons();
         game.fragen.gameSettings.getJoker().setRevive(game.fragen.gameSettings.getJoker().isInfJoker() ? true : false);
+    }
+
+    public void useJoker_fifty_fifty(){
+        if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){return;}
+        String firstOption = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(2).getContext();
+        String secondOption = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(3).getContext();
+
+        if (answer_button1.getText().equals(firstOption) || answer_button1.getText().equals(secondOption)){
+            answer_button1.setDisable(true);
+        }
+        if (answer_button2.getText().equals(firstOption) || answer_button2.getText().equals(secondOption)){
+            answer_button2.setDisable(true);
+        }
+        if (answer_button3.getText().equals(firstOption) || answer_button3.getText().equals(secondOption)){
+            answer_button3.setDisable(true);
+        }
+        if (answer_button4.getText().equals(firstOption) || answer_button4.getText().equals(secondOption)){
+            answer_button4.setDisable(true);
+        }
+        game.fragen.gameSettings.getJoker().setFifty_fifty(game.fragen.gameSettings.getJoker().isInfJoker() ? true : false);
+        if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){
+            joker_fifty_fifty.setOpacity(0.5);
+        }
     }
 
     public void confirm(){
