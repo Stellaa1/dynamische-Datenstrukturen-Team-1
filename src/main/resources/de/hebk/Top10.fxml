@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -8,19 +9,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
-      <Text fx:id="availabilityText" layoutX="1193.0" layoutY="600.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="541.19384765625">
-         <font>
-            <Font size="31.0" />
-         </font>
-      </Text>
       <ImageView fx:id="image_Top1" fitHeight="105.0" fitWidth="105.0" layoutX="161.0" layoutY="84.0" pickOnBounds="true" visible="false">
          <image>
             <Image url="@Profilbilder/Unbenannt.PNG" />
          </image>
       </ImageView>
-      <ImageView fx:id="medal_Top1" fitHeight="65.0" fitWidth="65.0" layoutX="56.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="medal_Top1" fitHeight="65.0" fitWidth="65.0" layoutX="56.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Images/medal.png" />
          </image>
@@ -92,7 +88,7 @@
             <Font name="System Bold" size="47.0" />
          </font>
          <effect>
-            <Glow level="0.45" />
+            <Glow level="0.4" />
          </effect>
       </Text>
       <Text fx:id="played_Top2" fill="WHITE" layoutX="841.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top2" textAlignment="CENTER" visible="false" wrappingWidth="207.212890625">
@@ -100,7 +96,7 @@
             <Font name="System Bold" size="47.0" />
          </font>
          <effect>
-            <Glow level="0.45" />
+            <Glow level="0.4" />
          </effect>
       </Text>
       <Text fx:id="won_Top2" fill="WHITE" layoutX="1217.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top2" textAlignment="CENTER" visible="false" wrappingWidth="207.212890625">
@@ -108,7 +104,7 @@
             <Font name="System Bold" size="47.0" />
          </font>
          <effect>
-            <Glow level="0.45" />
+            <Glow level="0.4" />
          </effect>
       </Text>
       <Text fx:id="points_Top2" fill="WHITE" layoutX="1570.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top2" textAlignment="CENTER" visible="false" wrappingWidth="207.212890625">
@@ -116,7 +112,7 @@
             <Font name="System Bold" size="47.0" />
          </font>
          <effect>
-            <Glow level="0.45" />
+            <Glow level="0.4" />
          </effect>
       </Text>
       <ImageView fx:id="image_Top3" fitHeight="105.0" fitWidth="105.0" layoutX="161.0" layoutY="304.0" pickOnBounds="true" visible="false">
@@ -359,6 +355,16 @@
             <Font size="47.0" />
          </font>
       </Text>
-      <Rectangle fx:id="loader_Top10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1280.0" onMouseMoved="#setTop10" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1920.0" />
+      <Button layoutX="50.0" layoutY="1160.0" mnemonicParsing="false" onAction="#showTopPlayersMenu" prefHeight="58.0" prefWidth="157.0" styleClass="button_close" text="ZURÜCK" textFill="WHITE">
+         <font>
+            <Font name="Sylfaen" size="28.0" />
+         </font>
+      </Button>
+      <Button layoutX="1717.0" layoutY="1150.0" mnemonicParsing="false" onAction="#showTop10_Reverse" prefHeight="58.0" prefWidth="185.0" text="REVERSE" textFill="WHITE">
+         <font>
+            <Font name="Sylfaen" size="28.0" />
+         </font>
+      </Button>
+      <Rectangle fx:id="loader_Top10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1280.0" onMouseMoved="#handle_TopMenu" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1920.0" />
    </children>
 </AnchorPane>
