@@ -4,7 +4,7 @@ import de.hebk.model.list.List;
 public class Fragen {
     private List<Question> questions = new List<>();
 
-    private GameSettings gameSettings = new GameSettings();
+    GameSettings gameSettings = new GameSettings();
 
     public List<Question> getQuestions(){
         return questions;
