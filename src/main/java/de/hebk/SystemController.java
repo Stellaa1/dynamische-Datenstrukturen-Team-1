@@ -5,16 +5,14 @@ import de.hebk.model.list.List;
 import de.hebk.model.stack.Stack;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SystemController extends Texts{
 
-    String version = "";
-    DataStore dataStore = new DataStore();
+    private DataStore dataStore = new DataStore();
 
-    static List<User> users = new List<>();
-    static User local_User;
+    public static List<User> users = new List<>();
+    public static User local_User;
 
     public void saveData() {
         try {
@@ -52,13 +50,8 @@ public class SystemController extends Texts{
             }
 
             objectInputStream.close();
-            System.out.println(version);
 
-        } catch (IOException d) {
-            System.out.println("<Bug> Load Data");
-        } catch (ClassNotFoundException d2) {
-            System.out.println("<Bug> Load Data");
-        } catch (Exception m) {
+        } catch (Exception d) {
             System.out.println("<Bug> Load Data");
         }
     }
@@ -99,9 +92,9 @@ public class SystemController extends Texts{
 
             }
 
-            x = (int) (Math.random() * 100); // x Wird neu generiert (0-100)
+            x = (int) (Math.random() * 100); // x wird neu generiert (0-100)
             if (x < 60)
-                s = s + x; // 60%, dass der Name eine Zufällige Zahl am Ende bekommt
+                s = s + x; // 60 %, dass der Name eine zufällige Zahl am Ende bekommt
 
             return s;
         }

@@ -4,10 +4,10 @@ import java.util.Random;
 
 public class Texts {
 
-    Random r1 = new Random();
-    int r2 = r1.nextInt(14);
+    private Random r1 = new Random();
+    private int r2 = r1.nextInt(14);
 
-    String[] csvFiles_Questions = {
+    public String[] csvFiles_Questions = {
             "Allgemein",
             "Geschichte",
             "Natur-Pflanzen",
@@ -16,7 +16,7 @@ public class Texts {
             "Videospiele",
     };
 
-    String[] currencies = {
+    public String[] currencies = {
             "$",
             "€",
             "£",
@@ -45,11 +45,11 @@ public class Texts {
             "₰",
     };
 
-    String[] values1 = {"100", "500", "2500", "10000", "25000", "75000", "150000", "250000", "500000", "1000000"};
-    String[] values2 = {"100", "250", "500", "1000", "2500", "5000", "7500", "10000", "25000", "50000", "100000", "150000", "250000", "500000", "1000000"};
-    String[] values3 = {"100", "150", "250", "500", "1000", "2500", "5000", "7500", "10000", "15000", "25000", "350000", "50000", "750000", "1000000", "150000", "225000", "350000", "500000", "1000000"};
+    public String[] values1 = {"100", "500", "2500", "10000", "25000", "75000", "150000", "250000", "500000", "1000000"};
+    public String[] values2 = {"100", "250", "500", "1000", "2500", "5000", "7500", "10000", "25000", "50000", "100000", "150000", "250000", "500000", "1000000"};
+    public String[] values3 = {"100", "150", "250", "500", "1000", "2500", "5000", "7500", "10000", "15000", "25000", "350000", "50000", "750000", "1000000", "150000", "225000", "350000", "500000", "1000000"};
 
-    String[] randomNames = {
+    public String[] randomNames = {
             "Ter",
             "The",
             "Knight",

@@ -1,6 +1,5 @@
 package de.hebk;
 
-import de.hebk.model.list.List;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

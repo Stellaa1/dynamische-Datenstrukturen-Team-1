@@ -6,6 +6,4 @@ import javafx.scene.layout.Pane;
 public class Achievements {
     @FXML
     private Pane achievementPane;
-
-
 }

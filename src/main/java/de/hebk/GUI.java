@@ -29,21 +29,20 @@ import java.util.*;
 
 public class GUI extends SystemController {
 
-    Timer timer = new Timer();
+    private Timer timer = new Timer();
     TimerTask timertask;
     long beforeTimer;
     long afterRun;
     Game game;
-    static String temp_gameMode;
-    static int temp_FragenAnzahl;
-    static String temp_category;
-    static int temp_difficultyValue;
-    static int temp_difficultyRange;
-    static int temp_incrementValue;
-    static int temp_incrementRange;
-    static String temp_currency;
+    private static String temp_gameMode;
+    private static int temp_FragenAnzahl;
+    private static String temp_category;
+    private static int temp_difficultyValue;
+    private static int temp_difficultyRange;
+    private static int temp_incrementValue;
+    private static int temp_incrementRange;
+    private static String temp_currency;
 
-    DataStore dataStore = new DataStore();
     @FXML
     private Button button;
     @FXML
@@ -65,46 +64,45 @@ public class GUI extends SystemController {
     @FXML
     private VBox achievementsFrame;
     @FXML
-    ImageView profileImage1;
+    private ImageView profileImage1;
     @FXML
-    ImageView profileImage2;
+    private ImageView profileImage2;
     @FXML
-    ImageView profileImage3;
+    private ImageView profileImage3;
     @FXML
-    ImageView profileImage4;
+    private ImageView profileImage4;
     @FXML
-    ImageView profileImage5;
+    private ImageView profileImage5;
     @FXML
-    ImageView profileImage6;
+    private ImageView profileImage6;
     @FXML
-    ImageView profileImage7;
+    private ImageView profileImage7;
     @FXML
-    ImageView profileImage8;
+    private ImageView profileImage8;
     @FXML
-    ImageView profileImage9;
+    private ImageView profileImage9;
     @FXML
-    ImageView profileImage10;
+    private ImageView profileImage10;
     @FXML
-    ImageView profileImage11;
+    private ImageView profileImage11;
     @FXML
-    ImageView profileImage12;
+    private ImageView profileImage12;
     @FXML
-    ImageView profileImage13;
+    private ImageView profileImage13;
     @FXML
-    ImageView profileImage14;
+    private ImageView profileImage14;
     @FXML
-    ImageView profileImage15;
+    private ImageView profileImage15;
     @FXML
-    ImageView profileImage16;
+    private ImageView profileImage16;
     @FXML
-    ImageView profileImage17;
+    private ImageView profileImage17;
     @FXML
-    ImageView profileImage18;
+    private ImageView profileImage18;
     @FXML
-    ImageView profileImage19;
+    private ImageView profileImage19;
     @FXML
-    ImageView profileImage20;
-
+    private ImageView profileImage20;
     @FXML
     private ImageView questionImage;
     @FXML
@@ -246,7 +244,6 @@ public class GUI extends SystemController {
     private ImageView result_Option4_Box;
     @FXML
     private CheckBox autoConfirm;
-
     @FXML
     private ImageView medal_Top1;
     @FXML
@@ -287,7 +284,6 @@ public class GUI extends SystemController {
     private ImageView image_Top9;
     @FXML
     private ImageView image_Top10;
-
     @FXML
     private Text player_Top1;
     @FXML
@@ -329,7 +325,6 @@ public class GUI extends SystemController {
     private Text played_Top9;
     @FXML
     private Text played_Top10;
-
     @FXML
     private Text won_Top1;
     @FXML
@@ -350,7 +345,6 @@ public class GUI extends SystemController {
     private Text won_Top9;
     @FXML
     private Text won_Top10;
-
     @FXML
     private Text points_Top1;
     @FXML
@@ -372,7 +366,7 @@ public class GUI extends SystemController {
     @FXML
     private Text points_Top10;
 
-    String[] s = values1;
+    private String[] s = values1;
 
     static private final Text[] VALUES = new Text[20];
 

@@ -3,9 +3,6 @@ package de.hebk.model.list;
 import de.hebk.model.node.Node;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.ListIterator;
 
 /**
  * Objekte der Klasse List verwalten beliebig viele, linear angeordnete Objekte. Auf

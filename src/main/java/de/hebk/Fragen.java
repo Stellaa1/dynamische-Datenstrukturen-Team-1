@@ -1,13 +1,10 @@
 package de.hebk;
 import de.hebk.model.list.List;
-import de.hebk.model.node.Node;
-
-import java.util.Arrays;
 
 public class Fragen {
     private List<Question> questions = new List<>();
 
-    GameSettings gameSettings = new GameSettings();
+    private GameSettings gameSettings = new GameSettings();
 
     public List<Question> getQuestions(){
         return questions;

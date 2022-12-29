@@ -7,11 +7,7 @@ import java.io.Serializable;
 public class DataStore implements Serializable {
 
 
-     List<User> users = new List<>();
-
-    boolean angemeldet;
-    boolean ver;
-
+    public List<User> users = new List<>();
     public List<User> getUsers() {
         return users;
     }
@@ -21,13 +17,9 @@ public class DataStore implements Serializable {
         for (int i = 0; i< users.size(); i++){
             if (name.equals(users.get(i).getContext().getName())){
                 index = i;
-                //loadUser(i);
                 break;
             }
         }
         return index;
     }
-
-
-
 }

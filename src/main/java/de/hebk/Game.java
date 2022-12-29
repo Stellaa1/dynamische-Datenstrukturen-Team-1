@@ -1,6 +1,6 @@
 package de.hebk;
 
 public class Game {
-    int index_frage;
-    Fragen fragen;
+    public int index_frage;
+    public Fragen fragen;
 }
