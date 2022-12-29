@@ -189,6 +189,12 @@ public class GUI extends SystemController {
     @FXML
     private Button returnToMenu;
     @FXML
+    private Button revive_Button;
+    @FXML
+    private Text revive_Warning_Text;
+    @FXML
+    private Button replay_Button;
+    @FXML
     private Text timeText;
     @FXML
     private TableView<User> topTable;
@@ -672,27 +678,35 @@ public class GUI extends SystemController {
         loadScene("Main_Game.fxml");
     }
 
+
+    public void setGame(){
+        game = new Game();
+        game.fragen = new Fragen();
+        game.fragen.gameSettings.setGameMode(temp_gameMode);
+        game.fragen.gameSettings.setCategory(temp_category);
+        game.fragen.gameSettings.setQuestion_Amount(temp_FragenAnzahl);
+        game.fragen.gameSettings.setDifficultyValue(temp_difficultyValue);
+        game.fragen.gameSettings.setDifficultyRange(temp_difficultyRange);
+        game.fragen.gameSettings.setIncrementValue(temp_incrementValue);
+        game.fragen.gameSettings.setIncrementRange(temp_incrementRange);
+
+        game.fragen.gameSettings.getJoker().setInfJoker(false);
+        game.fragen.gameSettings.getJoker().setRevive(true);
+        game.fragen.gameSettings.getJoker().setAudience(true);
+        game.fragen.gameSettings.getJoker().setFifty_fifty(true);
+        game.fragen.gameSettings.getJoker().setCall(true);
+
+
+        game.fragen.generateQuestions();
+        game.index_frage = 0;
+        game.fragen.gameSettings.setCurrency(temp_currency);
+    }
+
     public void startGame() throws Exception {
         loader_Game_Normal.setVisible(false);
-
         try {
-            game = new Game();
-            game.fragen = new Fragen();
-            game.fragen.gameSettings.setGameMode(temp_gameMode);
-            game.fragen.gameSettings.setCategory(temp_category);
-            game.fragen.gameSettings.setQuestion_Amount(temp_FragenAnzahl);
-            game.fragen.gameSettings.setDifficultyValue(temp_difficultyValue);
-            game.fragen.gameSettings.setDifficultyRange(temp_difficultyRange);
-            game.fragen.gameSettings.setIncrementValue(temp_incrementValue);
-            game.fragen.gameSettings.setIncrementRange(temp_incrementRange);
-
-            game.fragen.generateQuestions();
-            game.index_frage = 0;
-            game.fragen.gameSettings.setCurrency(temp_currency);
-
-
+            setGame();
             int tg = 61;
-
             if (game.fragen.gameSettings.getQuestion_Amount() == 10){
                 tg = 61;
                 newVB.setSpacing(40);
@@ -710,8 +724,6 @@ public class GUI extends SystemController {
                 newVB.setSpacing(15);
                 s = values3;
             }
-
-
 
             newVB.getChildren().clear();
 
@@ -768,17 +780,6 @@ public class GUI extends SystemController {
     }
 
     public void setQuestionAndAnswers() throws Exception{
-        System.out.println("Reward: " + game.fragen.gameSettings.getReward());
-        //if (game.fragen.gameSettings.getGameMode().equals("Normal")){
-            //game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(game.index_frage).getContext().getDifficulty());
-        //}
-
-        //if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
-            //game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(game.fragen.getQuestions().size() - 1 - game.index_frage).getContext().getDifficulty());
-        //}
-
-        System.out.println("Reward: " + game.fragen.gameSettings.getReward());
-
         if (VALUES[game.index_frage] == null){
             System.out.println("Player Won");
             if (game.fragen.gameSettings.getGameMode().equals("Normal")){
@@ -942,8 +943,85 @@ public class GUI extends SystemController {
         pointsText.setText("PUNKTE: " + game.fragen.gameSettings.getReward());
         pointsText.setVisible(true);
         returnToMenu.setVisible(true);
+        replay_Button.setVisible(true);
+        revive_Button.setVisible(true);
         loader_Game_Normal2.setOpacity(0.65);
         loader_Game_Normal2.setVisible(true);
+
+        if (game.fragen.gameSettings.getJoker().isRevive()){
+            revive_Button.setDisable(false);
+            revive_Warning_Text.setVisible(true);
+        } else{
+            revive_Button.setDisable(true);
+            revive_Warning_Text.setVisible(false);
+        }
+    }
+
+    public void walkAway(){
+        hide_Confirm_Box();
+        if (game.fragen.gameSettings.getGameMode().equals("Normal")){
+            local_User.setPoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
+            local_User.setPlayed(local_User.getPlayed() + 1);
+            local_User.setLost(local_User.getLost() + 1);
+        }
+        if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
+            local_User.setReversePoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
+            local_User.setPlayed_Reverse(local_User.getPlayed_Reverse() + 1);
+            local_User.setLost_Reverse(local_User.getLost_Reverse() + 1);
+        }
+        youLostText.setVisible(true);
+        pointsText.setText("PUNKTE: " + game.fragen.gameSettings.getReward());
+        pointsText.setVisible(true);
+        returnToMenu.setVisible(true);
+        replay_Button.setVisible(true);
+        loader_Game_Normal2.setOpacity(0.65);
+        loader_Game_Normal2.setVisible(true);
+    }
+
+    public void hideEndGame(){
+        youLostText.setVisible(false);
+        pointsText.setVisible(false);
+        returnToMenu.setVisible(false);
+        replay_Button.setVisible(false);
+        revive_Button.setVisible(false);
+        revive_Warning_Text.setVisible(false);
+        loader_Game_Normal2.setOpacity(1);
+        loader_Game_Normal2.setVisible(false);
+    }
+
+    public void resetButtons(){
+        animateButton(answer_button1, "Normal");
+        animateButton(answer_button2, "Normal");
+        animateButton(answer_button3, "Normal");
+        animateButton(answer_button4, "Normal");
+        answer_button1.setStyle("");
+        answer_button2.setStyle("");
+        answer_button3.setStyle("");
+        answer_button4.setStyle("");
+    }
+
+    public void resetValues(){
+        for (int i = 1; i < VALUES.length; i++){
+            if (VALUES[i - 1] == null){
+                break;
+            }
+            VALUES[i - 1].setStyle("-fx-fill: white");
+        }
+        VALUES[game.index_frage].setStyle("-fx-fill: #ff8c00");
+    }
+    public void replay() throws Exception {
+        hideEndGame();
+        setGame();
+        setQuestionAndAnswers();
+        resetButtons();
+        resetValues();
+    }
+
+    public void revive(){
+        hideEndGame();
+        game.fragen.gameSettings.setReward(0);
+        resetButtons();
+        game.fragen.gameSettings.getJoker().setRevive(game.fragen.gameSettings.getJoker().isInfJoker() ? true : false);
     }
 
     public void confirm(){
