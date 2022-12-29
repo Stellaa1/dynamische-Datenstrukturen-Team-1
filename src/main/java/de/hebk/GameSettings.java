@@ -2,8 +2,8 @@ package de.hebk;
 
 public class GameSettings{
 
-    private String gameMode;
-
+    private Joker joker = new Joker();
+    private String gameMode = "Normal";
     private int reward = 0;
     private int question_Amount = 10;
     private String category = "Allgemein";
@@ -11,9 +11,16 @@ public class GameSettings{
     private int difficultyRange = 0;
     private int incrementValue = 2;
     private int incrementRange = 2;
-    private String currency;
-
+    private String currency = "€";
     private boolean autoConfirm;
+
+    public Joker getJoker() {
+        return joker;
+    }
+
+    public void setJoker(Joker joker) {
+        this.joker = joker;
+    }
 
     public String getGameMode() {
         return gameMode;
