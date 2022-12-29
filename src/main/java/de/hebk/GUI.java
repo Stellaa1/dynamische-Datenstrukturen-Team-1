@@ -874,16 +874,6 @@ public class GUI extends SystemController {
         }
         System.out.println("Reward: " + game.fragen.gameSettings.getReward());
     }
-    public void addQuestions(){
-        for (int i = 0; i < 5; i++){
-            Text questionText = new Text();
-            questionText.setText(i + " ⬩ € 150");
-            questionText.setId("questionText_" + i);
-            Font questionText_Font = Font.font("Arial",52);
-            questionText.setFont(questionText_Font);
-            newVB.getChildren().add(questionText);
-        }
-    }
 
     public void animateButton(Button b, String t){
         if (t.equals("Normal")){
@@ -1116,7 +1106,7 @@ public class GUI extends SystemController {
     }
 
     public void showTop10_Reverse() throws Exception{
-        loadScene("Top10Reverse.fxml");
+        loadScene("Top10_Reverse.fxml");
     }
 
     public void showTopAll() throws Exception{
@@ -1127,14 +1117,17 @@ public class GUI extends SystemController {
         loadScene("TopAllReverse.fxml");
     }
 
-    public void setTop10() throws FileNotFoundException {
-        loader_Top10.setVisible(false);
-        Stack<User> top10 = calculateTop10("Normal");
+    public void setTop10(String method) throws FileNotFoundException {
+        Stack<User> top10 = null;
+
+        top10 = (method.equals("Normal") == true ? calculateTop10("Normal") : calculateTop10("Reverse"));
+
         int x = 0;
 
         try {
             boolean t = (top10.get(x).getContext() == null ? true : false);
             System.out.println(t);
+
 
             if (!t){
                 medal_Top1.setVisible(true);
@@ -1143,18 +1136,26 @@ public class GUI extends SystemController {
                 played_Top1.setVisible(true);
                 won_Top1.setVisible(true);
                 points_Top1.setVisible(true);
-                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                FileInputStream inputStream = new FileInputStream(top10.get(x).getContext().getProfilePicture());
                 Image image = new Image(inputStream);
                 image_Top1.setImage(image);
                 player_Top1.setText(users.get(x).getContext().getName());
-                played_Top1.setText("" + users.get(x).getContext().getPlayed());
-                won_Top1.setText("" + users.get(x).getContext().getWon());
-                points_Top1.setText("" + users.get(x).getContext().getPoints());
+                if (method.equals("Normal")){
+                    played_Top1.setText("" + users.get(x).getContext().getPlayed());
+                    won_Top1.setText("" + users.get(x).getContext().getWon());
+                    points_Top1.setText("" + users.get(x).getContext().getPoints());
+                }
+                if (method.equals("Reverse")){
+                    played_Top1.setText("" + users.get(x).getContext().getPlayed_Reverse());
+                    won_Top1.setText("" + users.get(x).getContext().getWon_Reverse());
+                    points_Top1.setText("" + users.get(x).getContext().getReversePoints());
+                }
             }
 
             x = 1;
             t = (top10.get(x).getContext() == null ? true : false);
             System.out.println(t);
+            System.out.println(top10.get(x).getContext().getPoints() + " user x");
 
             if (!t){
                 medal_Top2.setVisible(true);
@@ -1163,19 +1164,28 @@ public class GUI extends SystemController {
                 played_Top2.setVisible(true);
                 won_Top2.setVisible(true);
                 points_Top2.setVisible(true);
-                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                FileInputStream inputStream = new FileInputStream(top10.get(1).getContext().getProfilePicture());
                 Image image = new Image(inputStream);
                 image_Top2.setImage(image);
-                player_Top2.setText(users.get(x).getContext().getName());
-                played_Top2.setText("" + users.get(x).getContext().getPlayed());
-                won_Top2.setText("" + users.get(x).getContext().getWon());
-                points_Top2.setText("" + users.get(x).getContext().getPoints());
+                player_Top2.setText(top10.get(x).getContext().getName());
+                if (method.equals("Normal")){
+                    played_Top2.setText("" + top10.get(x).getContext().getPlayed());
+                    won_Top2.setText("" + top10.get(x).getContext().getWon());
+                    points_Top2.setText("" + top10.get(x).getContext().getPoints());
+                }
+                if (method.equals("Reverse")){
+                    played_Top2.setText("" + top10.get(x).getContext().getPlayed_Reverse());
+                    won_Top2.setText("" + top10.get(x).getContext().getWon_Reverse());
+                    points_Top2.setText("" + top10.get(x).getContext().getReversePoints());
+                }
             }
 
 
             x = 2;
             t = (top10.get(x).getContext() == null ? true : false);
             System.out.println(t);
+            System.out.println(top10.get(x).getContext().getPoints() + " user x");
+
 
             if (!t){
                 medal_Top3.setVisible(true);
@@ -1184,18 +1194,27 @@ public class GUI extends SystemController {
                 played_Top3.setVisible(true);
                 won_Top3.setVisible(true);
                 points_Top3.setVisible(true);
-                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                FileInputStream inputStream = new FileInputStream(top10.get(x).getContext().getProfilePicture());
                 Image image = new Image(inputStream);
                 image_Top3.setImage(image);
-                player_Top3.setText(users.get(x).getContext().getName());
-                played_Top3.setText("" + users.get(x).getContext().getPlayed());
-                won_Top3.setText("" + users.get(x).getContext().getWon());
-                points_Top3.setText("" + users.get(x).getContext().getPoints());
+                player_Top3.setText(top10.get(x).getContext().getName());
+                if (method.equals("Normal")){
+                    played_Top3.setText("" + top10.get(x).getContext().getPlayed());
+                    won_Top3.setText("" + top10.get(x).getContext().getWon());
+                    points_Top3.setText("" + top10.get(x).getContext().getPoints());
+                }
+                if (method.equals("Reverse")){
+                    played_Top3.setText("" + top10.get(x).getContext().getPlayed_Reverse());
+                    won_Top3.setText("" + top10.get(x).getContext().getWon_Reverse());
+                    points_Top3.setText("" + top10.get(x).getContext().getReversePoints());
+                }
             }
 
 
             x = 3;
             t = (top10.get(x).getContext() == null ? true : false);
+            System.out.println(top10.get(x).getContext().getPoints() + " user x");
+
 
             if (!t){
                 medal_Top4.setVisible(true);
@@ -1204,13 +1223,20 @@ public class GUI extends SystemController {
                 played_Top4.setVisible(true);
                 won_Top4.setVisible(true);
                 points_Top4.setVisible(true);
-                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                FileInputStream inputStream = new FileInputStream(top10.get(x).getContext().getProfilePicture());
                 Image image = new Image(inputStream);
                 image_Top4.setImage(image);
-                player_Top4.setText(users.get(x).getContext().getName());
-                played_Top4.setText("" + users.get(x).getContext().getPlayed());
-                won_Top4.setText("" + users.get(x).getContext().getWon());
-                points_Top4.setText("" + users.get(x).getContext().getPoints());
+                player_Top4.setText(top10.get(x).getContext().getName());
+                if (method.equals("Normal")){
+                    played_Top4.setText("" + top10.get(x).getContext().getPlayed());
+                    won_Top4.setText("" + top10.get(x).getContext().getWon());
+                    points_Top4.setText("" + top10.get(x).getContext().getPoints());
+                }
+                if (method.equals("Reverse")){
+                    played_Top4.setText("" + top10.get(x).getContext().getPlayed_Reverse());
+                    won_Top4.setText("" + top10.get(x).getContext().getWon_Reverse());
+                    points_Top4.setText("" + top10.get(x).getContext().getReversePoints());
+                }
             }
 
 
@@ -1224,13 +1250,20 @@ public class GUI extends SystemController {
                 played_Top5.setVisible(true);
                 won_Top5.setVisible(true);
                 points_Top5.setVisible(true);
-                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                FileInputStream inputStream = new FileInputStream(top10.get(x).getContext().getProfilePicture());
                 Image image = new Image(inputStream);
                 image_Top5.setImage(image);
-                player_Top5.setText(users.get(x).getContext().getName());
-                played_Top5.setText("" + users.get(x).getContext().getPlayed());
-                won_Top5.setText("" + users.get(x).getContext().getWon());
-                points_Top5.setText("" + users.get(x).getContext().getPoints());
+                player_Top5.setText(top10.get(x).getContext().getName());
+                if (method.equals("Normal")){
+                    played_Top5.setText("" + top10.get(x).getContext().getPlayed());
+                    won_Top5.setText("" + top10.get(x).getContext().getWon());
+                    points_Top5.setText("" + top10.get(x).getContext().getPoints());
+                }
+                if (method.equals("Reverse")){
+                    played_Top5.setText("" + top10.get(x).getContext().getPlayed_Reverse());
+                    won_Top5.setText("" + top10.get(x).getContext().getWon_Reverse());
+                    points_Top5.setText("" + top10.get(x).getContext().getReversePoints());
+                }
             }
 
 
@@ -1244,13 +1277,20 @@ public class GUI extends SystemController {
                 played_Top6.setVisible(true);
                 won_Top6.setVisible(true);
                 points_Top6.setVisible(true);
-                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                FileInputStream inputStream = new FileInputStream(top10.get(x).getContext().getProfilePicture());
                 Image image = new Image(inputStream);
                 image_Top6.setImage(image);
-                player_Top6.setText(users.get(x).getContext().getName());
-                played_Top6.setText("" + users.get(x).getContext().getPlayed());
-                won_Top6.setText("" + users.get(x).getContext().getWon());
-                points_Top6.setText("" + users.get(x).getContext().getPoints());
+                player_Top6.setText(top10.get(x).getContext().getName());
+                if (method.equals("Normal")){
+                    played_Top6.setText("" + top10.get(x).getContext().getPlayed());
+                    won_Top6.setText("" + top10.get(x).getContext().getWon());
+                    points_Top6.setText("" + top10.get(x).getContext().getPoints());
+                }
+                if (method.equals("Reverse")){
+                    played_Top6.setText("" + top10.get(x).getContext().getPlayed_Reverse());
+                    won_Top6.setText("" + top10.get(x).getContext().getWon_Reverse());
+                    points_Top6.setText("" + top10.get(x).getContext().getReversePoints());
+                }
             }
 
 
@@ -1264,13 +1304,20 @@ public class GUI extends SystemController {
                 played_Top7.setVisible(true);
                 won_Top7.setVisible(true);
                 points_Top7.setVisible(true);
-                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                FileInputStream inputStream = new FileInputStream(top10.get(x).getContext().getProfilePicture());
                 Image image = new Image(inputStream);
                 image_Top7.setImage(image);
-                player_Top7.setText(users.get(x).getContext().getName());
-                played_Top7.setText("" + users.get(x).getContext().getPlayed());
-                won_Top7.setText("" + users.get(x).getContext().getWon());
-                points_Top7.setText("" + users.get(x).getContext().getPoints());
+                player_Top7.setText(top10.get(x).getContext().getName());
+                if (method.equals("Normal")){
+                    played_Top7.setText("" + top10.get(x).getContext().getPlayed());
+                    won_Top7.setText("" + top10.get(x).getContext().getWon());
+                    points_Top7.setText("" + top10.get(x).getContext().getPoints());
+                }
+                if (method.equals("Reverse")){
+                    played_Top7.setText("" + top10.get(x).getContext().getPlayed_Reverse());
+                    won_Top7.setText("" + top10.get(x).getContext().getWon_Reverse());
+                    points_Top7.setText("" + top10.get(x).getContext().getReversePoints());
+                }
             }
 
 
@@ -1284,13 +1331,20 @@ public class GUI extends SystemController {
                 played_Top8.setVisible(true);
                 won_Top8.setVisible(true);
                 points_Top8.setVisible(true);
-                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                FileInputStream inputStream = new FileInputStream(top10.get(x).getContext().getProfilePicture());
                 Image image = new Image(inputStream);
                 image_Top8.setImage(image);
-                player_Top8.setText(users.get(x).getContext().getName());
-                played_Top8.setText("" + users.get(x).getContext().getPlayed());
-                won_Top8.setText("" + users.get(x).getContext().getWon());
-                points_Top8.setText("" + users.get(x).getContext().getPoints());
+                player_Top8.setText(top10.get(x).getContext().getName());
+                if (method.equals("Normal")){
+                    played_Top8.setText("" + top10.get(x).getContext().getPlayed());
+                    won_Top8.setText("" + top10.get(x).getContext().getWon());
+                    points_Top8.setText("" + top10.get(x).getContext().getPoints());
+                }
+                if (method.equals("Reverse")){
+                    played_Top8.setText("" + top10.get(x).getContext().getPlayed_Reverse());
+                    won_Top8.setText("" + top10.get(x).getContext().getWon_Reverse());
+                    points_Top8.setText("" + top10.get(x).getContext().getReversePoints());
+                }
             }
 
 
@@ -1304,17 +1358,24 @@ public class GUI extends SystemController {
                 played_Top9.setVisible(true);
                 won_Top9.setVisible(true);
                 points_Top9.setVisible(true);
-                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                FileInputStream inputStream = new FileInputStream(top10.get(x).getContext().getProfilePicture());
                 Image image = new Image(inputStream);
                 image_Top9.setImage(image);
-                player_Top9.setText(users.get(x).getContext().getName());
-                played_Top9.setText("" + users.get(x).getContext().getPlayed());
-                won_Top9.setText("" + users.get(x).getContext().getWon());
-                points_Top9.setText("" + users.get(x).getContext().getPoints());
+                player_Top9.setText(top10.get(x).getContext().getName());
+                if (method.equals("Normal")){
+                    played_Top9.setText("" + top10.get(x).getContext().getPlayed());
+                    won_Top9.setText("" + top10.get(x).getContext().getWon());
+                    points_Top9.setText("" + top10.get(x).getContext().getPoints());
+                }
+                if (method.equals("Reverse")){
+                    played_Top9.setText("" + top10.get(x).getContext().getPlayed_Reverse());
+                    won_Top9.setText("" + top10.get(x).getContext().getWon_Reverse());
+                    points_Top9.setText("" + top10.get(x).getContext().getReversePoints());
+                }
             }
 
 
-            x = 0;
+            x = 9;
             t = (top10.get(x).getContext() == null ? true : false);
 
             if (!t){
@@ -1324,15 +1385,23 @@ public class GUI extends SystemController {
                 played_Top10.setVisible(true);
                 won_Top10.setVisible(true);
                 points_Top10.setVisible(true);
-                FileInputStream inputStream = new FileInputStream(users.get(x).getContext().getProfilePicture());
+                FileInputStream inputStream = new FileInputStream(top10.get(x).getContext().getProfilePicture());
                 Image image = new Image(inputStream);
                 image_Top10.setImage(image);
-                player_Top10.setText(users.get(x).getContext().getName());
-                played_Top10.setText("" + users.get(x).getContext().getPlayed());
-                won_Top10.setText("" + users.get(x).getContext().getWon());
-                points_Top10.setText("" + users.get(x).getContext().getPoints());
+                player_Top10.setText(top10.get(x).getContext().getName());
+                if (method.equals("Normal")){
+                    played_Top10.setText("" + top10.get(x).getContext().getPlayed());
+                    won_Top10.setText("" + top10.get(x).getContext().getWon());
+                    points_Top10.setText("" + top10.get(x).getContext().getPoints());
+                }
+                if (method.equals("Reverse")){
+                    played_Top10.setText("" + top10.get(x).getContext().getPlayed_Reverse());
+                    won_Top10.setText("" + top10.get(x).getContext().getWon_Reverse());
+                    points_Top10.setText("" + top10.get(x).getContext().getReversePoints());
+                }
             }
         } catch (Exception e){
+            System.out.println(Arrays.toString(e.getStackTrace()));
             return;
         }
 
@@ -1377,6 +1446,22 @@ public class GUI extends SystemController {
     public void close() throws IOException {
         super.saveData();
         System.exit(0);
+    }
+
+    public void handle_TopMenu(MouseEvent event) throws Exception{
+        System.out.println("HANDLE");
+        System.out.println(event.getSource().toString());
+        if (event.getSource() == loader_Top10){
+            loader_Top10.setVisible(false);
+            setTop10("Normal");
+        }
+
+        if (event.getSource() == loader_Top10_Reverse){
+            System.out.println("Reverse loader");
+            loader_Top10_Reverse.setVisible(false);
+            setTop10("Reverse");
+        }
+
     }
 
     public void handle_gameModes(MouseEvent event) throws Exception {
