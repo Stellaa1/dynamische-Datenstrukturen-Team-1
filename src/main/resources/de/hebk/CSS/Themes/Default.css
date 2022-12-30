@@ -2,6 +2,11 @@
     -fx-background-color: #2F346E;
 }
 
+.main_Panel2{
+    -fx-background-color: linear-gradient(to top, #02021c, #0b0b56);
+}
+
+
 .button{
     -fx-background-color: #575B95;
     -fx-background-radius: 0;
@@ -30,6 +35,12 @@
     -fx-background-color: #49529d;
     -fx-text-fill: White;
 }
+
+.button_5{
+    -fx-background-color: rgb(87, 87, 144);
+    -fx-text-fill: white;
+}
+
 
 .button_answer{
     -fx-background-color: #49529d;
@@ -110,6 +121,13 @@
     -fx-stroke-width: 5;
 }
 
+.rectangle_6{
+    -fx-fill: white;
+    -fx-opacity: 0.25;
+    -fx-arc-height: 20;
+    -fx-arc-width: 20;
+}
+
 .Text{
     -fx-background-color: orange;
 }
@@ -122,6 +140,11 @@
 .Text3{
     -fx-fill: #ffffff;
     -fx-text-fill: #ffffff;
+}
+
+.Text4{
+    -fx-fill: linear-gradient(to top right, #5e00ff, #d000ff);
+    -fx-text-fill: linear-gradient(to top right, #5e00ff, #d000ff);
 }
 
 .Text_Top1{
@@ -138,6 +161,7 @@
     -fx-fill: linear-gradient(to top right, #b7b7b7, #d7d7d7);
     -fx-text-fill: #ffffff;
 }
+
 
 
 .text-area {
