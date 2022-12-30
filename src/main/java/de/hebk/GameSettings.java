@@ -1,6 +1,6 @@
 package de.hebk;
 
-public class GameSettings{
+public class GameSettings {
 
     private Joker joker = new Joker();
     private String gameMode = "Normal";
