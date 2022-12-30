@@ -674,6 +674,9 @@ public class GUI extends SystemController {
         loadScene("Main_Game.fxml");
     }
 
+    public void restartJokerImages(){
+        joker_fifty_fifty.setDisable(false);
+    }
 
     public void setGame(){
         game = new Game();
@@ -691,7 +694,7 @@ public class GUI extends SystemController {
         game.fragen.gameSettings.getJoker().setAudience(true);
         game.fragen.gameSettings.getJoker().setFifty_fifty(true);
         game.fragen.gameSettings.getJoker().setCall(true);
-
+        restartJokerImages();
 
         game.fragen.generateQuestions();
         game.index_frage = 0;
