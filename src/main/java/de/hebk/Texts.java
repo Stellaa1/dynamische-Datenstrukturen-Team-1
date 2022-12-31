@@ -14,6 +14,8 @@ public class Texts {
             "Physik",
             "Sport",
             "Videospiele",
+            "Chemie",
+            "Tierwelt",
     };
 
     public String[] currencies = {
