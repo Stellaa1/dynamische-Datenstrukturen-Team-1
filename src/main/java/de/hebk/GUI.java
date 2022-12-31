@@ -25,6 +25,7 @@ import javafx.scene.text.TextAlignment;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class GUI extends SystemController {
@@ -499,6 +500,11 @@ public class GUI extends SystemController {
         User u = new User();
         u.setName(nameField.getText());
         u.setPassword(passwordField.getText());
+        Date d = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/y HH:mm:s");
+        u.setJoinDate(simpleDateFormat.format(d));
+        System.out.println(u.getJoinDate());
+
         users.append(u);
         local_User = u;
 
