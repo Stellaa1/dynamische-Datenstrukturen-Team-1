@@ -256,7 +256,7 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <Button fx:id="user_GameResults_Chart_switch" layoutX="1026.0" layoutY="736.0" mnemonicParsing="false" onAction="#setUser_GamesAndWon_Chart" prefHeight="40.0" prefWidth="91.0" styleClass="button_Top10" text="Normal">
+      <Button fx:id="user_GameResults_Chart_switch" layoutX="1026.0" layoutY="736.0" mnemonicParsing="false" onAction="#setUser_GameResults_Chart" prefHeight="40.0" prefWidth="91.0" styleClass="button_Top10" text="Normal">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
