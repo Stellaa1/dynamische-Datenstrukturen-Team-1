@@ -7,6 +7,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -171,6 +175,8 @@ public class GUI extends SystemController {
     private Rectangle loader_TopAll;
     @FXML
     private Rectangle loader_TopAll_Reverse;
+    @FXML
+    private Rectangle loader_User_Statistics;
     @FXML
     private Button gameMode_Normal;
     @FXML
@@ -368,7 +374,51 @@ public class GUI extends SystemController {
     private Text points_Top10;
     @FXML
     private ImageView joker_fifty_fifty;
+    @FXML
+    private Text user_userName;
+    @FXML
+    private Text user_joinedDate;
+    @FXML
+    private Text userInformation_Name;
+    @FXML
+    private Text userInformation_Password;
+    @FXML
+    private Text userRank_Normal;
+    @FXML
+    private Text userRank_Reverse;
+    @FXML
+    private Text userPoints_Normal;
+    @FXML
+    private Text userPoints_Reverse;
+    @FXML
+    private Text user_Achievements;
+    @FXML
+    private LineChart<String, Integer> user_GameResults_Chart;
+    @FXML
+    private Text user_GameResults_Chart_PlayedText;
+    @FXML
+    private Text user_GameResults_Chart_WonText;
+    @FXML
+    private Text user_GameResults_Chart_LostText;
 
+    @FXML
+    private Text user_GameResults_Chart_PlayedText_Reverse;
+    @FXML
+    private Text user_GameResults_Chart_WonText_Reverse;
+    @FXML
+    private Text user_GameResults_Chart_LostText_Reverse;
+    @FXML
+    private Button user_GameResults_Chart_switch;
+    @FXML
+    private PieChart user_Achievements_Chart;
+    @FXML
+    private BarChart<String, Integer> user_Joker_Chart;
+    @FXML
+    private Text user_favoriteSubject;
+    @FXML
+    private Text percentageOfWin;
+    @FXML
+    private ImageView user_Profilepicture;
     private String[] s = values1;
 
     static private final Text[] VALUES = new Text[20];
@@ -501,9 +551,12 @@ public class GUI extends SystemController {
         u.setName(nameField.getText());
         u.setPassword(passwordField.getText());
         Date d = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/y HH:mm:s");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/y HH:mm:ss");
         u.setJoinDate(simpleDateFormat.format(d));
-        System.out.println(u.getJoinDate());
+        u.setFavorite_subjects(new List<Integer>());
+        for (int i = 0; i < csvFiles_Questions.length; i++){
+            u.getFavorite_subjects().append(0);
+        }
 
         users.append(u);
         local_User = u;
@@ -559,6 +612,11 @@ public class GUI extends SystemController {
 
 
         User u = users.get(index).getContext();
+        for (int i = 0; i < csvFiles_Questions.length; i++){
+            if (u.getFavorite_subjects().get(i) == null){
+                u.getFavorite_subjects().append(0);
+            }
+        }
         if (!anmelden_Password.getText().equals(u.getPassword())){
             loadScene("Fehler_Einloggen.fxml");
             return;
@@ -711,6 +769,16 @@ public class GUI extends SystemController {
         loader_Game_Normal.setVisible(false);
         try {
             setGame();
+            System.out.println(temp_category);
+            for (int i = 0; i < csvFiles_Questions.length; i++){
+                if (csvFiles_Questions[i].equals(temp_category)){
+                    System.out.println(true);
+                    local_User.getFavorite_subjects().get(i).setContext(local_User.getFavorite_subjects().get(i).getContext() + 1);
+                    System.out.println(local_User.getFavorite_subjects().toString());
+                    break;
+                }
+            }
+
             int tg = 61;
             if (game.fragen.gameSettings.getQuestion_Amount() == 10){
                 tg = 61;
@@ -1028,6 +1096,7 @@ public class GUI extends SystemController {
 
     public void revive(){
         hideEndGame();
+        local_User.setUsed_Joker_Revive(local_User.getUsed_Joker_Revive() + 1);
         game.fragen.gameSettings.setReward(0);
         resetButtons();
         game.fragen.gameSettings.getJoker().setRevive(game.fragen.gameSettings.getJoker().isInfJoker() ? true : false);
@@ -1037,7 +1106,7 @@ public class GUI extends SystemController {
         if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){return;}
         String firstOption = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(2).getContext();
         String secondOption = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(3).getContext();
-
+        local_User.setUsed_Joker_FiftyFifty(local_User.getUsed_Joker_FiftyFifty() + 1);
         if (answer_button1.getText().equals(firstOption) || answer_button1.getText().equals(secondOption)){
             answer_button1.setDisable(true);
         }
@@ -1231,14 +1300,14 @@ public class GUI extends SystemController {
         Stack<User> top10 = null;
 
         top10 = (method.equals("Normal") == true ? calculateTop10("Normal") : calculateTop10("Reverse"));
+        System.out.println(top10.toString());
 
         int x = 0;
 
         try {
             boolean t = (top10.get(x).getContext() == null ? true : false);
+            System.out.println(top10.get(x).getContext().getName());
             System.out.println(t);
-
-
             if (!t){
                 medal_Top1.setVisible(true);
                 image_Top1.setVisible(true);
@@ -1249,21 +1318,22 @@ public class GUI extends SystemController {
                 FileInputStream inputStream = new FileInputStream(top10.get(x).getContext().getProfilePicture());
                 Image image = new Image(inputStream);
                 image_Top1.setImage(image);
-                player_Top1.setText(users.get(x).getContext().getName());
+                player_Top1.setText(top10.get(x).getContext().getName());
                 if (method.equals("Normal")){
-                    played_Top1.setText("" + users.get(x).getContext().getPlayed());
-                    won_Top1.setText("" + users.get(x).getContext().getWon());
-                    points_Top1.setText("" + users.get(x).getContext().getPoints());
+                    played_Top1.setText("" + top10.get(x).getContext().getPlayed());
+                    won_Top1.setText("" + top10.get(x).getContext().getWon());
+                    points_Top1.setText("" + top10.get(x).getContext().getPoints());
                 }
                 if (method.equals("Reverse")){
-                    played_Top1.setText("" + users.get(x).getContext().getPlayed_Reverse());
-                    won_Top1.setText("" + users.get(x).getContext().getWon_Reverse());
-                    points_Top1.setText("" + users.get(x).getContext().getReversePoints());
+                    played_Top1.setText("" + top10.get(x).getContext().getPlayed_Reverse());
+                    won_Top1.setText("" + top10.get(x).getContext().getWon_Reverse());
+                    points_Top1.setText("" + top10.get(x).getContext().getReversePoints());
                 }
             }
 
             x = 1;
             t = (top10.get(x).getContext() == null ? true : false);
+            System.out.println(top10.get(x).getContext().getName());
             System.out.println(t);
             System.out.println(top10.get(x).getContext().getPoints() + " user x");
 
@@ -1551,6 +1621,226 @@ public class GUI extends SystemController {
 
 
         topTable_Reverse.setItems(observableList);
+    }
+
+    public String getFavorite_Subject_local_user(){
+        int[] points = new int[local_User.getFavorite_subjects().size()];
+        for (int i = 0; i < local_User.getFavorite_subjects().size(); i++){
+            points[i] = local_User.getFavorite_subjects().get(i).getContext();
+        }
+
+        int highest = 0;
+        for (int i = 0; i < local_User.getFavorite_subjects().size(); i++){
+            for (int x = 0; x < local_User.getFavorite_subjects().size(); x++){
+                if (local_User.getFavorite_subjects().get(x).getContext() > highest){
+                    highest = i;
+                    break;
+                }
+            }
+        }
+
+        int index = 0;
+        for (int i = 0; i < local_User.getFavorite_subjects().size(); i++){
+            if (local_User.getFavorite_subjects().get(i).getContext() == highest){
+                index = i;
+            }
+        }
+
+        return csvFiles_Questions[index];
+    }
+
+    public void showUser_Statistics() throws Exception{
+        loadScene("local_user.fxml");
+    }
+
+    public void loadUser() throws FileNotFoundException {
+        FileInputStream inputStream = new FileInputStream(local_User.getProfilePicture());
+        Image image = new Image(inputStream);
+        user_Profilepicture.setImage(image);
+        user_userName.setText(local_User.getName());
+        user_joinedDate.setText(local_User.getJoinDate());
+        userInformation_Name.setText("Name: " + local_User.getName());
+        userInformation_Password.setText("Passwort: " + local_User.getPassword());
+
+        Stack<User> topAll = calculateTop10("Normal");
+        for (int i = 0; i < topAll.size(); i++){
+            User current = topAll.get(i).getContext();
+            System.out.println(i);
+            if (local_User.getName().equals(current.getName())){
+                userRank_Normal.setText("NORMAL: " + (i + 1));
+            }
+        }
+
+        Stack<User> topAll_Reverse = calculateTop10("Reverse");
+        for (int i = 0; i < topAll_Reverse.size(); i++){
+            User current = topAll_Reverse.get(i).getContext();
+            if (local_User.getName().equals(current.getName())){
+                userRank_Reverse.setText("REVERSE: " + (i + 1));
+            }
+        }
+
+        userPoints_Normal.setText("NORMAL: " + local_User.getPoints());
+        userPoints_Reverse.setText("REVERSE: " + local_User.getReversePoints());
+        user_Achievements.setText(local_User.getAchievements().size() + "/24");
+        user_favoriteSubject.setText(getFavorite_Subject_local_user());
+
+
+        setUser_GameResults_Chart();
+        setUser_Achievements_Chart();
+        setUser_Joker_Chart();
+        if (local_User.getPlayed() > 0){
+            percentageOfWin.setText(local_User.getWon() * 100 / local_User.getPlayed() + "%");
+        }
+    }
+
+    public void setUser_GameResults_Chart() {
+
+        user_GameResults_Chart.getData().clear();
+        user_GameResults_Chart.layout();
+
+        if (user_GameResults_Chart_switch.getText().equals("Normal")) {
+            loader_User_Statistics.setVisible(false);
+            local_User.setPlayed(142);
+            local_User.setWon(42);
+            local_User.setLost(100);
+
+            for (int i = 0; i < 42; i++) {
+                local_User.getAchievements().append(i + "");
+            }
+
+            XYChart.Series<String, Integer> series = new XYChart.Series<>();
+            series.getData().add(new XYChart.Data<>("0", local_User.getPlayed() / 8));
+            series.getData().add(new XYChart.Data<>("1", local_User.getPlayed() / 7));
+            series.getData().add(new XYChart.Data<>("2", local_User.getPlayed() / 6));
+            series.getData().add(new XYChart.Data<>("3", local_User.getPlayed() / 5));
+            series.getData().add(new XYChart.Data<>("4", local_User.getPlayed() / 4));
+            series.getData().add(new XYChart.Data<>("5", local_User.getPlayed() / 3));
+            series.getData().add(new XYChart.Data<>("6", local_User.getPlayed() / 2));
+            series.getData().add(new XYChart.Data<>("7", local_User.getPlayed()));
+            series.setName("Gespielt");
+            user_GameResults_Chart_PlayedText.setText("Normal: " + local_User.getPlayed());
+            user_GameResults_Chart_PlayedText_Reverse.setText("Reverse: " + local_User.getPlayed_Reverse());
+
+            XYChart.Series<String, Integer> series2 = new XYChart.Series<>();
+            series2.getData().add(new XYChart.Data<>("0", local_User.getWon() / 8));
+            series2.getData().add(new XYChart.Data<>("1", local_User.getWon() / 7));
+            series2.getData().add(new XYChart.Data<>("2", local_User.getWon() / 6));
+            series2.getData().add(new XYChart.Data<>("3", local_User.getWon() / 5));
+            series2.getData().add(new XYChart.Data<>("4", local_User.getWon() / 4));
+            series2.getData().add(new XYChart.Data<>("5", local_User.getWon() / 3));
+            series2.getData().add(new XYChart.Data<>("6", local_User.getWon() / 2));
+            series2.getData().add(new XYChart.Data<>("7", local_User.getWon()));
+            series2.setName("Gewonnen");
+            user_GameResults_Chart_WonText.setText("Normal: " + local_User.getWon());
+            user_GameResults_Chart_WonText_Reverse.setText("Reverse: " + local_User.getWon_Reverse());
+
+            XYChart.Series<String, Integer> series3 = new XYChart.Series<>();
+            series3.getData().add(new XYChart.Data<>("0", local_User.getLost() / 8));
+            series3.getData().add(new XYChart.Data<>("1", local_User.getLost() / 7));
+            series3.getData().add(new XYChart.Data<>("2", local_User.getLost() / 6));
+            series3.getData().add(new XYChart.Data<>("3", local_User.getLost() / 5));
+            series3.getData().add(new XYChart.Data<>("4", local_User.getLost() / 4));
+            series3.getData().add(new XYChart.Data<>("5", local_User.getLost() / 3));
+            series3.getData().add(new XYChart.Data<>("6", local_User.getLost() / 2));
+            series3.getData().add(new XYChart.Data<>("7", local_User.getLost()));
+            series3.setName("Verloren");
+            user_GameResults_Chart_LostText.setText("Normal: " + local_User.getLost());
+            user_GameResults_Chart_LostText_Reverse.setText("Reverse: " + local_User.getLost_Reverse());
+
+            user_GameResults_Chart.getData().add(series);
+            user_GameResults_Chart.getData().add(series2);
+            user_GameResults_Chart.getData().add(series3);
+            series.getNode().setStyle("-fx-stroke: #FFD6DC");
+            series2.getNode().setStyle("-fx-stroke: #8effd5");
+            series3.getNode().setStyle("-fx-stroke: #ff8092");
+            user_GameResults_Chart_switch.setText("Reverse");
+        } else {
+            loader_User_Statistics.setVisible(false);
+            local_User.setPlayed_Reverse(13);
+            local_User.setWon_Reverse(4);
+            local_User.setLost_Reverse(9);
+
+            XYChart.Series<String, Integer> series = new XYChart.Series<>();
+            series.getData().add(new XYChart.Data<>("0", local_User.getPlayed_Reverse() / 8));
+            series.getData().add(new XYChart.Data<>("1", local_User.getPlayed_Reverse() / 7));
+            series.getData().add(new XYChart.Data<>("2", local_User.getPlayed_Reverse() / 6));
+            series.getData().add(new XYChart.Data<>("3", local_User.getPlayed_Reverse() / 5));
+            series.getData().add(new XYChart.Data<>("4", local_User.getPlayed_Reverse() / 4));
+            series.getData().add(new XYChart.Data<>("5", local_User.getPlayed_Reverse() / 3));
+            series.getData().add(new XYChart.Data<>("6", local_User.getPlayed_Reverse() / 2));
+            series.getData().add(new XYChart.Data<>("7", local_User.getPlayed_Reverse()));
+            series.setName("Gespielt-Reverse");
+            user_GameResults_Chart_PlayedText.setText("Normal: " + local_User.getPlayed());
+            user_GameResults_Chart_PlayedText_Reverse.setText("Reverse: " + local_User.getPlayed_Reverse());
+
+            XYChart.Series<String, Integer> series2 = new XYChart.Series<>();
+            series2.getData().add(new XYChart.Data<>("0", local_User.getWon_Reverse() / 8));
+            series2.getData().add(new XYChart.Data<>("1", local_User.getWon_Reverse() / 7));
+            series2.getData().add(new XYChart.Data<>("2", local_User.getWon_Reverse() / 6));
+            series2.getData().add(new XYChart.Data<>("3", local_User.getWon_Reverse() / 5));
+            series2.getData().add(new XYChart.Data<>("4", local_User.getWon_Reverse() / 4));
+            series2.getData().add(new XYChart.Data<>("5", local_User.getWon_Reverse() / 3));
+            series2.getData().add(new XYChart.Data<>("6", local_User.getWon_Reverse() / 2));
+            series2.getData().add(new XYChart.Data<>("7", local_User.getWon_Reverse()));
+            series2.setName("Gewonnen-Reverse");
+            user_GameResults_Chart_WonText.setText("Normal: " + local_User.getWon());
+            user_GameResults_Chart_WonText_Reverse.setText("Reverse: " + local_User.getWon_Reverse());
+
+            XYChart.Series<String, Integer> series3 = new XYChart.Series<>();
+            series3.getData().add(new XYChart.Data<>("0", local_User.getLost_Reverse() / 8));
+            series3.getData().add(new XYChart.Data<>("1", local_User.getLost_Reverse() / 7));
+            series3.getData().add(new XYChart.Data<>("2", local_User.getLost_Reverse() / 6));
+            series3.getData().add(new XYChart.Data<>("3", local_User.getLost_Reverse() / 5));
+            series3.getData().add(new XYChart.Data<>("4", local_User.getLost_Reverse() / 4));
+            series3.getData().add(new XYChart.Data<>("5", local_User.getLost_Reverse() / 3));
+            series3.getData().add(new XYChart.Data<>("6", local_User.getLost_Reverse() / 2));
+            series3.getData().add(new XYChart.Data<>("7", local_User.getLost_Reverse()));
+            series3.setName("Verloren-Reverse");
+            user_GameResults_Chart_LostText.setText("Normal: " + local_User.getLost());
+            user_GameResults_Chart_LostText_Reverse.setText("Reverse: " + local_User.getLost_Reverse());
+
+            user_GameResults_Chart.getData().add(series);
+            user_GameResults_Chart.getData().add(series2);
+            user_GameResults_Chart.getData().add(series3);
+            series.getNode().setStyle("-fx-stroke: #FFD6DC");
+            series2.getNode().setStyle("-fx-stroke: #8effd5");
+            series3.getNode().setStyle("-fx-stroke: #ff8092");
+            user_GameResults_Chart_switch.setText("Normal");
+        }
+
+    }
+
+    public void setUser_Achievements_Chart(){
+        ObservableList<PieChart.Data> achievementsData = FXCollections.observableArrayList(
+                new PieChart.Data("übrig",64 - local_User.getAchievements().size()),
+                new PieChart.Data("erzielt",local_User.getAchievements().size())
+        );
+        user_Achievements_Chart.setData(achievementsData);
+    }
+
+    public void setUser_Joker_Chart(){
+        loader_User_Statistics.setVisible(false);
+
+        XYChart.Series<String, Integer> series = new XYChart.Series();
+        series.getData().add(new XYChart.Data<>("", local_User.getUsed_Joker_Audience()));
+        series.setName("Publikum");
+
+        XYChart.Series<String, Integer> series2 = new XYChart.Series();
+        series2.getData().add(new XYChart.Data<>("", local_User.getUsed_Joker_FiftyFifty()));
+        series2.setName("50%50");
+
+        XYChart.Series<String, Integer> series3 = new XYChart.Series();
+        series3.getData().add(new XYChart.Data<>("", local_User.getUsed_Joker_Call()));
+        series3.setName("Telefon");
+
+        XYChart.Series<String, Integer> series4 = new XYChart.Series();
+        series4.getData().add(new XYChart.Data<>("", local_User.getUsed_Joker_Revive()));
+        series4.setName("Revive");
+
+        user_Joker_Chart.getData().addAll(series);
+        user_Joker_Chart.getData().addAll(series2);
+        user_Joker_Chart.getData().addAll(series3);
+        user_Joker_Chart.getData().addAll(series4);
     }
 
     public void close() throws IOException {
