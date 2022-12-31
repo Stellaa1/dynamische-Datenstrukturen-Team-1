@@ -73,7 +73,7 @@
             <Image url="@Profilbilder/Unbenannt.PNG" />
          </image>
       </ImageView>
-      <Text fx:id="menu_UserName" fill="WHITE" layoutX="196.0" layoutY="1042.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text">
+      <Text fx:id="menu_UserName" fill="WHITE" layoutX="196.0" layoutY="1042.0" onMouseClicked="#showUser_Statistics" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text">
          <font>
             <Font size="38.0" />
          </font>
