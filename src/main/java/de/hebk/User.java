@@ -14,6 +14,8 @@ public class User implements Serializable {
     private int points, reversePoints = 0;
     private int played, won, lost = 0;
     private int played_Reverse, won_Reverse, lost_Reverse = 0;
+    private List<Integer> favorite_subjects;
+    private int used_Joker_Audience, used_Joker_FiftyFifty, used_Joker_Call, used_Joker_Revive = 0;
 
     public String getJoinDate() {
         return joinDate;
@@ -117,5 +119,45 @@ public class User implements Serializable {
 
     public void setLost_Reverse(int lost_Reverse) {
         this.lost_Reverse = lost_Reverse;
+    }
+
+    public List<Integer> getFavorite_subjects() {
+        return favorite_subjects;
+    }
+
+    public void setFavorite_subjects(List<Integer> favorite_subjects) {
+        this.favorite_subjects = favorite_subjects;
+    }
+
+    public int getUsed_Joker_Audience() {
+        return used_Joker_Audience;
+    }
+
+    public void setUsed_Joker_Audience(int used_Joker_Audience) {
+        this.used_Joker_Audience = used_Joker_Audience;
+    }
+
+    public int getUsed_Joker_FiftyFifty() {
+        return used_Joker_FiftyFifty;
+    }
+
+    public void setUsed_Joker_FiftyFifty(int used_Joker_FiftyFifty) {
+        this.used_Joker_FiftyFifty = used_Joker_FiftyFifty;
+    }
+
+    public int getUsed_Joker_Call() {
+        return used_Joker_Call;
+    }
+
+    public void setUsed_Joker_Call(int used_Joker_Call) {
+        this.used_Joker_Call = used_Joker_Call;
+    }
+
+    public int getUsed_Joker_Revive() {
+        return used_Joker_Revive;
+    }
+
+    public void setUsed_Joker_Revive(int used_Joker_Revive) {
+        this.used_Joker_Revive = used_Joker_Revive;
     }
 }
