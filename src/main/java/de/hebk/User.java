@@ -5,6 +5,8 @@ import de.hebk.model.list.List;
 import java.io.Serializable;
 
 public class User implements Serializable {
+
+    private String joinDate;
     private String name;
     private String password;
     private String profilePicture = "src/main/resources/de/hebk/Profilbilder/Unbenannt.PNG";
@@ -13,6 +15,13 @@ public class User implements Serializable {
     private int played, won, lost = 0;
     private int played_Reverse, won_Reverse, lost_Reverse = 0;
 
+    public String getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(String joinDate) {
+        this.joinDate = joinDate;
+    }
 
     public String getName(){
         return name;
