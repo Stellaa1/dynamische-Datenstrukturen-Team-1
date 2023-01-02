@@ -19,6 +19,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -26,9 +28,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -767,6 +771,8 @@ public class GUI extends SystemController {
 
     public void startGame() throws Exception {
         loader_Game_Normal.setVisible(false);
+        playSound("src/main/java/sound.mp3");
+
         try {
             setGame();
             System.out.println(temp_category);
@@ -1296,6 +1302,13 @@ public class GUI extends SystemController {
         loadScene("TopAllReverse.fxml");
     }
 
+    public void playSound(String path){
+        Media media = new Media(new File("src/resources.sound.mp3").toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
+    }
+
     public void setTop10(String method) throws FileNotFoundException {
         Stack<User> top10 = null;
 
@@ -1820,6 +1833,10 @@ public class GUI extends SystemController {
 
     public void setUser_Joker_Chart(){
         loader_User_Statistics.setVisible(false);
+        local_User.setUsed_Joker_Audience(4);
+        local_User.setUsed_Joker_FiftyFifty(6);
+        local_User.setUsed_Joker_Revive(7);
+        local_User.setUsed_Joker_Call(3);
 
         XYChart.Series<String, Integer> series = new XYChart.Series();
         series.getData().add(new XYChart.Data<>("", local_User.getUsed_Joker_Audience()));
