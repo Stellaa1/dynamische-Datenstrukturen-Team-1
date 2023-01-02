@@ -28,16 +28,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class GUI extends SystemController {
-
     private Timer timer = new Timer();
     TimerTask timertask;
     long beforeTimer;
@@ -52,6 +49,7 @@ public class GUI extends SystemController {
     private static int temp_incrementRange;
     private static String temp_currency;
 
+    MediaPlayer mediaPlayer;
     @FXML
     private Button button;
     @FXML
@@ -642,6 +640,7 @@ public class GUI extends SystemController {
                         afterRun = System.currentTimeMillis();
                         timeText.setText("Zeit - " + ((int) 30 - (afterRun - beforeTimer) / 1000));
                         time[0] -= 1;
+                        System.out.println(time[0]);
                     }
                     if (time[0] == -1){
                         timer.cancel();
@@ -653,6 +652,28 @@ public class GUI extends SystemController {
         } catch (Exception e){
         }
 
+    }
+
+    public boolean counter_answer() throws Exception{
+        try {
+            final double[] time = {3.00};
+            timertask = new TimerTask() {
+                @Override
+                public void run() {
+                    if (time[0] >= 0.0){
+                        time[0] -= 0.1;
+                        System.out.println(time[0]);
+                        System.out.println("-0.1");
+                    }
+                    if (time[0] == -1.0){
+                        timer.cancel();
+                    }
+                }
+            };
+            timer.schedule(timertask, 0, 500);
+        } catch (Exception e){
+        }
+        return true;
     }
 
     public void loadUserInMenu() throws FileNotFoundException {
@@ -771,7 +792,7 @@ public class GUI extends SystemController {
 
     public void startGame() throws Exception {
         loader_Game_Normal.setVisible(false);
-        playSound("src/main/java/sound.mp3");
+        playSound("/de/hebk/Sounds/Musik/100-1000-Questions.mp3");
 
         try {
             setGame();
@@ -858,8 +879,46 @@ public class GUI extends SystemController {
 
     }
 
+    public void setSoundOnProgress(){
+        if (VALUES[game.index_frage] == null){
+            return;
+        }
+        int value = Integer.parseInt(s[game.index_frage]);
+        System.out.println(value);
+
+        if (value < 2000){
+            playSound("/de/hebk/Sounds/Win/2000-Win.mp3");
+        }
+
+        if (value > 4000 && value <= 8000){
+            playSound("/de/hebk/Sounds/Win/8000-Win.mp3");
+        }
+
+        if (value > 8000 && value <= 32000){
+            playSound("/de/hebk/Sounds/Win/32000-Win.mp3");
+        }
+
+        if (value > 32000 && value <= 250000){
+            playSound("/de/hebk/Sounds/Win/250000-Win.mp3");
+        }
+
+        if (value > 250000 && value <= 500000){
+            playSound("/de/hebk/Sounds/Win/500000-Win.mp3");
+        }
+
+        if (value > 500000 && value <= 1000000){
+            playSound("/de/hebk/Sounds/Win/1000000-Win.mp3");
+        }
+
+    }
+
     public void setQuestionAndAnswers() throws Exception{
         resetButtons();
+
+        if (timer != null){
+            timer.cancel();
+        }
+
         if (VALUES[game.index_frage] == null){
             System.out.println("Player Won");
             if (game.fragen.gameSettings.getGameMode().equals("Normal")){
@@ -953,7 +1012,6 @@ public class GUI extends SystemController {
                 answer_button4.setText("Keine von genannten");
             }
         }
-        System.out.println("Reward: " + game.fragen.gameSettings.getReward());
     }
 
     public void animateButton(Button b, String t){
@@ -1148,6 +1206,7 @@ public class GUI extends SystemController {
     }
 
     public void confirm2(){
+        setSoundOnProgress();
         hide_Confirm_Box();
         result_Box.setVisible(true);
         result_Title.setVisible(true);
@@ -1182,6 +1241,7 @@ public class GUI extends SystemController {
     }
 
     public void continueGame() throws Exception {
+        stopSound();
         hide_Confirm_Box();
         Button b = getCorrectAnswerFromButtons();
         game.index_frage++;
@@ -1210,7 +1270,8 @@ public class GUI extends SystemController {
             }
             if (answer_button3.getText().equals(result_Answer.getText())){
                 b2 = answer_button3;
-            }            if (answer_button4.getText().equals(result_Answer.getText())){
+            }
+            if (answer_button4.getText().equals(result_Answer.getText())){
                 b2 = answer_button4;
             }
             endGame();
@@ -1278,6 +1339,7 @@ public class GUI extends SystemController {
         if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
             game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(game.fragen.getQuestions().size() - 1 - game.index_frage).getContext().getDifficulty());
         }
+        setSoundOnProgress();
     }
 
 
@@ -1302,11 +1364,28 @@ public class GUI extends SystemController {
         loadScene("TopAllReverse.fxml");
     }
 
-    public void playSound(String path){
-        Media media = new Media(new File("src/resources.sound.mp3").toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayer.play();
+    public void playSound(String filename){
+        try {
+            if (mediaPlayer != null){
+                mediaPlayer.stop();
+            }
+            String path = getClass().getResource(filename).toURI().toString();
+            Media media = new Media(path);
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.play();
+        } catch (Exception e){
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        }
+    }
+
+    public void stopSound(){
+        try {
+            if (mediaPlayer != null){
+                mediaPlayer.stop();
+            }
+        } catch (Exception e){
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        }
     }
 
     public void setTop10(String method) throws FileNotFoundException {
