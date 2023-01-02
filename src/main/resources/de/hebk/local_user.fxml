@@ -15,9 +15,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1919.0" styleClass="main_Panel2" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1919.0" styleClass="main_Panel2" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1188.0" layoutX="40.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="396.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1140.0" layoutX="40.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="396.0" />
       <ImageView fx:id="user_Profilepicture" fitHeight="150.0" fitWidth="150.0" layoutX="163.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Profilbilder/Unbenannt.PNG" />
@@ -29,8 +29,8 @@
          </font>
       </Text>
       <Line endX="236.0" layoutX="169.0" layoutY="286.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" styleClass="line" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="252.0" layoutX="482.0" layoutY="94.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="1365.0" />
-      <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="583.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="252.0" layoutX="482.0" layoutY="84.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="1365.0" />
+      <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="583.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/schedule.png" />
          </image>
@@ -40,81 +40,81 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Text>
-      <Text layoutX="482.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="INFORMATIONEN" wrappingWidth="242.55445861816395">
+      <Text layoutX="482.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="INFORMATIONEN" wrappingWidth="242.55445861816395">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
       </Text>
-      <Line endX="-100.0" endY="178.0" layoutX="854.0" layoutY="166.0" startX="-100.0" startY="-70.0" stroke="WHITE" strokeWidth="2.0" styleClass="line" />
-      <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="846.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+      <Line endX="-100.0" endY="178.0" layoutX="854.0" layoutY="156.0" startX="-100.0" startY="-70.0" stroke="WHITE" strokeWidth="2.0" styleClass="line" />
+      <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="846.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/information.png" />
          </image>
       </ImageView>
-      <Text layoutX="780.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="KONTO" textAlignment="CENTER" wrappingWidth="207.13671875">
+      <Text layoutX="780.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="KONTO" textAlignment="CENTER" wrappingWidth="207.13671875">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Text>
-      <Line endX="-100.0" endY="178.0" layoutX="1117.0" layoutY="166.0" startX="-100.0" startY="-70.0" stroke="WHITE" strokeWidth="2.0" styleClass="line" />
-      <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="1112.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+      <Line endX="-100.0" endY="178.0" layoutX="1117.0" layoutY="156.0" startX="-100.0" startY="-70.0" stroke="WHITE" strokeWidth="2.0" styleClass="line" />
+      <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="1112.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/top.png" />
          </image>
       </ImageView>
-      <Text layoutX="1046.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="RANG" textAlignment="CENTER" wrappingWidth="207.13671875">
+      <Text layoutX="1046.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="RANG" textAlignment="CENTER" wrappingWidth="207.13671875">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Text>
-      <Line endX="-100.0" endY="178.0" layoutX="1383.0" layoutY="166.0" startX="-100.0" startY="-70.0" stroke="WHITE" strokeWidth="2.0" styleClass="line" />
-      <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="1385.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+      <Line endX="-100.0" endY="178.0" layoutX="1383.0" layoutY="156.0" startX="-100.0" startY="-70.0" stroke="WHITE" strokeWidth="2.0" styleClass="line" />
+      <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="1385.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/stars.png" />
          </image>
       </ImageView>
-      <Text layoutX="1319.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="PUNKTE" textAlignment="CENTER" wrappingWidth="207.13671875">
+      <Text layoutX="1319.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="PUNKTE" textAlignment="CENTER" wrappingWidth="207.13671875">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Text>
-      <Line endX="-100.0" endY="178.0" layoutX="1653.0" layoutY="166.0" startX="-100.0" startY="-70.0" stroke="WHITE" strokeWidth="2.0" styleClass="line" />
-      <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="1669.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+      <Line endX="-100.0" endY="178.0" layoutX="1653.0" layoutY="156.0" startX="-100.0" startY="-70.0" stroke="WHITE" strokeWidth="2.0" styleClass="line" />
+      <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="1669.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/star-medal.png" />
          </image>
       </ImageView>
-      <Text layoutX="1603.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="ACHIEVEMENTS" textAlignment="CENTER" wrappingWidth="207.13671875">
+      <Text layoutX="1603.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="ACHIEVEMENTS" textAlignment="CENTER" wrappingWidth="207.13671875">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Text>
-      <Text fx:id="user_joinedDate" layoutX="499.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text2" textAlignment="CENTER" wrappingWidth="242.55445861816384">
+      <Text fx:id="user_joinedDate" layoutX="499.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text2" textAlignment="CENTER" wrappingWidth="242.55445861816384">
          <font>
             <Font size="23.0" />
          </font>
       </Text>
-      <Text fx:id="userInformation_Name" layoutX="762.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text2" textAlignment="CENTER" wrappingWidth="242.55445861816384">
+      <Text fx:id="userInformation_Name" layoutX="762.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text2" textAlignment="CENTER" wrappingWidth="242.55445861816384">
          <font>
             <Font size="23.0" />
          </font>
       </Text>
-      <Text fx:id="userInformation_Password" layoutX="762.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text2" textAlignment="CENTER" wrappingWidth="242.55445861816384">
+      <Text fx:id="userInformation_Password" layoutX="762.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text2" textAlignment="CENTER" wrappingWidth="242.55445861816384">
          <font>
             <Font size="23.0" />
          </font>
       </Text>
-      <Text fx:id="userRank_Normal" layoutX="1028.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top1" textAlignment="CENTER" wrappingWidth="242.55445861816384">
+      <Text fx:id="userRank_Normal" layoutX="1028.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top1" textAlignment="CENTER" wrappingWidth="242.55445861816384">
          <font>
             <Font name="System Bold" size="23.0" />
          </font>
       </Text>
-      <Text fx:id="userRank_Reverse" layoutX="1028.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top1" textAlignment="CENTER" wrappingWidth="242.55445861816384">
+      <Text fx:id="userRank_Reverse" layoutX="1028.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top1" textAlignment="CENTER" wrappingWidth="242.55445861816384">
          <font>
             <Font name="System Bold" size="23.0" />
          </font>
       </Text>
-      <Text fx:id="user_Achievements" layoutX="1603.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top2" textAlignment="CENTER" wrappingWidth="207.13671875">
+      <Text fx:id="user_Achievements" layoutX="1603.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top2" textAlignment="CENTER" wrappingWidth="207.13671875">
          <font>
             <Font name="System Bold" size="23.0" />
          </font>
@@ -122,12 +122,12 @@
             <Glow level="0.21" />
          </effect>
       </Text>
-      <Text fx:id="userPoints_Normal" layoutX="1301.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text4" textAlignment="CENTER" wrappingWidth="242.55445861816384">
+      <Text fx:id="userPoints_Normal" layoutX="1301.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text4" textAlignment="CENTER" wrappingWidth="242.55445861816384">
          <font>
             <Font name="System Bold" size="23.0" />
          </font>
       </Text>
-      <Text fx:id="userPoints_Reverse" layoutX="1301.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text4" textAlignment="CENTER" wrappingWidth="242.55445861816384">
+      <Text fx:id="userPoints_Reverse" layoutX="1301.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text4" textAlignment="CENTER" wrappingWidth="242.55445861816384">
          <font>
             <Font name="System Bold" size="23.0" />
          </font>
@@ -144,21 +144,21 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button graphicTextGap="10.0" layoutX="68.0" layoutY="429.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="338.0" styleClass="button_5" text="Statistiken">
+      <Button graphicTextGap="10.0" layoutX="68.0" layoutY="429.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="338.0" styleClass="button_5" text="Mein Konto">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
          <graphic>
             <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Images/analytics.png" />
+                  <Image url="@Images/admin.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="420.0" layoutX="482.0" layoutY="373.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="667.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="420.0" layoutX="1180.0" layoutY="373.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="667.0" />
-      <LineChart fx:id="user_GameResults_Chart" horizontalGridLinesVisible="false" layoutX="501.0" layoutY="383.0" prefWidth="500.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="420.0" layoutX="482.0" layoutY="363.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="667.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="420.0" layoutX="1180.0" layoutY="363.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="667.0" />
+      <LineChart fx:id="user_GameResults_Chart" horizontalGridLinesVisible="false" layoutX="501.0" layoutY="373.0" prefWidth="500.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -169,31 +169,31 @@
             <Glow />
          </effect>
       </LineChart>
-      <Text layoutX="1198.0" layoutY="412.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="ACHIEVEMENTS" wrappingWidth="242.55445861816395">
+      <Text layoutX="1198.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="ACHIEVEMENTS" wrappingWidth="242.55445861816395">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
       </Text>
-      <PieChart fx:id="user_Achievements_Chart" layoutX="1264.0" layoutY="383.0" styleClass="default-color1-chart-pie" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="400.0" layoutX="482.0" layoutY="833.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="430.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="400.0" layoutX="1417.0" layoutY="833.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="430.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="400.0" layoutX="950.0" layoutY="833.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="430.0" />
-      <Text fx:id="user_favoriteSubject" layoutX="507.0" layoutY="1050.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="380.1367187499999">
+      <PieChart fx:id="user_Achievements_Chart" layoutX="1264.0" layoutY="373.0" styleClass="default-color1-chart-pie" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="380.0" layoutX="482.0" layoutY="811.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="430.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="380.0" layoutX="1417.0" layoutY="811.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="430.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="380.0" layoutX="950.0" layoutY="811.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="430.0" />
+      <Text fx:id="user_favoriteSubject" layoutX="507.0" layoutY="1028.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="380.1367187499999">
          <font>
             <Font name="System Bold" size="58.0" />
          </font>
       </Text>
-      <Text layoutX="499.0" layoutY="879.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="Lieblingsfach" wrappingWidth="242.55445861816395">
+      <Text layoutX="499.0" layoutY="857.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="Lieblingsfach" wrappingWidth="242.55445861816395">
          <font>
             <Font name="System Bold" size="33.0" />
          </font>
       </Text>
-      <Text layoutX="960.0" layoutY="878.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="Genutzte Joker" wrappingWidth="242.55445861816395">
+      <Text layoutX="960.0" layoutY="856.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="Genutzte Joker" wrappingWidth="242.55445861816395">
          <font>
             <Font name="System Bold" size="33.0" />
          </font>
       </Text>
-      <BarChart fx:id="user_Joker_Chart" alternativeColumnFillVisible="true" barGap="1.0" categoryGap="1.0" horizontalGridLinesVisible="false" layoutX="1013.0" layoutY="911.0" prefHeight="244.0" prefWidth="305.0" styleClass="jokerChart">
+      <BarChart fx:id="user_Joker_Chart" alternativeColumnFillVisible="true" barGap="1.0" categoryGap="1.0" horizontalGridLinesVisible="false" layoutX="1013.0" layoutY="889.0" prefHeight="244.0" prefWidth="305.0" styleClass="jokerChart">
         <xAxis>
           <CategoryAxis />
         </xAxis>
@@ -201,62 +201,62 @@
           <NumberAxis lowerBound="15.0" minorTickCount="0" side="LEFT" styleClass="jokerChart" tickLabelGap="1.0" tickLength="3.0" upperBound="64.0" />
         </yAxis>
       </BarChart>
-      <Text layoutX="1433.0" layoutY="879.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="\% Gewinn" wrappingWidth="242.55445861816395">
+      <Text layoutX="1433.0" layoutY="857.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" text="\% Gewinn" wrappingWidth="242.55445861816395">
          <font>
             <Font name="System Bold" size="33.0" />
          </font>
       </Text>
-      <Text fx:id="percentageOfWin" layoutX="1442.0" layoutY="1093.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="380.1367187499999">
+      <Text fx:id="percentageOfWin" layoutX="1442.0" layoutY="1071.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="380.1367187499999">
          <font>
             <Font name="System Bold" size="146.0" />
          </font>
       </Text>
-      <Text layoutX="1001.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Gespielt" text="GESPIELT" textAlignment="CENTER" wrappingWidth="140.13671875">
+      <Text layoutX="1001.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Gespielt" text="GESPIELT" textAlignment="CENTER" wrappingWidth="140.13671875">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Text fx:id="user_GameResults_Chart_PlayedText" layoutX="1001.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="140.13671875">
+      <Text fx:id="user_GameResults_Chart_PlayedText" layoutX="1001.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="140.13671875">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="user_GameResults_Chart_PlayedText_Reverse" layoutX="1001.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="140.13671875">
+      <Text fx:id="user_GameResults_Chart_PlayedText_Reverse" layoutX="1001.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="140.13671875">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text layoutX="1001.0" layoutY="545.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Gewonnen" text="GEWONNEN" textAlignment="CENTER" wrappingWidth="140.13671875">
+      <Text layoutX="1001.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Gewonnen" text="GEWONNEN" textAlignment="CENTER" wrappingWidth="140.13671875">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Text fx:id="user_GameResults_Chart_WonText" layoutX="1001.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="140.13671875">
+      <Text fx:id="user_GameResults_Chart_WonText" layoutX="1001.0" layoutY="565.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="140.13671875">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="user_GameResults_Chart_WonText_Reverse" layoutX="1001.0" layoutY="605.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="140.13671875">
+      <Text fx:id="user_GameResults_Chart_WonText_Reverse" layoutX="1001.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="140.13671875">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text layoutX="1001.0" layoutY="650.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Verloren" text="VERLOREN" textAlignment="CENTER" wrappingWidth="140.13671875">
+      <Text layoutX="1001.0" layoutY="640.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Verloren" text="VERLOREN" textAlignment="CENTER" wrappingWidth="140.13671875">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Text fx:id="user_GameResults_Chart_LostText" layoutX="1001.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="140.13671875">
+      <Text fx:id="user_GameResults_Chart_LostText" layoutX="1001.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="140.13671875">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="user_GameResults_Chart_LostText_Reverse" layoutX="1001.0" layoutY="710.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="140.13671875">
+      <Text fx:id="user_GameResults_Chart_LostText_Reverse" layoutX="1001.0" layoutY="700.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="140.13671875">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Button fx:id="user_GameResults_Chart_switch" layoutX="1026.0" layoutY="736.0" mnemonicParsing="false" onAction="#setUser_GameResults_Chart" prefHeight="40.0" prefWidth="91.0" styleClass="button_Top10" text="Normal">
+      <Button fx:id="user_GameResults_Chart_switch" layoutX="1026.0" layoutY="726.0" mnemonicParsing="false" onAction="#setUser_GameResults_Chart" prefHeight="40.0" prefWidth="91.0" styleClass="button_Top10" text="Normal">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
