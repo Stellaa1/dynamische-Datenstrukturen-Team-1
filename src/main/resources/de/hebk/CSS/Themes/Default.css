@@ -42,15 +42,8 @@
 }
 
 
-.button_answer{
-    -fx-background-color: #49529d;
-    -fx-text-fill: White;
-}
-
-
-.button_answer:hover{
-    -fx-background-color: #ff8c00;
-    -fx-text-fill: White;
+.rectangle_answer{
+    -fx-fill: #49529d;
 }
 
 .button_lost{
