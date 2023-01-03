@@ -21,6 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -35,6 +36,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class GUI extends SystemController {
+
+    static int wait_idle;
+    static int wait_win;
+    static int wait_lose;
     private Timer timer = new Timer();
     private Timer answer_timer = new Timer();
     private Timer answer_timer_win = new Timer();
@@ -123,13 +128,21 @@ public class GUI extends SystemController {
     @FXML
     private TextArea questionBox;
     @FXML
-    private Button answer_button1;
+    private Text answer_text1;
     @FXML
-    private Button answer_button2;
+    private Text answer_text2;
     @FXML
-    private Button answer_button3;
+    private Text answer_text3;
     @FXML
-    private Button answer_button4;
+    private Text answer_text4;
+    @FXML
+    private Rectangle answer_rectangle1;
+    @FXML
+    private Rectangle answer_rectangle2;
+    @FXML
+    private Rectangle answer_rectangle3;
+    @FXML
+    private Rectangle answer_rectangle4;
     @FXML
     private TextField topicTitle;
     @FXML
@@ -428,6 +441,8 @@ public class GUI extends SystemController {
     @FXML
     private ImageView user_Profilepicture;
     private String[] s = values1;
+    private String firstColor = "#49529d";
+    private String secondColor = "#ff8c00";
 
     static private final Text[] VALUES = new Text[20];
 
@@ -660,8 +675,10 @@ public class GUI extends SystemController {
         }
     }
 
-    public void counter_answer(Button b) throws Exception{
+    public void counter_answer(Text t) throws Exception{
         try {
+            Rectangle r = getRectangleFromTexts(t.getText());
+            System.out.println(r + " r");
             answer_timer = new Timer();
             timer.cancel();
             double[] time = {3.00};
@@ -671,19 +688,19 @@ public class GUI extends SystemController {
                     if (time[0] >= 0.0){
                         time[0] -= 0.5;
                         System.out.println(time[0]);
-                        if (b.getStyle().equals("") || b.getStyle().equals("-fx-background-color: rgb(73,82,157)")){
-                            b.setStyle("-fx-background-color: rgb(255,140,0)");
+                        if (r.getStyle().equals("") || r.getStyle().equals("-fx-fill: rgb(73,82,157)")){
+                            r.setStyle("-fx-fill: rgb(255,140,0)");
                         } else {
-                            b.setStyle("-fx-background-color: rgb(73,82,157)");
+                            r.setStyle("-fx-fill: rgb(73,82,157)");
                         }
                     }
                     if (time[0] < 0){
                         answer_timer.cancel();
                         try {
-                            if (answerResult_DisabledAutoAnswer(b)){
-                                counter_answer_win(b);
+                            if (answerResult_DisabledAutoAnswer(t)){
+                                counter_answer_win(t);
                             } else {
-                                counter_answer_lose(b);
+                                counter_answer_lose(t);
                             }
                         } catch (Exception e) {
                         }
@@ -695,31 +712,33 @@ public class GUI extends SystemController {
         }
     }
 
-    public void counter_answer_win(Button b) throws Exception{
+    public void counter_answer_win(Text t) throws Exception{
         try {
+            Rectangle r = getRectangleFromTexts(t.getText());
             answer_timer_win = new Timer();
-            double[] time = {3.00};
+            setSoundOnProgress_Win();
+            double[] time = {wait_win};
             answer_timertask_win = new TimerTask() {
                 @Override
                 public void run() {
                     if (time[0] >= 0.0){
-                        time[0] -= 0.5;
+                        time[0] -= 0.2;
                         System.out.println(time[0]);
-                        if (b.getStyle().equals("") || b.getStyle().equals("-fx-background-color: rgb(73,82,157)")){
-                            b.setStyle("-fx-background-color: rgb(0,255,140)");
+                        if (r.getStyle().equals("") || r.getStyle().equals("-fx-fill: rgb(73,82,157)")){
+                            r.setStyle("-fx-fill: rgb(0,255,140)");
                         } else {
-                            b.setStyle("-fx-background-color: rgb(73,82,157)");
+                            r.setStyle("-fx-fill: rgb(73,82,157)");
                         }
                     }
                     if (time[0] < 0){
-                        answer_timer.cancel();
-                        answer_timer_lose.cancel();
+                        System.out.println("End");
                         answer_timer_win.cancel();
                         try {
                             game.index_frage++;
                             setQuestionAndAnswers();
-                            animateButton(b, "Normal");
+                            animateObjects(r, "Normal");
                             changeReward();
+                            playBackgroundSound();
                         } catch (Exception e) {
                         }
                     }
@@ -730,28 +749,30 @@ public class GUI extends SystemController {
         }
     }
 
-    public void counter_answer_lose(Button b) throws Exception{
+    public void counter_answer_lose(Text t) throws Exception{
         try {
+            Rectangle r = getRectangleFromTexts(t.getText());
             answer_timer_lose = new Timer();
-            double[] time = {3.00};
+            setSoundOnProgress_Lose();
+            double[] time = {4.00};
             answer_timertask_lose = new TimerTask() {
                 @Override
                 public void run() {
                     if (time[0] >= 0.0){
-                        time[0] -= 0.5;
+                        time[0] -= 0.7;
                         System.out.println(time[0]);
-                        if (b.getStyle().equals("") || b.getStyle().equals("-fx-background-color: rgb(73,82,157)")){
-                            b.setStyle("-fx-background-color: rgb(255,0,40)");
+                        if (r.getStyle().equals("") || r.getStyle().equals("-fx-fill: rgb(73,82,157)")){
+                            r.setStyle("-fx-fill: rgb(255,0,40)");
                         } else {
-                            b.setStyle("-fx-background-color: rgb(73,82,157)");
+                            r.setStyle("-fx-fill: rgb(73,82,157)");
                         }
                     }
                     if (time[0] < 0){
                         answer_timer_lose.cancel();
                         endGame();
-                        Button b2 = getCorrectAnswerFromButtons();
-                        animateButton(b2, "Answer");
-                        animateButton(b, "Wrong");
+                        Rectangle r2 = getCorrectAnswerFromRectangels();
+                        animateObjects(r2, "Answer");
+                        animateObjects(r, "Wrong");
                     }
                 }
             };
@@ -872,6 +893,12 @@ public class GUI extends SystemController {
         game.fragen.generateQuestions();
         game.index_frage = 0;
         game.fragen.gameSettings.setCurrency(temp_currency);
+
+        if (autoConfirm.isSelected()){
+            game.fragen.gameSettings.setAutoConfirm(true);
+        }
+        joker_fifty_fifty.setOpacity(1);
+
     }
 
     public void startGame() {
@@ -959,50 +986,89 @@ public class GUI extends SystemController {
             try {
                 loadScene("Fehler_Game.fxml");
             } catch (Exception e2){
-
             }
-
         }
-
-
-
     }
 
-    public void setSoundOnProgress(){
+    public void setSoundOnProgress_Win(){
+        System.out.println("Sound started");
         if (VALUES[game.index_frage] == null){
             return;
         }
         int value = Integer.parseInt(s[game.index_frage]);
         System.out.println(value);
 
-        if (value < 2000){
+        if (value < 4000){
+            wait_idle = 3;
+            wait_win = 5;
             playSound("/de/hebk/Sounds/Win/2000-Win.mp3");
         }
 
         if (value > 4000 && value <= 8000){
+            wait_win = 4;
+            wait_idle = 3;
             playSound("/de/hebk/Sounds/Win/8000-Win.mp3");
         }
 
         if (value > 8000 && value <= 32000){
+            wait_idle = 5;
+            wait_win = 8;
             playSound("/de/hebk/Sounds/Win/32000-Win.mp3");
         }
 
         if (value > 32000 && value <= 250000){
+            wait_idle = 4;
+            wait_win = 6;
             playSound("/de/hebk/Sounds/Win/250000-Win.mp3");
         }
 
         if (value > 250000 && value <= 500000){
+            wait_idle = 4;
+            wait_win = 6;
             playSound("/de/hebk/Sounds/Win/500000-Win.mp3");
         }
 
         if (value > 500000 && value <= 1000000){
+            wait_idle = 10;
+            wait_win = 26;
             playSound("/de/hebk/Sounds/Win/1000000-Win.mp3");
         }
+    }
 
+    public void setSoundOnProgress_Lose(){
+        if (VALUES[game.index_frage] == null){
+            return;
+        }
+        int value = Integer.parseInt(s[game.index_frage]);
+        System.out.println(value);
+
+        if (value < 4000){
+            playSound("/de/hebk/Sounds/Loose/2000-Lose.mp3");
+        }
+
+        if (value > 4000 && value <= 8000){
+            playSound("/de/hebk/Sounds/Loose/8000-Lose.mp3");
+        }
+
+        if (value > 8000 && value <= 32000){
+            playSound("/de/hebk/Sounds/Loose/32000-Lose.mp3");
+        }
+
+        if (value > 32000 && value <= 250000){
+            playSound("/de/hebk/Sounds/Loose/250000-Lose.mp3");
+        }
+
+        if (value > 250000 && value <= 500000){
+            playSound("/de/hebk/Sounds/Loose/500000-Lose.mp3");
+        }
+
+        if (value > 500000 && value <= 1000000){
+            playSound("/de/hebk/Sounds/Loose/1000000-Lose.mp3");
+        }
     }
 
     public void setQuestionAndAnswers() throws Exception{
-        resetButtons();
+        resetObjects();
 
         if (timer != null){
             timer.cancel();
@@ -1051,78 +1117,114 @@ public class GUI extends SystemController {
 
         int x;
         x = (int) (Math.random() * options.size());
-        answer_button1.setText(options.get(x).getContext());
+        answer_text1.setText(options.get(x).getContext());
 
         x = (int) (Math.random() * options.size());
-        answer_button2.setText(options.get(x).getContext());
+        answer_text2.setText(options.get(x).getContext());
 
-        while (answer_button1.getText().equals(answer_button2.getText())){
+        while (answer_text1.getText().equals(answer_text2.getText())){
             x = (int) (Math.random() * options.size());
-            answer_button2.setText(options.get(x).getContext());
+            answer_text2.setText(options.get(x).getContext());
         }
 
         x = (int) (Math.random() * options.size());
-        answer_button3.setText(options.get(x).getContext());
+        answer_text3.setText(options.get(x).getContext());
 
-        while (answer_button1.getText().equals(answer_button2.getText()) || answer_button1.getText().equals(answer_button3.getText()) || answer_button2.getText().equals(answer_button3.getText())){
+        while (answer_text1.getText().equals(answer_text2.getText()) || answer_text1.getText().equals(answer_text3.getText()) || answer_text2.getText().equals(answer_text3.getText())){
             x = (int) (Math.random() * options.size());
-            answer_button3.setText(options.get(x).getContext());
+            answer_text3.setText(options.get(x).getContext());
         }
 
         x = (int) (Math.random() * options.size());
-        answer_button4.setText(options.get(x).getContext());
+        answer_text4.setText(options.get(x).getContext());
 
-        while (answer_button1.getText().equals(answer_button2.getText()) || answer_button1.getText().equals(answer_button3.getText()) || answer_button1.getText().equals(answer_button4.getText()) || answer_button2.getText().equals(answer_button3.getText()) || answer_button2.getText().equals(answer_button4.getText()) || answer_button3.getText().equals(answer_button4.getText())){
+        while (answer_text1.getText().equals(answer_text2.getText()) || answer_text1.getText().equals(answer_text3.getText()) || answer_text1.getText().equals(answer_text4.getText()) || answer_text2.getText().equals(answer_text3.getText()) || answer_text2.getText().equals(answer_text4.getText()) || answer_text3.getText().equals(answer_text4.getText())){
             x = (int) (Math.random() * options.size());
-            answer_button4.setText(options.get(x).getContext());
+            answer_text4.setText(options.get(x).getContext());
         }
 
         if (options.find("Keine von genannten")){
-            String s = answer_button4.getText();
+            String s = answer_text4.getText();
 
             if (s.equals("Keine von genannten")){
                 return;
             }
 
-            if (answer_button1.getText().equals("Keine von genannten")){
-                answer_button1.setText(s);
-                answer_button4.setText("Keine von genannten");
+            if (answer_text1.getText().equals("Keine von genannten")){
+                answer_text1.setText(s);
+                answer_text4.setText("Keine von genannten");
                 return;
             }
 
-            if (answer_button2.getText().equals("Keine von genannten")){
-                answer_button2.setText(s);
-                answer_button4.setText("Keine von genannten");
+            if (answer_text2.getText().equals("Keine von genannten")){
+                answer_text2.setText(s);
+                answer_text4.setText("Keine von genannten");
                 return;
             }
 
-            if (answer_button3.getText().equals("Keine von genannten")){
-                answer_button3.setText(s);
-                answer_button4.setText("Keine von genannten");
+            if (answer_text3.getText().equals("Keine von genannten")){
+                answer_text3.setText(s);
+                answer_text4.setText("Keine von genannten");
             }
         }
         System.out.println("METHOD ENDED");
     }
 
-    public void animateButton(Button b, String t){
+    private void disableObjects() {
+        answer_rectangle1.setDisable(true);
+        answer_rectangle2.setDisable(true);
+        answer_rectangle3.setDisable(true);
+        answer_rectangle4.setDisable(true);
+        answer_text1.setDisable(true);
+        answer_text2.setDisable(true);
+        answer_text3.setDisable(true);
+        answer_text4.setDisable(true);
+        joker_fifty_fifty.setDisable(true);
+    }
+
+    private void resetObjects() {
+        answer_rectangle1.setStyle("");
+        answer_rectangle2.setStyle("");
+        answer_rectangle3.setStyle("");
+        answer_rectangle4.setStyle("");
+        answer_rectangle1.setDisable(false);
+        answer_rectangle2.setDisable(false);
+        answer_rectangle3.setDisable(false);
+        answer_rectangle4.setDisable(false);
+        answer_rectangle1.setOpacity(1);
+        answer_rectangle2.setOpacity(1);
+        answer_rectangle3.setOpacity(1);
+        answer_rectangle4.setOpacity(1);
+        answer_text1.setDisable(false);
+        answer_text2.setDisable(false);
+        answer_text3.setDisable(false);
+        answer_text4.setDisable(false);
+        answer_text1.setOpacity(1);
+        answer_text2.setOpacity(1);
+        answer_text3.setOpacity(1);
+        answer_text4.setOpacity(1);
+        joker_fifty_fifty.setDisable(false);
+    }
+
+    public void animateObjects(Rectangle b, String t){
         if (t.equals("Normal")){
-            b.setStyle("-fx-background-color: rgb(73,82,157)");
+            b.setStyle("-fx-fill: rgb(73,82,157)");
         }
 
         if (t.equals("Trigger")){
-            b.setStyle("-fx-background-color: rgb(255,140,0)");
+            b.setStyle("-fx-fill: rgb(255,140,0)");
         }
 
         if (t.equals("Answer")){
-            b.setStyle("-fx-background-color: rgb(0,255,140)");
+            b.setStyle("-fx-fill: rgb(0,255,140)");
         }
 
         if (t.equals("Wrong")){
-            b.setStyle("-fx-background-color: rgb(255,0,40)");
+            b.setStyle("-fx-fill: rgb(255,0,40)");
         }
     }
 
-    public Button getCorrectAnswerFromButtons(){
+    public Rectangle getCorrectAnswerFromRectangels(){
         String answer = null;
         if (game.fragen.gameSettings.getGameMode().equals("Normal")){
             answer = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(0).getContext();
@@ -1132,25 +1234,83 @@ public class GUI extends SystemController {
             answer = game.fragen.getQuestions().get(game.fragen.gameSettings.getQuestion_Amount() - 1 -  game.index_frage).getContext().getOptions().get(0).getContext();
         }
 
-        Button button = null;
+        Rectangle rectangle = null;
 
-        if (answer_button1.getText().equals(answer)){
-            button = answer_button1;
+        if (answer_text1.getText().equals(answer)){
+            rectangle = answer_rectangle1;
         }
 
-        if (answer_button2.getText().equals(answer)){
-            button = answer_button2;
+        if (answer_text2.getText().equals(answer)){
+            rectangle = answer_rectangle2;
         }
 
-        if (answer_button3.getText().equals(answer)){
-            button = answer_button3;
+        if (answer_text3.getText().equals(answer)){
+            rectangle = answer_rectangle3;
         }
 
-        if (answer_button4.getText().equals(answer)){
-            button = answer_button4;
+        if (answer_text4.getText().equals(answer)){
+            rectangle = answer_rectangle4;
         }
 
-        return button;
+        return rectangle;
+    }
+
+    public Rectangle getRectangleFromTexts(String s){
+        System.out.println(s + " s");
+        Rectangle r = null;
+        System.out.println(answer_text1.getText());
+        System.out.println(s);
+        if (answer_text1.getText().equals(s)){
+            r = answer_rectangle1;
+            return r;
+        }
+
+        if (answer_text2.getText().equals(s)){
+            r = answer_rectangle2;
+            return r;
+        }
+
+        if (answer_text3.getText().equals(s)){
+            r = answer_rectangle3;
+            return r;
+        }
+
+        if (answer_text4.getText().equals(s)){
+            r = answer_rectangle4;
+            return r;
+        }
+        return r;
+    }
+
+    public Text getCorrectAnswerFromTexts(){
+        String answer = null;
+        if (game.fragen.gameSettings.getGameMode().equals("Normal")){
+            answer = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(0).getContext();
+        }
+
+        if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
+            answer = game.fragen.getQuestions().get(game.fragen.gameSettings.getQuestion_Amount() - 1 -  game.index_frage).getContext().getOptions().get(0).getContext();
+        }
+
+        Text text = null;
+
+        if (answer_text1.getText().equals(answer)){
+            text = answer_text1;
+        }
+
+        if (answer_text2.getText().equals(answer)){
+            text = answer_text2;
+        }
+
+        if (answer_text3.getText().equals(answer)){
+            text = answer_text3;
+        }
+
+        if (answer_text4.getText().equals(answer)){
+            text = answer_text4;
+        }
+
+        return text;
     }
 
     public void endGame(){
@@ -1217,20 +1377,6 @@ public class GUI extends SystemController {
         loader_Game_Normal2.setVisible(false);
     }
 
-    public void resetButtons(){
-        animateButton(answer_button1, "Normal");
-        animateButton(answer_button2, "Normal");
-        animateButton(answer_button3, "Normal");
-        animateButton(answer_button4, "Normal");
-        answer_button1.setStyle("");
-        answer_button2.setStyle("");
-        answer_button3.setStyle("");
-        answer_button4.setStyle("");
-        answer_button1.setDisable(false);
-        answer_button2.setDisable(false);
-        answer_button3.setDisable(false);
-        answer_button4.setDisable(false);
-    }
 
     public void resetValues(){
         for (int i = 1; i < VALUES.length; i++){
@@ -1248,12 +1394,16 @@ public class GUI extends SystemController {
         resetValues();
     }
 
-    public void revive(){
+    public void revive() throws Exception {
         hideEndGame();
         local_User.setUsed_Joker_Revive(local_User.getUsed_Joker_Revive() + 1);
         game.fragen.gameSettings.setReward(0);
-        resetButtons();
+        resetObjects();
         game.fragen.gameSettings.getJoker().setRevive(game.fragen.gameSettings.getJoker().isInfJoker() ? true : false);
+        if (timer != null){
+            timer.cancel();
+        }
+        counter();
     }
 
     public void useJoker_fifty_fifty(){
@@ -1261,17 +1411,29 @@ public class GUI extends SystemController {
         String firstOption = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(2).getContext();
         String secondOption = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(3).getContext();
         local_User.setUsed_Joker_FiftyFifty(local_User.getUsed_Joker_FiftyFifty() + 1);
-        if (answer_button1.getText().equals(firstOption) || answer_button1.getText().equals(secondOption)){
-            answer_button1.setDisable(true);
+        if (answer_text1.getText().equals(firstOption) || answer_text1.getText().equals(secondOption)){
+            answer_text1.setOpacity(0.5);
+            answer_rectangle1.setOpacity(0.5);
+            answer_text1.setDisable(true);
+            answer_rectangle1.setDisable(true);
         }
-        if (answer_button2.getText().equals(firstOption) || answer_button2.getText().equals(secondOption)){
-            answer_button2.setDisable(true);
+        if (answer_text2.getText().equals(firstOption) || answer_text2.getText().equals(secondOption)){
+            answer_text2.setOpacity(0.5);
+            answer_rectangle2.setOpacity(0.5);
+            answer_text2.setDisable(true);
+            answer_rectangle2.setDisable(true);
         }
-        if (answer_button3.getText().equals(firstOption) || answer_button3.getText().equals(secondOption)){
-            answer_button3.setDisable(true);
+        if (answer_text3.getText().equals(firstOption) || answer_text3.getText().equals(secondOption)){
+            answer_text3.setOpacity(0.5);
+            answer_rectangle3.setOpacity(0.5);
+            answer_text3.setDisable(true);
+            answer_rectangle3.setDisable(true);
         }
-        if (answer_button4.getText().equals(firstOption) || answer_button4.getText().equals(secondOption)){
-            answer_button4.setDisable(true);
+        if (answer_text4.getText().equals(firstOption) || answer_text4.getText().equals(secondOption)){
+            answer_text4.setOpacity(0.5);
+            answer_rectangle4.setOpacity(0.5);
+            answer_text4.setDisable(true);
+            answer_rectangle4.setDisable(true);
         }
         game.fragen.gameSettings.getJoker().setFifty_fifty(game.fragen.gameSettings.getJoker().isInfJoker() ? true : false);
         if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){
@@ -1296,18 +1458,12 @@ public class GUI extends SystemController {
     }
 
     public void confirm2(){
-        setSoundOnProgress();
+        setSoundOnProgress_Win();
         hide_Confirm_Box();
         result_Box.setVisible(true);
         result_Title.setVisible(true);
         result_Answer.setVisible(true);
-        //if (game.fragen.gameSettings.getGameMode().equals("Normal")){
-        //result_Confirm.setText(s[game.index_frage] + " " + game.fragen.gameSettings.getCurrency());
         result_Confirm.setText("PUNKTE: " + game.fragen.gameSettings.getReward());
-        //}
-        //if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
-        //result_Confirm.setText(s[(game.fragen.gameSettings.getQuestion_Amount() - game.index_frage - (1))] + " " + game.fragen.gameSettings.getCurrency());
-        //}
         result_Confirm.setVisible(true);
         result_Option3_Box.setVisible(true);
         result_Option3.setVisible(true);
@@ -1328,45 +1484,48 @@ public class GUI extends SystemController {
         result_Option3.setVisible(false);
         result_Option4.setVisible(false);
         result_Option4_Box.setVisible(false);
+        resetObjects();
     }
 
     public void continueGame() throws Exception {
-        stopSound();
+        //stopSound();
         hide_Confirm_Box();
-        Button b = getCorrectAnswerFromButtons();
+        Rectangle r = getCorrectAnswerFromRectangels();
         game.index_frage++;
         setQuestionAndAnswers();
-        animateButton(b, "Normal");
-        b.setStyle("");
+        animateObjects(r, "Normal");
+        r.setStyle("");
+        playBackgroundSound();
     }
 
-    public Button animateResult() throws Exception{
-        Button b = getCorrectAnswerFromButtons();
+    public Rectangle animateResult() throws Exception{
+        Rectangle b = getCorrectAnswerFromRectangels();
         timer.cancel();
-        animateButton(b, "Answer");
+        animateObjects(b, "Answer");
         return b;
     }
 
     public void answer() throws Exception {
         hide_Confirm_Box();
-        Button b = animateResult();
-        if (!b.getText().equals(result_Answer.getText())){
-            Button b2 = null;
-            if (answer_button1.getText().equals(result_Answer.getText())){
-                b2 = answer_button1;
+        Text t = getCorrectAnswerFromTexts();
+        Rectangle r = getCorrectAnswerFromRectangels();
+        if (!t.getText().equals(result_Answer.getText())){
+            Rectangle r2 = null;
+            if (answer_text1.getText().equals(result_Answer.getText())){
+                r2 = answer_rectangle1;
             }
-            if (answer_button2.getText().equals(result_Answer.getText())){
-                b2 = answer_button2;
+            if (answer_text2.getText().equals(result_Answer.getText())){
+                r2 = answer_rectangle2;
             }
-            if (answer_button3.getText().equals(result_Answer.getText())){
-                b2 = answer_button3;
+            if (answer_text3.getText().equals(result_Answer.getText())){
+                r2 = answer_rectangle3;
             }
-            if (answer_button4.getText().equals(result_Answer.getText())){
-                b2 = answer_button4;
+            if (answer_text4.getText().equals(result_Answer.getText())){
+                r2 = answer_rectangle4;
             }
             endGame();
-            animateButton(b, "Answer");
-            animateButton(b2, "Wrong");
+            animateObjects(r, "Answer");
+            animateObjects(r2, "Wrong");
             return;
         }
 
@@ -1376,49 +1535,32 @@ public class GUI extends SystemController {
             System.out.println("Reward " + game.fragen.gameSettings.getReward());
             confirm2();
         }
-        b.setStyle("");
+        r.setStyle("");
     }
 
     public void changeGameAutoConfirm(){
         game.fragen.gameSettings.setAutoConfirm(autoConfirm.isSelected());
     }
     public void getAnswer1() throws Exception{
-        answerFunction(answer_button1);
+        answerFunction(answer_text1);
     }
 
     public void getAnswer2() throws Exception{
-        answerFunction(answer_button2);
+        answerFunction(answer_text2);
     }
 
     public void getAnswer3() throws Exception{
-        answerFunction(answer_button3);
+        answerFunction(answer_text3);
     }
 
     public void getAnswer4() throws Exception{
-        answerFunction(answer_button4);
+        answerFunction(answer_text4);
     }
 
-    public void temp(Button b) throws Exception{
-        Button b2 = getCorrectAnswerFromButtons();
-        if (!b.getText().equals(b2.getText())){
-            endGame();
-            animateButton(b2, "Answer");
-            animateButton(b, "Wrong");
-            return;
-        }
-
-        if (super.checkAnswer(game.fragen, questionBox.getText(), b.getText())){
-            game.index_frage++;
-            setQuestionAndAnswers();
-            animateButton(b, "Normal");
-            changeReward();
-        }
-    }
-
-    public boolean answerResult_DisabledAutoAnswer(Button b) throws Exception{
-        Button b2 = getCorrectAnswerFromButtons();
+    public boolean answerResult_DisabledAutoAnswer(Text t) throws Exception{
+        Text t2 = getCorrectAnswerFromTexts();
         boolean v = false;
-        if (!b.getText().equals(b2.getText())){
+        if (!t.getText().equals(t2.getText())){
 
             //endGame();
             //animateButton(b2, "Answer");
@@ -1426,7 +1568,7 @@ public class GUI extends SystemController {
             v = false;
         }
 
-        if (super.checkAnswer(game.fragen, questionBox.getText(), b.getText())){
+        if (super.checkAnswer(game.fragen, questionBox.getText(), t.getText())){
             //game.index_frage++;
             //setQuestionAndAnswers();
             //animateButton(b, "Normal");
@@ -1437,18 +1579,17 @@ public class GUI extends SystemController {
         return v;
     }
 
-
-
-    public void answerFunction(Button b) throws Exception {
+    public void answerFunction(Text t) throws Exception {
+        disableObjects();
         if (!game.fragen.gameSettings.isAutoConfirm()){
-            b.setStyle("");
-            result_Answer.setText(b.getText());
+            t.setStyle("");
+            result_Answer.setText(t.getText());
             confirm();
         } else {
-            counter_answer(b);
-            //answerResult_DisabledAutoAnswer(b);
+            System.out.println("Else answer");
+            counter_answer(t);
         }
-        b.setStyle("");
+        t.setStyle("");
     }
 
     public void changeReward(){
@@ -1459,7 +1600,6 @@ public class GUI extends SystemController {
         if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
             game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(game.fragen.getQuestions().size() - 1 - game.index_frage).getContext().getDifficulty());
         }
-        setSoundOnProgress();
     }
 
 
@@ -1486,9 +1626,7 @@ public class GUI extends SystemController {
 
     public void playSound(String filename){
         try {
-            if (mediaPlayer != null){
-                mediaPlayer.stop();
-            }
+            stopSound();
             String path = getClass().getResource(filename).toURI().toString();
             Media media = new Media(path);
             mediaPlayer = new MediaPlayer(media);
@@ -1496,6 +1634,58 @@ public class GUI extends SystemController {
         } catch (Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
+    }
+
+    public void playBackgroundSound(){
+        if (VALUES[game.index_frage] == null){
+            return;
+        }
+        int value = Integer.parseInt(s[game.index_frage]);
+
+        if (value <= 1000){
+            playSound("/de/hebk/Sounds/Musik/100-1000-Questions.mp3");
+        }
+
+        if (value >= 2000 && value <= 4000){
+            playSound("/de/hebk/Sounds/Musik/2000-Question.mp3");
+        }
+
+        if (value >= 4000 && value <= 8000){
+            playSound("/de/hebk/Sounds/Musik/4000-Question.mp3");
+        }
+
+        if (value >= 8000 && value <= 16000){
+            playSound("/de/hebk/Sounds/Musik/8000-Question.mp3");
+        }
+
+        if (value >= 16000 && value <= 32000){
+            playSound("/de/hebk/Sounds/Musik/16000-Question.mp3");
+        }
+
+        if (value >= 32000 && value <= 64000){
+            playSound("/de/hebk/Sounds/Musik/32000-Question.mp3");
+        }
+
+        if (value >= 64000 && value <= 125000){
+            playSound("/de/hebk/Sounds/Musik/64000-Question.mp3");
+        }
+
+        if (value >= 125000 && value <= 250000){
+            playSound("/de/hebk/Sounds/Musik/125000-Question.mp3");
+        }
+
+        if (value >= 250000 && value <= 500000){
+            playSound("/de/hebk/Sounds/Musik/250000-Question.mp3");
+        }
+
+        if (value >= 500000 && value <= 1000000){
+            playSound("/de/hebk/Sounds/Musik/500000-Question.mp3");
+        }
+
+        if (value >= 1000000){
+            playSound("/de/hebk/Sounds/Musik/1000000-Question.mp3");
+        }
+
     }
 
     public void stopSound(){
@@ -2064,9 +2254,42 @@ public class GUI extends SystemController {
         System.exit(0);
     }
 
+
+    public void handle_BoxColor(MouseEvent event){
+        String s1 = "-fx-fill: " + firstColor;
+        String s2 = "-fx-fill: " + secondColor;
+        if (event.getEventType().getName().equals("MOUSE_ENTERED")){
+            if (event.getSource() == answer_rectangle1 || event.getSource() == answer_text1){
+                answer_rectangle1.setStyle(s2);
+            }
+            if (event.getSource() == answer_rectangle2 || event.getSource() == answer_text2){
+                answer_rectangle2.setStyle(s2);
+            }
+            if (event.getSource() == answer_rectangle3 || event.getSource() == answer_text3){
+                answer_rectangle3.setStyle(s2);
+            }
+            if (event.getSource() == answer_rectangle4 || event.getSource() == answer_text4){
+                answer_rectangle4.setStyle(s2);
+            }
+        }
+
+        if (event.getEventType().getName().equals("MOUSE_EXITED")){
+            if (event.getSource() == answer_rectangle1 || event.getSource() == answer_text1){
+                answer_rectangle1.setStyle(s1);
+            }
+            if (event.getSource() == answer_rectangle2 || event.getSource() == answer_text2){
+                answer_rectangle2.setStyle(s1);
+            }
+            if (event.getSource() == answer_rectangle3 || event.getSource() == answer_text3){
+                answer_rectangle3.setStyle(s1);
+            }
+            if (event.getSource() == answer_rectangle4 || event.getSource() == answer_text4){
+                answer_rectangle4.setStyle(s1);
+            }
+        }
+    }
+
     public void handle_TopMenu(MouseEvent event) throws Exception{
-        System.out.println("HANDLE");
-        System.out.println(event.getSource().toString());
         if (event.getSource() == loader_Top10){
             loader_Top10.setVisible(false);
             setTop10("Normal");
