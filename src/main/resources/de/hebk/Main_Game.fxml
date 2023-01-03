@@ -53,16 +53,6 @@
          </image>
       </ImageView>
       <Line endX="100.0" startX="-100.0" />
-      <Button fx:id="answer_button1" layoutX="66.0" layoutY="938.0" mnemonicParsing="false" onAction="#getAnswer1" prefHeight="82.0" prefWidth="558.0" styleClass="button_answer" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-         <font>
-            <Font name="Sylfaen" size="43.0" />
-         </font>
-      </Button>
-      <Button fx:id="answer_button2" layoutX="666.0" layoutY="938.0" mnemonicParsing="false" onAction="#getAnswer2" prefHeight="82.0" prefWidth="558.0" styleClass="button_answer" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-         <font>
-            <Font name="Sylfaen" size="43.0" />
-         </font>
-      </Button>
       <TextArea fx:id="questionBox" cache="true" editable="false" layoutX="66.0" layoutY="644.0" mouseTransparent="true" prefHeight="234.0" prefWidth="1157.0" wrapText="true">
          <font>
             <Font name="System Bold" size="28.0" />
@@ -82,16 +72,6 @@
             </Lighting>
          </effect>
       </TextArea>
-      <Button fx:id="answer_button3" layoutX="66.0" layoutY="1050.0" mnemonicParsing="false" onAction="#getAnswer3" prefHeight="82.0" prefWidth="558.0" styleClass="button_answer" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-         <font>
-            <Font name="Sylfaen" size="43.0" />
-         </font>
-      </Button>
-      <Button fx:id="answer_button4" layoutX="666.0" layoutY="1050.0" mnemonicParsing="false" onAction="#getAnswer4" prefHeight="82.0" prefWidth="558.0" styleClass="button_answer" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-         <font>
-            <Font name="Sylfaen" size="43.0" />
-         </font>
-      </Button>
       <ImageView fx:id="joker_fifty_fifty" accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="1091.0" layoutY="571.0" onMouseClicked="#useJoker_fifty_fifty" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/speed-limit.png" />
@@ -208,5 +188,29 @@
          </graphic>
       </Button>
       <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" layoutX="541.0" layoutY="101.0" />
+      <Rectangle fx:id="answer_rectangle1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="66.0" layoutY="938.0" onMouseClicked="#getAnswer1" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="558.0" />
+      <Rectangle fx:id="answer_rectangle3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="67.0" layoutY="1051.0" onMouseClicked="#getAnswer3" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="558.0" />
+      <Rectangle fx:id="answer_rectangle2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="666.0" layoutY="938.0" onMouseClicked="#getAnswer2" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="558.0" />
+      <Rectangle fx:id="answer_rectangle4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="667.0" layoutY="1051.0" onMouseClicked="#getAnswer4" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="558.0" />
+      <Text fx:id="answer_text1" fill="WHITE" layoutX="83.0" layoutY="988.0" onMouseClicked="#getAnswer1" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.0">
+         <font>
+            <Font name="Sylfaen" size="43.0" />
+         </font>
+      </Text>
+      <Text fx:id="answer_text2" fill="WHITE" layoutX="683.0" layoutY="988.0" onMouseClicked="#getAnswer2" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.0">
+         <font>
+            <Font name="Sylfaen" size="43.0" />
+         </font>
+      </Text>
+      <Text fx:id="answer_text3" fill="WHITE" layoutX="83.0" layoutY="1101.0" onMouseClicked="#getAnswer3" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.0">
+         <font>
+            <Font name="Sylfaen" size="43.0" />
+         </font>
+      </Text>
+      <Text fx:id="answer_text4" fill="WHITE" layoutX="683.0" layoutY="1100.0" onMouseClicked="#getAnswer4" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.0">
+         <font>
+            <Font name="Sylfaen" size="43.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
