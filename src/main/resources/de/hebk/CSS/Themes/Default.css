@@ -2,6 +2,11 @@
     -fx-background-color: #2F346E;
 }
 
+.main_Panel2{
+    -fx-background-color: linear-gradient(to top, #02021c, #0b0b56);
+}
+
+
 .button{
     -fx-background-color: #575B95;
     -fx-background-radius: 0;
@@ -12,4 +17,190 @@
     -fx-background-color: #575B95;
     -fx-background-radius: 0;
     -fx-text-fill: white;
+}
+
+.button_1{
+    -fx-background-color: #B5B9DD;
+}
+
+.button_2{
+    -fx-background-color: #7C83C2;
+}
+
+.button_3{
+    -fx-background-color: #515AAD;
+}
+
+.button_4{
+    -fx-background-color: #49529d;
+    -fx-text-fill: White;
+}
+
+.button_5{
+    -fx-background-color: rgb(87, 87, 144);
+    -fx-text-fill: white;
+}
+
+
+.rectangle_answer{
+    -fx-fill: #49529d;
+}
+
+.button_lost{
+    -fx-background-color: null;
+    -fx-text-fill: White;
+    -fx-border-color: white;
+    -fx-border-radius: 0;
+    -fx-border-width: 5;
+}
+
+.button_replay{
+    -fx-background-color: null;
+    -fx-text-fill: White;
+    -fx-border-color: white;
+    -fx-border-radius: 0;
+    -fx-border-width: 5;
+}
+
+.button_revive{
+    -fx-background-color: null;
+    -fx-border-color: linear-gradient(to top right, #ffa500, #ffd600);
+    -fx-text-fill: linear-gradient(to top right, #ffa500, #ffd600);
+    -fx-border-radius: 0;
+    -fx-border-width: 5;
+}
+
+.button_lost:hover{
+    -fx-background-color: #383853;
+}
+
+.button_replay:hover{
+    -fx-background-color: #383853;
+}
+
+.button_revive:hover{
+    -fx-background-color: linear-gradient(to top right, #ffa500, #ffd600);
+    -fx-border-color: white;
+    -fx-text-fill: white;
+}
+
+.button_Top10{
+    -fx-background-color: linear-gradient(to top right, #ec008c, #fc6767);
+}
+
+.button_TopAll{
+    -fx-background-color: linear-gradient(to top right, #ffa500, #ffd600);
+}
+
+.rectangle{
+    -fx-fill: #49529d;
+}
+
+.rectangle_2{
+    -fx-fill: #7C83C2;
+}
+
+.rectangle_3{
+    -fx-fill: #2F346E;
+}
+
+.rectangle_4{
+    -fx-fill: #000000;
+}
+
+.rectangle_5{
+    -fx-fill: linear-gradient(to top right, #02021c, #0b0b56);
+    -fx-stroke: linear-gradient(to top right, #0b0b56, #02021c);
+    -fx-stroke-width: 5;
+}
+
+.rectangle_6{
+    -fx-fill: rgba(255,255,255,0.2);
+    -fx-arc-height: 20;
+    -fx-arc-width: 20;
+}
+
+.Text{
+    -fx-background-color: orange;
+}
+
+.Text2{
+    -fx-fill: #868686;
+    -fx-text-fill: #868686;
+}
+
+.Text3{
+    -fx-fill: #ffffff;
+    -fx-text-fill: #ffffff;
+}
+
+.Text4{
+    -fx-fill: linear-gradient(to top right, #5e00ff, #d000ff);
+    -fx-text-fill: linear-gradient(to top right, #5e00ff, #d000ff);
+}
+
+.Text_Top1{
+    -fx-fill: linear-gradient(to top right, #0048ff, #00eaff);
+    -fx-text-fill: linear-gradient(to top right, #0048ff, #00eaff);
+}
+
+.Text_Top2{
+    -fx-fill: linear-gradient(to top right, #ffde00, #fff400);
+    -fx-text-fill: #ffffff;
+}
+
+.Text_Top3{
+    -fx-fill: linear-gradient(to top right, #b7b7b7, #d7d7d7);
+    -fx-text-fill: #ffffff;
+}
+
+.Text_Gespielt{
+    -fx-fill: linear-gradient(to top right, #ff86d0, #FFD6DC);
+}
+
+.Text_Gewonnen{
+    -fx-fill: linear-gradient(to top right, #00ff8c, #8effd5);
+}
+
+.Text_Verloren{
+    -fx-fill: linear-gradient(to top right, #ff005f, #ff8092);
+}
+
+.text-area {
+    -fx-text-fill: rgb(0,0,0);
+}
+
+.text-field1{
+    -fx-background-color: #575B95;
+    -fx-background-radius: 0;
+    -fx-text-fill: white;
+}
+
+.text-field2{
+    -fx-background-color: #575B95;
+    -fx-background-radius: 10;
+    -fx-text-fill: white;
+}
+
+.chart-plot-background{
+    -fx-background-color: transparent;
+    -fx-fill: white;
+}
+
+.default-color1-chart-pie{
+    -fx-pie-color: transparent;
+    -fx-background-color: transparent;
+    -fx-fill: white;
+}
+
+.gamesChart{
+    -fx-tick-label-fill: white;
+}
+
+.jokerChart{
+    -fx-tick-label-fill: white;
+}
+
+.line{
+    -fx-stroke: white;
 }

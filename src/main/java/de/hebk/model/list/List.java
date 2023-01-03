@@ -30,12 +30,13 @@ public class List<T> implements Serializable {
         return first == null;
     }
 
+
     /**
      * Die Anfrage liefert den Wert true, wenn es ein aktuelles Objekt
      * gibt, sonst liefert sie den Wert false.
      * @return
      */
-    public  boolean hasAccess(){
+    public boolean hasAccess(){
         return aktuelleNode != null;
     }
 
@@ -77,12 +78,16 @@ public class List<T> implements Serializable {
         }
     }
 
+    public void moveCurrent(int i){
+        setCurrent(get(i));
+    }
+
 
     public int size(){
         return size;
     }
     public Node<T> get(int index){
-        Node<T> ret = null;
+        Node<T> ret;
         if (index > size){
             ret = null;
         }
@@ -91,9 +96,7 @@ public class List<T> implements Serializable {
         for (int i = 0; i< index; i++){
             temp = temp.getNext();
         }
-
         ret = temp;
-
         return ret;
     }
 
@@ -235,7 +238,19 @@ public class List<T> implements Serializable {
      * bleibt die Liste unverändert
      */
     public void concat(List<T> pList){
-        //TODO fill
+        if (pList == null || pList.isEmpty()){
+            return;
+        }
+
+        if (isEmpty()){
+            first = pList.first;
+        }
+
+        Node<T> temp = first;
+        while(temp.getNext() != null){
+            temp = temp.getNext();
+        }
+        temp.setNext(pList.first);
     }
 
     /**
@@ -257,14 +272,12 @@ public class List<T> implements Serializable {
         }
 
         if (aktuelleNode.getNext() == null){
-            System.out.println(aktuelleNode.getContext() + " removed");
             temp.setNext(null);
             aktuelleNode = null;
             size--;
             return;
         }
 
-        System.out.println(aktuelleNode.getContext() + " removed");
         temp.setNext(aktuelleNode.getNext());
         aktuelleNode = temp;
         size--;

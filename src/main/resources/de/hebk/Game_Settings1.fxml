@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.Double?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+    <children>
+        <Text fill="WHITE" layoutX="586.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spiel Einstellungen">
+            <font>
+                <Font name="Sylfaen" size="84.0" />
+            </font>
+        </Text>
+        <ImageView accessibleRole="BUTTON" fitHeight="92.0" fitWidth="92.0" layoutX="22.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Images/speisekarte.png" />
+            </image>
+        </ImageView>
+        <Button layoutX="760.0" layoutY="1100.0" mnemonicParsing="false" onMouseClicked="#showGame_Settings2" prefHeight="72.0" prefWidth="357.0" styleClass="button_close" text="WEITER" textFill="WHITE">
+            <font>
+                <Font name="Sylfaen" size="40.0" />
+            </font>
+        </Button>
+      <TextField fx:id="topicTitle" layoutX="518.0" layoutY="316.0" prefHeight="50.0" prefWidth="831.0" styleClass="text-field2" text="doku/Fragen/Allgemein.csv">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </TextField>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="77.0" layoutX="805.0" layoutY="397.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="247.0" />
+      <Text fx:id="topicText" layoutX="805.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Allgemein" textAlignment="CENTER" wrappingWidth="247.0">
+         <font>
+            <Font name="System Bold" size="33.0" />
+         </font>
+      </Text>
+      <Polygon fx:id="nextTopicTrigger" fill="WHITE" layoutX="1097.0" layoutY="446.0" onMouseClicked="#nextTopic" rotate="90.0" scaleX="0.6" scaleY="0.6" scaleZ="0.6" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_2">
+        <points>
+          <Double fx:value="-50.0" />
+          <Double fx:value="40.0" />
+          <Double fx:value="50.0" />
+          <Double fx:value="40.0" />
+          <Double fx:value="0.0" />
+          <Double fx:value="-60.0" />
+        </points>
+      </Polygon>
+    </children>
+</AnchorPane>

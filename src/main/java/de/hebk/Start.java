@@ -1,6 +1,5 @@
 package de.hebk;
 
-import de.hebk.model.list.List;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,18 +15,14 @@ public class Start extends Application implements Serializable {
     public void start(Stage stage) throws Exception {
         mainStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("GUI.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1920,1480);
+        Scene scene = new Scene(fxmlLoader.load(), 1920,1280);
         stage.setTitle("GUI.fxml");
         stage.setScene(scene);
         stage.show();
     }
 
 
-    public static void main(String[] args) {
-        Fragen f = new Fragen(16,"Geschichte");
-        f.generateQuestions();
-        List<String> l = new List<>();
+    public static void main(String[] args) throws Exception {
         launch();
-        //s.loadData();
     }
 }

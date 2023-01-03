@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1919.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1919.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
-      <Button layoutX="575.0" layoutY="879.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="714.0" text="ANMELDEN" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="575.0" AnchorPane.rightAnchor="630.0">
+      <Button layoutX="575.0" layoutY="879.0" mnemonicParsing="false" onAction="#showLogIn" prefHeight="115.0" prefWidth="714.0" text="ANMELDEN" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="575.0" AnchorPane.rightAnchor="630.0">
          <font>
             <Font name="Sylfaen" size="61.0" />
          </font>
@@ -25,7 +25,7 @@
          </image>
       </ImageView>
       <Accordion />
-      <Button layoutX="576.0" layoutY="1030.0" mnemonicParsing="false" onAction="#showEinloggen" prefHeight="115.0" prefWidth="714.0" text="EINLOGGEN" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="576.0" AnchorPane.rightAnchor="629.0">
+      <Button layoutX="576.0" layoutY="1030.0" mnemonicParsing="false" onAction="#showRegister" prefHeight="115.0" prefWidth="714.0" text="REGESTRIEREN" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="576.0" AnchorPane.rightAnchor="629.0">
          <font>
             <Font name="Sylfaen" size="61.0" />
          </font>
