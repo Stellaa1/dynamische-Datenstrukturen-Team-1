@@ -12,7 +12,7 @@ public class GameSettings {
     private int incrementValue = 2;
     private int incrementRange = 2;
     private String currency = "€";
-    private boolean autoConfirm;
+    private boolean autoConfirm = false;
 
     public Joker getJoker() {
         return joker;
