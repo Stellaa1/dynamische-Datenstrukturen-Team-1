@@ -20,11 +20,11 @@ public class Fragen {
             List<String> o4 = csvReader.read_List_String("doku/Fragen/" + gameSettings.getCategory() + ".csv",5);
 
 
-            for (int i = 1; i<f.size() + 1; i++){
+            for (int i = 1; i < f.size() + 1; i++){
                 d.get(i).setContext(d.get(i).getContext().replaceAll("\\D+", "1000"));
                 if (Integer.parseInt(d.get(i).getContext()) <= gameSettings.getDifficultyValue() && Integer.parseInt(d.get(i).getContext()) >= gameSettings.getDifficultyRange()){
-                    gameSettings.setIncrementValue(gameSettings.getDifficultyValue() + gameSettings.getIncrementValue());
-                    gameSettings.setIncrementRange(gameSettings.getDifficultyRange() + gameSettings.getIncrementRange());
+                    gameSettings.setDifficultyValue(gameSettings.getDifficultyValue() + gameSettings.getIncrementValue());
+                    gameSettings.setDifficultyRange(gameSettings.getDifficultyRange() + gameSettings.getIncrementRange());
 
                     Question q = new Question();
                     q.setQuestion(f.get(i).getContext().replaceAll("<K>", ","));
