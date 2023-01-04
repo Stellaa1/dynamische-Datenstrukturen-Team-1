@@ -547,7 +547,7 @@ public class GUI extends SystemController {
 
 
     public void showSettings() throws Exception{
-        loadScene("Einstellungen.fxml");
+        loadScene("Settings.fxml");
     }
 
 
@@ -1607,6 +1607,28 @@ public class GUI extends SystemController {
         loadScene("TopPlayersMenu.fxml");
     }
 
+    public void showCheats() throws Exception{
+        loadScene("Cheats.fxml");
+    }
+    public void showDescriptions() throws Exception{
+        loadScene("Descriptions.fxml");
+    }
+
+    public void showDescription_Games() throws Exception{
+        loadScene("Description_Games.fxml");
+    }
+
+    public void showDescription_Cheats() throws Exception{
+        loadScene("Description_Cheats.fxml");
+    }
+
+    public void showDescription_Joker() throws Exception{
+        loadScene("Description_Joker.fxml");
+    }
+
+    public void showDescription_TopPlayers() throws Exception{
+        loadScene("Description_TopPlayers.fxml");
+    }
 
     public void showTop10() throws Exception{
         loadScene("Top10.fxml");
