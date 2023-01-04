@@ -166,6 +166,22 @@
     -fx-fill: linear-gradient(to top right, #ff005f, #ff8092);
 }
 
+.Text_Description_Questionmaker{
+    -fx-fill: #c8c8c8;
+}
+
+.Text_Description_Multiplayer{
+    -fx-fill: #c8c8c8;
+}
+
+.Text_Description_Reverse{
+    -fx-fill: #c8c8c8;
+}
+
+.Text_Description_Normal{
+    -fx-fill: #c8c8c8;
+}
+
 .text-area {
     -fx-text-fill: rgb(0,0,0);
 }
