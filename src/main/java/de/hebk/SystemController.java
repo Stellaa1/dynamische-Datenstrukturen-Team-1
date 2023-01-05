@@ -5,7 +5,6 @@ import de.hebk.model.list.List;
 import de.hebk.model.stack.Stack;
 
 import java.io.*;
-import java.util.Arrays;
 
 public class SystemController extends Texts{
 
@@ -141,24 +140,20 @@ public class SystemController extends Texts{
     }
 
 
-    public Stack<User> calculateTop10(String type){
+    public Stack<User> calculateTopPlayers(String type){
         Stack<User> top10 = new Stack<>();
         int[] points = new int[users.size()];
-
         if (type.equals("Normal")){
             for (int i = 0; i < users.size(); i++){
                 points[i] = users.get(i).getContext().getPoints();
             }
-            System.out.println(Arrays.toString(points));
-
             Sorter s = new Sorter();
             s.countSort(points, points.length);
-            System.out.println(Arrays.toString(points) + " sorted");
-
             for (int i = 0; i < points.length; i++){
                 for (int x = 0; x < users.size(); x++){
-                    if (users.get(x).getContext().getPoints() == points[i] && !top10.find(users.get(x).getContext())){
-                        top10.push(users.get(x).getContext());
+                    User u = users.get(x).getContext();
+                    if (u.getPoints() == points[i] && !top10.find(u)){
+                        top10.push(u);
                         break;
                     }
                 }
@@ -166,17 +161,16 @@ public class SystemController extends Texts{
         }
 
         if (type.equals("Reverse")){
-
             for (int i = 0; i < users.size(); i++){
                 points[i] = users.get(i).getContext().getReversePoints();
             }
             Sorter s = new Sorter();
             s.countSort(points, points.length);
-
             for (int i = 0; i < points.length; i++){
                 for (int x = 0; x < users.size(); x++){
-                    if (users.get(x).getContext().getReversePoints() == points[i] && !top10.find(users.get(x).getContext())){
-                        top10.push(users.get(x).getContext());
+                    User u = users.get(x).getContext();
+                    if (u.getReversePoints() == points[i] && !top10.find(u)){
+                        top10.push(u);
                         break;
                     }
                 }
