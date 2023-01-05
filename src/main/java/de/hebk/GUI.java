@@ -21,14 +21,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -1724,7 +1722,7 @@ public class GUI extends SystemController {
     public void setTop10(String method) throws FileNotFoundException {
         Stack<User> top10 = null;
 
-        top10 = (method.equals("Normal") == true ? calculateTop10("Normal") : calculateTop10("Reverse"));
+*        top10 = (method.equals("Normal") == true ? calculateTopPlayers("Normal") : calculateTopPlayers("Reverse"));
         System.out.println(top10.toString());
 
         int x = 0;
@@ -2014,7 +2012,7 @@ public class GUI extends SystemController {
 
     public void setTopAll(){
         loader_TopAll.setVisible(false);
-        Stack<User> topAll = calculateTop10("Normal");
+        Stack<User> topAll = calculateTopPlayers("Normal");
         ObservableList<User> observableList = FXCollections.observableArrayList();
 
         for (int i = 0; i < topAll.size(); i++){
@@ -2032,7 +2030,7 @@ public class GUI extends SystemController {
 
     public void setTopAll_Reverse(){
         loader_TopAll_Reverse.setVisible(false);
-        Stack<User> topAll_Reverse = calculateTop10("Reverse");
+        Stack<User> topAll_Reverse = calculateTopPlayers("Reverse");
         ObservableList<User> observableList = FXCollections.observableArrayList();
 
         for (int i = 0; i < topAll_Reverse.size(); i++){
@@ -2087,7 +2085,7 @@ public class GUI extends SystemController {
         userInformation_Name.setText("Name: " + local_User.getName());
         userInformation_Password.setText("Passwort: " + local_User.getPassword());
 
-        Stack<User> topAll = calculateTop10("Normal");
+        Stack<User> topAll = calculateTopPlayers("Normal");
         for (int i = 0; i < topAll.size(); i++){
             User current = topAll.get(i).getContext();
             System.out.println(i);
@@ -2096,7 +2094,7 @@ public class GUI extends SystemController {
             }
         }
 
-        Stack<User> topAll_Reverse = calculateTop10("Reverse");
+        Stack<User> topAll_Reverse = calculateTopPlayers("Reverse");
         for (int i = 0; i < topAll_Reverse.size(); i++){
             User current = topAll_Reverse.get(i).getContext();
             if (local_User.getName().equals(current.getName())){
