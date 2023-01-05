@@ -542,6 +542,7 @@ public class GUI extends SystemController {
     }
 
     public void openMenu() throws Exception {
+        stopSound();
         loadScene("Menu.fxml");
     }
 
