@@ -753,7 +753,7 @@ public class GUI extends SystemController {
             Rectangle r = getRectangleFromTexts(t.getText());
             answer_timer_lose = new Timer();
             setSoundOnProgress_Lose();
-            double[] time = {4.00};
+            double[] time = {wait_lose};
             answer_timertask_lose = new TimerTask() {
                 @Override
                 public void run() {
@@ -1000,12 +1000,12 @@ public class GUI extends SystemController {
         if (value < 4000){
             wait_idle = 3;
             wait_win = 5;
+            wait_lose = 4;
             playSound("/de/hebk/Sounds/Win/2000-Win.mp3");
         }
 
         if (value > 4000 && value <= 8000){
             wait_win = 4;
-            wait_idle = 3;
             playSound("/de/hebk/Sounds/Win/8000-Win.mp3");
         }
 
@@ -1023,13 +1023,14 @@ public class GUI extends SystemController {
 
         if (value > 250000 && value <= 500000){
             wait_idle = 4;
-            wait_win = 6;
+            wait_lose = 5;
             playSound("/de/hebk/Sounds/Win/500000-Win.mp3");
         }
 
         if (value > 500000 && value <= 1000000){
             wait_idle = 10;
             wait_win = 26;
+            wait_lose = 7;
             playSound("/de/hebk/Sounds/Win/1000000-Win.mp3");
         }
     }
