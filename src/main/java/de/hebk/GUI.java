@@ -540,6 +540,7 @@ public class GUI extends SystemController {
     }
 
     public void openMenu() throws Exception {
+        super.saveData();
         stopSound();
         loadScene("Menu.fxml");
     }
@@ -669,6 +670,7 @@ public class GUI extends SystemController {
                 }
             };
             timer.schedule(timertask, 0, 1000);
+            super.saveData();
         } catch (Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
@@ -1392,6 +1394,7 @@ public class GUI extends SystemController {
         setGame();
         setQuestionAndAnswers();
         resetValues();
+        super.saveData();
     }
 
     public void revive() throws Exception {
@@ -1408,8 +1411,16 @@ public class GUI extends SystemController {
 
     public void useJoker_fifty_fifty(){
         if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){return;}
-        String firstOption = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(2).getContext();
-        String secondOption = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(3).getContext();
+        String firstOption;
+        String secondOption;
+        if (game.fragen.gameSettings.getGameMode().equals("Normal")){
+            firstOption = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(2).getContext();
+            secondOption = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(3).getContext();
+        } else{
+            firstOption = game.fragen.getQuestions().get(game.fragen.gameSettings.getQuestion_Amount() - 1 - game.index_frage).getContext().getOptions().get(2).getContext();
+            secondOption = game.fragen.getQuestions().get(game.fragen.gameSettings.getQuestion_Amount() - 1 - game.index_frage).getContext().getOptions().get(3).getContext();
+        }
+
         local_User.setUsed_Joker_FiftyFifty(local_User.getUsed_Joker_FiftyFifty() + 1);
         if (answer_text1.getText().equals(firstOption) || answer_text1.getText().equals(secondOption)){
             answer_text1.setOpacity(0.5);
@@ -1484,7 +1495,7 @@ public class GUI extends SystemController {
         result_Option3.setVisible(false);
         result_Option4.setVisible(false);
         result_Option4_Box.setVisible(false);
-        resetObjects();
+        //resetObjects();
     }
 
     public void continueGame() throws Exception {
@@ -1580,13 +1591,14 @@ public class GUI extends SystemController {
     }
 
     public void answerFunction(Text t) throws Exception {
-        disableObjects();
+        //disableObjects();
         if (!game.fragen.gameSettings.isAutoConfirm()){
             t.setStyle("");
             result_Answer.setText(t.getText());
             confirm();
         } else {
             System.out.println("Else answer");
+            disableObjects();
             counter_answer(t);
         }
         t.setStyle("");
@@ -2089,9 +2101,12 @@ public class GUI extends SystemController {
         Stack<User> topAll = calculateTopPlayers("Normal");
         for (int i = 0; i < topAll.size(); i++){
             User current = topAll.get(i).getContext();
-            System.out.println(i);
             if (local_User.getName().equals(current.getName())){
                 userRank_Normal.setText("NORMAL: " + (i + 1));
+                break;
+            }
+            else {
+                userRank_Normal.setText("NORMAL: " + topAll.size());
             }
         }
 
@@ -2100,6 +2115,9 @@ public class GUI extends SystemController {
             User current = topAll_Reverse.get(i).getContext();
             if (local_User.getName().equals(current.getName())){
                 userRank_Reverse.setText("REVERSE: " + (i + 1));
+                break;
+            } else {
+                userRank_Reverse.setText("REVERSE: " + topAll_Reverse.size());
             }
         }
 
@@ -2108,12 +2126,13 @@ public class GUI extends SystemController {
         user_Achievements.setText(local_User.getAchievements().size() + "/24");
         user_favoriteSubject.setText(getFavorite_Subject_local_user());
 
-
         setUser_GameResults_Chart();
         setUser_Achievements_Chart();
         setUser_Joker_Chart();
         if (local_User.getPlayed() > 0){
             percentageOfWin.setText(local_User.getWon() * 100 / local_User.getPlayed() + "%");
+        } else{
+            percentageOfWin.setText("/");
         }
     }
 
@@ -2124,9 +2143,6 @@ public class GUI extends SystemController {
 
         if (user_GameResults_Chart_switch.getText().equals("Normal")) {
             loader_User_Statistics.setVisible(false);
-            local_User.setPlayed(142);
-            local_User.setWon(42);
-            local_User.setLost(100);
 
             for (int i = 0; i < 42; i++) {
                 local_User.getAchievements().append(i + "");
@@ -2180,9 +2196,6 @@ public class GUI extends SystemController {
             user_GameResults_Chart_switch.setText("Reverse");
         } else {
             loader_User_Statistics.setVisible(false);
-            local_User.setPlayed_Reverse(13);
-            local_User.setWon_Reverse(4);
-            local_User.setLost_Reverse(9);
 
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
             series.getData().add(new XYChart.Data<>("0", local_User.getPlayed_Reverse() / 8));
@@ -2231,7 +2244,6 @@ public class GUI extends SystemController {
             series3.getNode().setStyle("-fx-stroke: #ff8092");
             user_GameResults_Chart_switch.setText("Normal");
         }
-
     }
 
     public void setUser_Achievements_Chart(){
@@ -2244,10 +2256,6 @@ public class GUI extends SystemController {
 
     public void setUser_Joker_Chart(){
         loader_User_Statistics.setVisible(false);
-        local_User.setUsed_Joker_Audience(4);
-        local_User.setUsed_Joker_FiftyFifty(6);
-        local_User.setUsed_Joker_Revive(7);
-        local_User.setUsed_Joker_Call(3);
 
         XYChart.Series<String, Integer> series = new XYChart.Series();
         series.getData().add(new XYChart.Data<>("", local_User.getUsed_Joker_Audience()));
