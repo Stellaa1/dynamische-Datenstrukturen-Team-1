@@ -156,6 +156,11 @@
             </ImageView>
          </graphic>
       </Button>
+      <Button graphicTextGap="10.0" layoutX="68.0" layoutY="1039.0" mnemonicParsing="false" onAction="#showPreviousScene" prefHeight="70.0" prefWidth="338.0" styleClass="button_close" text="ZURÜCK">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="420.0" layoutX="482.0" layoutY="363.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="667.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="420.0" layoutX="1180.0" layoutY="363.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="667.0" />
       <LineChart fx:id="user_GameResults_Chart" horizontalGridLinesVisible="false" layoutX="501.0" layoutY="373.0" prefWidth="500.0">
