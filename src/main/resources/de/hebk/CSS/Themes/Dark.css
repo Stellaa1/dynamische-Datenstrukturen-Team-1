@@ -29,3 +29,19 @@
     -fx-background-radius: 20;
     -fx-text-fill: black;
 }
+
+.Text_Description_Questionmaker{
+    -fx-fill: linear-gradient(to top, #ffb700, #11ff00);
+}
+
+.Text_Description_Multiplayer{
+    -fx-fill: linear-gradient(to top, #11ff00, #00ffc4);
+}
+
+.Text_Description_Reverse{
+    -fx-fill: linear-gradient(to top, #00ffc4, #00c4ff);
+}
+
+.Text_Description_Normal{
+    -fx-fill: linear-gradient(to top, #0022ff, #ff00ae);
+}

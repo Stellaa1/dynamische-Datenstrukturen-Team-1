@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+   <children>
+      <ImageView fitHeight="95.0" fitWidth="99.0" layoutX="628.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/unterlagen.png" />
+         </image>
+      </ImageView>
+      <ImageView accessibleRole="BUTTON" fitHeight="92.0" fitWidth="92.0" layoutX="32.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/speisekarte.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="979.0" fitWidth="979.0" layoutX="1081.0" layoutY="65.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" rotate="21.0">
+         <image>
+            <Image url="@Images/top-10.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="744.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="TOP SPIELER">
+         <font>
+            <Font name="Sylfaen" size="84.0" />
+         </font>
+      </Text>
+      <Button layoutX="1531.0" layoutY="1131.0" mnemonicParsing="false" onAction="#showPreviousScene" prefHeight="72.0" prefWidth="357.0" styleClass="button_close" text="ZURÜCK" textFill="WHITE">
+         <font>
+            <Font name="Sylfaen" size="40.0" />
+         </font>
+      </Button>
+      <Text fill="WHITE" layoutX="262.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Description_Normal" text="Wenn man auf dem Top Spieler draufdrückt, werden zwei Menüs angezeigt, das erste zeigt die Top 10 Spieler und das zweite alle Spieler mit dessen Platz, Spielername, Profilbild und Punkten gezeigt und gespeichert. Die Spieler haben immer die Möglichkeit, sich den Top Spieler anzugucken, z.B. wer auf dem ersten Platz ist und wie viele Punkte man kriegen muss, um ihm zu besiegen." textAlignment="CENTER" wrappingWidth="1396.7420272827148">
+         <font>
+            <Font name="Sylfaen" size="64.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
