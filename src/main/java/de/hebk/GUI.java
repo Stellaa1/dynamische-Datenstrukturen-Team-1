@@ -1722,7 +1722,7 @@ public class GUI extends SystemController {
     public void setTop10(String method) throws FileNotFoundException {
         Stack<User> top10 = null;
 
-*        top10 = (method.equals("Normal") == true ? calculateTopPlayers("Normal") : calculateTopPlayers("Reverse"));
+        top10 = (method.equals("Normal") == true ? calculateTopPlayers("Normal") : calculateTopPlayers("Reverse"));
         System.out.println(top10.toString());
 
         int x = 0;
