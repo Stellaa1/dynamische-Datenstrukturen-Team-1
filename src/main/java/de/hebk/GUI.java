@@ -13,6 +13,8 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -119,6 +121,14 @@ public class GUI extends SystemController {
     private ImageView profileImage19;
     @FXML
     private ImageView profileImage20;
+    @FXML
+    private ImageView profileImage21;
+    @FXML
+    private ImageView profileImage22;
+    @FXML
+    private ImageView profileImage23;
+    @FXML
+    private ImageView profileImage24;
     @FXML
     private ImageView questionImage;
     @FXML
@@ -394,6 +404,10 @@ public class GUI extends SystemController {
     @FXML
     private ImageView joker_fifty_fifty;
     @FXML
+    private ImageView joker_audience;
+    @FXML
+    private ImageView joker_call;
+    @FXML
     private Text user_userName;
     @FXML
     private Text user_joinedDate;
@@ -419,6 +433,14 @@ public class GUI extends SystemController {
     private Text user_GameResults_Chart_WonText;
     @FXML
     private Text user_GameResults_Chart_LostText;
+    @FXML
+    private Rectangle audienceJoker_Background;
+    @FXML
+    private BarChart<String, Integer> audienceJoker_Chart;
+    @FXML
+    private ImageView result_audienceJoker_Box;
+    @FXML
+    private Text result_audienceJoker_Option;
 
     @FXML
     private Text user_GameResults_Chart_PlayedText_Reverse;
@@ -550,6 +572,9 @@ public class GUI extends SystemController {
         loadScene("Settings.fxml");
     }
 
+    public void showMultiplayer() throws Exception{
+        loadScene("MultiplayerOderQuestionmaker.fxml");
+    }
 
     public void createUser() throws Exception {
 
@@ -895,6 +920,9 @@ public class GUI extends SystemController {
         game.index_frage = 0;
         game.fragen.gameSettings.setCurrency(temp_currency);
 
+        stopSound();
+        playSound("/de/hebk/Sounds/Musik/100-1000-Questions.mp3");
+
         if (autoConfirm.isSelected()){
             game.fragen.gameSettings.setAutoConfirm(true);
         }
@@ -904,7 +932,6 @@ public class GUI extends SystemController {
 
     public void startGame() {
         loader_Game_Normal.setVisible(false);
-        playSound("/de/hebk/Sounds/Musik/100-1000-Questions.mp3");
 
         try {
             setGame();
@@ -1450,6 +1477,92 @@ public class GUI extends SystemController {
         if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){
             joker_fifty_fifty.setOpacity(0.5);
         }
+    }
+
+    public void hideAudienceChart(){
+        changeVisibility_audienceJoker(false);
+    }
+
+    public void useJoker_Audience(){
+        audienceJoker_Chart.getData().clear();
+        audienceJoker_Chart.layout();
+        changeVisibility_audienceJoker(true);
+        int startValue = 100 - game.fragen.getQuestions().get(game.index_frage).getContext().getDifficulty();
+        if (startValue > 20){
+            startValue = 20;
+        }
+        int remaining = 100 - startValue;
+        int c1 = 0;
+        int c2 = 0;
+        int c3 = 0;
+        int c4 = 0;
+        if (answer_text1.getText().equals(game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(0).getContext())){
+            c1 = startValue;
+        }
+
+        if (answer_text2.getText().equals(game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(0).getContext())){
+            c2 = startValue;
+        }
+
+        if (answer_text3.getText().equals(game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(0).getContext())){
+            c3 = startValue;
+        }
+
+        if (answer_text4.getText().equals(game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(0).getContext())){
+            c4 = startValue;
+        }
+
+        while (remaining > 0){
+            int x = (int) (Math.random() * 4);
+
+            if (x == 0){
+                c1++;
+                remaining--;
+            }
+            if (x == 1){
+                c2++;
+                remaining--;
+            }
+            if (x == 2){
+                c3++;
+                remaining--;
+            }
+            if (x == 3){
+                c4++;
+                remaining--;
+            }
+        }
+        XYChart.Series<String, Integer> series = new XYChart.Series();
+        series.getData().add(new XYChart.Data<>("", c1));
+        series.setName("1");
+
+        XYChart.Series<String, Integer> series2 = new XYChart.Series();
+        series2.getData().add(new XYChart.Data<>("", c2));
+        series2.setName("2");
+
+        XYChart.Series<String, Integer> series3 = new XYChart.Series();
+        series3.getData().add(new XYChart.Data<>("", c3));
+        series3.setName("3");
+
+        XYChart.Series<String, Integer> series4 = new XYChart.Series();
+        series4.getData().add(new XYChart.Data<>("", c4));
+        series4.setName("4");
+
+        audienceJoker_Chart.getData().addAll(series);
+        audienceJoker_Chart.getData().addAll(series2);
+        audienceJoker_Chart.getData().addAll(series3);
+        audienceJoker_Chart.getData().addAll(series4);
+        if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){
+            joker_fifty_fifty.setOpacity(0.5);
+        }
+    }
+
+
+    public void changeVisibility_audienceJoker(boolean v){
+        audienceJoker_Background.setVisible(v);
+        audienceJoker_Chart.setVisible(v);
+        result_audienceJoker_Box.setVisible(v);
+        result_audienceJoker_Option.setVisible(v);
     }
 
     public void confirm(){
@@ -2434,10 +2547,26 @@ public class GUI extends SystemController {
         }
 
         if (event.getSource() == profileImage19){
-            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/GG.PNG";
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/19.PNG";
         }
 
         if (event.getSource() == profileImage20){
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/20.PNG";
+        }
+
+        if (event.getSource() == profileImage21){
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/21.PNG";
+        }
+
+        if (event.getSource() == profileImage22){
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/22.PNG";
+        }
+
+        if (event.getSource() == profileImage23){
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/GG.PNG";
+        }
+
+        if (event.getSource() == profileImage24){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/Unbenannt.PNG";
         }
 
