@@ -30,32 +30,32 @@
             <Font name="Sylfaen" size="40.0" />
          </font>
       </Button>
-      <CheckBox layoutX="718.0" layoutY="276.0" mnemonicParsing="false" styleClass="Text3" text="UNENDLICH JOKER">
+      <CheckBox fx:id="cheat1" layoutX="718.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#handle_cheats" styleClass="Text3" text="UNENDLICH JOKER">
          <font>
             <Font size="47.0" />
          </font>
       </CheckBox>
-      <CheckBox layoutX="718.0" layoutY="376.0" mnemonicParsing="false" styleClass="Text3" text="UNENDLICHE ZEIT">
+      <CheckBox fx:id="cheat2" layoutX="718.0" layoutY="376.0" mnemonicParsing="false" onMouseClicked="#handle_cheats" styleClass="Text3" text="UNENDLICHE ZEIT">
          <font>
             <Font size="47.0" />
          </font>
       </CheckBox>
-      <CheckBox layoutX="718.0" layoutY="476.0" mnemonicParsing="false" styleClass="Text3" text="UNENDLICH LEBEN">
+      <CheckBox fx:id="cheat3" layoutX="718.0" layoutY="476.0" mnemonicParsing="false" onMouseClicked="#handle_cheats" styleClass="Text3" text="UNENDLICH LEBEN">
          <font>
             <Font size="47.0" />
          </font>
       </CheckBox>
-      <CheckBox layoutX="718.0" layoutY="576.0" mnemonicParsing="false" styleClass="Text3" text="IMMER 50/50 JOKER">
+      <CheckBox fx:id="cheat4" layoutX="718.0" layoutY="576.0" mnemonicParsing="false" onMouseClicked="#handle_cheats" styleClass="Text3" text="IMMER 50/50 JOKER">
          <font>
             <Font size="47.0" />
          </font>
       </CheckBox>
-      <CheckBox layoutX="718.0" layoutY="676.0" mnemonicParsing="false" styleClass="Text3" text="IMMER TELEFON JOKER">
+      <CheckBox fx:id="cheat5" layoutX="718.0" layoutY="676.0" mnemonicParsing="false" onMouseClicked="#handle_cheats" styleClass="Text3" text="IMMER TELEFON JOKER">
          <font>
             <Font size="47.0" />
          </font>
       </CheckBox>
-      <CheckBox layoutX="718.0" layoutY="776.0" mnemonicParsing="false" styleClass="Text3" text="IMMER PUBLIKUM JOKER">
+      <CheckBox fx:id="cheat6" layoutX="718.0" layoutY="776.0" mnemonicParsing="false" onMouseClicked="#handle_cheats" styleClass="Text3" text="IMMER PUBLIKUM JOKER">
          <font>
             <Font size="47.0" />
          </font>

@@ -59,7 +59,12 @@ public class GUI extends SystemController {
     private static int temp_incrementValue;
     private static int temp_incrementRange;
     private static String temp_currency;
-
+    private static boolean temp_cheats_infJoker = false;
+    private static boolean temp_cheats_infTime = false;
+    private static boolean temp_cheats_infLife = false;
+    private static boolean temp_cheats_alwaysFiftyFifty = false;
+    private static boolean temp_cheats_alwaysAudience = false;
+    private static boolean temp_cheats_alwaysCall = false;
     MediaPlayer mediaPlayer;
     @FXML
     private Button button;
@@ -460,6 +465,19 @@ public class GUI extends SystemController {
     private Text percentageOfWin;
     @FXML
     private ImageView user_Profilepicture;
+
+    @FXML
+    private CheckBox cheat1;
+    @FXML
+    private CheckBox cheat2;
+    @FXML
+    private CheckBox cheat3;
+    @FXML
+    private CheckBox cheat4;
+    @FXML
+    private CheckBox cheat5;
+    @FXML
+    private CheckBox cheat6;
     private String[] s = values1;
     private String firstColor = "#49529d";
     private String secondColor = "#ff8c00";
@@ -757,7 +775,6 @@ public class GUI extends SystemController {
                         }
                     }
                     if (time[0] < 0){
-                        System.out.println("End");
                         answer_timer_win.cancel();
                         try {
                             game.index_frage++;
@@ -795,10 +812,21 @@ public class GUI extends SystemController {
                     }
                     if (time[0] < 0){
                         answer_timer_lose.cancel();
-                        endGame();
-                        Rectangle r2 = getCorrectAnswerFromRectangels();
-                        animateObjects(r2, "Answer");
-                        animateObjects(r, "Wrong");
+                        if (!game.fragen.gameSettings.getCheats().isInfLife()){
+                            endGame();
+                            Rectangle r2 = getCorrectAnswerFromRectangels();
+                            animateObjects(r2, "Answer");
+                            animateObjects(r, "Wrong");
+                        } else{
+                            try {
+                                game.index_frage++;
+                                setQuestionAndAnswers();
+                                animateObjects(r, "Normal");
+                                changeReward();
+                                playBackgroundSound();
+                            } catch (Exception e){
+                            }
+                        }
                     }
                 }
             };
@@ -909,12 +937,18 @@ public class GUI extends SystemController {
         game.fragen.gameSettings.setIncrementValue(temp_incrementValue);
         game.fragen.gameSettings.setIncrementRange(temp_incrementRange);
 
-        game.fragen.gameSettings.getJoker().setInfJoker(false);
         game.fragen.gameSettings.getJoker().setRevive(true);
         game.fragen.gameSettings.getJoker().setAudience(true);
         game.fragen.gameSettings.getJoker().setFifty_fifty(true);
         game.fragen.gameSettings.getJoker().setCall(true);
         restartJokerImages();
+
+        game.fragen.gameSettings.getCheats().setInfJoker(temp_cheats_infJoker);
+        game.fragen.gameSettings.getCheats().setInfTime(temp_cheats_infTime);
+        game.fragen.gameSettings.getCheats().setInfLife(temp_cheats_infLife);
+        game.fragen.gameSettings.getCheats().setAlwaysFiftyFifty(temp_cheats_alwaysFiftyFifty);
+        game.fragen.gameSettings.getCheats().setAlwaysCall(temp_cheats_alwaysCall);
+        game.fragen.gameSettings.getCheats().setAlwaysAudiece(temp_cheats_alwaysAudience);
 
         game.fragen.generateQuestions();
         game.index_frage = 0;
@@ -1118,7 +1152,11 @@ public class GUI extends SystemController {
             return;
         }
 
-        counter();
+        if (!game.fragen.gameSettings.getCheats().isInfTime()){
+            counter();
+        }
+
+
         if (game.index_frage != 0){
             VALUES[game.index_frage - 1].setStyle("-fx-fill: white");
         }
@@ -1129,20 +1167,10 @@ public class GUI extends SystemController {
 
         List<String> options = null;
 
-        if (game.fragen.gameSettings.getGameMode().equals("Normal")){
-            options = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions();
-            questionBox.setText(game.fragen.getQuestions().get(game.index_frage).getContext().getQuestion());
-        }
+        int current = getCurrentQuestion();
+        options = game.fragen.getQuestions().get(current).getContext().getOptions();
+        questionBox.setText(game.fragen.getQuestions().get(current).getContext().getQuestion());
 
-        if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
-            options = game.fragen.getQuestions().get(game.fragen.gameSettings.getQuestion_Amount() - 1 - game.index_frage).getContext().getOptions();
-            questionBox.setText(game.fragen.getQuestions().get(game.fragen.gameSettings.getQuestion_Amount() - 1 - game.index_frage).getContext().getQuestion());
-        }
-
-
-        for (int i = 0; i < game.fragen.gameSettings.getQuestion_Amount(); i++){
-            System.out.println(game.fragen.getQuestions().get(i).getContext().getOptions().toString());
-        }
 
         int x;
         x = (int) (Math.random() * options.size());
@@ -1196,7 +1224,14 @@ public class GUI extends SystemController {
                 answer_text4.setText("Keine von genannten");
             }
         }
-        System.out.println("METHOD ENDED");
+        if (game.fragen.gameSettings.getCheats().isAlwaysFiftyFifty()){
+            useJoker_fifty_fifty();
+        }
+        if (game.fragen.gameSettings.getCheats().isAlwaysAudiece()){
+            audienceJoker_Chart.getData().clear();
+            audienceJoker_Chart.layout();
+            useJoker_Audience();
+        }
     }
 
     private void disableObjects() {
@@ -1212,6 +1247,8 @@ public class GUI extends SystemController {
     }
 
     private void resetObjects() {
+        hide_Confirm_Box();
+        changeVisibility_audienceJoker(false);
         answer_rectangle1.setStyle("");
         answer_rectangle2.setStyle("");
         answer_rectangle3.setStyle("");
@@ -1346,6 +1383,9 @@ public class GUI extends SystemController {
         if (result_Box.isVisible()){
             hide_Confirm_Box();
         }
+        if (audienceJoker_Background.isVisible()){
+            changeVisibility_audienceJoker(false);
+        }
         if (game.fragen.gameSettings.getGameMode().equals("Normal")){
             local_User.setPoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
             local_User.setPlayed(local_User.getPlayed() + 1);
@@ -1424,12 +1464,24 @@ public class GUI extends SystemController {
         super.saveData();
     }
 
+    public int getCurrentQuestion(){
+        int index = 0;
+        if (game.fragen.gameSettings.getGameMode().equals("Normal")){
+            index = game.index_frage;
+        }
+
+        if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
+            index = game.fragen.gameSettings.getQuestion_Amount() - 1 - game.index_frage;
+        }
+        return index;
+    }
+
     public void revive() throws Exception {
         hideEndGame();
         local_User.setUsed_Joker_Revive(local_User.getUsed_Joker_Revive() + 1);
         game.fragen.gameSettings.setReward(0);
         resetObjects();
-        game.fragen.gameSettings.getJoker().setRevive(game.fragen.gameSettings.getJoker().isInfJoker() ? true : false);
+        game.fragen.gameSettings.getJoker().setRevive(game.fragen.gameSettings.getCheats().isInfJoker() ? true : false);
         if (timer != null){
             timer.cancel();
         }
@@ -1438,16 +1490,12 @@ public class GUI extends SystemController {
 
     public void useJoker_fifty_fifty(){
         if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){return;}
+        System.out.println("+++");
         String firstOption;
         String secondOption;
-        if (game.fragen.gameSettings.getGameMode().equals("Normal")){
-            firstOption = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(2).getContext();
-            secondOption = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(3).getContext();
-        } else{
-            firstOption = game.fragen.getQuestions().get(game.fragen.gameSettings.getQuestion_Amount() - 1 - game.index_frage).getContext().getOptions().get(2).getContext();
-            secondOption = game.fragen.getQuestions().get(game.fragen.gameSettings.getQuestion_Amount() - 1 - game.index_frage).getContext().getOptions().get(3).getContext();
-        }
-
+        int current = getCurrentQuestion();
+        firstOption = game.fragen.getQuestions().get(current).getContext().getOptions().get(2).getContext();
+        secondOption = game.fragen.getQuestions().get(current).getContext().getOptions().get(3).getContext();
         local_User.setUsed_Joker_FiftyFifty(local_User.getUsed_Joker_FiftyFifty() + 1);
         if (answer_text1.getText().equals(firstOption) || answer_text1.getText().equals(secondOption)){
             answer_text1.setOpacity(0.5);
@@ -1473,7 +1521,7 @@ public class GUI extends SystemController {
             answer_text4.setDisable(true);
             answer_rectangle4.setDisable(true);
         }
-        game.fragen.gameSettings.getJoker().setFifty_fifty(game.fragen.gameSettings.getJoker().isInfJoker() ? true : false);
+        game.fragen.gameSettings.getJoker().setFifty_fifty(game.fragen.gameSettings.getCheats().isInfJoker() ? true : false);
         if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){
             joker_fifty_fifty.setOpacity(0.5);
         }
@@ -1484,10 +1532,12 @@ public class GUI extends SystemController {
     }
 
     public void useJoker_Audience(){
-        audienceJoker_Chart.getData().clear();
-        audienceJoker_Chart.layout();
+        if (!game.fragen.gameSettings.getJoker().isAudience()){return;}
+        //audienceJoker_Chart.getData().clear();
+        //audienceJoker_Chart.layout();
         changeVisibility_audienceJoker(true);
-        int startValue = 100 - game.fragen.getQuestions().get(game.index_frage).getContext().getDifficulty();
+        int current = getCurrentQuestion();
+        int startValue = 100 - game.fragen.getQuestions().get(current).getContext().getDifficulty();
         if (startValue > 20){
             startValue = 20;
         }
@@ -1496,19 +1546,19 @@ public class GUI extends SystemController {
         int c2 = 0;
         int c3 = 0;
         int c4 = 0;
-        if (answer_text1.getText().equals(game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(0).getContext())){
+        if (answer_text1.getText().equals(game.fragen.getQuestions().get(current).getContext().getOptions().get(0).getContext())){
             c1 = startValue;
         }
 
-        if (answer_text2.getText().equals(game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(0).getContext())){
+        if (answer_text2.getText().equals(game.fragen.getQuestions().get(current).getContext().getOptions().get(0).getContext())){
             c2 = startValue;
         }
 
-        if (answer_text3.getText().equals(game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(0).getContext())){
+        if (answer_text3.getText().equals(game.fragen.getQuestions().get(current).getContext().getOptions().get(0).getContext())){
             c3 = startValue;
         }
 
-        if (answer_text4.getText().equals(game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(0).getContext())){
+        if (answer_text4.getText().equals(game.fragen.getQuestions().get(current).getContext().getOptions().get(0).getContext())){
             c4 = startValue;
         }
 
@@ -1552,8 +1602,10 @@ public class GUI extends SystemController {
         audienceJoker_Chart.getData().addAll(series2);
         audienceJoker_Chart.getData().addAll(series3);
         audienceJoker_Chart.getData().addAll(series4);
-        if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){
-            joker_fifty_fifty.setOpacity(0.5);
+
+        game.fragen.gameSettings.getJoker().setAudience(game.fragen.gameSettings.getCheats().isInfJoker() ? true : false);
+        if (!game.fragen.gameSettings.getJoker().isAudience()){
+            joker_audience.setOpacity(0.5);
         }
     }
 
@@ -1647,16 +1699,18 @@ public class GUI extends SystemController {
             if (answer_text4.getText().equals(result_Answer.getText())){
                 r2 = answer_rectangle4;
             }
-            endGame();
-            animateObjects(r, "Answer");
-            animateObjects(r2, "Wrong");
-            return;
+            if (!game.fragen.gameSettings.getCheats().isInfLife()){
+                endGame();
+                animateObjects(r, "Answer");
+                animateObjects(r2, "Wrong");
+                return;
+            } else{
+                continueGame();
+            }
         }
 
         if (super.checkAnswer(game.fragen, questionBox.getText(), result_Answer.getText())){
-            System.out.println("Reward " + game.fragen.gameSettings.getReward());
             changeReward();
-            System.out.println("Reward " + game.fragen.gameSettings.getReward());
             confirm2();
         }
         r.setStyle("");
@@ -1685,21 +1739,11 @@ public class GUI extends SystemController {
         Text t2 = getCorrectAnswerFromTexts();
         boolean v = false;
         if (!t.getText().equals(t2.getText())){
-
-            //endGame();
-            //animateButton(b2, "Answer");
-            //animateButton(b, "Wrong");
             v = false;
         }
-
         if (super.checkAnswer(game.fragen, questionBox.getText(), t.getText())){
-            //game.index_frage++;
-            //setQuestionAndAnswers();
-            //animateButton(b, "Normal");
-            //changeReward();
             v = true;
         }
-
         return v;
     }
 
@@ -1718,13 +1762,8 @@ public class GUI extends SystemController {
     }
 
     public void changeReward(){
-        if (game.fragen.gameSettings.getGameMode().equals("Normal")){
-            game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(game.index_frage).getContext().getDifficulty());
-        }
-
-        if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
-            game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(game.fragen.getQuestions().size() - 1 - game.index_frage).getContext().getDifficulty());
-        }
+        int current = getCurrentQuestion();
+        game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(current).getContext().getDifficulty());
     }
 
 
@@ -2397,6 +2436,31 @@ public class GUI extends SystemController {
         System.exit(0);
     }
 
+    public void handle_gameModes(MouseEvent event) throws Exception {
+        if (event.getSource() == gameMode_Normal){
+            temp_gameMode = "Normal";
+        }
+
+        if (event.getSource() == gameMode_Reverse){
+            temp_gameMode = "Reverse";
+        }
+        showHowManyQuestions();
+    }
+
+    public void handle_HowManyQuestions(MouseEvent event) throws Exception {
+        if (event.getSource() == amount_Questions10){
+            temp_FragenAnzahl = 10;
+        }
+
+        if (event.getSource() == amount_Questions15){
+            temp_FragenAnzahl = 15;
+        }
+
+        if (event.getSource() == amount_Questions20){
+            temp_FragenAnzahl = 20;
+        }
+        loadScene("Game_Settings1.fxml");
+    }
 
     public void handle_BoxColor(MouseEvent event){
         String s1 = "-fx-fill: " + firstColor;
@@ -2446,30 +2510,37 @@ public class GUI extends SystemController {
 
     }
 
-    public void handle_gameModes(MouseEvent event) throws Exception {
-        if (event.getSource() == gameMode_Normal){
-            temp_gameMode = "Normal";
+    public void handle_cheats(MouseEvent event) throws Exception{
+        if (event.getSource() == cheat1){
+            temp_cheats_infJoker = cheat1.isSelected();
         }
-
-        if (event.getSource() == gameMode_Reverse){
-            temp_gameMode = "Reverse";
+        if (event.getSource() == cheat2){
+            temp_cheats_infTime = cheat2.isSelected();
         }
-        showHowManyQuestions();
-    }
-
-    public void handle_HowManyQuestions(MouseEvent event) throws Exception {
-        if (event.getSource() == amount_Questions10){
-            temp_FragenAnzahl = 10;
+        if (event.getSource() == cheat3){
+            temp_cheats_infLife = cheat3.isSelected();
         }
-
-        if (event.getSource() == amount_Questions15){
-            temp_FragenAnzahl = 15;
+        if (event.getSource() == cheat4){
+            if (cheat4.isSelected()){
+                cheat1.setSelected(true);
+                temp_cheats_infJoker = cheat1.isSelected();
+            }
+            temp_cheats_alwaysFiftyFifty = cheat4.isSelected();
         }
-
-        if (event.getSource() == amount_Questions20){
-            temp_FragenAnzahl = 20;
+        if (event.getSource() == cheat5){
+            if (cheat5.isSelected()){
+                cheat1.setSelected(true);
+                temp_cheats_infJoker = cheat1.isSelected();
+            }
+            temp_cheats_alwaysCall = cheat5.isSelected();
         }
-        loadScene("Game_Settings1.fxml");
+        if (event.getSource() == cheat6){
+            if (cheat6.isSelected()){
+                cheat1.setSelected(true);
+                temp_cheats_infJoker = cheat1.isSelected();
+            }
+            temp_cheats_alwaysAudience = cheat6.isSelected();
+        }
     }
 
     public void handle_ProfileImages(MouseEvent event) throws Exception {
