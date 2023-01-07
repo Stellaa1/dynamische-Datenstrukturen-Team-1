@@ -192,6 +192,22 @@ public class GUI extends SystemController {
     @FXML
     private TextField anmelden_PasswortWiederholen;
     @FXML
+    private ImageView anmelden_Image1;
+    @FXML
+    private TextField anmelden_Benutzername1;
+    @FXML
+    private TextField anmelden_Password1;
+    @FXML
+    private TextField anmelden_PasswortWiederholen1;
+    @FXML
+    private ImageView anmelden_Image2;
+    @FXML
+    private TextField anmelden_Benutzername2;
+    @FXML
+    private TextField anmelden_Password2;
+    @FXML
+    private TextField anmelden_PasswortWiederholen2;
+    @FXML
     private ImageView menu_UserImage;
     @FXML
     private Text menu_UserName;
@@ -594,6 +610,15 @@ public class GUI extends SystemController {
         loadScene("MultiplayerOderQuestionmaker.fxml");
     }
 
+    public void showMultiplayerLogIn() throws Exception{
+        loadScene("LogIn_Multiplayer.fxml");
+    }
+
+
+    public void setMultiPlayer(){
+        Multiplayer multiplayer;
+    }
+
     public void createUser() throws Exception {
 
         int index = searchForUser(nameField.getText());
@@ -690,6 +715,59 @@ public class GUI extends SystemController {
         local_User = u;
 
         loadScene("Menu.fxml");
+    }
+
+    public void logIn_Multiplayer() throws Exception{
+        Multiplayer multiplayer = new Multiplayer();
+        if (!anmelden_Benutzername1.getText().equals(local_User.getName())){
+            loadScene("Fehler_Einloggen.fxml");
+            return;
+        }
+
+
+        if (!anmelden_Password1.getText().equals(anmelden_PasswortWiederholen1.getText())){
+            loadScene("Fehler_Einloggen.fxml");
+            return;
+        }
+
+
+        for (int i = 0; i < csvFiles_Questions.length; i++){
+            if (local_User.getFavorite_subjects().get(i) == null){
+                local_User.getFavorite_subjects().append(0);
+            }
+        }
+        if (!anmelden_Password1.getText().equals(local_User.getPassword())){
+            loadScene("Fehler_Einloggen.fxml");
+            return;
+        }
+        multiplayer.setPlayer1(local_User);
+
+        int index = searchForUser(anmelden_Benutzername2.getText());
+
+        if (index == -1){
+            loadScene("Fehler_Einloggen.fxml");
+            return;
+        }
+
+        if (!anmelden_Password2.getText().equals(anmelden_PasswortWiederholen2.getText())){
+            loadScene("Fehler_Einloggen.fxml");
+            return;
+        }
+
+
+        User u = users.get(index).getContext();
+        for (int i = 0; i < csvFiles_Questions.length; i++){
+            if (u.getFavorite_subjects().get(i) == null){
+                u.getFavorite_subjects().append(0);
+            }
+        }
+        if (!anmelden_Password2.getText().equals(u.getPassword())){
+            loadScene("Fehler_Einloggen.fxml");
+            return;
+        }
+        multiplayer.setPlayer2(u);
+        temp_gameMode = "Multiplayer - Normal";
+        loadScene("Fragenzahl.fxml");
     }
 
     public void counter() throws Exception{
@@ -918,8 +996,11 @@ public class GUI extends SystemController {
         //game.fragen.gameSettings.setDifficultyValue(Integer.parseInt(maximum_DifficultyField.getText()));
         //game.fragen.gameSettings.setIncrementValue(Integer.parseInt(incrementValueField.getText()));
         //game.fragen.gameSettings.setIncrementRange(Integer.parseInt(incrementRangeField.getText()));
+        if (temp_gameMode.equals("Multiplayer - Normal")){
 
-        loadScene("Main_Game.fxml");
+        } else {
+            loadScene("Main_Game.fxml");
+        }
     }
 
     public void restartJokerImages(){
@@ -1380,6 +1461,7 @@ public class GUI extends SystemController {
     }
 
     public void endGame(){
+        timer.cancel();
         if (result_Box.isVisible()){
             hide_Confirm_Box();
         }
