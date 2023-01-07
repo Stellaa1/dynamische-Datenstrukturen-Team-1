@@ -7,31 +7,31 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2F346E;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
-      <Text fill="WHITE" layoutX="240.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SPIELEN" textAlignment="CENTER">
+      <Text fill="WHITE" layoutX="830.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="SPIELEN" textAlignment="CENTER">
          <font>
-            <Font name="Sylfaen" size="30.0" />
+            <Font name="Sylfaen" size="67.0" />
          </font>
       </Text>
-      <ImageView fitHeight="309.0" fitWidth="321.0" layoutX="146.0" layoutY="64.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="930.0" fitWidth="930.0" layoutX="495.0" layoutY="124.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/game-controller.png" />
          </image>
       </ImageView>
-      <Button layoutX="207.0" layoutY="201.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="185.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="REVERSE" textFill="WHITE">
+      <Button fx:id="gameMode_Normal" layoutX="764.0" layoutY="404.0" mnemonicParsing="false" onMouseClicked="#handle_gameModes" prefHeight="90.0" prefWidth="392.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="NORMAL" textFill="WHITE">
          <font>
-            <Font name="Sylfaen" size="18.0" />
+            <Font name="Sylfaen" size="42.0" />
          </font>
       </Button>
-      <Button layoutX="206.0" layoutY="151.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="185.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="NORMAL" textFill="WHITE">
+      <Button layoutX="40.0" layoutY="1121.0" mnemonicParsing="false" onAction="#openMenu" prefHeight="72.0" prefWidth="357.0" styleClass="button_close" text="ZURÜCK" textFill="WHITE">
          <font>
-            <Font name="Sylfaen" size="18.0" />
+            <Font name="Sylfaen" size="40.0" />
          </font>
       </Button>
-      <Button layoutX="14.0" layoutY="362.0" mnemonicParsing="false" style="-fx-background-radius: 0; -fx-background-color: #575B95;" text="ZURÜCK" textFill="WHITE">
+      <Button fx:id="gameMode_Reverse" layoutX="764.0" layoutY="532.0" mnemonicParsing="false" onMouseClicked="#handle_gameModes" prefHeight="90.0" prefWidth="392.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="REVERSE" textFill="WHITE">
          <font>
-            <Font name="Sylfaen" size="12.0" />
+            <Font name="Sylfaen" size="42.0" />
          </font>
       </Button>
    </children>

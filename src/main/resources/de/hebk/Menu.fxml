@@ -6,64 +6,77 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2F346E;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
-      <ImageView fitHeight="335.0" fitWidth="356.0" layoutX="251.0" layoutY="38.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="1163.0" fitWidth="1163.0" layoutX="671.0" layoutY="44.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/WWTBAM_Germany_Logo11.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#49529d" height="409.0" layoutY="-9.0" stroke="#49529d" strokeType="INSIDE" width="228.0" />
-      <Button layoutX="17.0" layoutY="82.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="185.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="SPIELEN" textFill="WHITE">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#49529d" height="1291.0" layoutY="-9.0" onMouseClicked="#loadUserInMenu" stroke="#49529d" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="564.0" />
+      <Rectangle fx:id="loader_Menu" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1280.0" onMouseMoved="#loadUserInMenu" opacity="0.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangle" width="1920.0" />
+      <Button layoutX="111.0" layoutY="80.0" mnemonicParsing="false" onAction="#showGameModes" prefHeight="81.0" prefWidth="241.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="SPIELEN" textFill="WHITE">
          <font>
-            <Font name="Sylfaen" size="18.0" />
+            <Font name="Sylfaen" size="43.0" />
          </font>
       </Button>
-      <Button layoutX="42.0" layoutY="120.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="185.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="MULTIPLAYER" textFill="WHITE">
+      <Button layoutX="27.0" layoutY="1120.0" mnemonicParsing="false" onAction="#logOut" prefHeight="68.0" prefWidth="510.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="AUSLOGGEN" textFill="WHITE">
          <font>
-            <Font name="Sylfaen" size="18.0" />
+            <Font name="Sylfaen" size="45.0" />
          </font>
       </Button>
-      <Button layoutX="-8.0" layoutY="153.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="220.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="TOP 10" textFill="WHITE">
-         <font>
-            <Font name="Sylfaen" size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="20.0" layoutY="368.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="180.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="SCHLIESSEN" textFill="WHITE">
-         <font>
-            <Font name="Sylfaen" size="12.0" />
-         </font>
-      </Button>
-      <Button layoutX="59.0" layoutY="189.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="167.0" style="-fx-background-radius: 0; -fx-background-color: #49529D#49529D;" text="EINSTELLUNGEN" textFill="WHITE">
-         <font>
-            <Font name="Sylfaen" size="18.0" />
-         </font>
-      </Button>
-      <ImageView fitHeight="32.0" fitWidth="34.0" layoutX="28.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/top-10.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="29.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="79.0" fitWidth="129.0" layoutX="29.0" layoutY="80.0" onMouseClicked="#showGameModes" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/game-controller.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="39.0" fitWidth="35.0" layoutX="26.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/player-versus-player(1).png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="29.0" fitWidth="28.0" layoutX="31.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/cogwheel.png" />
-         </image>
-      </ImageView>
-      <ImageView accessibleRole="BUTTON" fitHeight="45.0" fitWidth="41.0" layoutX="545.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView accessibleRole="BUTTON" fitHeight="93.0" fitWidth="93.0" layoutX="1782.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/trophy.png" />
          </image>
       </ImageView>
+      <Button layoutX="112.0" layoutY="200.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="359.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="MULTIPLAYER" textFill="WHITE">
+         <font>
+            <Font name="Sylfaen" size="43.0" />
+         </font>
+      </Button>
+      <Button layoutX="122.0" layoutY="320.0" mnemonicParsing="false" onAction="#showTopPlayersMenu" prefHeight="81.0" prefWidth="319.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="TOP SPIELER" textFill="WHITE">
+         <font>
+            <Font name="Sylfaen" size="43.0" />
+         </font>
+      </Button>
+      <Button layoutX="122.0" layoutY="440.0" mnemonicParsing="false" onAction="#showSettings" prefHeight="81.0" prefWidth="399.0" style="-fx-background-radius: 0; -fx-background-color: #49529D;" text="EINSTELLUNGEN" textFill="WHITE">
+         <font>
+            <Font name="Sylfaen" size="43.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="79.0" fitWidth="129.0" layoutX="29.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/player-versus-player(1).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="79.0" fitWidth="129.0" layoutX="29.0" layoutY="320.0" onMouseClicked="#showTopPlayersMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/top-10.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="79.0" fitWidth="129.0" layoutX="29.0" layoutY="440.0" onMouseClicked="#showSettings" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/cogwheel.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="23.0" layoutY="952.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_3" width="517.0" />
+      <ImageView fx:id="menu_UserImage" fitHeight="132.0" fitWidth="132.0" layoutX="42.0" layoutY="961.0" onMouseClicked="#showProfilePicture1" pickOnBounds="true">
+         <image>
+            <Image url="@Profilbilder/Unbenannt.PNG" />
+         </image>
+      </ImageView>
+      <Text fx:id="menu_UserName" fill="WHITE" layoutX="196.0" layoutY="1042.0" onMouseClicked="#showUser_Statistics" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

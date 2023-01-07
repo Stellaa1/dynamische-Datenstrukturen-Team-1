@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+   <children>
+      <ImageView fx:id="profileImage1" accessibleRole="BUTTON" fitHeight="355.0" fitWidth="355.0" layoutX="144.0" layoutY="14.0" onMouseClicked="#handle_ProfileImages" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Profilbilder/1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="profileImage2" accessibleRole="BUTTON" fitHeight="355.0" fitWidth="355.0" layoutX="584.0" layoutY="14.0" onMouseClicked="#handle_ProfileImages" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Profilbilder/2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="profileImage3" accessibleRole="BUTTON" fitHeight="355.0" fitWidth="355.0" layoutX="984.0" layoutY="14.0" onMouseClicked="#handle_ProfileImages" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Profilbilder/3.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="profileImage4" accessibleRole="BUTTON" fitHeight="355.0" fitWidth="355.0" layoutX="1384.0" layoutY="14.0" onMouseClicked="#handle_ProfileImages" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Profilbilder/4.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="profileImage5" accessibleRole="BUTTON" fitHeight="355.0" fitWidth="355.0" layoutX="144.0" layoutY="394.0" onMouseClicked="#handle_ProfileImages" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Profilbilder/5.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="profileImage6" accessibleRole="BUTTON" fitHeight="355.0" fitWidth="355.0" layoutX="584.0" layoutY="394.0" onMouseClicked="#handle_ProfileImages" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Profilbilder/6.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="profileImage7" accessibleRole="BUTTON" fitHeight="355.0" fitWidth="355.0" layoutX="984.0" layoutY="394.0" onMouseClicked="#handle_ProfileImages" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Profilbilder/7.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="profileImage9" accessibleRole="BUTTON" fitHeight="355.0" fitWidth="355.0" layoutX="144.0" layoutY="774.0" onMouseClicked="#handle_ProfileImages" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Profilbilder/9.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="profileImage10" accessibleRole="BUTTON" fitHeight="355.0" fitWidth="355.0" layoutX="584.0" layoutY="774.0" onMouseClicked="#handle_ProfileImages" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Profilbilder/10.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="profileImage12" accessibleRole="BUTTON" fitHeight="355.0" fitWidth="355.0" layoutX="1404.0" layoutY="774.0" onMouseClicked="#handle_ProfileImages" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Profilbilder/12.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="profileImage8" accessibleRole="BUTTON" fitHeight="355.0" fitWidth="355.0" layoutX="1384.0" layoutY="394.0" onMouseClicked="#handle_ProfileImages" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Profilbilder/8.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="profileImage11" accessibleRole="BUTTON" fitHeight="355.0" fitWidth="355.0" layoutX="1014.0" layoutY="774.0" onMouseClicked="#handle_ProfileImages" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Profilbilder/11.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="1735.0" layoutY="1140.0" mnemonicParsing="false" onAction="#showProfilePicture2" prefHeight="58.0" prefWidth="157.0" text="WEITER" textFill="WHITE">
+         <font>
+            <Font name="Sylfaen" size="28.0" />
+         </font>
+      </Button>
+      <Text fill="#fffafa" layoutX="870.0" layoutY="1200.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="Seite 1/2" wrappingWidth="177.5">
+         <font>
+            <Font name="Sylfaen" size="47.0" />
+         </font>
+      </Text>
+      <Button layoutX="30.0" layoutY="1140.0" mnemonicParsing="false" onAction="#showPreviousScene" prefHeight="58.0" prefWidth="157.0" styleClass="button_close" text="ZURÜCK" textFill="WHITE">
+         <font>
+            <Font name="Sylfaen" size="28.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
