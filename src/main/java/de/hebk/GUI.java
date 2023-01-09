@@ -2286,7 +2286,54 @@ public class GUI extends SystemController {
     }
 
     public void playBackgroundSound(){
+        if (VALUES[game.index_frage] == null){
+            return;
+        }
+        int value = Integer.parseInt(s[game.index_frage]);
 
+        if (value <= 1000){
+            playSound("/de/hebk/Sounds/Musik/100-1000-Questions.mp3");
+        }
+
+        if (value >= 2000 && value <= 4000){
+            playSound("/de/hebk/Sounds/Musik/2000-Question.mp3");
+        }
+
+        if (value >= 4000 && value <= 8000){
+            playSound("/de/hebk/Sounds/Musik/4000-Question.mp3");
+        }
+
+        if (value >= 8000 && value <= 16000){
+            playSound("/de/hebk/Sounds/Musik/8000-Question.mp3");
+        }
+
+        if (value >= 16000 && value <= 32000){
+            playSound("/de/hebk/Sounds/Musik/16000-Question.mp3");
+        }
+
+        if (value >= 32000 && value <= 64000){
+            playSound("/de/hebk/Sounds/Musik/32000-Question.mp3");
+        }
+
+        if (value >= 64000 && value <= 125000){
+            playSound("/de/hebk/Sounds/Musik/64000-Question.mp3");
+        }
+
+        if (value >= 125000 && value <= 250000){
+            playSound("/de/hebk/Sounds/Musik/125000-Question.mp3");
+        }
+
+        if (value >= 250000 && value <= 500000){
+            playSound("/de/hebk/Sounds/Musik/250000-Question.mp3");
+        }
+
+        if (value >= 500000 && value <= 1000000){
+            playSound("/de/hebk/Sounds/Musik/500000-Question.mp3");
+        }
+
+        if (value >= 1000000){
+            playSound("/de/hebk/Sounds/Musik/1000000-Question.mp3");
+        }
     }
 
     public void stopSound(){
