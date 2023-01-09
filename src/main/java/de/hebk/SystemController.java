@@ -72,12 +72,34 @@ public class SystemController extends Texts{
 
     public String randomName() {
         Texts texts = new Texts();
-        int x = (int)Math.floor(Math.random() * (texts.firstNames.length));
+        int x = (int) (Math.random() * 100);
         String s = "";
-        int y = (int)Math.floor(Math.random() * (texts.lastNames.length));
+        if (x > 50) {
+            x = (int) (Math.random() * 100);
+            for (int a = 1; a < 3; a++) {
+                s = s + texts.randomNames[x];
+                x = (int) (Math.random() * 100);
 
-        s = texts.firstNames[x] + " " + texts.lastNames[y];
-        return s;
+            }
+            System.out.println(s);
+            return s;
+        }
+
+        if (x < 50) {
+            x = (int) (Math.random() * 100);
+            for (int a = 1; a < 2; a++) {
+                s = s + texts.randomNames[x];
+                x = (int) (Math.random() * 100);
+
+            }
+
+            x = (int) (Math.random() * 100); // x wird neu generiert (0-100)
+            if (x < 60)
+                s = s + x; // 60 %, dass der Name eine zufällige Zahl am Ende bekommt
+
+            return s;
+        }
+        return null;
     }
 
     public boolean checkValidName(String s){

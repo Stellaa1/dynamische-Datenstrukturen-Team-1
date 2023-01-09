@@ -1785,13 +1785,15 @@ public class GUI extends SystemController {
             local_User.setPlayed_Reverse(local_User.getPlayed_Reverse() + 1);
             local_User.setLost_Reverse(local_User.getLost_Reverse() + 1);
         }
-        if (multiplayer.getCurrentPlayer() == multiPlayer_Player1){
-            if (multiplayer.getPlayer2Settings().getReward() <= multiplayer.getPlayer1Settings().getReward()){
-                multiplayer.getPlayer2Settings().setReward(multiplayer.getPlayer1Settings().getReward() + 1);
-            }
-        } else{
-            if (multiplayer.getPlayer1Settings().getReward() <= multiplayer.getPlayer2Settings().getReward()){
-                multiplayer.getPlayer1Settings().setReward(multiplayer.getPlayer2Settings().getReward() + 1);
+        if (multiplayer != null){
+            if (multiplayer.getCurrentPlayer() == multiPlayer_Player1){
+                if (multiplayer.getPlayer2Settings().getReward() <= multiplayer.getPlayer1Settings().getReward()){
+                    multiplayer.getPlayer2Settings().setReward(multiplayer.getPlayer1Settings().getReward() + 1);
+                }
+            } else{
+                if (multiplayer.getPlayer1Settings().getReward() <= multiplayer.getPlayer2Settings().getReward()){
+                    multiplayer.getPlayer1Settings().setReward(multiplayer.getPlayer2Settings().getReward() + 1);
+                }
             }
         }
         endGame();
@@ -3093,10 +3095,6 @@ public class GUI extends SystemController {
 
         if (event.getSource() == profileImage20){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/20.PNG";
-        }
-
-        if (event.getSource() == profileImage21){
-            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/21.PNG";
         }
 
         if (event.getSource() == profileImage22){
