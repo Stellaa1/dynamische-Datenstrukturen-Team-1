@@ -12,6 +12,8 @@ public class SystemController extends Texts{
 
     public static List<User> users = new List<>();
     public static User local_User;
+    public static User multiPlayer_Player1;
+    public static User multiPlayer_Player2;
 
     public void saveData() {
         try {
