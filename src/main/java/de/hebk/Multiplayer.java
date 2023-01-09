@@ -1,11 +1,14 @@
 package de.hebk;
 
 public class Multiplayer {
-    Game game;
-    User player1;
-    User player2;
-    GameSettings player1Settings;
-    GameSettings player2Settings;
+    private Game game;
+    private User currentPlayer;
+    private User player1;
+    private User player2;
+    private GameSettings player1Settings;
+    private GameSettings player2Settings;
+    private int fIndex1 = 0;
+    private int fIndex2 = 0;
 
     public Game getGame() {
         return game;
@@ -13,6 +16,14 @@ public class Multiplayer {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public User getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(User currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     public User getPlayer1() {
@@ -45,5 +56,21 @@ public class Multiplayer {
 
     public void setPlayer2Settings(GameSettings player2Settings) {
         this.player2Settings = player2Settings;
+    }
+
+    public int getfIndex1() {
+        return fIndex1;
+    }
+
+    public void setfIndex1(int fIndex1) {
+        this.fIndex1 = fIndex1;
+    }
+
+    public int getfIndex2() {
+        return fIndex2;
+    }
+
+    public void setfIndex2(int fIndex2) {
+        this.fIndex2 = fIndex2;
     }
 }
