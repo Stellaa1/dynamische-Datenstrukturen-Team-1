@@ -67,6 +67,7 @@ public class GUI extends SystemController {
     private static boolean temp_cheats_alwaysFiftyFifty = false;
     private static boolean temp_cheats_alwaysCall = false;
     MediaPlayer mediaPlayer;
+    MediaPlayer mediaPlayer_Video;
     @FXML
     private Button button;
     @FXML
@@ -513,7 +514,9 @@ public class GUI extends SystemController {
     @FXML
     private CheckBox cheat5;
     @FXML
-    private CheckBox cheat6;
+    private Text multiplayer_Player1Points;
+    @FXML
+    private Text multiplayer_Player2Points;
     @FXML
     private Text multiplayer_Player1Name;
     @FXML
@@ -1162,7 +1165,7 @@ public class GUI extends SystemController {
 
             }
 
-            playVideo("src/main/resources/de/hebk/Videos/gold light and particles - correct loop.mp4");
+            playVideo("/de/hebk/Videos/Win_Effect.mp4");
 
         } catch(Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
@@ -2214,6 +2217,8 @@ public class GUI extends SystemController {
             } else{
                 multiplayer.getPlayer2Settings().setReward(multiplayer.getPlayer2Settings().getReward() + game.fragen.getQuestions().get(current).getContext().getDifficulty());
             }
+            multiplayer_Player1Points.setText("PUNKTE: " + multiplayer.getPlayer1Settings().getReward());
+            multiplayer_Player2Points.setText("PUNKTE: " + multiplayer.getPlayer2Settings().getReward());
         }
     }
 
@@ -2277,9 +2282,8 @@ public class GUI extends SystemController {
         try {
             String path = getClass().getResource(filename).toURI().toString();
             Media media = new Media(path);
-            mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.play();
-            mediaView.setMediaPlayer(mediaPlayer);
+            mediaPlayer_Video.setAutoPlay(true);
+            mediaView.setMediaPlayer(mediaPlayer_Video);
         } catch (Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
         }

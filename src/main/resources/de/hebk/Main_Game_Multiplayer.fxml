@@ -21,7 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
       <ImageView fitHeight="1086.0" fitWidth="1859.0" layoutX="30.0" layoutY="94.0" pickOnBounds="true">
          <image>
@@ -81,7 +81,7 @@
       </ImageView>
       <ImageView fx:id="questionImage" fitHeight="474.0" fitWidth="632.0" layoutX="317.0" layoutY="54.0" pickOnBounds="true" />
       <VBox fx:id="questionsVBox" layoutX="217.0" layoutY="91.0" prefHeight="200.0" prefWidth="100.0" />
-      <Text fx:id="timeText" fill="WHITE" layoutX="602.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="timeText" fill="WHITE" layoutX="870.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="46.0" />
          </font>
@@ -218,14 +218,24 @@
             <Font name="Sylfaen" size="43.0" />
          </font>
       </Text>
-      <Text fx:id="multiplayer_Player1Name" layoutX="27.0" layoutY="1217.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="460.0">
+      <Text fx:id="multiplayer_Player1Name" layoutX="27.0" layoutY="1207.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="460.0">
          <font>
-            <Font size="23.0" />
+            <Font size="26.0" />
          </font>
       </Text>
-      <Text fx:id="multiplayer_Player2Name" layoutX="1431.0" layoutY="1217.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="460.0">
+      <Text fx:id="multiplayer_Player2Name" layoutX="1431.0" layoutY="1207.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="460.0">
          <font>
-            <Font size="23.0" />
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Text fx:id="multiplayer_Player1Points" layoutX="27.0" layoutY="1231.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text2" textAlignment="CENTER" wrappingWidth="460.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="multiplayer_Player2Points" layoutX="1431.0" layoutY="1231.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text2" textAlignment="CENTER" wrappingWidth="460.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
          </font>
       </Text>
       <Rectangle fx:id="loader_Game_Normal2" arcHeight="5.0" arcWidth="5.0" height="1280.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_4" visible="false" width="1920.0" />
@@ -240,7 +250,7 @@
             <Image url="@Images/krone.png" />
          </image>
       </ImageView>
-      <Text fx:id="multiplayer_WinnerName" layoutX="767.0" layoutY="511.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top2" text="User" textAlignment="CENTER" visible="false" wrappingWidth="437.99999999999994">
+      <Text fx:id="multiplayer_WinnerName" layoutX="767.0" layoutY="511.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top2" textAlignment="CENTER" visible="false" wrappingWidth="437.99999999999994">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
