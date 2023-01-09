@@ -7,7 +7,6 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.ColorAdjust?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
@@ -22,9 +21,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
-      <ImageView fitHeight="1140.0" fitWidth="1894.0" layoutX="5.0" layoutY="40.0" pickOnBounds="true">
+      <ImageView fitHeight="1086.0" fitWidth="1859.0" layoutX="30.0" layoutY="94.0" pickOnBounds="true">
          <image>
             <Image url="@Images/Background1.jpg" />
          </image>
@@ -32,31 +31,26 @@
             <ColorAdjust brightness="-0.8" />
          </effect>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#49529d" height="1140.0" layoutX="1281.0" layoutY="40.0" opacity="0.17" stroke="#49529d" strokeType="INSIDE" strokeWidth="0.0" width="619.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#49529d" height="1280.0" layoutX="1.0" stroke="#49529d" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_3" width="1279.0" />
-      <Text fill="WHITE" layoutX="68.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NORMAL" textAlignment="CENTER">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#49529d" height="1086.0" layoutX="1430.0" layoutY="94.0" opacity="0.17" stroke="#49529d" strokeType="INSIDE" strokeWidth="0.0" width="460.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#49529d" height="1280.0" layoutX="482.0" stroke="#49529d" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_3" width="949.0" />
+      <Text fill="WHITE" layoutX="896.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MULTIPLAYER" textAlignment="CENTER">
          <font>
             <Font name="Sylfaen" size="27.0" />
          </font>
       </Text>
-      <ImageView accessibleRole="BUTTON" fitHeight="58.0" fitWidth="55.0" layoutX="12.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView accessibleRole="BUTTON" fitHeight="58.0" fitWidth="55.0" layoutX="840.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/speisekarte.png" />
          </image>
       </ImageView>
-      <ImageView accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="1151.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="joker_callP1" accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="285.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/smartphone.png" />
          </image>
       </ImageView>
-      <VBox fx:id="newVB" layoutX="1278.0" layoutY="75.0" prefHeight="1070.0" prefWidth="351.0" spacing="25.0" />
-      <ImageView accessibleRole="BUTTON" fitHeight="41.0" fitWidth="38.0" layoutX="12.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/cogwheel.png" />
-         </image>
-      </ImageView>
+      <VBox fx:id="newVBP2" layoutX="1485.0" layoutY="119.0" prefHeight="1031.0" prefWidth="351.0" spacing="25.0" />
       <Line endX="100.0" startX="-100.0" />
-      <TextArea fx:id="questionBox" cache="true" editable="false" layoutX="66.0" layoutY="644.0" mouseTransparent="true" prefHeight="234.0" prefWidth="1157.0" wrapText="true">
+      <TextArea fx:id="questionBox" cache="true" editable="false" layoutX="526.0" layoutY="644.0" mouseTransparent="true" prefHeight="234.0" prefWidth="860.0" wrapText="true">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
@@ -75,12 +69,12 @@
             </Lighting>
          </effect>
       </TextArea>
-      <ImageView fx:id="joker_fifty_fifty" accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="1091.0" layoutY="571.0" onMouseClicked="#useJoker_fifty_fifty" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="joker_fifty_fiftyP1" accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="225.0" layoutY="32.0" onMouseClicked="#useJoker_fifty_fifty" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/speed-limit.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="joker_audience" accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="1031.0" layoutY="571.0" onMouseClicked="#useJoker_Audience" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="joker_audienceP1" accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="165.0" layoutY="32.0" onMouseClicked="#useJoker_Audience" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/people.png" />
          </image>
@@ -92,26 +86,9 @@
             <Font size="46.0" />
          </font>
       </Text>
-      <Rectangle fx:id="answer_rectangle1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="66.0" layoutY="938.0" onMouseClicked="#getAnswer1" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="558.0" />
-      <Rectangle fx:id="answer_rectangle3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="67.0" layoutY="1051.0" onMouseClicked="#getAnswer3" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="558.0" />
-      <Rectangle fx:id="answer_rectangle2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="666.0" layoutY="938.0" onMouseClicked="#getAnswer2" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="558.0" />
-      <Rectangle fx:id="answer_rectangle4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="667.0" layoutY="1051.0" onMouseClicked="#getAnswer4" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="558.0" />
-      <Text fx:id="answer_text1" fill="WHITE" layoutX="83.0" layoutY="988.0" onMouseClicked="#getAnswer1" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.0">
-         <font>
-            <Font name="Sylfaen" size="43.0" />
-         </font>
-      </Text>
-      <Text fx:id="answer_text2" fill="WHITE" layoutX="683.0" layoutY="988.0" onMouseClicked="#getAnswer2" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.0">
-         <font>
-            <Font name="Sylfaen" size="43.0" />
-         </font>
-      </Text>
-      <Text fx:id="answer_text3" fill="WHITE" layoutX="83.0" layoutY="1101.0" onMouseClicked="#getAnswer3" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.0">
-         <font>
-            <Font name="Sylfaen" size="43.0" />
-         </font>
-      </Text>
-      <Text fx:id="answer_text4" fill="WHITE" layoutX="683.0" layoutY="1100.0" onMouseClicked="#getAnswer4" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.0">
+      <Rectangle fx:id="answer_rectangle1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="530.0" layoutY="938.0" onMouseClicked="#getAnswer1" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="408.0" />
+      <Rectangle fx:id="answer_rectangle2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="977.0" layoutY="938.0" onMouseClicked="#getAnswer2" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="408.0" />
+      <Text fx:id="answer_text2" fill="WHITE" layoutX="986.0" layoutY="986.0" onMouseClicked="#getAnswer2" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="390.00000000000006">
          <font>
             <Font name="Sylfaen" size="43.0" />
          </font>
@@ -171,7 +148,7 @@
             <Font name="System Bold" size="31.0" />
          </font>
       </Text>
-      <CheckBox fx:id="autoConfirm" layoutX="14.0" layoutY="147.0" mnemonicParsing="false" onMouseClicked="#changeGameAutoConfirm" styleClass="Text3" text="AUTOMATISCHES ANTWORTEN" textFill="WHITE" />
+      <CheckBox fx:id="autoConfirm" layoutX="501.0" layoutY="149.0" mnemonicParsing="false" onMouseClicked="#changeGameAutoConfirm" styleClass="Text3" text="AUTOMATISCHES ANTWORTEN" textFill="WHITE" />
       <Text fx:id="revive_Warning_Text" fill="#d0d0d0" layoutX="715.0" layoutY="780.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text2" text="PUNKTE WERDEN AUF 0 EINGESETZT" textAlignment="CENTER" textOrigin="BOTTOM" visible="false" wrappingWidth="532.13671875">
          <font>
             <Font name="System Bold" size="17.0" />
@@ -202,37 +179,91 @@
             <Font name="System Bold" size="29.0" />
          </font>
       </Text>
-      <Rectangle fx:id="loader_Game_Normal2" arcHeight="5.0" arcWidth="5.0" height="1280.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_4" visible="false" width="1920.0" />
-      <Rectangle fx:id="loader_Game_Normal" arcHeight="5.0" arcWidth="5.0" height="1280.0" onMouseMoved="#startGame" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1920.0" />
-      <Text fx:id="youLostText" fill="WHITE" layoutX="526.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DU HAST VERLOREN" visible="false">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#49529d" height="1086.0" layoutX="27.0" layoutY="95.0" opacity="0.17" stroke="#49529d" strokeType="INSIDE" strokeWidth="0.0" width="460.0" />
+      <VBox fx:id="newVBP1" layoutX="76.0" layoutY="129.0" prefHeight="1031.0" prefWidth="351.0" spacing="25.0" />
+      <Text fx:id="answer_text1" fill="WHITE" layoutX="539.0" layoutY="988.0" onMouseClicked="#getAnswer1" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="389.9999999999998">
          <font>
-            <Font name="System Bold" size="96.0" />
+            <Font name="Sylfaen" size="43.0" />
          </font>
       </Text>
-      <Button fx:id="returnToMenu" layoutX="714.0" layoutY="395.0" mnemonicParsing="false" onAction="#openMenu" prefHeight="82.0" prefWidth="558.0" styleClass="button_lost" text="ZURÜCK" textAlignment="CENTER" textFill="WHITE" visible="false">
+      <Rectangle fx:id="answer_rectangle3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="530.0" layoutY="1050.0" onMouseClicked="#getAnswer3" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="408.0" />
+      <Text fx:id="answer_text3" fill="WHITE" layoutX="538.0" layoutY="1101.0" onMouseClicked="#getAnswer3" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="389.9999999999998">
+         <font>
+            <Font name="Sylfaen" size="43.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="answer_rectangle4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="977.0" layoutY="1050.0" onMouseClicked="#getAnswer4" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="408.0" />
+      <Text fx:id="answer_text4" fill="WHITE" layoutX="986.0" layoutY="1098.0" onMouseClicked="#getAnswer4" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="390.00000000000006">
+         <font>
+            <Font name="Sylfaen" size="43.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="joker_callP2" accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="1694.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/smartphone.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="joker_fifty_fiftyP2" accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="1634.0" layoutY="28.0" onMouseClicked="#useJoker_fifty_fifty" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/speed-limit.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="joker_audienceP2" accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="1574.0" layoutY="28.0" onMouseClicked="#useJoker_Audience" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/people.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="answer_text2" fill="WHITE" layoutX="986.0" layoutY="988.0" onMouseClicked="#getAnswer2" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="390.00000000000006">
+         <font>
+            <Font name="Sylfaen" size="43.0" />
+         </font>
+      </Text>
+      <Text fx:id="multiplayer_Player1Name" layoutX="27.0" layoutY="1217.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="460.0">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Text>
+      <Text fx:id="multiplayer_Player2Name" layoutX="1431.0" layoutY="1217.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text3" textAlignment="CENTER" wrappingWidth="460.0">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="loader_Game_Normal2" arcHeight="5.0" arcWidth="5.0" height="1280.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_4" visible="false" width="1920.0" />
+      <Rectangle fx:id="loader_Game_Multiplayer_Normal" arcHeight="5.0" arcWidth="5.0" height="1280.0" onMouseMoved="#startGame_Multiplayer" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1920.0" />
+      <ImageView fx:id="multiplayer_WinnerImage" fitHeight="200.0" fitWidth="200.0" layoutX="886.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Profilbilder/Unbenannt.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="multiplayer_Crown" fitHeight="162.0" fitWidth="162.0" layoutX="896.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Images/krone.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="multiplayer_WinnerName" layoutX="767.0" layoutY="511.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Top2" text="User" textAlignment="CENTER" visible="false" wrappingWidth="437.99999999999994">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Text>
+      <Text fx:id="multiplayer_GameResults_Winner" layoutX="719.0" layoutY="536.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Gewonnen" textAlignment="CENTER" visible="false" wrappingWidth="548.0">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <Text fx:id="multiplayer_GameResults_RunnerUp" layoutX="719.0" layoutY="579.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Verloren" textAlignment="CENTER" visible="false" wrappingWidth="548.0">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <Button fx:id="returnToMenu" layoutX="714.0" layoutY="608.0" mnemonicParsing="false" onAction="#openMenu" prefHeight="82.0" prefWidth="558.0" styleClass="button_lost" text="ZURÜCK" textAlignment="CENTER" textFill="WHITE" visible="false">
          <font>
             <Font name="Sylfaen" size="43.0" />
          </font>
       </Button>
-      <Button fx:id="replay_Button" layoutX="714.0" layoutY="499.0" mnemonicParsing="false" onAction="#replay" prefHeight="82.0" prefWidth="558.0" styleClass="button_replay" text="WIEDERHOLEN" textAlignment="CENTER" textFill="WHITE" visible="false">
+      <Button fx:id="replay_Button" layoutX="714.0" layoutY="712.0" mnemonicParsing="false" onAction="#replay" prefHeight="82.0" prefWidth="558.0" styleClass="button_replay" text="WIEDERHOLEN" textAlignment="CENTER" textFill="WHITE" visible="false">
          <font>
             <Font name="Sylfaen" size="43.0" />
          </font>
-      </Button>
-      <Button fx:id="revive_Button" contentDisplay="TOP" graphicTextGap="5.0" layoutX="714.0" layoutY="603.0" mnemonicParsing="false" onAction="#revive" prefHeight="82.0" prefWidth="558.0" styleClass="button_revive" text="REVIVE" textFill="WHITE" visible="false">
-         <font>
-            <Font name="Sylfaen" size="43.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Images/revive.png" />
-               </image>
-               <effect>
-                  <Glow level="0.48" />
-               </effect>
-            </ImageView>
-         </graphic>
       </Button>
    </children>
 </AnchorPane>
