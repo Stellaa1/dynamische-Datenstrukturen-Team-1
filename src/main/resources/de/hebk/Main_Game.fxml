@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.TextArea?>
@@ -19,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
       <ImageView fitHeight="1140.0" fitWidth="1894.0" layoutX="5.0" layoutY="40.0" pickOnBounds="true">
          <image>
@@ -77,7 +80,7 @@
             <Image url="@Images/speed-limit.png" />
          </image>
       </ImageView>
-      <ImageView accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="1031.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="joker_audience" accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="1031.0" layoutY="571.0" onMouseClicked="#useJoker_Audience" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/people.png" />
          </image>
@@ -89,21 +92,28 @@
             <Font size="46.0" />
          </font>
       </Text>
-      <Rectangle fx:id="loader_Game_Normal2" arcHeight="5.0" arcWidth="5.0" height="1280.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_4" visible="false" width="1920.0" />
-      <Rectangle fx:id="loader_Game_Normal" arcHeight="5.0" arcWidth="5.0" height="1280.0" onMouseMoved="#startGame" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1920.0" />
-      <Text fx:id="youLostText" fill="WHITE" layoutX="526.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DU HAST VERLOREN" visible="false">
-         <font>
-            <Font name="System Bold" size="96.0" />
-         </font>
-      </Text>
-      <Button fx:id="returnToMenu" layoutX="714.0" layoutY="395.0" mnemonicParsing="false" onAction="#openMenu" prefHeight="82.0" prefWidth="558.0" styleClass="button_lost" text="ZURÜCK" textAlignment="CENTER" textFill="WHITE" visible="false">
+      <Rectangle fx:id="answer_rectangle1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="66.0" layoutY="938.0" onMouseClicked="#getAnswer1" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="558.0" />
+      <Rectangle fx:id="answer_rectangle3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="67.0" layoutY="1051.0" onMouseClicked="#getAnswer3" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="558.0" />
+      <Rectangle fx:id="answer_rectangle2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="666.0" layoutY="938.0" onMouseClicked="#getAnswer2" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="558.0" />
+      <Rectangle fx:id="answer_rectangle4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="667.0" layoutY="1051.0" onMouseClicked="#getAnswer4" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="558.0" />
+      <Text fx:id="answer_text1" fill="WHITE" layoutX="83.0" layoutY="988.0" onMouseClicked="#getAnswer1" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.0">
          <font>
             <Font name="Sylfaen" size="43.0" />
          </font>
-      </Button>
-      <Text fx:id="pointsText" fill="WHITE" layoutX="936.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text2" visible="false">
+      </Text>
+      <Text fx:id="answer_text2" fill="WHITE" layoutX="683.0" layoutY="988.0" onMouseClicked="#getAnswer2" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.0">
          <font>
-            <Font name="System Bold" size="29.0" />
+            <Font name="Sylfaen" size="43.0" />
+         </font>
+      </Text>
+      <Text fx:id="answer_text3" fill="WHITE" layoutX="83.0" layoutY="1101.0" onMouseClicked="#getAnswer3" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.0">
+         <font>
+            <Font name="Sylfaen" size="43.0" />
+         </font>
+      </Text>
+      <Text fx:id="answer_text4" fill="WHITE" layoutX="683.0" layoutY="1100.0" onMouseClicked="#getAnswer4" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.0">
+         <font>
+            <Font name="Sylfaen" size="43.0" />
          </font>
       </Text>
       <Rectangle fx:id="result_Box" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="438.0" layoutX="395.0" layoutY="175.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_5" visible="false" width="438.0" />
@@ -162,16 +172,53 @@
          </font>
       </Text>
       <CheckBox fx:id="autoConfirm" layoutX="14.0" layoutY="147.0" mnemonicParsing="false" onMouseClicked="#changeGameAutoConfirm" styleClass="Text3" text="AUTOMATISCHES ANTWORTEN" textFill="WHITE" />
-      <Button fx:id="replay_Button" layoutX="714.0" layoutY="499.0" mnemonicParsing="false" onAction="#replay" prefHeight="82.0" prefWidth="558.0" styleClass="button_replay" text="WIEDERHOLEN" textAlignment="CENTER" textFill="WHITE" visible="false">
-         <font>
-            <Font name="Sylfaen" size="43.0" />
-         </font>
-      </Button>
       <Text fx:id="revive_Warning_Text" fill="#d0d0d0" layoutX="715.0" layoutY="780.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text2" text="PUNKTE WERDEN AUF 0 EINGESETZT" textAlignment="CENTER" textOrigin="BOTTOM" visible="false" wrappingWidth="532.13671875">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
+      <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" layoutX="541.0" layoutY="101.0" />
+      <Rectangle fx:id="audienceJoker_Background" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="380.0" layoutX="468.0" layoutY="124.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_5" visible="false" width="430.0" />
+      <BarChart fx:id="audienceJoker_Chart" alternativeColumnFillVisible="true" barGap="1.0" categoryGap="1.0" horizontalGridLinesVisible="false" layoutX="501.0" layoutY="157.0" prefHeight="292.0" prefWidth="365.0" styleClass="jokerChart" visible="false">
+         <xAxis>
+            <CategoryAxis />
+         </xAxis>
+         <yAxis>
+            <NumberAxis lowerBound="15.0" minorTickCount="0" side="LEFT" styleClass="jokerChart" tickLabelGap="1.0" tickLength="3.0" upperBound="64.0" />
+         </yAxis>
+      </BarChart>
+      <ImageView fx:id="result_audienceJoker_Box" fitHeight="55.0" fitWidth="240.0" layoutX="567.0" layoutY="441.0" onMouseClicked="#hideAudienceChart" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Images/Untitled-5.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="result_audienceJoker_Option" fill="WHITE" layoutX="638.0" layoutY="478.0" onMouseClicked="#hideAudienceChart" strokeType="OUTSIDE" strokeWidth="0.0" text="ZURÜCK" visible="false">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="pointsText" fill="WHITE" layoutX="936.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text2" visible="false">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="loader_Game_Normal2" arcHeight="5.0" arcWidth="5.0" height="1280.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_4" visible="false" width="1920.0" />
+      <Rectangle fx:id="loader_Game_Normal" arcHeight="5.0" arcWidth="5.0" height="1280.0" onMouseMoved="#startGame" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1920.0" />
+      <Text fx:id="youLostText" fill="WHITE" layoutX="526.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DU HAST VERLOREN" visible="false">
+         <font>
+            <Font name="System Bold" size="96.0" />
+         </font>
+      </Text>
+      <Button fx:id="returnToMenu" layoutX="714.0" layoutY="395.0" mnemonicParsing="false" onAction="#openMenu" prefHeight="82.0" prefWidth="558.0" styleClass="button_lost" text="ZURÜCK" textAlignment="CENTER" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Sylfaen" size="43.0" />
+         </font>
+      </Button>
+      <Button fx:id="replay_Button" layoutX="714.0" layoutY="499.0" mnemonicParsing="false" onAction="#replay" prefHeight="82.0" prefWidth="558.0" styleClass="button_replay" text="WIEDERHOLEN" textAlignment="CENTER" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Sylfaen" size="43.0" />
+         </font>
+      </Button>
       <Button fx:id="revive_Button" contentDisplay="TOP" graphicTextGap="5.0" layoutX="714.0" layoutY="603.0" mnemonicParsing="false" onAction="#revive" prefHeight="82.0" prefWidth="558.0" styleClass="button_revive" text="REVIVE" textFill="WHITE" visible="false">
          <font>
             <Font name="Sylfaen" size="43.0" />
@@ -187,30 +234,5 @@
             </ImageView>
          </graphic>
       </Button>
-      <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" layoutX="541.0" layoutY="101.0" />
-      <Rectangle fx:id="answer_rectangle1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="66.0" layoutY="938.0" onMouseClicked="#getAnswer1" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="558.0" />
-      <Rectangle fx:id="answer_rectangle3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="67.0" layoutY="1051.0" onMouseClicked="#getAnswer3" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="558.0" />
-      <Rectangle fx:id="answer_rectangle2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="666.0" layoutY="938.0" onMouseClicked="#getAnswer2" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="558.0" />
-      <Rectangle fx:id="answer_rectangle4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="667.0" layoutY="1051.0" onMouseClicked="#getAnswer4" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_answer" width="558.0" />
-      <Text fx:id="answer_text1" fill="WHITE" layoutX="83.0" layoutY="988.0" onMouseClicked="#getAnswer1" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.0">
-         <font>
-            <Font name="Sylfaen" size="43.0" />
-         </font>
-      </Text>
-      <Text fx:id="answer_text2" fill="WHITE" layoutX="683.0" layoutY="988.0" onMouseClicked="#getAnswer2" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.0">
-         <font>
-            <Font name="Sylfaen" size="43.0" />
-         </font>
-      </Text>
-      <Text fx:id="answer_text3" fill="WHITE" layoutX="83.0" layoutY="1101.0" onMouseClicked="#getAnswer3" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.0">
-         <font>
-            <Font name="Sylfaen" size="43.0" />
-         </font>
-      </Text>
-      <Text fx:id="answer_text4" fill="WHITE" layoutX="683.0" layoutY="1100.0" onMouseClicked="#getAnswer4" onMouseEntered="#handle_BoxColor" onMouseExited="#handle_BoxColor" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.0">
-         <font>
-            <Font name="Sylfaen" size="43.0" />
-         </font>
-      </Text>
    </children>
 </AnchorPane>

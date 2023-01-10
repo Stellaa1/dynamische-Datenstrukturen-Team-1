@@ -1,19 +1,10 @@
 package de.hebk;
 
 public class Joker {
-    private boolean infJoker;
     private boolean revive;
     private boolean audience;
     private boolean fifty_fifty;
     private boolean call;
-
-    public boolean isInfJoker() {
-        return infJoker;
-    }
-
-    public void setInfJoker(boolean infJoker) {
-        this.infJoker = infJoker;
-    }
 
     public boolean isRevive() {
         return revive;
