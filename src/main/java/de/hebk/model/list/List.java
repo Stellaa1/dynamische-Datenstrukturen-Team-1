@@ -93,7 +93,7 @@ public class List<T> implements Serializable {
         }
 
         Node<T> temp = first;
-        for (int i = 0; i< index; i++){
+        for (int i = 0; i < index; i++){
             temp = temp.getNext();
         }
         ret = temp;
@@ -119,6 +119,10 @@ public class List<T> implements Serializable {
                 break;
             }
             temp = temp.getNext();
+        }
+
+        if (temp.getContext() == value){
+            return true;
         }
 
         return f;
