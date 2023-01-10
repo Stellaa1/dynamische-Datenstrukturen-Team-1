@@ -9,11 +9,11 @@ import java.io.*;
 public class SystemController extends Texts{
 
     private DataStore dataStore = new DataStore();
-
     public static List<User> users = new List<>();
     public static User local_User;
     public static User multiPlayer_Player1;
     public static User multiPlayer_Player2;
+    public static int amount_Achievements = 13;
 
     public void saveData() {
         try {
@@ -109,6 +109,9 @@ public class SystemController extends Texts{
             v = true;
         }
 
+        if (s.length() > 15){
+            v = false;
+        }
 
         return v;
     }
@@ -179,5 +182,10 @@ public class SystemController extends Texts{
             }
         }
         return top10;
+    }
+    public void reward(User user, String achievement){
+        if (!user.getAchievements().find(achievement.toString())){
+            user.getAchievements().append(achievement.toString());
+        }
     }
 }
