@@ -31,10 +31,10 @@ die immer schwerer werden. Dazu kriegt man natürlich 4 Antwortmöglichkeiten, w
 funktioniert ähnlich, der einzige Unterschied ist, dass man mit der schwierigsten Frage anfängt und später immer leichtere
 Fragen kriegt. In Multiplayer kann man auch zwischen zwei Spielmodi entscheiden. Entweder spielt man mit Freunden,
 dem Normalmodus oder Question Maker. In dem Normalmodus kämpft man um den besten Highscore/Platz und um die meisten Punkten.
-Bei Question Maker kann jeder Spieler 10 Fragen alleine erstellen und dann seinen Freunden zur beantworten geben.
+Bei Question Maker kann jeder Spieler 10 Fragen alleine erstellen und dann seinen Freund zur beantworten geben.
 
 Wir wollen, dass die Spieler in jedem Modus sin wissen testen und erweitern.
-Außerdem sollen die Spieler dabei Spaß haben und den besten Platz in Top 10 erreichen.
+Außerdem sollen die Spieler dabei Spaß haben und den besten Platz in der Top 10 erreichen.
 
 ### 2.2 Systemidee
 *Welche Idee wird mit dem System umgesetzt?*
@@ -164,47 +164,45 @@ Es gibt nur zwei Anforderungen: die Hauptfunktion und eine Hilfefunktion. Der am
 | F1     | start game          | Das Spiel wird gestartet                                                                                                                        |
 | F2     | use revive          | Nachdem man das Spielt verliert, kann man den Joker Revive nutzen, um weiterspielen zu können.                                                  |
 | F3     | use fifty percent   | Zwei von den falschen Fragen werden zufällig ausgewählt und ausgeschaltet                                                                       |
-| F4     | use telephone       | Ein Audiospur wird abgespielt, die die richtige Antwort wied  gesagt (A/B/C/D)                                                                  |
-| F5     | use change question | Wenn man die Antwort nicht weißt, kann man eine neue Frage kriegen                                                                              |
-| F6     | use audience        | Ein Diagramm mit vier Balken wird angezeigt. Je schwerer die Frage ist, desto großer die Wahrscheinlichkeit, dass das Publikum falsch antwortet |
-| F7     | ask question        | Die Fragen werden schwere je weiter man kommt. der int Schwierigkeit zählt die gestellten Fragen und passt dem Schwierigkeitsgrad an.           |
-| F8     | get question        | Die Fragen werden schwerer je weiter man kommt, so wird dann von Array eine Frage ausgewählt (anhand des int Schwierigkeit)                     |
-| F9     | main                | Führt das Programm aus.                                                                                                                         |
-| F10    | create player       | Der Spieler kann sein Profil erstellen.                                                                                                         |
-| F11    | show top ten        | Top 10 Spieler werden angezeigt (Platz, Name, Profilbild, Punkten)                                                                              |
-| F12    | options             | Man kann die Einstellungen ändern.                                                                                                              |
-| F13    | choose player       | Man kann dem Spieler auswählen.                                                                                                                 |
-| F14    | multiplayer         | Man kann mit Freunden spielen.                                                                                                                  |
-| F15    | singelplayer        | Man spielt alleine.                                                                                                                             |
-| F16    | question maker      | Man spielt mit Freunden und erstellt die Fragen/Antworten alleine.                                                                              |
-| F17    | reverse             | Man fängt mit der schwersten Frage an und kriegt die leichteste am Ende                                                                         |
-| F18    | conditions          |                                                                                                                                                 |
+| F4     | use telephone       | Ein Audiospur wird abgespielt, die die richtige Antwort wied  gesagt (A/B/C/D)                                                                  |                                                                            
+| F5     | use audience        | Ein Diagramm mit vier Balken wird angezeigt. Je schwerer die Frage ist, desto großer die Wahrscheinlichkeit, dass das Publikum falsch antwortet |
+| F6     | ask question        | Die Fragen werden schwere je weiter man kommt. der int Schwierigkeit zählt die gestellten Fragen und passt dem Schwierigkeitsgrad an.           |
+| F7     | get question        | Die Fragen werden schwerer je weiter man kommt, so wird dann von Array eine Frage ausgewählt (anhand des int Schwierigkeit)                     |
+| F8     | main                | Führt das Programm aus.                                                                                                                         |
+| F9     | create player       | Der Spieler kann sein Profil erstellen.                                                                                                         |
+| F10    | show top ten        | Top 10 Spieler werden angezeigt (Platz, Name, Profilbild, Punkten)                                                                              |
+| F11    | options             | Man kann die Einstellungen ändern.                                                                                                              |
+| F12    | choose player       | Man kann dem Spieler auswählen.                                                                                                                 |
+| F13    | multiplayer         | Man kann mit Freunden spielen.                                                                                                                  |
+| F14    | singelplayer        | Man spielt alleine.                                                                                                                             |
+| F15    | question maker      | Man spielt mit Freunden und erstellt die Fragen/Antworten alleine.                                                                              |
+| F16    | reverse             | Man fängt mit der schwersten Frage an und kriegt die leichteste am Ende                                                                         |
+| F17    | conditions          |                                                                                                                                                 |
+
 ### 3.2 Nicht-funktionale Anforderungen
 
 | Kürzel | Funktionsname                    | Funktionsbeschreibung                                                                      |
 |--------|----------------------------------|--------------------------------------------------------------------------------------------|
-| NF1    | Vollbild                         | Man kann das Programm in Vollbild starten                                                  |
-| NF2    | Startbildschirm Animation        | Im Hintergrund wird ein Video abgespielt                                                   |
-| NF3    | Top 10                           | Top 10 Spieler werden angezeigt                                                            |
-| NF4    | Joker Animation                  | Symbol kommt auf                                                                           |
-| NF5    | Telefon Joker                    | Auswahl zwischen 3 Personen, die auf dem Bildschirm aezeigt werden                         |
-| NF6    | Publikum Joker                   | Diagramm mit vier Balken, die sich bewegen und nach 4 Sekunden die richtige Antwort zeigen |
-| NF7    | 50/50 Joker                      | 2 Felder werden ausgeblendet                                                               |
-| NF8    | Frage wechseln Joker             | Neue frage, nachdem das Symbol aufkommt                                                    |
-| NF9    | Revive Joker                     | Symbol kommt auf --> nächste Frage                                                         |
-| NF10   | Du hast einen langen Weg vor dir | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
-| NF11   | Kein Defizit                     | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
-| NF12   | Genie                            | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
-| NF13   | Ein Stein                        | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
-| NF14   | Jonas                            | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
-| NF15   | Muss Mutti wieder helfen?        | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
-| NF16   | Siri wirf ne Münze               | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
-| NF17   | Du vertraust den?                | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
-| NF18   | Joker-Master (Mafia Tenbrock)    | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
-| NF19   | Hacker                           | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
-| NF20   | Indischer Kundensupport          | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
-| NF21   | Millionär                        | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
-| NF22   | Milliardär                       | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
+| NF1    | Vollbild                         | Man kann das Programm in Vollbild starten                                                  |                                             
+| NF2    | Top 10                           | Top 10 Spieler werden angezeigt                                                            |
+| NF3    | Joker Animation                  | Symbol kommt auf                                                                           |
+| NF4    | Telefon Joker                    | die Frage wird beantwortet                                                                 |
+| NF5    | Publikum Joker                   | Diagramm mit vier Balken, die sich bewegen und nach 4 Sekunden die richtige Antwort zeigen |
+| NF6    | 50/50 Joker                      | 2 Felder werden ausgeblendet                                                               |                                                  
+| NF7    | Revive Joker                     | Symbol kommt auf --> nächste Frage                                                         |
+| NF8    | Du hast einen langen Weg vor dir | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
+| NF9    | Kein Defizit                     | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
+| NF10   | Genie                            | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
+| NF11   | Ein Stein                        | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
+| NF12   | Jonas                            | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
+| NF13   | Muss Mutti wieder helfen?        | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
+| NF14   | Siri wirf ne Münze               | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
+| NF15   | Du vertraust den?                | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
+| NF16   | Joker-Master (Mafia Tenbrock)    | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
+| NF17   | Hacker                           | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
+| NF18   | Indischer Kundensupport          | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
+| NF19   | Millionär                        | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
+| NF20   | Milliardär                       | Symbol und Erklärung wofür man dem Achivement gekriegt hat kommen auf                      |
 |
 
 ## 4 Entwürfe
