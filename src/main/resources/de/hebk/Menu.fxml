@@ -68,7 +68,7 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="23.0" layoutY="952.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_3" width="517.0" />
-      <ImageView fx:id="menu_UserImage" fitHeight="132.0" fitWidth="132.0" layoutX="42.0" layoutY="961.0" onMouseClicked="#showProfilePicture1" pickOnBounds="true">
+      <ImageView fx:id="menu_UserImage" fitHeight="132.0" fitWidth="132.0" layoutX="42.0" layoutY="961.0" onMouseClicked="#showUser_Statistics" pickOnBounds="true">
          <image>
             <Image url="@Profilbilder/Unbenannt.PNG" />
          </image>
