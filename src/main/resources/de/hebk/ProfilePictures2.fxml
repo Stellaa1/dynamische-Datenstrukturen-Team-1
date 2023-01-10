@@ -54,7 +54,7 @@
             <Font name="Sylfaen" size="47.0" />
          </font>
       </Text>
-      <Button layoutX="1735.0" layoutY="1160.0" mnemonicParsing="false" onAction="#showProfilePicture2" prefHeight="58.0" prefWidth="157.0" text="WEITER" textFill="WHITE">
+      <Button layoutX="1735.0" layoutY="1160.0" mnemonicParsing="false" onAction="#showProfilePictures2" prefHeight="58.0" prefWidth="157.0" text="WEITER" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="28.0" />
          </font>

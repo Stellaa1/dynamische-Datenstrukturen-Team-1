@@ -69,7 +69,7 @@
             <Image url="@Profilbilder/11.png" />
          </image>
       </ImageView>
-      <Button layoutX="1735.0" layoutY="1140.0" mnemonicParsing="false" onAction="#showProfilePicture2" prefHeight="58.0" prefWidth="157.0" text="WEITER" textFill="WHITE">
+      <Button layoutX="1735.0" layoutY="1140.0" mnemonicParsing="false" onAction="#showProfilePictures2" prefHeight="58.0" prefWidth="157.0" text="WEITER" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="28.0" />
          </font>
