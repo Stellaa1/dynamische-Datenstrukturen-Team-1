@@ -3,6 +3,7 @@ package de.hebk;
 public class GameSettings {
 
     private Joker joker = new Joker();
+    private Cheats cheats = new Cheats();
     private String gameMode = "Normal";
     private int reward = 0;
     private int question_Amount = 10;
@@ -20,6 +21,14 @@ public class GameSettings {
 
     public void setJoker(Joker joker) {
         this.joker = joker;
+    }
+
+    public Cheats getCheats() {
+        return cheats;
+    }
+
+    public void setCheats(Cheats cheats) {
+        this.cheats = cheats;
     }
 
     public String getGameMode() {

@@ -19,6 +19,12 @@
     -fx-text-fill: white;
 }
 
+.button_close2{
+    -fx-background-color: #ff0000;
+    -fx-background-radius: 0;
+    -fx-text-fill: white;
+}
+
 .button_1{
     -fx-background-color: #B5B9DD;
 }

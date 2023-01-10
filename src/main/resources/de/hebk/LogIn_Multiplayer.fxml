@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+   <children>
+      <ImageView fx:id="anmelden_Image1" fitHeight="481.0" fitWidth="480.0" layoutX="197.0" layoutY="71.0" pickOnBounds="true">
+         <image>
+            <Image url="@Profilbilder/Unbenannt.PNG" />
+         </image>
+      </ImageView>
+      <Button layoutX="1534.0" layoutY="1131.0" mnemonicParsing="false" onAction="#logIn_Multiplayer" prefHeight="72.0" prefWidth="357.0" styleClass="button_close" text="WEITER" textFill="WHITE">
+         <font>
+            <Font name="Sylfaen" size="40.0" />
+         </font>
+      </Button>
+      <Button layoutX="30.0" layoutY="1131.0" mnemonicParsing="false" onAction="#showMainMenu" prefHeight="72.0" prefWidth="357.0" styleClass="button_close" text="ZURÜCK" textFill="WHITE">
+         <font>
+            <Font name="Sylfaen" size="40.0" />
+         </font>
+      </Button>
+      <TextField fx:id="anmelden_Benutzername1" layoutX="697.0" layoutY="121.0" onKeyTyped="#logIn_showProfilePicture" prefHeight="83.0" prefWidth="930.0" promptText="Eingabe" styleClass="text-field1">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="anmelden_Password1" layoutX="697.0" layoutY="292.0" prefHeight="83.0" prefWidth="930.0" promptText="Eingabe" styleClass="text-field1">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </TextField>
+      <Text fill="#a4a4a4" layoutX="713.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BENUTZERNAME - SPIELER 1">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fill="#a4a4a4" layoutX="713.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PASSWORT - SPIELER 1">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <TextField fx:id="anmelden_PasswortWiederholen1" layoutX="697.0" layoutY="469.0" prefHeight="83.0" prefWidth="930.0" promptText="Eingabe" styleClass="text-field1">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </TextField>
+      <Text fill="#a4a4a4" layoutX="713.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PASSWORT WIEDERHOLEN - SPIELER 1">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="anmelden_Image2" fitHeight="481.0" fitWidth="480.0" layoutX="197.0" layoutY="615.0" pickOnBounds="true">
+         <image>
+            <Image url="@Profilbilder/Unbenannt.PNG" />
+         </image>
+      </ImageView>
+      <TextField fx:id="anmelden_Benutzername2" layoutX="697.0" layoutY="665.0" onKeyTyped="#logIn_showProfilePicture" prefHeight="83.0" prefWidth="930.0" promptText="Eingabe" styleClass="text-field1">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="anmelden_Password2" layoutX="697.0" layoutY="836.0" prefHeight="83.0" prefWidth="930.0" promptText="Eingabe" styleClass="text-field1">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </TextField>
+      <Text fill="#a4a4a4" layoutX="713.0" layoutY="628.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BENUTZERNAME - SPIELER 2">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fill="#a4a4a4" layoutX="713.0" layoutY="808.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PASSWORT - SPIELER 2">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <TextField fx:id="anmelden_PasswortWiederholen2" layoutX="697.0" layoutY="1013.0" prefHeight="83.0" prefWidth="930.0" promptText="Eingabe" styleClass="text-field1">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </TextField>
+      <Text fill="#a4a4a4" layoutX="713.0" layoutY="993.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PASSWORT WIEDERHOLEN - SPIELER 2">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

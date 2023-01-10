@@ -13,6 +13,8 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -21,14 +23,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -37,9 +38,9 @@ import java.util.*;
 
 public class GUI extends SystemController {
 
-    static int wait_idle;
-    static int wait_win;
-    static int wait_lose;
+    static int wait_idle = 4;
+    static int wait_win = 4;
+    static int wait_lose = 4;
     private Timer timer = new Timer();
     private Timer answer_timer = new Timer();
     private Timer answer_timer_win = new Timer();
@@ -50,6 +51,7 @@ public class GUI extends SystemController {
     TimerTask answer_timertask_lose;
     long beforeTimer;
     long afterRun;
+    Multiplayer multiplayer;
     Game game;
     private static String temp_gameMode;
     private static int temp_FragenAnzahl;
@@ -59,8 +61,13 @@ public class GUI extends SystemController {
     private static int temp_incrementValue;
     private static int temp_incrementRange;
     private static String temp_currency;
-
+    private static boolean temp_cheats_infJoker = false;
+    private static boolean temp_cheats_infTime = false;
+    private static boolean temp_cheats_infLife = false;
+    private static boolean temp_cheats_alwaysFiftyFifty = false;
+    private static boolean temp_cheats_alwaysCall = false;
     MediaPlayer mediaPlayer;
+    MediaPlayer mediaPlayer_Video;
     @FXML
     private Button button;
     @FXML
@@ -73,6 +80,10 @@ public class GUI extends SystemController {
     private TextField nameField;
     @FXML
     private VBox newVB;
+    @FXML
+    private VBox newVBP1;
+    @FXML
+    private VBox newVBP2;
     @FXML
     private TextField passwordField;
     @FXML
@@ -121,6 +132,14 @@ public class GUI extends SystemController {
     private ImageView profileImage19;
     @FXML
     private ImageView profileImage20;
+    @FXML
+    private ImageView profileImage21;
+    @FXML
+    private ImageView profileImage22;
+    @FXML
+    private ImageView profileImage23;
+    @FXML
+    private ImageView profileImage24;
     @FXML
     private ImageView questionImage;
     @FXML
@@ -179,6 +198,22 @@ public class GUI extends SystemController {
     @FXML
     private TextField anmelden_PasswortWiederholen;
     @FXML
+    private ImageView anmelden_Image1;
+    @FXML
+    private TextField anmelden_Benutzername1;
+    @FXML
+    private TextField anmelden_Password1;
+    @FXML
+    private TextField anmelden_PasswortWiederholen1;
+    @FXML
+    private ImageView anmelden_Image2;
+    @FXML
+    private TextField anmelden_Benutzername2;
+    @FXML
+    private TextField anmelden_Password2;
+    @FXML
+    private TextField anmelden_PasswortWiederholen2;
+    @FXML
     private ImageView menu_UserImage;
     @FXML
     private Text menu_UserName;
@@ -189,6 +224,8 @@ public class GUI extends SystemController {
     @FXML
     private Rectangle loader_Game_Normal2;
     @FXML
+    private Rectangle loader_Game_Multiplayer_Normal;
+    @FXML
     private Rectangle loader_Top10;
     @FXML
     private Rectangle loader_Top10_Reverse;
@@ -198,6 +235,8 @@ public class GUI extends SystemController {
     private Rectangle loader_TopAll_Reverse;
     @FXML
     private Rectangle loader_User_Statistics;
+    @FXML
+    private Rectangle loader_Cheats;
     @FXML
     private Button gameMode_Normal;
     @FXML
@@ -396,6 +435,22 @@ public class GUI extends SystemController {
     @FXML
     private ImageView joker_fifty_fifty;
     @FXML
+    private ImageView joker_audience;
+    @FXML
+    private ImageView joker_call;
+    @FXML
+    private ImageView joker_fifty_fiftyP1;
+    @FXML
+    private ImageView joker_audienceP1;
+    @FXML
+    private ImageView joker_callP1;
+    @FXML
+    private ImageView joker_fifty_fiftyP2;
+    @FXML
+    private ImageView joker_audienceP2;
+    @FXML
+    private ImageView joker_callP2;
+    @FXML
     private Text user_userName;
     @FXML
     private Text user_joinedDate;
@@ -421,6 +476,14 @@ public class GUI extends SystemController {
     private Text user_GameResults_Chart_WonText;
     @FXML
     private Text user_GameResults_Chart_LostText;
+    @FXML
+    private Rectangle audienceJoker_Background;
+    @FXML
+    private BarChart<String, Integer> audienceJoker_Chart;
+    @FXML
+    private ImageView result_audienceJoker_Box;
+    @FXML
+    private Text result_audienceJoker_Option;
 
     @FXML
     private Text user_GameResults_Chart_PlayedText_Reverse;
@@ -440,32 +503,40 @@ public class GUI extends SystemController {
     private Text percentageOfWin;
     @FXML
     private ImageView user_Profilepicture;
+    @FXML
+    private CheckBox cheat1;
+    @FXML
+    private CheckBox cheat2;
+    @FXML
+    private CheckBox cheat3;
+    @FXML
+    private CheckBox cheat4;
+    @FXML
+    private CheckBox cheat5;
+    @FXML
+    private Text multiplayer_Player1Points;
+    @FXML
+    private Text multiplayer_Player2Points;
+    @FXML
+    private Text multiplayer_Player1Name;
+    @FXML
+    private Text multiplayer_Player2Name;
+    @FXML
+    private ImageView multiplayer_Crown;
+    @FXML
+    private ImageView multiplayer_WinnerImage;
+    @FXML
+    private Text multiplayer_WinnerName;
+    @FXML
+    private Text multiplayer_GameResults_Winner;
+    @FXML
+    private Text multiplayer_GameResults_RunnerUp;
     private String[] s = values1;
     private String firstColor = "#49529d";
     private String secondColor = "#ff8c00";
-
+    private MediaView mediaView;
     static private final Text[] VALUES = new Text[20];
-
-
-
-    @FXML
-    public void onHelloButtonClick() throws Exception{
-        //welcomeText.setText("Welcome to JavaFX Application!");
-        System.out.println(achievementPane);
-        System.out.println(achievementPane.getParent());
-        System.out.println(achievementPane.getId());
-
-        for( int i=0; i < 10; i++) {
-            Button p = new Button();
-            p.setId("Item" + i);
-            System.out.println(p.getId());
-            achievementsFrame.getChildren().add(p);
-        }
-    }
-
-
-
-
+    static private final Text[] VALUES2 = new Text[20];
     public void loadScene(String screen) throws Exception{
         Start.previousScene = Start.mainStage.getTitle();
         FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource(screen));
@@ -542,6 +613,8 @@ public class GUI extends SystemController {
     }
 
     public void openMenu() throws Exception {
+        super.saveData();
+        stopSound();
         loadScene("Menu.fxml");
     }
 
@@ -550,6 +623,18 @@ public class GUI extends SystemController {
         loadScene("Settings.fxml");
     }
 
+    public void showMultiplayer() throws Exception{
+        loadScene("MultiplayerOderQuestionmaker.fxml");
+    }
+
+    public void showMultiplayerLogIn() throws Exception{
+        loadScene("LogIn_Multiplayer.fxml");
+    }
+
+
+    public void setMultiPlayer(){
+        Multiplayer multiplayer;
+    }
 
     public void createUser() throws Exception {
 
@@ -649,6 +734,58 @@ public class GUI extends SystemController {
         loadScene("Menu.fxml");
     }
 
+    public void logIn_Multiplayer() throws Exception{
+        if (!anmelden_Benutzername1.getText().equals(local_User.getName())){
+            loadScene("Fehler_Einloggen.fxml");
+            return;
+        }
+
+
+        if (!anmelden_Password1.getText().equals(anmelden_PasswortWiederholen1.getText())){
+            loadScene("Fehler_Einloggen.fxml");
+            return;
+        }
+
+
+        for (int i = 0; i < csvFiles_Questions.length; i++){
+            if (local_User.getFavorite_subjects().get(i) == null){
+                local_User.getFavorite_subjects().append(0);
+            }
+        }
+        if (!anmelden_Password1.getText().equals(local_User.getPassword())){
+            loadScene("Fehler_Einloggen.fxml");
+            return;
+        }
+        multiPlayer_Player1 = local_User;
+
+        int index = searchForUser(anmelden_Benutzername2.getText());
+
+        if (index == -1){
+            loadScene("Fehler_Einloggen.fxml");
+            return;
+        }
+
+        if (!anmelden_Password2.getText().equals(anmelden_PasswortWiederholen2.getText())){
+            loadScene("Fehler_Einloggen.fxml");
+            return;
+        }
+
+
+        User u = users.get(index).getContext();
+        for (int i = 0; i < csvFiles_Questions.length; i++){
+            if (u.getFavorite_subjects().get(i) == null){
+                u.getFavorite_subjects().append(0);
+            }
+        }
+        if (!anmelden_Password2.getText().equals(u.getPassword())){
+            loadScene("Fehler_Einloggen.fxml");
+            return;
+        }
+        multiPlayer_Player2 = u;
+        temp_gameMode = "Multiplayer - Normal";
+        loadScene("Fragenzahl.fxml");
+    }
+
     public void counter() throws Exception{
         try {
             System.out.println("Main Timer Started");
@@ -665,11 +802,16 @@ public class GUI extends SystemController {
                     }
                     if (time[0] == -1){
                         timer.cancel();
-                        endGame();
+                        try {
+                            endGame();
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 }
             };
             timer.schedule(timertask, 0, 1000);
+            super.saveData();
         } catch (Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
@@ -697,6 +839,7 @@ public class GUI extends SystemController {
                     if (time[0] < 0){
                         answer_timer.cancel();
                         try {
+                            System.out.println(answerResult_DisabledAutoAnswer(t) + " answerResult_DisabledAutoAnswer(t)");
                             if (answerResult_DisabledAutoAnswer(t)){
                                 counter_answer_win(t);
                             } else {
@@ -731,7 +874,6 @@ public class GUI extends SystemController {
                         }
                     }
                     if (time[0] < 0){
-                        System.out.println("End");
                         answer_timer_win.cancel();
                         try {
                             game.index_frage++;
@@ -754,7 +896,7 @@ public class GUI extends SystemController {
             Rectangle r = getRectangleFromTexts(t.getText());
             answer_timer_lose = new Timer();
             setSoundOnProgress_Lose();
-            double[] time = {4.00};
+            double[] time = {wait_lose};
             answer_timertask_lose = new TimerTask() {
                 @Override
                 public void run() {
@@ -769,10 +911,36 @@ public class GUI extends SystemController {
                     }
                     if (time[0] < 0){
                         answer_timer_lose.cancel();
-                        endGame();
-                        Rectangle r2 = getCorrectAnswerFromRectangels();
-                        animateObjects(r2, "Answer");
-                        animateObjects(r, "Wrong");
+                        if (!game.fragen.gameSettings.getCheats().isInfLife()){
+                            if (!game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
+                                try {
+                                    endGame();
+                                } catch (Exception e) {
+                                    throw new RuntimeException(e);
+                                }
+                                Rectangle r2 = getCorrectAnswerFromRectangels();
+                                animateObjects(r2, "Answer");
+                                animateObjects(r, "Wrong");
+                            } else {
+                                try {
+                                    game.index_frage++;
+                                    setQuestionAndAnswers();
+                                    animateObjects(r, "Normal");
+                                    playBackgroundSound();
+                                } catch (Exception e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+
+                        } else{
+                            try {
+                                game.index_frage++;
+                                setQuestionAndAnswers();
+                                animateObjects(r, "Normal");
+                                playBackgroundSound();
+                            } catch (Exception e){
+                            }
+                        }
                     }
                 }
             };
@@ -858,18 +1026,27 @@ public class GUI extends SystemController {
             temp_incrementRange = 2;
             temp_currency = "€";
         }
-
-
-        //game.fragen.gameSettings.setDifficultyRange(Integer.parseInt(minimum_DifficultyField.getText()));
-        //game.fragen.gameSettings.setDifficultyValue(Integer.parseInt(maximum_DifficultyField.getText()));
-        //game.fragen.gameSettings.setIncrementValue(Integer.parseInt(incrementValueField.getText()));
-        //game.fragen.gameSettings.setIncrementRange(Integer.parseInt(incrementRangeField.getText()));
-
-        loadScene("Main_Game.fxml");
+        if (temp_gameMode.equals("Multiplayer - Normal")){
+            loadScene("Main_Game_Multiplayer.fxml");
+        } else {
+            loadScene("Main_Game.fxml");
+        }
     }
 
     public void restartJokerImages(){
-        joker_fifty_fifty.setDisable(false);
+        if (joker_fifty_fifty != null){
+            joker_fifty_fifty.setDisable(false);
+            joker_fifty_fifty.setOpacity(1);
+        }
+        if (joker_fifty_fiftyP1 != null){
+            joker_fifty_fiftyP1.setDisable(false);
+            joker_fifty_fiftyP1.setOpacity(1);
+
+        }
+        if (joker_fifty_fiftyP2 != null){
+            joker_fifty_fiftyP2.setDisable(false);
+            joker_fifty_fiftyP2.setOpacity(1);
+        }
     }
 
     public void setGame(){
@@ -883,16 +1060,24 @@ public class GUI extends SystemController {
         game.fragen.gameSettings.setIncrementValue(temp_incrementValue);
         game.fragen.gameSettings.setIncrementRange(temp_incrementRange);
 
-        game.fragen.gameSettings.getJoker().setInfJoker(false);
         game.fragen.gameSettings.getJoker().setRevive(true);
         game.fragen.gameSettings.getJoker().setAudience(true);
         game.fragen.gameSettings.getJoker().setFifty_fifty(true);
         game.fragen.gameSettings.getJoker().setCall(true);
         restartJokerImages();
 
+        game.fragen.gameSettings.getCheats().setInfJoker(temp_cheats_infJoker);
+        game.fragen.gameSettings.getCheats().setInfTime(temp_cheats_infTime);
+        game.fragen.gameSettings.getCheats().setInfLife(temp_cheats_infLife);
+        game.fragen.gameSettings.getCheats().setAlwaysFiftyFifty(temp_cheats_alwaysFiftyFifty);
+        game.fragen.gameSettings.getCheats().setAlwaysCall(temp_cheats_alwaysCall);
+
         game.fragen.generateQuestions();
         game.index_frage = 0;
         game.fragen.gameSettings.setCurrency(temp_currency);
+
+        stopSound();
+        playSound("/de/hebk/Sounds/Musik/100-1000-Questions.mp3");
 
         if (autoConfirm.isSelected()){
             game.fragen.gameSettings.setAutoConfirm(true);
@@ -903,7 +1088,6 @@ public class GUI extends SystemController {
 
     public void startGame() {
         loader_Game_Normal.setVisible(false);
-        playSound("/de/hebk/Sounds/Musik/100-1000-Questions.mp3");
 
         try {
             setGame();
@@ -981,6 +1165,8 @@ public class GUI extends SystemController {
 
             }
 
+            playVideo("/de/hebk/Videos/Win_Effect.mp4");
+
         } catch(Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
             try {
@@ -990,8 +1176,138 @@ public class GUI extends SystemController {
         }
     }
 
+    public void startGame_Multiplayer() {
+        loader_Game_Multiplayer_Normal.setVisible(false);
+        multiplayer_Player1Name.setText(multiPlayer_Player1.getName());
+        multiplayer_Player2Name.setText(multiPlayer_Player2.getName());
+
+
+        try {
+            setGame_Multiplayer();
+            System.out.println(temp_category);
+            for (int i = 0; i < csvFiles_Questions.length; i++){
+                if (csvFiles_Questions[i].equals(temp_category)){
+                    multiplayer.getPlayer1().getFavorite_subjects().get(i).setContext(multiplayer.getPlayer1().getFavorite_subjects().get(i).getContext() + 1);
+                    multiplayer.getPlayer2().getFavorite_subjects().get(i).setContext(multiplayer.getPlayer2().getFavorite_subjects().get(i).getContext() + 1);
+                    break;
+                }
+            }
+
+            int tg = 47;
+            if (game.fragen.gameSettings.getQuestion_Amount() == 20){
+                tg = 47;
+                newVBP1.setSpacing(45);
+                newVBP2.setSpacing(45);
+                s = values1;
+            }
+
+            if (game.fragen.gameSettings.getQuestion_Amount() == 30){
+                tg = 38;
+                newVBP1.setSpacing(25);
+                newVBP2.setSpacing(25);
+                s = values2;
+            }
+
+            if (game.fragen.gameSettings.getQuestion_Amount() == 40){
+                tg = 30;
+                newVBP1.setSpacing(17);
+                newVBP2.setSpacing(17);
+                s = values3;
+            }
+
+            newVBP1.getChildren().clear();
+            newVBP2.getChildren().clear();
+
+            //if (multiplayer.getGame().fragen.gameSettings.getGameMode().equals("Normal")){
+            for (int i = 0; i < game.fragen.gameSettings.getQuestion_Amount() / 2; i++){
+                Text questionText = new Text();
+                questionText.setText((i + 1) + " ⬩ " + s[i] + " " + game.fragen.gameSettings.getCurrency());
+                questionText.setWrappingWidth(350.65087890625);
+                questionText.setTextAlignment(TextAlignment.CENTER);
+                questionText.setFill(Paint.valueOf("#ffffff"));
+                Font questionText_Font = Font.font("Arial",tg);
+                questionText.setFont(questionText_Font);
+                System.out.println(i + " " + VALUES[i]);
+                VALUES[i] = questionText;
+                System.out.println(i + " " + VALUES[i]);
+                newVBP1.getChildren().add(questionText);
+            }
+
+            VALUES[0].setStyle("-fx-fill: #ff8c00");
+
+            for (int i = 0; i < game.fragen.gameSettings.getQuestion_Amount() / 2; i++){
+                Text questionText = new Text();
+                questionText.setText((i + 1) + " ⬩ " + s[i] + " " + game.fragen.gameSettings.getCurrency());
+                questionText.setWrappingWidth(350.65087890625);
+                questionText.setTextAlignment(TextAlignment.CENTER);
+                questionText.setFill(Paint.valueOf("#ffffff"));
+                Font questionText_Font = Font.font("Arial",tg);
+                questionText.setFont(questionText_Font);
+                System.out.println(i + " " + VALUES[i]);
+                VALUES2[i] = questionText;
+                System.out.println(i + " " + VALUES[i]);
+                newVBP2.getChildren().add(questionText);
+            }
+
+            if (game.index_frage < game.fragen.gameSettings.getQuestion_Amount()){
+                multiplayer.setCurrentPlayer(multiplayer.getPlayer1());
+                setQuestionAndAnswers();
+            }
+
+            //}
+
+        } catch(Exception e){
+            System.out.println(Arrays.toString(e.getStackTrace()));
+            try {
+                loadScene("Fehler_Game.fxml");
+            } catch (Exception e2){
+            }
+        }
+    }
+
+    public void setGame_Multiplayer(){
+        multiplayer = new Multiplayer();
+        multiplayer.setPlayer1(multiPlayer_Player1);
+        multiplayer.setPlayer2(multiPlayer_Player2);
+        game = new Game();
+        game.fragen = new Fragen();
+        game.fragen.gameSettings.setGameMode(temp_gameMode);
+        game.fragen.gameSettings.setCategory(temp_category);
+        game.fragen.gameSettings.setQuestion_Amount(temp_FragenAnzahl);
+        game.fragen.gameSettings.setDifficultyValue(temp_difficultyValue);
+        game.fragen.gameSettings.setDifficultyRange(temp_difficultyRange);
+        game.fragen.gameSettings.setIncrementValue(temp_incrementValue);
+        game.fragen.gameSettings.setIncrementRange(temp_incrementRange);
+        game.fragen.gameSettings.getCheats().setInfJoker(temp_cheats_infJoker);
+        game.fragen.gameSettings.getCheats().setInfTime(temp_cheats_infTime);
+        game.fragen.gameSettings.getCheats().setInfLife(temp_cheats_infLife);
+        game.fragen.gameSettings.getCheats().setAlwaysFiftyFifty(temp_cheats_alwaysFiftyFifty);
+        game.fragen.gameSettings.getCheats().setAlwaysCall(temp_cheats_alwaysCall);
+        GameSettings s1 = new GameSettings();
+        s1.getJoker().setRevive(false);
+        s1.getJoker().setAudience(true);
+        s1.getJoker().setFifty_fifty(true);
+        s1.getJoker().setCall(true);
+        restartJokerImages();
+        GameSettings s2 = new GameSettings();
+        s2.getJoker().setRevive(false);
+        s2.getJoker().setAudience(true);
+        s2.getJoker().setFifty_fifty(true);
+        s2.getJoker().setCall(true);
+        multiplayer.setPlayer1Settings(s1);
+        multiplayer.setPlayer2Settings(s2);
+        multiplayer.setfIndex1(0);
+        multiplayer.setfIndex2(0);
+        game.fragen.generateQuestions();
+        game.fragen.gameSettings.setCurrency(temp_currency);
+        stopSound();
+        playSound("/de/hebk/Sounds/Musik/100-1000-Questions.mp3");
+        if (autoConfirm.isSelected()){
+            game.fragen.gameSettings.setAutoConfirm(true);
+        }
+    }
+
     public void setSoundOnProgress_Win(){
-        System.out.println("Sound started");
         if (VALUES[game.index_frage] == null){
             return;
         }
@@ -999,14 +1315,11 @@ public class GUI extends SystemController {
         System.out.println(value);
 
         if (value < 4000){
-            wait_idle = 3;
-            wait_win = 5;
             playSound("/de/hebk/Sounds/Win/2000-Win.mp3");
         }
 
         if (value > 4000 && value <= 8000){
             wait_win = 4;
-            wait_idle = 3;
             playSound("/de/hebk/Sounds/Win/8000-Win.mp3");
         }
 
@@ -1024,13 +1337,14 @@ public class GUI extends SystemController {
 
         if (value > 250000 && value <= 500000){
             wait_idle = 4;
-            wait_win = 6;
+            wait_lose = 5;
             playSound("/de/hebk/Sounds/Win/500000-Win.mp3");
         }
 
         if (value > 500000 && value <= 1000000){
             wait_idle = 10;
             wait_win = 26;
+            wait_lose = 7;
             playSound("/de/hebk/Sounds/Win/1000000-Win.mp3");
         }
     }
@@ -1047,73 +1361,111 @@ public class GUI extends SystemController {
         }
 
         if (value > 4000 && value <= 8000){
+            wait_win = 4;
             playSound("/de/hebk/Sounds/Loose/8000-Lose.mp3");
         }
 
         if (value > 8000 && value <= 32000){
+            wait_idle = 5;
+            wait_win = 8;
             playSound("/de/hebk/Sounds/Loose/32000-Lose.mp3");
         }
 
         if (value > 32000 && value <= 250000){
+            wait_idle = 4;
+            wait_win = 6;
             playSound("/de/hebk/Sounds/Loose/250000-Lose.mp3");
         }
 
         if (value > 250000 && value <= 500000){
+            wait_idle = 4;
+            wait_lose = 5;
             playSound("/de/hebk/Sounds/Loose/500000-Lose.mp3");
         }
 
         if (value > 500000 && value <= 1000000){
+            wait_idle = 10;
+            wait_win = 26;
+            wait_lose = 7;
             playSound("/de/hebk/Sounds/Loose/1000000-Lose.mp3");
         }
     }
 
     public void setQuestionAndAnswers() throws Exception{
+        if (game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal") && game.index_frage != 0){
+            if (multiplayer.getCurrentPlayer() == multiPlayer_Player1){
+                multiplayer.setCurrentPlayer(multiPlayer_Player2);
+                multiplayer.setfIndex1(multiplayer.getfIndex1() + 1);
+            } else {
+                multiplayer.setCurrentPlayer(multiPlayer_Player1);
+                multiplayer.setfIndex2(multiplayer.getfIndex2() + 1);
+            }
+        }
         resetObjects();
 
         if (timer != null){
             timer.cancel();
         }
 
-        if (VALUES[game.index_frage] == null){
-            System.out.println("Player Won");
-            if (game.fragen.gameSettings.getGameMode().equals("Normal")){
-                local_User.setPoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
-                local_User.setPlayed(local_User.getPlayed() + 1);
-                local_User.setWon(local_User.getWon() + 1);
+        if (!game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
+            if (VALUES[game.index_frage] == null){
+                System.out.println("Player Won");
+                if (game.fragen.gameSettings.getGameMode().equals("Normal")){
+                    local_User.setPoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
+                    local_User.setPlayed(local_User.getPlayed() + 1);
+                    local_User.setWon(local_User.getWon() + 1);
+                }
+                if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
+                    local_User.setReversePoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
+                    local_User.setPlayed_Reverse(local_User.getPlayed_Reverse() + 1);
+                    local_User.setWon_Reverse(local_User.getWon_Reverse() + 1);
+                }
+                return;
             }
-            if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
-                local_User.setReversePoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
-                local_User.setPlayed_Reverse(local_User.getPlayed_Reverse() + 1);
-                local_User.setWon_Reverse(local_User.getWon_Reverse() + 1);
+        } else{
+            if (VALUES[multiplayer.getfIndex2()] == null){
+                endGame();
+                return;
             }
-            return;
         }
 
-        counter();
-        if (game.index_frage != 0){
-            VALUES[game.index_frage - 1].setStyle("-fx-fill: white");
+
+        if (!game.fragen.gameSettings.getCheats().isInfTime()){
+            counter();
         }
-        VALUES[game.index_frage].setStyle("-fx-fill: #ff8c00");
+
+        if (!game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
+            if (game.index_frage != 0){
+                VALUES[game.index_frage - 1].setStyle("-fx-fill: white");
+            }
+            VALUES[game.index_frage].setStyle("-fx-fill: #ff8c00");
+        } else{
+            if (game.index_frage != 0){
+                if (multiplayer.getfIndex1() != 0){
+                    VALUES[multiplayer.getfIndex1() - 1].setStyle("-fx-fill: white");
+                }
+                if (multiplayer.getfIndex2() != 0){
+                    VALUES2[multiplayer.getfIndex2() - 1].setStyle("-fx-fill: white");
+                }
+            }
+            if (multiplayer.getCurrentPlayer() == multiPlayer_Player1){
+                VALUES[multiplayer.getfIndex1()].setStyle("-fx-fill: #ff8c00");
+            } else{
+                VALUES2[multiplayer.getfIndex2()].setStyle("-fx-fill: #ff8c00");
+            }
+        }
+
+
         if (game.index_frage >= game.fragen.gameSettings.getQuestion_Amount()){
             return;
         }
 
         List<String> options = null;
 
-        if (game.fragen.gameSettings.getGameMode().equals("Normal")){
-            options = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions();
-            questionBox.setText(game.fragen.getQuestions().get(game.index_frage).getContext().getQuestion());
-        }
+        int current = getCurrentQuestion();
+        options = game.fragen.getQuestions().get(current).getContext().getOptions();
+        questionBox.setText(game.fragen.getQuestions().get(current).getContext().getQuestion());
 
-        if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
-            options = game.fragen.getQuestions().get(game.fragen.gameSettings.getQuestion_Amount() - 1 - game.index_frage).getContext().getOptions();
-            questionBox.setText(game.fragen.getQuestions().get(game.fragen.gameSettings.getQuestion_Amount() - 1 - game.index_frage).getContext().getQuestion());
-        }
-
-
-        for (int i = 0; i < game.fragen.gameSettings.getQuestion_Amount(); i++){
-            System.out.println(game.fragen.getQuestions().get(i).getContext().getOptions().toString());
-        }
 
         int x;
         x = (int) (Math.random() * options.size());
@@ -1167,7 +1519,14 @@ public class GUI extends SystemController {
                 answer_text4.setText("Keine von genannten");
             }
         }
-        System.out.println("METHOD ENDED");
+        if (game.fragen.gameSettings.getCheats().isAlwaysFiftyFifty()){
+            useJoker_fifty_fifty(null);
+        }
+        if (game.fragen.gameSettings.getCheats().isAlwaysAudiece()){
+            audienceJoker_Chart.getData().clear();
+            audienceJoker_Chart.layout();
+            useJoker_Audience(null);
+        }
     }
 
     private void disableObjects() {
@@ -1179,10 +1538,20 @@ public class GUI extends SystemController {
         answer_text2.setDisable(true);
         answer_text3.setDisable(true);
         answer_text4.setDisable(true);
-        joker_fifty_fifty.setDisable(true);
+        if (joker_fifty_fifty != null){
+            joker_fifty_fifty.setDisable(true);
+        }
+        if (joker_fifty_fiftyP1 != null){
+            joker_fifty_fiftyP1.setDisable(true);
+        }
+        if (joker_fifty_fiftyP2 != null){
+            joker_fifty_fiftyP2.setDisable(true);
+        }
     }
 
     private void resetObjects() {
+        hide_Confirm_Box();
+        changeVisibility_audienceJoker(false);
         answer_rectangle1.setStyle("");
         answer_rectangle2.setStyle("");
         answer_rectangle3.setStyle("");
@@ -1203,7 +1572,15 @@ public class GUI extends SystemController {
         answer_text2.setOpacity(1);
         answer_text3.setOpacity(1);
         answer_text4.setOpacity(1);
-        joker_fifty_fifty.setDisable(false);
+        if (joker_fifty_fifty != null){
+            joker_fifty_fifty.setDisable(false);
+        }
+        if (joker_fifty_fiftyP1 != null){
+            joker_fifty_fiftyP1.setDisable(false);
+        }
+        if (joker_fifty_fiftyP2 != null){
+            joker_fifty_fiftyP2.setDisable(false);
+        }
     }
 
     public void animateObjects(Rectangle b, String t){
@@ -1226,7 +1603,7 @@ public class GUI extends SystemController {
 
     public Rectangle getCorrectAnswerFromRectangels(){
         String answer = null;
-        if (game.fragen.gameSettings.getGameMode().equals("Normal")){
+        if (game.fragen.gameSettings.getGameMode().equals("Normal") || game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
             answer = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(0).getContext();
         }
 
@@ -1284,7 +1661,7 @@ public class GUI extends SystemController {
 
     public Text getCorrectAnswerFromTexts(){
         String answer = null;
-        if (game.fragen.gameSettings.getGameMode().equals("Normal")){
+        if (game.fragen.gameSettings.getGameMode().equals("Normal") || game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
             answer = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(0).getContext();
         }
 
@@ -1313,10 +1690,15 @@ public class GUI extends SystemController {
         return text;
     }
 
-    public void endGame(){
+    public void endGame() throws Exception {
+        timer.cancel();
         if (result_Box.isVisible()){
             hide_Confirm_Box();
         }
+        if (audienceJoker_Background.isVisible()){
+            changeVisibility_audienceJoker(false);
+        }
+
         if (game.fragen.gameSettings.getGameMode().equals("Normal")){
             local_User.setPoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
             local_User.setPlayed(local_User.getPlayed() + 1);
@@ -1327,25 +1709,71 @@ public class GUI extends SystemController {
             local_User.setPlayed_Reverse(local_User.getPlayed_Reverse() + 1);
             local_User.setLost_Reverse(local_User.getLost_Reverse() + 1);
         }
-        youLostText.setVisible(true);
-        pointsText.setText("PUNKTE: " + game.fragen.gameSettings.getReward());
-        pointsText.setVisible(true);
+
         returnToMenu.setVisible(true);
         replay_Button.setVisible(true);
-        revive_Button.setVisible(true);
         loader_Game_Normal2.setOpacity(0.65);
         loader_Game_Normal2.setVisible(true);
 
-        if (game.fragen.gameSettings.getJoker().isRevive()){
-            revive_Button.setDisable(false);
-            revive_Warning_Text.setVisible(true);
-        } else{
-            revive_Button.setDisable(true);
-            revive_Warning_Text.setVisible(false);
+        if (!game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
+            youLostText.setVisible(true);
+            pointsText.setText("PUNKTE: " + game.fragen.gameSettings.getReward());
+            pointsText.setVisible(true);
+            revive_Button.setVisible(true);
+            if (game.fragen.gameSettings.getJoker().isRevive()){
+                revive_Button.setDisable(false);
+                revive_Warning_Text.setVisible(true);
+            } else{
+                revive_Button.setDisable(true);
+                revive_Warning_Text.setVisible(false);
+            }
+        } else {
+            if (multiplayer.getPlayer1Settings().getReward() == multiplayer.getPlayer2Settings().getReward()){
+                multiplayer_WinnerImage.setVisible(true);
+                multiplayer_WinnerName.setVisible(true);
+                multiplayer_GameResults_Winner.setVisible(true);
+                multiplayer_GameResults_RunnerUp.setVisible(true);
+                FileInputStream inputStream = new FileInputStream("src/main/resources/de/hebk/Images/scale.png");
+                Image image = new Image(inputStream);
+                multiplayer_WinnerImage.setImage(image);
+                multiplayer_WinnerName.setText("UNENTSCHIEDEN");
+                String m = multiplayer.getPlayer1().getName() + " hatte " + multiplayer.getPlayer1Settings().getReward() + " Punkte mit " + multiplayer.getfIndex1() + 1 + " Fragen";
+                multiplayer_GameResults_Winner.setText(m.toUpperCase());
+                m = multiplayer.getPlayer2().getName() + " hat mit " + multiplayer.getPlayer2Settings().getReward() + " Punkte mit " + multiplayer.getfIndex1() + 1 + " Fragen";
+                multiplayer_GameResults_RunnerUp.setText(m.toUpperCase());
+                return;
+            }
+            if (multiplayer.getPlayer1Settings().getReward() != multiplayer.getPlayer2Settings().getReward()){
+                multiplayer_Crown.setVisible(true);
+                multiplayer_WinnerImage.setVisible(true);
+                multiplayer_WinnerName.setVisible(true);
+                multiplayer_GameResults_Winner.setVisible(true);
+                multiplayer_GameResults_RunnerUp.setVisible(true);
+            }
+            if (multiplayer.getPlayer1Settings().getReward() > multiplayer.getPlayer2Settings().getReward()){
+                FileInputStream inputStream = new FileInputStream(multiplayer.getPlayer1().getProfilePicture());
+                Image image = new Image(inputStream);
+                multiplayer_WinnerImage.setImage(image);
+                multiplayer_WinnerName.setText(multiplayer.getPlayer1().getName());
+                String m = multiplayer.getPlayer1().getName() + " hat mit " + multiplayer.getPlayer1Settings().getReward() + " Punkten gewonnen";
+                multiplayer_GameResults_Winner.setText(m.toUpperCase());
+                m = multiplayer.getPlayer2().getName() + " hat mit " + multiplayer.getPlayer2Settings().getReward() + " Punkten verloren";
+                multiplayer_GameResults_RunnerUp.setText(m.toUpperCase());
+            } else{
+                FileInputStream inputStream = new FileInputStream(multiplayer.getPlayer2().getProfilePicture());
+                Image image = new Image(inputStream);
+                multiplayer_WinnerImage.setImage(image);
+                multiplayer_WinnerName.setText(multiplayer.getPlayer2().getName());
+                String m = multiplayer.getPlayer2().getName() + " hat mit " + multiplayer.getPlayer2Settings().getReward() + " Punkten gewonnen";
+                multiplayer_GameResults_Winner.setText(m.toUpperCase());
+                m = multiplayer.getPlayer1().getName() + " hat mit " + multiplayer.getPlayer1Settings().getReward() + " Punkten verloren";
+                multiplayer_GameResults_RunnerUp.setText(m.toUpperCase());
+            }
         }
+
     }
 
-    public void walkAway(){
+    public void walkAway() throws Exception {
         hide_Confirm_Box();
         if (game.fragen.gameSettings.getGameMode().equals("Normal")){
             local_User.setPoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
@@ -1357,24 +1785,38 @@ public class GUI extends SystemController {
             local_User.setPlayed_Reverse(local_User.getPlayed_Reverse() + 1);
             local_User.setLost_Reverse(local_User.getLost_Reverse() + 1);
         }
-        youLostText.setVisible(true);
-        pointsText.setText("PUNKTE: " + game.fragen.gameSettings.getReward());
-        pointsText.setVisible(true);
-        returnToMenu.setVisible(true);
-        replay_Button.setVisible(true);
-        loader_Game_Normal2.setOpacity(0.65);
-        loader_Game_Normal2.setVisible(true);
+        if (multiplayer != null){
+            if (multiplayer.getCurrentPlayer() == multiPlayer_Player1){
+                if (multiplayer.getPlayer2Settings().getReward() <= multiplayer.getPlayer1Settings().getReward()){
+                    multiplayer.getPlayer2Settings().setReward(multiplayer.getPlayer1Settings().getReward() + 1);
+                }
+            } else{
+                if (multiplayer.getPlayer1Settings().getReward() <= multiplayer.getPlayer2Settings().getReward()){
+                    multiplayer.getPlayer1Settings().setReward(multiplayer.getPlayer2Settings().getReward() + 1);
+                }
+            }
+        }
+        endGame();
     }
 
     public void hideEndGame(){
-        youLostText.setVisible(false);
+        if (youLostText != null){
+            youLostText.setVisible(false);
+            revive_Button.setVisible(false);
+            revive_Warning_Text.setVisible(false);
+        }
         pointsText.setVisible(false);
         returnToMenu.setVisible(false);
         replay_Button.setVisible(false);
-        revive_Button.setVisible(false);
-        revive_Warning_Text.setVisible(false);
         loader_Game_Normal2.setOpacity(1);
         loader_Game_Normal2.setVisible(false);
+        if (multiplayer_Crown != null){
+            multiplayer_Crown.setVisible(false);
+            multiplayer_WinnerImage.setVisible(false);
+            multiplayer_WinnerName.setVisible(false);
+            multiplayer_GameResults_Winner.setVisible(false);
+            multiplayer_GameResults_RunnerUp.setVisible(false);
+        }
     }
 
 
@@ -1384,14 +1826,34 @@ public class GUI extends SystemController {
                 break;
             }
             VALUES[i - 1].setStyle("-fx-fill: white");
+            if (VALUES2 != null){
+                VALUES2[i - 1].setStyle("-fx-fill: white");
+            }
         }
         VALUES[game.index_frage].setStyle("-fx-fill: #ff8c00");
     }
     public void replay() throws Exception {
         hideEndGame();
-        setGame();
+        if (!game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
+            setGame();
+        } else {
+            setGame_Multiplayer();
+        }
         setQuestionAndAnswers();
         resetValues();
+        super.saveData();
+    }
+
+    public int getCurrentQuestion(){
+        int index = 0;
+        if (game.fragen.gameSettings.getGameMode().equals("Normal") || game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
+            index = game.index_frage;
+        }
+
+        if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
+            index = game.fragen.gameSettings.getQuestion_Amount() - 1 - game.index_frage;
+        }
+        return index;
     }
 
     public void revive() throws Exception {
@@ -1399,17 +1861,33 @@ public class GUI extends SystemController {
         local_User.setUsed_Joker_Revive(local_User.getUsed_Joker_Revive() + 1);
         game.fragen.gameSettings.setReward(0);
         resetObjects();
-        game.fragen.gameSettings.getJoker().setRevive(game.fragen.gameSettings.getJoker().isInfJoker() ? true : false);
+        game.fragen.gameSettings.getJoker().setRevive(game.fragen.gameSettings.getCheats().isInfJoker() ? true : false);
         if (timer != null){
             timer.cancel();
         }
         counter();
     }
 
-    public void useJoker_fifty_fifty(){
-        if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){return;}
-        String firstOption = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(2).getContext();
-        String secondOption = game.fragen.getQuestions().get(game.index_frage).getContext().getOptions().get(3).getContext();
+    public void useJoker_fifty_fifty(MouseEvent event){
+        ImageView used = null;
+        if (event != null){
+            used = (ImageView) event.getSource();
+        }
+        if (multiplayer != null){
+            if (multiplayer.getCurrentPlayer() == multiPlayer_Player1 && !multiplayer.getPlayer1Settings().getJoker().isFifty_fifty()){return;}
+            if (multiplayer.getCurrentPlayer() == multiPlayer_Player2 && !multiplayer.getPlayer2Settings().getJoker().isFifty_fifty()){return;}
+            if (event != null){
+                if (event.getSource() == joker_fifty_fiftyP1 && multiplayer.getCurrentPlayer() != multiPlayer_Player1){return;}
+                if (event.getSource() == joker_fifty_fiftyP2 && multiplayer.getCurrentPlayer() != multiPlayer_Player2){return;}
+            }
+        } else{
+            if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){return;}
+        }
+        String firstOption;
+        String secondOption;
+        int current = getCurrentQuestion();
+        firstOption = game.fragen.getQuestions().get(current).getContext().getOptions().get(2).getContext();
+        secondOption = game.fragen.getQuestions().get(current).getContext().getOptions().get(3).getContext();
         local_User.setUsed_Joker_FiftyFifty(local_User.getUsed_Joker_FiftyFifty() + 1);
         if (answer_text1.getText().equals(firstOption) || answer_text1.getText().equals(secondOption)){
             answer_text1.setOpacity(0.5);
@@ -1435,10 +1913,129 @@ public class GUI extends SystemController {
             answer_text4.setDisable(true);
             answer_rectangle4.setDisable(true);
         }
-        game.fragen.gameSettings.getJoker().setFifty_fifty(game.fragen.gameSettings.getJoker().isInfJoker() ? true : false);
-        if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){
-            joker_fifty_fifty.setOpacity(0.5);
+        game.fragen.gameSettings.getJoker().setFifty_fifty(game.fragen.gameSettings.getCheats().isInfJoker() ? true : false);
+        if (multiplayer != null){
+            if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){
+                if (used != null){
+                    used.setOpacity(0.5);
+                }
+            }
+        } else{
+            if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){
+                joker_fifty_fifty.setOpacity(0.5);
+            }
         }
+    }
+
+    public void hideAudienceChart(){
+        changeVisibility_audienceJoker(false);
+    }
+
+    public void useJoker_Audience(MouseEvent event){
+        ImageView used = null;
+        if (event != null){
+            used = (ImageView) event.getSource();
+        }
+        if (multiplayer != null){
+            if (multiplayer.getCurrentPlayer() == multiPlayer_Player1 && !multiplayer.getPlayer1Settings().getJoker().isAudience()){return;}
+            if (multiplayer.getCurrentPlayer() == multiPlayer_Player2 && !multiplayer.getPlayer2Settings().getJoker().isAudience()){return;}
+            if (event != null){
+                if (event.getSource() == joker_audienceP1 && multiplayer.getCurrentPlayer() != multiPlayer_Player1){return;}
+                if (event.getSource() == joker_audienceP2 && multiplayer.getCurrentPlayer() != multiPlayer_Player2){return;}
+            }
+        } else{
+            if (!game.fragen.gameSettings.getJoker().isAudience()){return;}
+        }
+        audienceJoker_Chart.getData().clear();
+        audienceJoker_Chart.layout();
+        changeVisibility_audienceJoker(true);
+        int current = getCurrentQuestion();
+        int startValue = 100 - game.fragen.getQuestions().get(current).getContext().getDifficulty();
+        if (startValue > 20){
+            startValue = 20;
+        }
+        int remaining = 100 - startValue;
+        int c1 = 0;
+        int c2 = 0;
+        int c3 = 0;
+        int c4 = 0;
+        if (answer_text1.getText().equals(game.fragen.getQuestions().get(current).getContext().getOptions().get(0).getContext())){
+            c1 = startValue;
+        }
+
+        if (answer_text2.getText().equals(game.fragen.getQuestions().get(current).getContext().getOptions().get(0).getContext())){
+            c2 = startValue;
+        }
+
+        if (answer_text3.getText().equals(game.fragen.getQuestions().get(current).getContext().getOptions().get(0).getContext())){
+            c3 = startValue;
+        }
+
+        if (answer_text4.getText().equals(game.fragen.getQuestions().get(current).getContext().getOptions().get(0).getContext())){
+            c4 = startValue;
+        }
+
+        while (remaining > 0){
+            int x = (int) (Math.random() * 4);
+
+            if (x == 0){
+                c1++;
+                remaining--;
+            }
+            if (x == 1){
+                c2++;
+                remaining--;
+            }
+            if (x == 2){
+                c3++;
+                remaining--;
+            }
+            if (x == 3){
+                c4++;
+                remaining--;
+            }
+        }
+        XYChart.Series<String, Integer> series = new XYChart.Series();
+        series.getData().add(new XYChart.Data<>("", c1));
+        series.setName("1");
+
+        XYChart.Series<String, Integer> series2 = new XYChart.Series();
+        series2.getData().add(new XYChart.Data<>("", c2));
+        series2.setName("2");
+
+        XYChart.Series<String, Integer> series3 = new XYChart.Series();
+        series3.getData().add(new XYChart.Data<>("", c3));
+        series3.setName("3");
+
+        XYChart.Series<String, Integer> series4 = new XYChart.Series();
+        series4.getData().add(new XYChart.Data<>("", c4));
+        series4.setName("4");
+
+        audienceJoker_Chart.getData().addAll(series);
+        audienceJoker_Chart.getData().addAll(series2);
+        audienceJoker_Chart.getData().addAll(series3);
+        audienceJoker_Chart.getData().addAll(series4);
+
+        game.fragen.gameSettings.getJoker().setAudience(game.fragen.gameSettings.getCheats().isInfJoker() ? true : false);
+        if (multiplayer != null){
+            if (!game.fragen.gameSettings.getJoker().isAudience()){
+                if (used != null){
+                    used.setOpacity(0.5);
+                }
+            }
+        } else{
+            if (!game.fragen.gameSettings.getJoker().isAudience()){
+                joker_audience.setOpacity(0.5);
+            }
+        }
+    }
+
+
+    public void changeVisibility_audienceJoker(boolean v){
+        audienceJoker_Background.setVisible(v);
+        audienceJoker_Chart.setVisible(v);
+        result_audienceJoker_Box.setVisible(v);
+        result_audienceJoker_Option.setVisible(v);
     }
 
     public void confirm(){
@@ -1465,10 +2062,33 @@ public class GUI extends SystemController {
         result_Answer.setVisible(true);
         result_Confirm.setText("PUNKTE: " + game.fragen.gameSettings.getReward());
         result_Confirm.setVisible(true);
-        result_Option3_Box.setVisible(true);
-        result_Option3.setVisible(true);
-        result_Option4_Box.setVisible(true);
-        result_Option4.setVisible(true);
+        if (result_Option3 != null){
+            result_Option3_Box.setVisible(true);
+            result_Option3.setVisible(true);
+        }
+        if (result_Option4 != null){
+            result_Option4_Box.setVisible(true);
+            result_Option4.setVisible(true);
+        }
+    }
+
+    public void loadCheats(){
+        loader_Cheats.setVisible(false);
+        if (temp_cheats_infJoker){
+            cheat1.setSelected(true);
+        }
+        if (temp_cheats_infTime){
+            cheat2.setSelected(true);
+        }
+        if (temp_cheats_infLife){
+            cheat3.setSelected(true);
+        }
+        if (temp_cheats_alwaysFiftyFifty){
+            cheat4.setSelected(true);
+        }
+        if (temp_cheats_alwaysCall){
+            cheat5.setSelected(true);
+        }
     }
 
     public void hide_Confirm_Box(){
@@ -1484,7 +2104,7 @@ public class GUI extends SystemController {
         result_Option3.setVisible(false);
         result_Option4.setVisible(false);
         result_Option4_Box.setVisible(false);
-        resetObjects();
+        //resetObjects();
     }
 
     public void continueGame() throws Exception {
@@ -1523,16 +2143,22 @@ public class GUI extends SystemController {
             if (answer_text4.getText().equals(result_Answer.getText())){
                 r2 = answer_rectangle4;
             }
-            endGame();
-            animateObjects(r, "Answer");
-            animateObjects(r2, "Wrong");
-            return;
+            if (!game.fragen.gameSettings.getCheats().isInfLife()){
+                if (!game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
+                    endGame();
+                    animateObjects(r, "Answer");
+                    animateObjects(r2, "Wrong");
+                    return;
+                } else {
+                    continueGame();
+                }
+            } else{
+                continueGame();
+            }
         }
 
         if (super.checkAnswer(game.fragen, questionBox.getText(), result_Answer.getText())){
-            System.out.println("Reward " + game.fragen.gameSettings.getReward());
             changeReward();
-            System.out.println("Reward " + game.fragen.gameSettings.getReward());
             confirm2();
         }
         r.setStyle("");
@@ -1561,44 +2187,40 @@ public class GUI extends SystemController {
         Text t2 = getCorrectAnswerFromTexts();
         boolean v = false;
         if (!t.getText().equals(t2.getText())){
-
-            //endGame();
-            //animateButton(b2, "Answer");
-            //animateButton(b, "Wrong");
             v = false;
         }
-
         if (super.checkAnswer(game.fragen, questionBox.getText(), t.getText())){
-            //game.index_frage++;
-            //setQuestionAndAnswers();
-            //animateButton(b, "Normal");
-            //changeReward();
             v = true;
         }
-
         return v;
     }
 
     public void answerFunction(Text t) throws Exception {
-        disableObjects();
+        //disableObjects();
         if (!game.fragen.gameSettings.isAutoConfirm()){
             t.setStyle("");
             result_Answer.setText(t.getText());
             confirm();
         } else {
             System.out.println("Else answer");
+            disableObjects();
             counter_answer(t);
         }
         t.setStyle("");
     }
 
     public void changeReward(){
-        if (game.fragen.gameSettings.getGameMode().equals("Normal")){
-            game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(game.index_frage).getContext().getDifficulty());
-        }
-
-        if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
-            game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(game.fragen.getQuestions().size() - 1 - game.index_frage).getContext().getDifficulty());
+        int current = getCurrentQuestion();
+        if (!game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
+            game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(current).getContext().getDifficulty());
+        } else{
+            if (multiplayer.getCurrentPlayer() == multiPlayer_Player1){
+                multiplayer.getPlayer1Settings().setReward(multiplayer.getPlayer1Settings().getReward() + game.fragen.getQuestions().get(current).getContext().getDifficulty());
+            } else{
+                multiplayer.getPlayer2Settings().setReward(multiplayer.getPlayer2Settings().getReward() + game.fragen.getQuestions().get(current).getContext().getDifficulty());
+            }
+            multiplayer_Player1Points.setText("PUNKTE: " + multiplayer.getPlayer1Settings().getReward());
+            multiplayer_Player2Points.setText("PUNKTE: " + multiplayer.getPlayer2Settings().getReward());
         }
     }
 
@@ -1658,6 +2280,17 @@ public class GUI extends SystemController {
         }
     }
 
+    public void playVideo(String filename){
+        try {
+            String path = getClass().getResource(filename).toURI().toString();
+            Media media = new Media(path);
+            mediaPlayer_Video.setAutoPlay(true);
+            mediaView.setMediaPlayer(mediaPlayer_Video);
+        } catch (Exception e){
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        }
+    }
+
     public void playBackgroundSound(){
         if (VALUES[game.index_frage] == null){
             return;
@@ -1707,7 +2340,6 @@ public class GUI extends SystemController {
         if (value >= 1000000){
             playSound("/de/hebk/Sounds/Musik/1000000-Question.mp3");
         }
-
     }
 
     public void stopSound(){
@@ -1723,7 +2355,7 @@ public class GUI extends SystemController {
     public void setTop10(String method) throws FileNotFoundException {
         Stack<User> top10 = null;
 
-        top10 = (method.equals("Normal") == true ? calculateTop10("Normal") : calculateTop10("Reverse"));
+        top10 = (method.equals("Normal") == true ? calculateTopPlayers("Normal") : calculateTopPlayers("Reverse"));
         System.out.println(top10.toString());
 
         int x = 0;
@@ -2013,7 +2645,7 @@ public class GUI extends SystemController {
 
     public void setTopAll(){
         loader_TopAll.setVisible(false);
-        Stack<User> topAll = calculateTop10("Normal");
+        Stack<User> topAll = calculateTopPlayers("Normal");
         ObservableList<User> observableList = FXCollections.observableArrayList();
 
         for (int i = 0; i < topAll.size(); i++){
@@ -2031,7 +2663,7 @@ public class GUI extends SystemController {
 
     public void setTopAll_Reverse(){
         loader_TopAll_Reverse.setVisible(false);
-        Stack<User> topAll_Reverse = calculateTop10("Reverse");
+        Stack<User> topAll_Reverse = calculateTopPlayers("Reverse");
         ObservableList<User> observableList = FXCollections.observableArrayList();
 
         for (int i = 0; i < topAll_Reverse.size(); i++){
@@ -2086,20 +2718,26 @@ public class GUI extends SystemController {
         userInformation_Name.setText("Name: " + local_User.getName());
         userInformation_Password.setText("Passwort: " + local_User.getPassword());
 
-        Stack<User> topAll = calculateTop10("Normal");
+        Stack<User> topAll = calculateTopPlayers("Normal");
         for (int i = 0; i < topAll.size(); i++){
             User current = topAll.get(i).getContext();
-            System.out.println(i);
             if (local_User.getName().equals(current.getName())){
                 userRank_Normal.setText("NORMAL: " + (i + 1));
+                break;
+            }
+            else {
+                userRank_Normal.setText("NORMAL: " + topAll.size());
             }
         }
 
-        Stack<User> topAll_Reverse = calculateTop10("Reverse");
+        Stack<User> topAll_Reverse = calculateTopPlayers("Reverse");
         for (int i = 0; i < topAll_Reverse.size(); i++){
             User current = topAll_Reverse.get(i).getContext();
             if (local_User.getName().equals(current.getName())){
                 userRank_Reverse.setText("REVERSE: " + (i + 1));
+                break;
+            } else {
+                userRank_Reverse.setText("REVERSE: " + topAll_Reverse.size());
             }
         }
 
@@ -2108,12 +2746,13 @@ public class GUI extends SystemController {
         user_Achievements.setText(local_User.getAchievements().size() + "/24");
         user_favoriteSubject.setText(getFavorite_Subject_local_user());
 
-
         setUser_GameResults_Chart();
         setUser_Achievements_Chart();
         setUser_Joker_Chart();
         if (local_User.getPlayed() > 0){
             percentageOfWin.setText(local_User.getWon() * 100 / local_User.getPlayed() + "%");
+        } else{
+            percentageOfWin.setText("/");
         }
     }
 
@@ -2124,9 +2763,6 @@ public class GUI extends SystemController {
 
         if (user_GameResults_Chart_switch.getText().equals("Normal")) {
             loader_User_Statistics.setVisible(false);
-            local_User.setPlayed(142);
-            local_User.setWon(42);
-            local_User.setLost(100);
 
             for (int i = 0; i < 42; i++) {
                 local_User.getAchievements().append(i + "");
@@ -2180,9 +2816,6 @@ public class GUI extends SystemController {
             user_GameResults_Chart_switch.setText("Reverse");
         } else {
             loader_User_Statistics.setVisible(false);
-            local_User.setPlayed_Reverse(13);
-            local_User.setWon_Reverse(4);
-            local_User.setLost_Reverse(9);
 
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
             series.getData().add(new XYChart.Data<>("0", local_User.getPlayed_Reverse() / 8));
@@ -2231,7 +2864,6 @@ public class GUI extends SystemController {
             series3.getNode().setStyle("-fx-stroke: #ff8092");
             user_GameResults_Chart_switch.setText("Normal");
         }
-
     }
 
     public void setUser_Achievements_Chart(){
@@ -2244,10 +2876,6 @@ public class GUI extends SystemController {
 
     public void setUser_Joker_Chart(){
         loader_User_Statistics.setVisible(false);
-        local_User.setUsed_Joker_Audience(4);
-        local_User.setUsed_Joker_FiftyFifty(6);
-        local_User.setUsed_Joker_Revive(7);
-        local_User.setUsed_Joker_Call(3);
 
         XYChart.Series<String, Integer> series = new XYChart.Series();
         series.getData().add(new XYChart.Data<>("", local_User.getUsed_Joker_Audience()));
@@ -2276,6 +2904,42 @@ public class GUI extends SystemController {
         System.exit(0);
     }
 
+    public void handle_gameModes(MouseEvent event) throws Exception {
+        if (event.getSource() == gameMode_Normal){
+            temp_gameMode = "Normal";
+        }
+
+        if (event.getSource() == gameMode_Reverse){
+            temp_gameMode = "Reverse";
+        }
+        showHowManyQuestions();
+    }
+
+    public void handle_HowManyQuestions(MouseEvent event) throws Exception {
+        if (event.getSource() == amount_Questions10){
+            if (!temp_gameMode.equals("Multiplayer - Normal")){
+                temp_FragenAnzahl = 10;
+            } else {
+                temp_FragenAnzahl = 20;
+            }
+        }
+
+        if (event.getSource() == amount_Questions15){
+            if (!temp_gameMode.equals("Multiplayer - Normal")){
+                temp_FragenAnzahl = 15;
+            } else {
+                temp_FragenAnzahl = 30;
+            }        }
+
+        if (event.getSource() == amount_Questions20){
+            if (!temp_gameMode.equals("Multiplayer - Normal")){
+                temp_FragenAnzahl = 20;
+            } else {
+                temp_FragenAnzahl = 40;
+            }
+        }
+        loadScene("Game_Settings1.fxml");
+    }
 
     public void handle_BoxColor(MouseEvent event){
         String s1 = "-fx-fill: " + firstColor;
@@ -2325,30 +2989,30 @@ public class GUI extends SystemController {
 
     }
 
-    public void handle_gameModes(MouseEvent event) throws Exception {
-        if (event.getSource() == gameMode_Normal){
-            temp_gameMode = "Normal";
+    public void handle_cheats(MouseEvent event) throws Exception{
+        if (event.getSource() == cheat1){
+            temp_cheats_infJoker = cheat1.isSelected();
         }
-
-        if (event.getSource() == gameMode_Reverse){
-            temp_gameMode = "Reverse";
+        if (event.getSource() == cheat2){
+            temp_cheats_infTime = cheat2.isSelected();
         }
-        showHowManyQuestions();
-    }
-
-    public void handle_HowManyQuestions(MouseEvent event) throws Exception {
-        if (event.getSource() == amount_Questions10){
-            temp_FragenAnzahl = 10;
+        if (event.getSource() == cheat3){
+            temp_cheats_infLife = cheat3.isSelected();
         }
-
-        if (event.getSource() == amount_Questions15){
-            temp_FragenAnzahl = 15;
+        if (event.getSource() == cheat4){
+            if (cheat4.isSelected()){
+                cheat1.setSelected(true);
+                temp_cheats_infJoker = cheat1.isSelected();
+            }
+            temp_cheats_alwaysFiftyFifty = cheat4.isSelected();
         }
-
-        if (event.getSource() == amount_Questions20){
-            temp_FragenAnzahl = 20;
+        if (event.getSource() == cheat5){
+            if (cheat5.isSelected()){
+                cheat1.setSelected(true);
+                temp_cheats_infJoker = cheat1.isSelected();
+            }
+            temp_cheats_alwaysCall = cheat5.isSelected();
         }
-        loadScene("Game_Settings1.fxml");
     }
 
     public void handle_ProfileImages(MouseEvent event) throws Exception {
@@ -2426,10 +3090,22 @@ public class GUI extends SystemController {
         }
 
         if (event.getSource() == profileImage19){
-            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/GG.PNG";
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/19.PNG";
         }
 
         if (event.getSource() == profileImage20){
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/20.PNG";
+        }
+
+        if (event.getSource() == profileImage22){
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/22.PNG";
+        }
+
+        if (event.getSource() == profileImage23){
+            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/GG.PNG";
+        }
+
+        if (event.getSource() == profileImage24){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/Unbenannt.PNG";
         }
 
