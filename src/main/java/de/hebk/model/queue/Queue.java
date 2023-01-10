@@ -9,6 +9,7 @@ import de.hebk.model.node.Node;
  * @param <T>
  */
 public class Queue<T> {
+
     private Node<T> first;
 
     /**
@@ -16,8 +17,7 @@ public class Queue<T> {
      * Objekte enthält, sonst liefert sie den Wert false.
      */
     public boolean isEmpty(){
-        //TODO Fill
-        return true;
+        return first == null;
     }
 
     /**
@@ -25,15 +25,35 @@ public class Queue<T> {
      * pObject gleich null ist, bleibt die Schlange unverändert
      */
     public void enqueue(T pObject){
-        //TODO Fill
+        if(pObject != null) {
+            Node<T> tmp = first;
+
+            if(pObject != null) {
+                if (first == null) {
+                    first = new Node<T>();
+                    first.setContext(pObject);
+                } else {
+                    while (tmp.getNext() != null) {
+                        tmp = tmp.getNext();
+                    }
+                    Node<T> tmp2 = new Node<T>();
+                    tmp2.setContext(pObject);
+                    tmp.setNext(tmp2);
+                }
+            }
+
+        }
     }
+
 
     /**
      * Das erste Objekt wird aus der Schlange entfernt. Falls die
      * Schlange leer ist, wird sie nicht verändert.
      */
     public void dequeue(){
-        //TODO Fill
+        if (first != null) {
+            first = first.getNext();
+        }
     }
 
     /**
@@ -42,8 +62,9 @@ public class Queue<T> {
      * null zurückgegeben.
      */
     public T front(){
-        //TODO Fill
-        return first.getContext();
+        if(first != null) {
+            return first.getContext();
+        }
+        return null;
     }
-
 }
