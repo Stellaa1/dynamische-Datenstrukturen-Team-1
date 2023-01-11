@@ -15,14 +15,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
       <ImageView fitHeight="1140.0" fitWidth="1894.0" layoutX="5.0" layoutY="40.0" pickOnBounds="true">
          <image>
@@ -44,17 +43,12 @@
             <Image url="@Images/speisekarte.png" />
          </image>
       </ImageView>
-      <ImageView accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="1151.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView accessibleRole="BUTTON" fitHeight="53.0" fitWidth="58.0" layoutX="1151.0" layoutY="571.0" onMouseClicked="#useJoker_Call" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/smartphone.png" />
          </image>
       </ImageView>
       <VBox fx:id="newVB" layoutX="1278.0" layoutY="75.0" prefHeight="1070.0" prefWidth="351.0" spacing="25.0" />
-      <ImageView accessibleRole="BUTTON" fitHeight="41.0" fitWidth="38.0" layoutX="12.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/cogwheel.png" />
-         </image>
-      </ImageView>
       <Line endX="100.0" startX="-100.0" />
       <TextArea fx:id="questionBox" cache="true" editable="false" layoutX="66.0" layoutY="644.0" mouseTransparent="true" prefHeight="234.0" prefWidth="1157.0" wrapText="true">
          <font>
@@ -117,6 +111,7 @@
          </font>
       </Text>
       <Rectangle fx:id="result_Box" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="438.0" layoutX="395.0" layoutY="175.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_5" visible="false" width="438.0" />
+      <Rectangle fx:id="result_Box_Call" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="192.0" layoutX="405.0" layoutY="185.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_5" visible="false" width="438.0" />
       <Text fx:id="result_Title" fill="WHITE" layoutX="391.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DEINE ANTWORT:" textAlignment="CENTER" visible="false" wrappingWidth="438.0">
          <font>
             <Font name="System Bold" size="29.0" />
@@ -151,6 +146,11 @@
             <Image url="@Images/Untitled-5.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="result_Option4_Box" fitHeight="73.0" fitWidth="399.0" layoutX="422.0" layoutY="447.0" onMouseClicked="#continueGame" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Images/Untitled-2.png" />
+         </image>
+      </ImageView>
       <Text fx:id="result_Option2" fill="WHITE" layoutX="686.0" layoutY="493.0" onMouseClicked="#hide_Confirm_Box" strokeType="OUTSIDE" strokeWidth="0.0" text="NEIN" visible="false">
          <font>
             <Font name="System Bold" size="24.0" />
@@ -161,11 +161,21 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <ImageView fx:id="result_Option4_Box" fitHeight="73.0" fitWidth="399.0" layoutX="422.0" layoutY="447.0" onMouseClicked="#continueGame" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="result_Option1_Box_Call" fitHeight="55.0" fitWidth="240.0" layoutX="505.0" layoutY="313.0" onMouseClicked="#hide_Confirm_Box" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@Images/Untitled-2.png" />
+            <Image url="@Images/Untitled-5.png" />
          </image>
       </ImageView>
+      <Text fx:id="result_Option1_Call" fill="WHITE" layoutX="552.0" layoutY="350.0" onMouseClicked="#answer" strokeType="OUTSIDE" strokeWidth="0.0" text="SCHLIESSEN" visible="false">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="result_Box_Call_Description" fill="WHITE" layoutX="420.0" layoutY="226.0" onMouseClicked="#answer" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" visible="false" wrappingWidth="409.10546875">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
       <Text fx:id="result_Option4" fill="WHITE" layoutX="558.0" layoutY="496.0" onMouseClicked="#continueGame" strokeType="OUTSIDE" strokeWidth="0.0" text="WEITER" visible="false">
          <font>
             <Font name="System Bold" size="31.0" />
@@ -177,7 +187,6 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
-      <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" layoutX="541.0" layoutY="101.0" />
       <Rectangle fx:id="audienceJoker_Background" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="380.0" layoutX="468.0" layoutY="124.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_5" visible="false" width="430.0" />
       <BarChart fx:id="audienceJoker_Chart" alternativeColumnFillVisible="true" barGap="1.0" categoryGap="1.0" horizontalGridLinesVisible="false" layoutX="501.0" layoutY="157.0" prefHeight="292.0" prefWidth="365.0" styleClass="jokerChart" visible="false">
          <xAxis>
@@ -203,7 +212,7 @@
          </font>
       </Text>
       <Rectangle fx:id="loader_Game_Normal2" arcHeight="5.0" arcWidth="5.0" height="1280.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_4" visible="false" width="1920.0" />
-      <Rectangle fx:id="loader_Game_Normal" arcHeight="5.0" arcWidth="5.0" height="1280.0" onMouseMoved="#startGame" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1920.0" />
+      <Rectangle fx:id="loader_Game_Normal" arcHeight="5.0" arcWidth="5.0" height="1280.0" onMouseMoved="#startGame" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" visible="false" width="1920.0" />
       <Text fx:id="youLostText" fill="WHITE" layoutX="526.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DU HAST VERLOREN" visible="false">
          <font>
             <Font name="System Bold" size="96.0" />

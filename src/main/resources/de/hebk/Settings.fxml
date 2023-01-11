@@ -48,7 +48,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="551.0" layoutY="723.0" mnemonicParsing="false" onAction="#showGame" prefHeight="57.0" prefWidth="723.0" styleClass="button_4" text="PROFIL" textFill="WHITE">
+      <Button layoutX="551.0" layoutY="723.0" mnemonicParsing="false" onAction="#showUser_Statistics" prefHeight="57.0" prefWidth="723.0" styleClass="button_4" text="PROFIL" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="60.0" />
          </font>
