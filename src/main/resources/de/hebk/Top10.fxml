@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
       <ImageView fx:id="image_Top1" fitHeight="105.0" fitWidth="105.0" layoutX="161.0" layoutY="84.0" pickOnBounds="true" visible="false">
          <image>
@@ -366,5 +366,10 @@
          </font>
       </Button>
       <Rectangle fx:id="loader_Top10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1280.0" onMouseMoved="#handle_TopMenu" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1920.0" />
+      <ImageView accessibleRole="BUTTON" fitHeight="92.0" fitWidth="92.0" layoutX="42.0" layoutY="34.0" onMouseClicked="#openMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/speisekarte.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

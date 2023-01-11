@@ -705,7 +705,7 @@ public class GUI extends SystemController {
         u.setPassword(passwordField.getText());
         u.setAchievements(new List<>());
         Date d = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/y HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/y HH:mm:ss");
         u.setJoinDate(simpleDateFormat.format(d));
         u.setFavorite_subjects(new List<Integer>());
         for (int i = 0; i < csvFiles_Questions.length; i++){
@@ -1930,7 +1930,7 @@ public class GUI extends SystemController {
                 break;
             }
             VALUES[i - 1].setStyle("-fx-fill: white");
-            if (VALUES2 != null){
+            if (VALUES2[i - 1] != null){
                 VALUES2[i - 1].setStyle("-fx-fill: white");
             }
         }
@@ -2171,6 +2171,7 @@ public class GUI extends SystemController {
     public void hideCallJoker(){
         changeVisibility_CallJoker(false);
     }
+
     public void useJoker_Call(MouseEvent event){
         ImageView used = null;
         if (event != null){
@@ -2193,10 +2194,10 @@ public class GUI extends SystemController {
         int generated = (int) (Math.random() * 100);
         int current = getCurrentQuestion();
         if (generated <= 70){
-            result_Box_Call_Description.setText("Dein Freund sagt, dass" + game.fragen.getQuestions().get(current).getContext().getOptions().get(0));
+            result_Box_Call_Description.setText("Dein Freund sagt, dass " + game.fragen.getQuestions().get(current).getContext().getOptions().get(0).getContext() +  " richtig ist");
         } else {
             generated = (int) (Math.random() * 2);
-            result_Box_Call_Description.setText("Dein Freund sagt, dass" + game.fragen.getQuestions().get(current).getContext().getOptions().get(generated + 1));
+            result_Box_Call_Description.setText("Dein Freund sagt, dass " + game.fragen.getQuestions().get(current).getContext().getOptions().get(generated + 1).getContext() +  " richtig ist");
         }
 
         changeVisibility_CallJoker(true);
@@ -2230,7 +2231,7 @@ public class GUI extends SystemController {
     }
 
     public void changeVisibility_CallJoker(boolean v){
-        result_Box.setVisible(v);
+        result_Box_Call.setVisible(v);
         result_Box_Call_Description.setVisible(v);
         result_Option1_Box_Call.setVisible(v);
         result_Option1_Call.setVisible(v);
@@ -3354,9 +3355,6 @@ public class GUI extends SystemController {
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/22.PNG";
         }
         if (event.getSource() == profileImage23){
-            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/GG.PNG";
-        }
-        if (event.getSource() == profileImage24){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/Unbenannt.PNG";
         }
         local_User.setProfilePicture(local_Profile_Picure);

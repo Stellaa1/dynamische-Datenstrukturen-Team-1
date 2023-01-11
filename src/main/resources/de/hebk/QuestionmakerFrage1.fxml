@@ -5,66 +5,87 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2F346E;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" style="-fx-background-color: #2F346E;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
-      <TextField alignment="CENTER" layoutX="113.0" layoutY="150.0" prefHeight="57.0" prefWidth="374.0" style="-fx-background-color: #49529d; -fx-text-fill: white;" text="Hier kannst du deine Frage schreiben ">
+      <TextField fx:id="questionboxmaking" alignment="CENTER" layoutX="380.0" layoutY="196.0" pickOnBounds="false" prefHeight="415.0" prefWidth="965.0" promptText="Hier kannst du deine Frage schreiben" style="-fx-background-color: #49529d; -fx-text-fill: white;">
          <font>
-            <Font name="Sylfaen" size="12.0" />
+            <Font name="Sylfaen" size="22.0" />
          </font>
       </TextField>
-      <TextField alignment="CENTER" layoutX="305.0" layoutY="216.0" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: #49529d; -fx-text-fill: white;" text="Antwort 2">
+      <TextField fx:id="answerboxQM" alignment="CENTER" layoutX="380.0" layoutY="690.0" prefHeight="186.0" prefWidth="466.0" style="-fx-background-color: #49529d; -fx-text-fill: white;" text="Antwort 1">
          <font>
-            <Font name="Sylfaen" size="12.0" />
+            <Font name="Sylfaen" size="27.0" />
          </font>
       </TextField>
-      <TextField alignment="CENTER" layoutX="115.0" layoutY="216.0" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: #49529d; -fx-text-fill: white;" text="Antwort 1">
+      <Text fill="WHITE" layoutX="150.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUESTIONMAKER" textAlignment="CENTER">
          <font>
-            <Font name="Sylfaen" size="12.0" />
-         </font>
-      </TextField>
-      <TextField alignment="CENTER" layoutX="115.0" layoutY="276.0" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: #49529d; -fx-text-fill: white;" text="Antwort 3">
-         <font>
-            <Font name="Sylfaen" size="12.0" />
-         </font>
-      </TextField>
-      <TextField alignment="CENTER" layoutX="305.0" layoutY="276.0" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: #49529d; -fx-text-fill: white;" text="Antwort 4 ">
-         <font>
-            <Font name="Sylfaen" size="12.0" />
-         </font>
-      </TextField>
-      <Text fill="WHITE" layoutX="48.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUESTIONMAKER" textAlignment="CENTER">
-         <font>
-            <Font name="Sylfaen" size="15.0" />
+            <Font name="Sylfaen" size="52.0" />
          </font>
       </Text>
-      <ImageView accessibleRole="BUTTON" fitHeight="31.0" fitWidth="26.0" layoutX="21.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView accessibleRole="BUTTON" fitHeight="89.0" fitWidth="91.0" layoutX="36.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/speisekarte.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="113.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler ... ist dran mit Fragen erstellen " textAlignment="CENTER" wrappingWidth="374.0">
+      <Text fx:id="fragenStellenText" fill="WHITE" layoutX="502.0" layoutY="1106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler ... ist dran mit Fragen erstellen " textAlignment="CENTER" wrappingWidth="764.1867980957031">
          <font>
-            <Font name="Sylfaen" size="15.0" />
+            <Font name="Sylfaen" size="30.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="264.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frage 1 " textAlignment="CENTER">
+      <Text fx:id="fragencounter" fill="WHITE" layoutX="264.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frage 1 " textAlignment="CENTER" wrappingWidth="196.33672588762488">
          <font>
-            <Font name="Sylfaen" size="25.0" />
+            <Font name="Sylfaen" size="42.0" />
          </font>
       </Text>
-      <ImageView accessibleRole="BUTTON" fitHeight="31.0" fitWidth="26.0" layoutX="565.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/cogwheel.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="524.0" layoutY="371.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="72.0" style="-fx-background-color: #49529d;" text="WEITER" textAlignment="CENTER" textFill="WHITE">
+      <Button layoutX="1508.0" layoutY="1117.0" mnemonicParsing="false" prefHeight="150.0" prefWidth="288.0" style="-fx-background-color: #49529d;" text="WEITER" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font name="Sylfaen" size="12.0" />
+            <Font name="Sylfaen" size="44.0" />
          </font>
       </Button>
+      <TextField fx:id="answerboxQM1" alignment="CENTER" layoutX="381.0" layoutY="873.0" prefHeight="193.0" prefWidth="484.0" style="-fx-background-color: #49529d; -fx-text-fill: white;" text="Antwort 3">
+         <font>
+            <Font name="Sylfaen" size="27.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="answerboxQM3" alignment="CENTER" layoutX="831.0" layoutY="889.0" prefHeight="181.0" prefWidth="511.0" style="-fx-background-color: #49529d; -fx-text-fill: white;" text="Antwort 4">
+         <font>
+            <Font name="Sylfaen" size="27.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="answerboxQM2" alignment="CENTER" layoutX="833.0" layoutY="685.0" prefHeight="205.0" prefWidth="507.0" style="-fx-background-color: #49529d; -fx-text-fill: white;" text="Antwort 2">
+         <font>
+            <Font name="Sylfaen" size="27.0" />
+         </font>
+      </TextField>
+      <Text fx:id="fragenStellenText1" fill="WHITE" layoutX="471.0" layoutY="1155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HINWEIS! Drück oben links von eurer Richtigen antwort um sie zu Speichern" textAlignment="CENTER" wrappingWidth="739.2500305175781">
+         <font>
+            <Font name="Sylfaen" size="30.0" />
+         </font>
+      </Text>
+      <Button layoutX="395.0" layoutY="719.0" mnemonicParsing="false" onAction="#boxQMIsRight" prefHeight="36.0" prefWidth="93.0" style="-fx-background-color: orange;">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button layoutX="390.0" layoutY="911.0" mnemonicParsing="false" onAction="#boxQM2IsRight" prefHeight="36.0" prefWidth="93.0" style="-fx-background-color: orange;">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button layoutX="884.0" layoutY="722.0" mnemonicParsing="false" onAction="#boxQM1IsRight" prefHeight="36.0" prefWidth="93.0" style="-fx-background-color: orange;">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button layoutX="888.0" layoutY="903.0" mnemonicParsing="false" onAction="#boxQM3IsRight" prefHeight="36.0" prefWidth="93.0" style="-fx-background-color: orange;">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Rectangle fx:id="loader_Questionmaker" arcHeight="5.0" arcWidth="5.0" height="1280.0" onMouseMoved="#loadQuestion" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" visible="false" width="1920.0" />
    </children>
 </AnchorPane>
