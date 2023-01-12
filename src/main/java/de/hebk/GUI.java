@@ -717,19 +717,9 @@ public class GUI extends SystemController {
 
         loadScene("Menu.fxml");
 
-        //handle_ProfileImages(new MouseEvent(), u);
-
         System.out.println(users.toString() + " S");
         super.saveData();
 
-        if (index == -1){
-            User user = new User();
-            user.setName(nameField.getText());
-            user.setPassword(passwordField.getText());
-            user.getAchievements().append("START");
-        }
-
-        //super.saveData();
     }
 
     public void resetStreak(){
@@ -1142,6 +1132,32 @@ public class GUI extends SystemController {
             joker_fifty_fiftyP2.setDisable(false);
             joker_fifty_fiftyP2.setOpacity(1);
         }
+        if (joker_audience != null){
+            joker_audience.setDisable(false);
+            joker_audience.setOpacity(1);
+        }
+        if (joker_audienceP1 != null){
+            joker_audienceP1.setDisable(false);
+            joker_audienceP1.setOpacity(1);
+
+        }
+        if (joker_audienceP2 != null){
+            joker_audienceP2.setDisable(false);
+            joker_audienceP2.setOpacity(1);
+        }
+        if (joker_call != null){
+            joker_call.setDisable(false);
+            joker_call.setOpacity(1);
+        }
+        if (joker_callP1 != null){
+            joker_callP1.setDisable(false);
+            joker_callP1.setOpacity(1);
+
+        }
+        if (joker_callP2 != null){
+            joker_callP2.setDisable(false);
+            joker_callP2.setOpacity(1);
+        }
     }
 
     public void setGame(){
@@ -1259,8 +1275,6 @@ public class GUI extends SystemController {
                 }
 
             }
-
-            playVideo("/de/hebk/Videos/Win_Effect.mp4");
 
         } catch(Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
@@ -1618,10 +1632,8 @@ public class GUI extends SystemController {
         if (game.fragen.gameSettings.getCheats().isAlwaysFiftyFifty()){
             useJoker_fifty_fifty(null);
         }
-        if (game.fragen.gameSettings.getCheats().isAlwaysAudiece()){
-            audienceJoker_Chart.getData().clear();
-            audienceJoker_Chart.layout();
-            useJoker_Audience(null);
+        if (game.fragen.gameSettings.getCheats().isAlwaysCall()){
+            useJoker_Call(null);
         }
     }
 
@@ -2194,10 +2206,10 @@ public class GUI extends SystemController {
         int generated = (int) (Math.random() * 100);
         int current = getCurrentQuestion();
         if (generated <= 70){
-            result_Box_Call_Description.setText("Dein Freund sagt, dass " + game.fragen.getQuestions().get(current).getContext().getOptions().get(0).getContext() +  " richtig ist");
+            result_Box_Call_Description.setText("Dein Freund sagt, dass '" + game.fragen.getQuestions().get(current).getContext().getOptions().get(0).getContext() +  "' richtig ist");
         } else {
             generated = (int) (Math.random() * 2);
-            result_Box_Call_Description.setText("Dein Freund sagt, dass " + game.fragen.getQuestions().get(current).getContext().getOptions().get(generated + 1).getContext() +  " richtig ist");
+            result_Box_Call_Description.setText("Dein Freund sagt, dass '" + game.fragen.getQuestions().get(current).getContext().getOptions().get(generated + 1).getContext() +  "' richtig ist");
         }
 
         changeVisibility_CallJoker(true);
@@ -2259,7 +2271,15 @@ public class GUI extends SystemController {
         result_Box.setVisible(true);
         result_Title.setVisible(true);
         result_Answer.setVisible(true);
-        result_Confirm.setText("PUNKTE: " + game.fragen.gameSettings.getReward());
+        if (!game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
+            result_Confirm.setText("PUNKTE: " + game.fragen.gameSettings.getReward());
+        } else{
+            if (multiplayer.getCurrentPlayer() == multiPlayer_Player1){
+                result_Confirm.setText("PUNKTE: " + multiplayer.getPlayer1Settings().getReward());
+            } else{
+                result_Confirm.setText("PUNKTE: " + multiplayer.getPlayer2Settings().getReward());
+            }
+        }
         result_Confirm.setVisible(true);
         if (result_Option3 != null){
             result_Option3_Box.setVisible(true);
@@ -2453,6 +2473,9 @@ public class GUI extends SystemController {
     }
 
     public void changeReward(){
+        if (temp_cheats_infJoker || temp_cheats_infTime || temp_cheats_infLife || temp_cheats_alwaysFiftyFifty || temp_cheats_alwaysCall){
+            return;
+        }
         int current = getCurrentQuestion();
         if (!game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
             game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(current).getContext().getDifficulty());
@@ -2938,13 +2961,16 @@ public class GUI extends SystemController {
             }
         }
 
+        if (highest == 0){
+            return "";
+        }
+
         int index = 0;
         for (int i = 0; i < local_User.getFavorite_subjects().size(); i++){
             if (local_User.getFavorite_subjects().get(i).getContext() == highest){
                 index = i;
             }
         }
-
         return csvFiles_Questions[index];
     }
 

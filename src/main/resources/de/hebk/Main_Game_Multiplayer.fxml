@@ -21,7 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
       <ImageView fitHeight="1086.0" fitWidth="1859.0" layoutX="30.0" layoutY="94.0" pickOnBounds="true">
          <image>
@@ -152,7 +152,7 @@
             <Font name="System Bold" size="31.0" />
          </font>
       </Text>
-      <CheckBox fx:id="autoConfirm" layoutX="501.0" layoutY="149.0" mnemonicParsing="false" onMouseClicked="#changeGameAutoConfirm" styleClass="Text3" text="AUTOMATISCHES ANTWORTEN" textFill="WHITE" />
+      <CheckBox fx:id="autoConfirm" layoutX="501.0" layoutY="149.0" mnemonicParsing="false" onMouseClicked="#changeGameAutoConfirm" styleClass="Text3" text="ANIMATIONEN" textFill="WHITE" />
       <Text fx:id="revive_Warning_Text" fill="#d0d0d0" layoutX="715.0" layoutY="780.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text2" text="PUNKTE WERDEN AUF 0 EINGESETZT" textAlignment="CENTER" textOrigin="BOTTOM" visible="false" wrappingWidth="532.13671875">
          <font>
             <Font name="System Bold" size="17.0" />
@@ -240,6 +240,22 @@
       <Text fx:id="multiplayer_Player2Points" layoutX="1431.0" layoutY="1231.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text2" textAlignment="CENTER" wrappingWidth="460.0">
          <font>
             <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="result_Box_Call" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="192.0" layoutX="741.0" layoutY="195.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_5" visible="false" width="438.0" />
+      <ImageView fx:id="result_Option1_Box_Call" fitHeight="55.0" fitWidth="240.0" layoutX="841.0" layoutY="323.0" onMouseClicked="#hideCallJoker" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Images/Untitled-5.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="result_Option1_Call" fill="WHITE" layoutX="888.0" layoutY="360.0" onMouseClicked="#hideCallJoker" strokeType="OUTSIDE" strokeWidth="0.0" text="SCHLIESSEN" visible="false">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="result_Box_Call_Description" fill="WHITE" layoutX="756.0" layoutY="236.0" onMouseClicked="#answer" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" visible="false" wrappingWidth="409.10546875">
+         <font>
+            <Font name="System Bold" size="24.0" />
          </font>
       </Text>
       <Rectangle fx:id="loader_Game_Normal2" arcHeight="5.0" arcWidth="5.0" height="1280.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_4" visible="false" width="1920.0" />

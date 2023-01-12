@@ -10,12 +10,12 @@ public class Texts {
     public String[] csvFiles_Questions = {
             "Allgemein",
             "Geschichte",
-            "Natur-Pflanzen",
             "Physik",
             "Sport",
             "Videospiele",
             "Chemie",
-            "Tierwelt",
+            "Natur",
+            "Musik",
     };
 
     public String[] currencies = {

@@ -9,14 +9,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
       <Button layoutX="1525.0" layoutY="1100.0" mnemonicParsing="false" onAction="#createUser" prefHeight="96.0" prefWidth="360.0" text="WEITER" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="54.0" />
          </font>
       </Button>
-      <Text fill="WHITE" layoutX="563.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REGESTRIEREN">
+      <Text fill="WHITE" layoutX="563.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REGISTRIEREN">
          <font>
             <Font name="Sylfaen" size="95.0" />
          </font>
@@ -32,11 +32,6 @@
          </font>
       </TextField>
       <ImageView fitHeight="86.0" fitWidth="320.0" layoutX="559.0" layoutY="544.0" onMouseClicked="#generateName" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/Dice.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="86.0" fitWidth="86.0" layoutX="559.0" layoutY="671.0" onMouseClicked="#generatePassword" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Dice.png" />
          </image>

@@ -30,4 +30,7 @@ public class Question {
     public void setOptions(List<String> options) {
         this.options = options;
     }
+    public void tostring(){
+        System.out.println("Question " + question + "; difficulty" + difficulty);
+    }
 }
