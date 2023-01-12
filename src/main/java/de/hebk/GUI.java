@@ -705,7 +705,7 @@ public class GUI extends SystemController {
         u.setPassword(passwordField.getText());
         u.setAchievements(new List<>());
         Date d = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/y HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/y HH:mm:ss");
         u.setJoinDate(simpleDateFormat.format(d));
         u.setFavorite_subjects(new List<Integer>());
         for (int i = 0; i < csvFiles_Questions.length; i++){
@@ -3355,9 +3355,6 @@ public class GUI extends SystemController {
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/22.PNG";
         }
         if (event.getSource() == profileImage23){
-            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/GG.PNG";
-        }
-        if (event.getSource() == profileImage24){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/Unbenannt.PNG";
         }
         local_User.setProfilePicture(local_Profile_Picure);
