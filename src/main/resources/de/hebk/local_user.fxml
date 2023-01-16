@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1919.0" styleClass="main_Panel2" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1919.0" styleClass="main_Panel2" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1140.0" layoutX="40.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_6" width="396.0" />
       <ImageView fx:id="user_Profilepicture" fitHeight="150.0" fitWidth="150.0" layoutX="163.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
@@ -144,7 +144,19 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button graphicTextGap="10.0" layoutX="68.0" layoutY="429.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="338.0" styleClass="button_5" text="Mein Konto">
+      <Button graphicTextGap="10.0" layoutX="70.0" layoutY="429.0" mnemonicParsing="false" onAction="#showAchievements" prefHeight="70.0" prefWidth="338.0" styleClass="button_5" text="Achievements">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/star-medal.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button graphicTextGap="10.0" layoutX="70.0" layoutY="512.0" mnemonicParsing="false" onAction="#showAccountInformation" prefHeight="70.0" prefWidth="338.0" styleClass="button_5" text="Mein Konto">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -156,7 +168,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button graphicTextGap="10.0" layoutX="68.0" layoutY="1039.0" mnemonicParsing="false" onAction="#showPreviousScene" prefHeight="70.0" prefWidth="338.0" styleClass="button_close" text="ZURÜCK">
+      <Button graphicTextGap="10.0" layoutX="70.0" layoutY="1039.0" mnemonicParsing="false" onAction="#openMenu" prefHeight="70.0" prefWidth="338.0" styleClass="button_close" text="ZURÜCK">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

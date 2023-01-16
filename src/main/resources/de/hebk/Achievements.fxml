@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -7,31 +8,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" style="-fx-background-color: #575B95;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
       <Pane layoutX="320.0" layoutY="54.0" prefHeight="200.0" prefWidth="1280.0" style="-fx-background-color: #161832;">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="32.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Images/krone.png" />
-               </image>
-            </ImageView>
-            <Text fill="WHITE" layoutX="213.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+            <ImageView fx:id="achievements_ProfileImage" fitHeight="150.0" fitWidth="150.0" layoutX="32.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" />
+            <Text fx:id="achievements_Username" fill="WHITE" layoutX="213.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="340.0">
                <font>
                   <Font name="System Bold" size="41.0" />
-               </font>
-            </Text>
-            <Text fill="#a4a4a4" layoutX="896.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3/20(15%)" wrappingWidth="348.9700927734375">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Text>
-            <Text fill="#a4a4a4" layoutX="949.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="64 h 30m Stunden gespielt" wrappingWidth="319.3033447265625">
-               <font>
-                  <Font size="21.0" />
                </font>
             </Text>
          </children>
@@ -42,150 +30,251 @@
                <children>
                   <VBox fx:id="achievementsFrame" layoutX="100.0" layoutY="40.0" prefHeight="1600.0" prefWidth="1060.0" spacing="15.0">
                      <children>
-                        <Pane fx:id="achievementPane" prefHeight="118.0" prefWidth="1060.0" style="-fx-background-color: #575B95;">
+                        <Pane fx:id="achievement1" opacity="0.0" prefHeight="118.0" prefWidth="1060.0" style="-fx-background-color: #575B95;">
+                           <children>
+                              <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/strasse.png" />
+                                 </image>
+                              </ImageView>
+                              <Text fill="WHITE" layoutX="126.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Du hast einen langen Weg vor dir" wrappingWidth="411.6785430908203">
+                                 <font>
+                                    <Font name="System Bold" size="21.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#a4a4a4" layoutX="124.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5 Fragen hintereinander richtig beantworten" wrappingWidth="643.6785430908203">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="achievement2" layoutX="10.0" layoutY="10.0" opacity="0.0" prefHeight="118.0" prefWidth="1060.0" style="-fx-background-color: #575B95;">
+                           <children>
+                              <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/upgrade.png" />
+                                 </image>
+                              </ImageView>
+                              <Text fill="WHITE" layoutX="126.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kein Defizit" wrappingWidth="411.6785430908203">
+                                 <font>
+                                    <Font name="System Bold" size="21.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#a4a4a4" layoutX="124.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10 Fragen hintereinander richtig beantworten" wrappingWidth="643.6785430908203">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="achievement3" layoutX="10.0" layoutY="143.0" opacity="0.0" prefHeight="118.0" prefWidth="1060.0" style="-fx-background-color: #575B95;">
+                           <children>
+                              <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/magic-lamp.png" />
+                                 </image>
+                              </ImageView>
+                              <Text fill="WHITE" layoutX="126.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genie" wrappingWidth="411.6785430908203">
+                                 <font>
+                                    <Font name="System Bold" size="21.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#a4a4a4" layoutX="124.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15 Fragen hintereinander richtig beantworten" wrappingWidth="643.6785430908203">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="achievement4" layoutX="10.0" layoutY="276.0" opacity="0.0" prefHeight="118.0" prefWidth="1060.0" style="-fx-background-color: #575B95;">
+                           <children>
+                              <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/heisse-steine.png" />
+                                 </image>
+                              </ImageView>
+                              <Text fill="WHITE" layoutX="126.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ein Stein" wrappingWidth="411.6785430908203">
+                                 <font>
+                                    <Font name="System Bold" size="21.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#a4a4a4" layoutX="124.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="20 Fragen hintereinander richtig beantworten" wrappingWidth="643.6785430908203">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="achievement5" layoutX="10.0" layoutY="409.0" opacity="0.0" prefHeight="118.0" prefWidth="1060.0" style="-fx-background-color: #575B95;">
+                           <children>
+                              <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/troll.png" />
+                                 </image>
+                              </ImageView>
+                              <Text fill="WHITE" layoutX="126.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jonas" wrappingWidth="411.6785430908203">
+                                 <font>
+                                    <Font name="System Bold" size="21.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#a4a4a4" layoutX="124.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Du verlierst bei einer der einfachsten Fragen" wrappingWidth="643.6785430908203">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="achievement6" layoutX="10.0" layoutY="542.0" opacity="0.0" prefHeight="118.0" prefWidth="1060.0" style="-fx-background-color: #575B95;">
+                           <children>
+                              <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/smartphone.png" />
+                                 </image>
+                              </ImageView>
+                              <Text fill="WHITE" layoutX="126.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Muss Mutti wieder helfen?" wrappingWidth="411.6785430908203">
+                                 <font>
+                                    <Font name="System Bold" size="21.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#a4a4a4" layoutX="124.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nutze den Telefonjoker" wrappingWidth="643.6785430908203">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="achievement7" layoutX="10.0" layoutY="675.0" opacity="0.0" prefHeight="118.0" prefWidth="1060.0" style="-fx-background-color: #575B95;">
+                           <children>
+                              <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/apfel.png" />
+                                 </image>
+                              </ImageView>
+                              <Text fill="WHITE" layoutX="126.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Siri wirf ne Münze" wrappingWidth="411.6785430908203">
+                                 <font>
+                                    <Font name="System Bold" size="21.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#a4a4a4" layoutX="124.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nutze den 50%50 Joker" wrappingWidth="643.6785430908203">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="achievement8" layoutX="10.0" layoutY="808.0" opacity="0.0" prefHeight="118.0" prefWidth="1060.0" style="-fx-background-color: #575B95;">
+                           <children>
+                              <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/people.png" />
+                                 </image>
+                              </ImageView>
+                              <Text fill="WHITE" layoutX="126.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Du vertraust den?" wrappingWidth="411.6785430908203">
+                                 <font>
+                                    <Font name="System Bold" size="21.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#a4a4a4" layoutX="124.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nutze den Publikumsjoker" wrappingWidth="643.6785430908203">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="achievement9" layoutX="10.0" layoutY="941.0" opacity="0.0" prefHeight="118.0" prefWidth="1060.0" style="-fx-background-color: #575B95;">
+                           <children>
+                              <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/clown.png" />
+                                 </image>
+                              </ImageView>
+                              <Text fill="WHITE" layoutX="126.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Joker-Master" wrappingWidth="411.6785430908203">
+                                 <font>
+                                    <Font name="System Bold" size="21.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#a4a4a4" layoutX="124.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nutze alle Joker" wrappingWidth="643.6785430908203">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="achievement10" layoutX="10.0" layoutY="1074.0" opacity="0.0" prefHeight="118.0" prefWidth="1060.0" style="-fx-background-color: #575B95;">
                            <children>
                               <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@Images/hacker.png" />
                                  </image>
                               </ImageView>
-                              <Text fill="WHITE" layoutX="126.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Achievement" wrappingWidth="202.6785430908203">
+                              <Text fill="WHITE" layoutX="126.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hacker" wrappingWidth="411.6785430908203">
                                  <font>
                                     <Font name="System Bold" size="21.0" />
                                  </font>
                               </Text>
-                              <Text fill="#a4a4a4" layoutX="124.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How to unlock" wrappingWidth="202.6785430908203">
+                              <Text fill="#a4a4a4" layoutX="124.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nutze cheats" wrappingWidth="643.6785430908203">
                                  <font>
                                     <Font size="21.0" />
                                  </font>
                               </Text>
-                              <Pane layoutX="767.0" layoutY="7.0" prefHeight="32.0" prefWidth="274.0" style="-fx-background-color: #161832;">
-                                 <children>
-                                    <Text fill="#00ff0d" layoutY="25.0" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EASY" textAlignment="CENTER" wrappingWidth="273.83119201660156">
-                                       <font>
-                                          <Font name="System Bold" size="21.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </Pane>
-                              <Pane layoutX="767.0" layoutY="44.0" prefHeight="32.0" prefWidth="274.0" style="-fx-background-color: #161832;">
-                                 <children>
-                                    <Text fill="#00ffe9" layoutY="25.0" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" OWNED" textAlignment="CENTER" wrappingWidth="273.83119201660156">
-                                       <font>
-                                          <Font name="System Bold" size="21.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </Pane>
-                              <Pane layoutX="767.0" layoutY="81.0" prefHeight="32.0" prefWidth="274.0" style="-fx-background-color: #161832;">
-                                 <children>
-                                    <Text fill="#a4a4a4" layoutY="25.0" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unlocked 18.3.2020 @15:34" textAlignment="CENTER" wrappingWidth="273.83119201660156">
-                                       <font>
-                                          <Font size="21.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </Pane>
                            </children>
                         </Pane>
-                        <Pane prefHeight="118.0" prefWidth="1060.0" style="-fx-background-color: #575B95;">
+                        <Pane fx:id="achievement11" layoutX="10.0" layoutY="1207.0" opacity="0.0" prefHeight="118.0" prefWidth="1060.0" style="-fx-background-color: #575B95;">
                            <children>
                               <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@Images/game-controller.png" />
+                                    <Image url="@Images/unterstutzung.png" />
                                  </image>
                               </ImageView>
-                              <Text fill="WHITE" layoutX="126.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Achievement" wrappingWidth="202.6785430908203">
+                              <Text fill="WHITE" layoutX="126.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Indischer Kundensupport" wrappingWidth="411.6785430908203">
                                  <font>
                                     <Font name="System Bold" size="21.0" />
                                  </font>
                               </Text>
-                              <Text fill="#a4a4a4" layoutX="124.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How to unlock" wrappingWidth="202.6785430908203">
+                              <Text fill="#a4a4a4" layoutX="124.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nutze alle cheats" wrappingWidth="643.6785430908203">
                                  <font>
                                     <Font size="21.0" />
                                  </font>
                               </Text>
-                              <Pane layoutX="767.0" layoutY="7.0" prefHeight="32.0" prefWidth="274.0" style="-fx-background-color: #161832;">
-                                 <children>
-                                    <Text fill="#ffc100" layoutY="25.0" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MEDIUM" textAlignment="CENTER" wrappingWidth="273.83119201660156">
-                                       <font>
-                                          <Font name="System Bold" size="21.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </Pane>
-                              <Pane layoutX="767.0" layoutY="44.0" prefHeight="32.0" prefWidth="274.0" style="-fx-background-color: #161832;">
-                                 <children>
-                                    <Text fill="#ff003f" layoutY="25.0" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="❌ NOT OWNED" textAlignment="CENTER" wrappingWidth="273.83119201660156">
-                                       <font>
-                                          <Font name="System Bold" size="21.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </Pane>
-                              <Pane layoutX="767.0" layoutY="81.0" prefHeight="32.0" prefWidth="274.0" style="-fx-background-color: #161832;">
-                                 <children>
-                                    <Text fill="#a4a4a4" layoutY="25.0" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Keine Informationen" textAlignment="CENTER" wrappingWidth="273.83119201660156">
-                                       <font>
-                                          <Font size="21.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </Pane>
                            </children>
                         </Pane>
-                        <Pane layoutX="10.0" layoutY="143.0" prefHeight="118.0" prefWidth="1060.0" style="-fx-background-color: #575B95;">
+                        <Pane fx:id="achievement12" layoutX="10.0" layoutY="1340.0" opacity="0.0" prefHeight="118.0" prefWidth="1060.0" style="-fx-background-color: #575B95;">
                            <children>
                               <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@Images/game-controller.png" />
+                                    <Image url="@Images/geld.png" />
                                  </image>
                               </ImageView>
-                              <Text fill="WHITE" layoutX="126.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Achievement" wrappingWidth="202.6785430908203">
+                              <Text fill="WHITE" layoutX="126.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Millionär" wrappingWidth="411.6785430908203">
                                  <font>
                                     <Font name="System Bold" size="21.0" />
                                  </font>
                               </Text>
-                              <Text fill="#a4a4a4" layoutX="124.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How to unlock" wrappingWidth="202.6785430908203">
+                              <Text fill="#a4a4a4" layoutX="124.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gewinne dein erstes Spiel" wrappingWidth="643.6785430908203">
                                  <font>
                                     <Font size="21.0" />
                                  </font>
                               </Text>
-                              <Pane layoutX="767.0" layoutY="7.0" prefHeight="32.0" prefWidth="274.0" style="-fx-background-color: #161832;">
-                                 <children>
-                                    <Text fill="#ffc100" layoutY="25.0" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MEDIUM" textAlignment="CENTER" wrappingWidth="273.83119201660156">
-                                       <font>
-                                          <Font name="System Bold" size="21.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </Pane>
-                              <Pane layoutX="767.0" layoutY="44.0" prefHeight="32.0" prefWidth="274.0" style="-fx-background-color: #161832;">
-                                 <children>
-                                    <Text fill="#ff003f" layoutY="25.0" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="❌ NOT OWNED" textAlignment="CENTER" wrappingWidth="273.83119201660156">
-                                       <font>
-                                          <Font name="System Bold" size="21.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </Pane>
-                              <Pane layoutX="767.0" layoutY="81.0" prefHeight="32.0" prefWidth="274.0" style="-fx-background-color: #161832;">
-                                 <children>
-                                    <Text fill="#a4a4a4" layoutY="25.0" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Keine Informationen" textAlignment="CENTER" wrappingWidth="273.83119201660156">
-                                       <font>
-                                          <Font size="21.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </Pane>
                            </children>
                         </Pane>
-                        <Button fx:id="button" mnemonicParsing="false" onAction="#onHelloButtonClick" text="Button" />
                      </children>
                   </VBox>
                </children>
             </AnchorPane>
         </content>
       </ScrollPane>
+      <Rectangle fx:id="loader_Achievements" arcHeight="5.0" arcWidth="5.0" height="1280.0" onMouseMoved="#loadAchievements" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1920.0" />
+      <Button layoutX="30.0" layoutY="1131.0" mnemonicParsing="false" onAction="#showPreviousScene" prefHeight="72.0" prefWidth="357.0" styleClass="button_close" text="ZURÜCK" textFill="WHITE" AnchorPane.topAnchor="1131.0">
+         <font>
+            <Font name="Sylfaen" size="40.0" />
+         </font>
+      </Button>
+      <PieChart fx:id="user_Achievements_Chart" layoutX="1243.0" layoutY="23.0" prefHeight="263.0" prefWidth="329.0" styleClass="default-color1-chart-pie" />
+      <ImageView accessibleRole="BUTTON" fitHeight="92.0" fitWidth="92.0" layoutX="42.0" layoutY="34.0" onMouseClicked="#openMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/speisekarte.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

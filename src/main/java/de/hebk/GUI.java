@@ -13,8 +13,6 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -37,7 +35,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class GUI extends SystemController {
-
     static int wait_idle = 4;
     static int wait_win = 4;
     static int wait_lose = 4;
@@ -85,7 +82,7 @@ public class GUI extends SystemController {
     @FXML
     private VBox newVBP2;
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
     @FXML
     private Text availabilityText;
     @FXML
@@ -194,25 +191,25 @@ public class GUI extends SystemController {
     @FXML
     private TextField anmelden_Benutzername;
     @FXML
-    private TextField anmelden_Password;
+    private PasswordField anmelden_Password;
     @FXML
-    private TextField anmelden_PasswortWiederholen;
+    private PasswordField anmelden_PasswortWiederholen;
     @FXML
     private ImageView anmelden_Image1;
     @FXML
     private TextField anmelden_Benutzername1;
     @FXML
-    private TextField anmelden_Password1;
+    private PasswordField anmelden_Password1;
     @FXML
-    private TextField anmelden_PasswortWiederholen1;
+    private PasswordField anmelden_PasswortWiederholen1;
     @FXML
     private ImageView anmelden_Image2;
     @FXML
     private TextField anmelden_Benutzername2;
     @FXML
-    private TextField anmelden_Password2;
+    private PasswordField anmelden_Password2;
     @FXML
-    private TextField anmelden_PasswortWiederholen2;
+    private PasswordField anmelden_PasswortWiederholen2;
     @FXML
     private ImageView menu_UserImage;
     @FXML
@@ -237,6 +234,10 @@ public class GUI extends SystemController {
     private Rectangle loader_User_Statistics;
     @FXML
     private Rectangle loader_Cheats;
+    @FXML
+    private Rectangle loader_Achievements;
+    @FXML
+    private Rectangle loader_AccountInformation;
     @FXML
     private Button gameMode_Normal;
     @FXML
@@ -531,6 +532,50 @@ public class GUI extends SystemController {
     private Text multiplayer_GameResults_Winner;
     @FXML
     private Text multiplayer_GameResults_RunnerUp;
+    @FXML
+    private ImageView achievements_ProfileImage;
+    @FXML
+    private Text achievements_Username;
+    @FXML
+    private Pane achievement1;
+    @FXML
+    private Pane achievement2;
+    @FXML
+    private Pane achievement3;
+    @FXML
+    private Pane achievement4;
+    @FXML
+    private Pane achievement5;
+    @FXML
+    private Pane achievement6;
+    @FXML
+    private Pane achievement7;
+    @FXML
+    private Pane achievement8;
+    @FXML
+    private Pane achievement9;
+    @FXML
+    private Pane achievement10;
+    @FXML
+    private Pane achievement11;
+    @FXML
+    private Pane achievement12;
+    @FXML
+    private ImageView image_AccountInformation;
+    @FXML
+    private PasswordField changePassword_Field1;
+    @FXML
+    private PasswordField changePassword_Field2;
+    @FXML
+    private PasswordField changePassword_Field3;
+    @FXML
+    private Rectangle result_Box_Call;
+    @FXML
+    private Text result_Box_Call_Description;
+    @FXML
+    private ImageView result_Option1_Box_Call;
+    @FXML
+    private Text result_Option1_Call;
     private String[] s = values1;
     private String firstColor = "#49529d";
     private String secondColor = "#ff8c00";
@@ -589,7 +634,7 @@ public class GUI extends SystemController {
     public void checkAvailabilityName(){
 
         if (!checkValidName(nameField.getText())){
-            availabilityText.setText("(✕) Mindestens 3 Zeichen erfordert");
+            availabilityText.setText("(✕) Mindestens 3 und Maximal 15 Zeichen erfordert");
             availabilityText.setStyle("-fx-fill: rgb(255,140,0)");
             return;
         }
@@ -641,25 +686,26 @@ public class GUI extends SystemController {
         int index = searchForUser(nameField.getText());
 
         if (index != -1){
-            loadScene("Fehler_Einloggen.fxml");
+            loadScene("Error_LogIn.fxml");
             return;
         }
 
         if (!super.checkValidName(nameField.getText())){
-            loadScene("Fehler_Einloggen.fxml");
+            loadScene("Error_LogIn.fxml");
             return;
         }
 
         if (!super.checkValidPassword(passwordField.getText())){
-            loadScene("Fehler_Einloggen.fxml");
+            loadScene("Error_LogIn.fxml");
             return;
         }
 
         User u = new User();
         u.setName(nameField.getText());
         u.setPassword(passwordField.getText());
+        u.setAchievements(new List<>());
         Date d = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/y HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/y HH:mm:ss");
         u.setJoinDate(simpleDateFormat.format(d));
         u.setFavorite_subjects(new List<Integer>());
         for (int i = 0; i < csvFiles_Questions.length; i++){
@@ -671,24 +717,57 @@ public class GUI extends SystemController {
 
         loadScene("Menu.fxml");
 
-        //handle_ProfileImages(new MouseEvent(), u);
-
         System.out.println(users.toString() + " S");
         super.saveData();
 
-        if (index == -1){
-            User user = new User();
-            user.setName(nameField.getText());
-            user.setPassword(passwordField.getText());
-            user.getAchievements().append("START");
-        }
+    }
 
-        //super.saveData();
+    public void resetStreak(){
+        if (multiplayer != null){
+            if (multiplayer.getCurrentPlayer() == multiPlayer_Player1){
+                multiplayer.getPlayer1Settings().setStreak(0);
+            } else {
+                multiplayer.getPlayer2Settings().setStreak(0);
+            }
+        } else {
+            game.fragen.gameSettings.setStreak(0);
+        }
+    }
+    public void changeStreak(){
+        GameSettings gameSettings;
+        User u;
+        if (multiplayer != null){
+            if (multiplayer.getCurrentPlayer() == multiPlayer_Player1){
+                multiplayer.getPlayer1Settings().setStreak(multiplayer.getPlayer1Settings().getStreak() + 1);
+                gameSettings = multiplayer.getPlayer1Settings();
+                u = multiplayer.getPlayer1();
+            } else {
+                multiplayer.getPlayer2Settings().setStreak(multiplayer.getPlayer2Settings().getStreak() + 1);
+                gameSettings = multiplayer.getPlayer2Settings();
+                u = multiplayer.getPlayer2();
+            }
+        } else {
+            game.fragen.gameSettings.setStreak(game.fragen.gameSettings.getStreak() + 1);
+            gameSettings = game.fragen.gameSettings;
+            u = local_User;
+        }
+        if (gameSettings.getStreak() >= 5){
+            reward(u, "Du hast einen langen Weg vor dir");
+        }
+        if (gameSettings.getStreak() >= 10){
+            reward(u, "Kein Defizit");
+        }
+        if (gameSettings.getStreak() >= 15){
+            reward(u, "Genie");
+        }
+        if (gameSettings.getStreak() >= 20){
+            reward(u, "Ein Stein");
+        }
     }
 
     public void showLogIn() throws Exception{
         super.loadData();
-        loadScene("Anmelden.fxml");
+        loadScene("LogIn.fxml");
     }
 
     public void logIn_showProfilePicture() throws FileNotFoundException {
@@ -709,12 +788,12 @@ public class GUI extends SystemController {
         int index = searchForUser(anmelden_Benutzername.getText());
 
         if (index == -1){
-            loadScene("Fehler_Einloggen.fxml");
+            loadScene("Error_LogIn.fxml");
             return;
         }
 
         if (!anmelden_Password.getText().equals(anmelden_PasswortWiederholen.getText())){
-            loadScene("Fehler_Einloggen.fxml");
+            loadScene("Error_LogIn.fxml");
             return;
         }
 
@@ -726,7 +805,7 @@ public class GUI extends SystemController {
             }
         }
         if (!anmelden_Password.getText().equals(u.getPassword())){
-            loadScene("Fehler_Einloggen.fxml");
+            loadScene("Error_LogIn.fxml");
             return;
         }
         local_User = u;
@@ -736,13 +815,13 @@ public class GUI extends SystemController {
 
     public void logIn_Multiplayer() throws Exception{
         if (!anmelden_Benutzername1.getText().equals(local_User.getName())){
-            loadScene("Fehler_Einloggen.fxml");
+            loadScene("Error_LogIn.fxml");
             return;
         }
 
 
         if (!anmelden_Password1.getText().equals(anmelden_PasswortWiederholen1.getText())){
-            loadScene("Fehler_Einloggen.fxml");
+            loadScene("Error_LogIn.fxml");
             return;
         }
 
@@ -753,7 +832,7 @@ public class GUI extends SystemController {
             }
         }
         if (!anmelden_Password1.getText().equals(local_User.getPassword())){
-            loadScene("Fehler_Einloggen.fxml");
+            loadScene("Error_LogIn.fxml");
             return;
         }
         multiPlayer_Player1 = local_User;
@@ -761,12 +840,12 @@ public class GUI extends SystemController {
         int index = searchForUser(anmelden_Benutzername2.getText());
 
         if (index == -1){
-            loadScene("Fehler_Einloggen.fxml");
+            loadScene("Error_LogIn.fxml");
             return;
         }
 
         if (!anmelden_Password2.getText().equals(anmelden_PasswortWiederholen2.getText())){
-            loadScene("Fehler_Einloggen.fxml");
+            loadScene("Error_LogIn.fxml");
             return;
         }
 
@@ -778,7 +857,7 @@ public class GUI extends SystemController {
             }
         }
         if (!anmelden_Password2.getText().equals(u.getPassword())){
-            loadScene("Fehler_Einloggen.fxml");
+            loadScene("Error_LogIn.fxml");
             return;
         }
         multiPlayer_Player2 = u;
@@ -879,6 +958,7 @@ public class GUI extends SystemController {
                             game.index_frage++;
                             setQuestionAndAnswers();
                             animateObjects(r, "Normal");
+                            changeStreak();
                             changeReward();
                             playBackgroundSound();
                         } catch (Exception e) {
@@ -914,6 +994,7 @@ public class GUI extends SystemController {
                         if (!game.fragen.gameSettings.getCheats().isInfLife()){
                             if (!game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
                                 try {
+                                    resetStreak();
                                     endGame();
                                 } catch (Exception e) {
                                     throw new RuntimeException(e);
@@ -957,11 +1038,15 @@ public class GUI extends SystemController {
         menu_UserName.setText(local_User.getName());
     }
 
-    public void showProfilePicture1() throws Exception{
-        loadScene("Profilbilder1.fxml");
+    public void showAccountInformation() throws Exception{
+        loadScene("Profile.fxml");
     }
-    public void showProfilePicture2() throws Exception{
-        loadScene("Profilbilder2.fxml");
+
+    public void showProfilePictures1() throws Exception{
+        loadScene("ProfilePictures1.fxml");
+    }
+    public void showProfilePictures2() throws Exception{
+        loadScene("ProfilePictures2.fxml");
     }
 
     public void logOut() throws Exception{
@@ -1046,6 +1131,32 @@ public class GUI extends SystemController {
         if (joker_fifty_fiftyP2 != null){
             joker_fifty_fiftyP2.setDisable(false);
             joker_fifty_fiftyP2.setOpacity(1);
+        }
+        if (joker_audience != null){
+            joker_audience.setDisable(false);
+            joker_audience.setOpacity(1);
+        }
+        if (joker_audienceP1 != null){
+            joker_audienceP1.setDisable(false);
+            joker_audienceP1.setOpacity(1);
+
+        }
+        if (joker_audienceP2 != null){
+            joker_audienceP2.setDisable(false);
+            joker_audienceP2.setOpacity(1);
+        }
+        if (joker_call != null){
+            joker_call.setDisable(false);
+            joker_call.setOpacity(1);
+        }
+        if (joker_callP1 != null){
+            joker_callP1.setDisable(false);
+            joker_callP1.setOpacity(1);
+
+        }
+        if (joker_callP2 != null){
+            joker_callP2.setDisable(false);
+            joker_callP2.setOpacity(1);
         }
     }
 
@@ -1165,12 +1276,10 @@ public class GUI extends SystemController {
 
             }
 
-            playVideo("/de/hebk/Videos/Win_Effect.mp4");
-
         } catch(Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
             try {
-                loadScene("Fehler_Game.fxml");
+                loadScene("Error_Game.fxml");
             } catch (Exception e2){
             }
         }
@@ -1259,7 +1368,7 @@ public class GUI extends SystemController {
         } catch(Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
             try {
-                loadScene("Fehler_Game.fxml");
+                loadScene("Error_Game.fxml");
             } catch (Exception e2){
             }
         }
@@ -1410,6 +1519,7 @@ public class GUI extends SystemController {
         if (!game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
             if (VALUES[game.index_frage] == null){
                 System.out.println("Player Won");
+                reward(local_User,"Millionär");
                 if (game.fragen.gameSettings.getGameMode().equals("Normal")){
                     local_User.setPoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
                     local_User.setPlayed(local_User.getPlayed() + 1);
@@ -1522,10 +1632,8 @@ public class GUI extends SystemController {
         if (game.fragen.gameSettings.getCheats().isAlwaysFiftyFifty()){
             useJoker_fifty_fifty(null);
         }
-        if (game.fragen.gameSettings.getCheats().isAlwaysAudiece()){
-            audienceJoker_Chart.getData().clear();
-            audienceJoker_Chart.layout();
-            useJoker_Audience(null);
+        if (game.fragen.gameSettings.getCheats().isAlwaysCall()){
+            useJoker_Call(null);
         }
     }
 
@@ -1703,11 +1811,17 @@ public class GUI extends SystemController {
             local_User.setPoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
             local_User.setPlayed(local_User.getPlayed() + 1);
             local_User.setLost(local_User.getLost() + 1);
+            if (game.fragen.getQuestions().get(game.index_frage).getContext().getDifficulty() < 20){
+                reward(local_User,"Jonas");
+            }
         }
         if (game.fragen.gameSettings.getGameMode().equals("Reverse")){
             local_User.setReversePoints(local_User.getPoints() + game.fragen.gameSettings.getReward());
             local_User.setPlayed_Reverse(local_User.getPlayed_Reverse() + 1);
             local_User.setLost_Reverse(local_User.getLost_Reverse() + 1);
+            if (game.fragen.getQuestions().get(game.index_frage).getContext().getDifficulty() < 20){
+                reward(local_User,"Jonas");
+            }
         }
 
         returnToMenu.setVisible(true);
@@ -1739,7 +1853,7 @@ public class GUI extends SystemController {
                 multiplayer_WinnerName.setText("UNENTSCHIEDEN");
                 String m = multiplayer.getPlayer1().getName() + " hatte " + multiplayer.getPlayer1Settings().getReward() + " Punkte mit " + multiplayer.getfIndex1() + 1 + " Fragen";
                 multiplayer_GameResults_Winner.setText(m.toUpperCase());
-                m = multiplayer.getPlayer2().getName() + " hat mit " + multiplayer.getPlayer2Settings().getReward() + " Punkte mit " + multiplayer.getfIndex1() + 1 + " Fragen";
+                m = multiplayer.getPlayer2().getName() + " hatte " + multiplayer.getPlayer2Settings().getReward() + " Punkte mit " + multiplayer.getfIndex1() + 1 + " Fragen";
                 multiplayer_GameResults_RunnerUp.setText(m.toUpperCase());
                 return;
             }
@@ -1759,6 +1873,7 @@ public class GUI extends SystemController {
                 multiplayer_GameResults_Winner.setText(m.toUpperCase());
                 m = multiplayer.getPlayer2().getName() + " hat mit " + multiplayer.getPlayer2Settings().getReward() + " Punkten verloren";
                 multiplayer_GameResults_RunnerUp.setText(m.toUpperCase());
+                reward(multiplayer.getPlayer1(), "Millionär");
             } else{
                 FileInputStream inputStream = new FileInputStream(multiplayer.getPlayer2().getProfilePicture());
                 Image image = new Image(inputStream);
@@ -1768,9 +1883,9 @@ public class GUI extends SystemController {
                 multiplayer_GameResults_Winner.setText(m.toUpperCase());
                 m = multiplayer.getPlayer1().getName() + " hat mit " + multiplayer.getPlayer1Settings().getReward() + " Punkten verloren";
                 multiplayer_GameResults_RunnerUp.setText(m.toUpperCase());
+                reward(multiplayer.getPlayer2(), "Millionär");
             }
         }
-
     }
 
     public void walkAway() throws Exception {
@@ -1796,6 +1911,7 @@ public class GUI extends SystemController {
                 }
             }
         }
+        resetStreak();
         endGame();
     }
 
@@ -1826,7 +1942,7 @@ public class GUI extends SystemController {
                 break;
             }
             VALUES[i - 1].setStyle("-fx-fill: white");
-            if (VALUES2 != null){
+            if (VALUES2[i - 1] != null){
                 VALUES2[i - 1].setStyle("-fx-fill: white");
             }
         }
@@ -1888,7 +2004,7 @@ public class GUI extends SystemController {
         int current = getCurrentQuestion();
         firstOption = game.fragen.getQuestions().get(current).getContext().getOptions().get(2).getContext();
         secondOption = game.fragen.getQuestions().get(current).getContext().getOptions().get(3).getContext();
-        local_User.setUsed_Joker_FiftyFifty(local_User.getUsed_Joker_FiftyFifty() + 1);
+
         if (answer_text1.getText().equals(firstOption) || answer_text1.getText().equals(secondOption)){
             answer_text1.setOpacity(0.5);
             answer_rectangle1.setOpacity(0.5);
@@ -1913,16 +2029,30 @@ public class GUI extends SystemController {
             answer_text4.setDisable(true);
             answer_rectangle4.setDisable(true);
         }
+        User u;
         game.fragen.gameSettings.getJoker().setFifty_fifty(game.fragen.gameSettings.getCheats().isInfJoker() ? true : false);
         if (multiplayer != null){
             if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){
                 if (used != null){
                     used.setOpacity(0.5);
                 }
+                if (multiplayer.getCurrentPlayer() == multiPlayer_Player1){
+                    multiplayer.getPlayer1().setUsed_Joker_FiftyFifty(multiplayer.getPlayer1().getUsed_Joker_FiftyFifty() + 1);
+                    u = multiplayer.getPlayer1();
+                }
+                if (multiplayer.getCurrentPlayer() == multiPlayer_Player2){
+                    multiplayer.getPlayer1().setUsed_Joker_FiftyFifty(multiplayer.getPlayer2().getUsed_Joker_FiftyFifty() + 1);
+                    u = multiplayer.getPlayer2();
+                }
             }
         } else{
+            u = local_User;
+            local_User.setUsed_Joker_FiftyFifty(local_User.getUsed_Joker_FiftyFifty() + 1);
             if (!game.fragen.gameSettings.getJoker().isFifty_fifty()){
                 joker_fifty_fifty.setOpacity(0.5);
+                if (check_AllJokerUsed(u)){
+                    reward(u, "Joker-Master");
+                }
             }
         }
     }
@@ -2016,26 +2146,107 @@ public class GUI extends SystemController {
         audienceJoker_Chart.getData().addAll(series3);
         audienceJoker_Chart.getData().addAll(series4);
 
+        User u;
         game.fragen.gameSettings.getJoker().setAudience(game.fragen.gameSettings.getCheats().isInfJoker() ? true : false);
         if (multiplayer != null){
             if (!game.fragen.gameSettings.getJoker().isAudience()){
                 if (used != null){
                     used.setOpacity(0.5);
                 }
+                if (multiplayer.getCurrentPlayer() == multiPlayer_Player1){
+                    multiplayer.getPlayer1().setUsed_Joker_Audience(multiplayer.getPlayer1().getUsed_Joker_Audience() + 1);
+                    u = multiplayer.getPlayer1();
+                }
+                if (multiplayer.getCurrentPlayer() == multiPlayer_Player2){
+                    multiplayer.getPlayer1().setUsed_Joker_Audience(multiplayer.getPlayer2().getUsed_Joker_Audience() + 1);
+                    u = multiplayer.getPlayer2();
+                }
             }
         } else{
+            u = local_User;
+            local_User.setUsed_Joker_Audience(local_User.getUsed_Joker_Audience() + 1);
+            if (check_AllJokerUsed(u)){
+                reward(u, "Joker-Master");
+            }
             if (!game.fragen.gameSettings.getJoker().isAudience()){
                 joker_audience.setOpacity(0.5);
             }
         }
     }
 
-
     public void changeVisibility_audienceJoker(boolean v){
         audienceJoker_Background.setVisible(v);
         audienceJoker_Chart.setVisible(v);
         result_audienceJoker_Box.setVisible(v);
         result_audienceJoker_Option.setVisible(v);
+    }
+    public void hideCallJoker(){
+        changeVisibility_CallJoker(false);
+    }
+
+    public void useJoker_Call(MouseEvent event){
+        ImageView used = null;
+        if (event != null){
+            used = (ImageView) event.getSource();
+        }
+        if (multiplayer != null){
+            if (multiplayer.getCurrentPlayer() == multiPlayer_Player1 && !multiplayer.getPlayer1Settings().getJoker().isCall()){return;}
+            if (multiplayer.getCurrentPlayer() == multiPlayer_Player2 && !multiplayer.getPlayer2Settings().getJoker().isCall()){return;}
+            if (event != null){
+                if (event.getSource() == joker_callP1 && multiplayer.getCurrentPlayer() != multiPlayer_Player1){return;}
+                if (event.getSource() == joker_callP2 && multiplayer.getCurrentPlayer() != multiPlayer_Player2){return;}
+            }
+        } else{
+            if (!game.fragen.gameSettings.getJoker().isCall()){return;}
+        }
+
+        int chance_correct = 70;
+        int change_wrong = 100 - chance_correct;
+
+        int generated = (int) (Math.random() * 100);
+        int current = getCurrentQuestion();
+        if (generated <= 70){
+            result_Box_Call_Description.setText("Dein Freund sagt, dass '" + game.fragen.getQuestions().get(current).getContext().getOptions().get(0).getContext() +  "' richtig ist");
+        } else {
+            generated = (int) (Math.random() * 2);
+            result_Box_Call_Description.setText("Dein Freund sagt, dass '" + game.fragen.getQuestions().get(current).getContext().getOptions().get(generated + 1).getContext() +  "' richtig ist");
+        }
+
+        changeVisibility_CallJoker(true);
+
+        User u;
+        game.fragen.gameSettings.getJoker().setCall(game.fragen.gameSettings.getCheats().isInfJoker() ? true : false);
+        if (multiplayer != null){
+            if (!game.fragen.gameSettings.getJoker().isCall()){
+                if (used != null){
+                    used.setOpacity(0.5);
+                }
+                if (multiplayer.getCurrentPlayer() == multiPlayer_Player1){
+                    multiplayer.getPlayer1().setUsed_Joker_Call(multiplayer.getPlayer1().getUsed_Joker_Call() + 1);
+                    u = multiplayer.getPlayer1();
+                }
+                if (multiplayer.getCurrentPlayer() == multiPlayer_Player2){
+                    multiplayer.getPlayer1().setUsed_Joker_Call(multiplayer.getPlayer2().getUsed_Joker_Call() + 1);
+                    u = multiplayer.getPlayer2();
+                }
+            }
+        } else{
+            u = local_User;
+            local_User.setUsed_Joker_Call(local_User.getUsed_Joker_Call() + 1);
+            if (!game.fragen.gameSettings.getJoker().isCall()){
+                joker_call.setOpacity(0.5);
+                if (check_AllJokerUsed(u)){
+                    reward(u, "Joker-Master");
+                }
+            }
+        }
+    }
+
+    public void changeVisibility_CallJoker(boolean v){
+        result_Box_Call.setVisible(v);
+        result_Box_Call_Description.setVisible(v);
+        result_Option1_Box_Call.setVisible(v);
+        result_Option1_Call.setVisible(v);
     }
 
     public void confirm(){
@@ -2060,7 +2271,15 @@ public class GUI extends SystemController {
         result_Box.setVisible(true);
         result_Title.setVisible(true);
         result_Answer.setVisible(true);
-        result_Confirm.setText("PUNKTE: " + game.fragen.gameSettings.getReward());
+        if (!game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
+            result_Confirm.setText("PUNKTE: " + game.fragen.gameSettings.getReward());
+        } else{
+            if (multiplayer.getCurrentPlayer() == multiPlayer_Player1){
+                result_Confirm.setText("PUNKTE: " + multiplayer.getPlayer1Settings().getReward());
+            } else{
+                result_Confirm.setText("PUNKTE: " + multiplayer.getPlayer2Settings().getReward());
+            }
+        }
         result_Confirm.setVisible(true);
         if (result_Option3 != null){
             result_Option3_Box.setVisible(true);
@@ -2072,6 +2291,48 @@ public class GUI extends SystemController {
         }
     }
 
+    public void showAchievements() throws Exception{
+        loadScene("Achievements.fxml");
+    }
+    public void loadAchievements() throws Exception {
+        loader_Achievements.setVisible(false);
+        setUser_Achievements_Chart();
+        FileInputStream inputStream = new FileInputStream(local_User.getProfilePicture());
+        Image image = new Image(inputStream);
+        achievements_ProfileImage.setImage(image);
+        achievements_Username.setText(local_User.getName());
+        double currentTransparency = local_User.getAchievements().find("Du hast einen langen Weg vor dir") ? 1 : 0.5;
+        achievement1.setOpacity(currentTransparency);
+        currentTransparency = local_User.getAchievements().find("Kein Defizit") ? 1 : 0.5;
+        achievement2.setOpacity(currentTransparency);
+        currentTransparency = local_User.getAchievements().find("Genie") ? 1 : 0.5;
+        achievement3.setOpacity(currentTransparency);
+        currentTransparency = local_User.getAchievements().find("Ein Stein") ? 1 : 0.5;
+        achievement4.setOpacity(currentTransparency);
+        currentTransparency = local_User.getAchievements().find("Jonas") ? 1 : 0.5;
+        achievement5.setOpacity(currentTransparency);
+        currentTransparency = local_User.getAchievements().find("Muss Mutti wieder helfen?") ? 1 : 0.5;
+        achievement6.setOpacity(currentTransparency);
+        currentTransparency = local_User.getAchievements().find("Siri wirf ne Münze") ? 1 : 0.5;
+        achievement7.setOpacity(currentTransparency);
+        currentTransparency = local_User.getAchievements().find("Du vertraust den?") ? 1 : 0.5;
+        achievement8.setOpacity(currentTransparency);
+        currentTransparency = local_User.getAchievements().find("Joker-Master") ? 1 : 0.5;
+        achievement9.setOpacity(currentTransparency);
+        currentTransparency = local_User.getAchievements().find("Hacker") ? 1 : 0.5;
+        achievement10.setOpacity(currentTransparency);
+        currentTransparency = local_User.getAchievements().find("Indischer Kundensupport") ? 1 : 0.5;
+        achievement11.setOpacity(currentTransparency);
+        currentTransparency = local_User.getAchievements().find("Millionär") ? 1 : 0.5;
+        achievement12.setOpacity(currentTransparency);
+    }
+    public void loadAccountInformation() throws Exception{
+        loader_AccountInformation.setVisible(false);
+        FileInputStream inputStream = new FileInputStream(local_User.getProfilePicture());
+        Image image = new Image(inputStream);
+        image_AccountInformation.setImage(image);
+
+    }
     public void loadCheats(){
         loader_Cheats.setVisible(false);
         if (temp_cheats_infJoker){
@@ -2145,6 +2406,7 @@ public class GUI extends SystemController {
             }
             if (!game.fragen.gameSettings.getCheats().isInfLife()){
                 if (!game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
+                    resetStreak();
                     endGame();
                     animateObjects(r, "Answer");
                     animateObjects(r2, "Wrong");
@@ -2158,6 +2420,7 @@ public class GUI extends SystemController {
         }
 
         if (super.checkAnswer(game.fragen, questionBox.getText(), result_Answer.getText())){
+            changeStreak();
             changeReward();
             confirm2();
         }
@@ -2210,6 +2473,9 @@ public class GUI extends SystemController {
     }
 
     public void changeReward(){
+        if (temp_cheats_infJoker || temp_cheats_infTime || temp_cheats_infLife || temp_cheats_alwaysFiftyFifty || temp_cheats_alwaysCall){
+            return;
+        }
         int current = getCurrentQuestion();
         if (!game.fragen.gameSettings.getGameMode().equals("Multiplayer - Normal")){
             game.fragen.gameSettings.setReward(game.fragen.gameSettings.getReward() + game.fragen.getQuestions().get(current).getContext().getDifficulty());
@@ -2695,13 +2961,16 @@ public class GUI extends SystemController {
             }
         }
 
+        if (highest == 0){
+            return "";
+        }
+
         int index = 0;
         for (int i = 0; i < local_User.getFavorite_subjects().size(); i++){
             if (local_User.getFavorite_subjects().get(i).getContext() == highest){
                 index = i;
             }
         }
-
         return csvFiles_Questions[index];
     }
 
@@ -2743,7 +3012,7 @@ public class GUI extends SystemController {
 
         userPoints_Normal.setText("NORMAL: " + local_User.getPoints());
         userPoints_Reverse.setText("REVERSE: " + local_User.getReversePoints());
-        user_Achievements.setText(local_User.getAchievements().size() + "/24");
+        user_Achievements.setText(local_User.getAchievements().size() + "/" + amount_Achievements);
         user_favoriteSubject.setText(getFavorite_Subject_local_user());
 
         setUser_GameResults_Chart();
@@ -2763,10 +3032,6 @@ public class GUI extends SystemController {
 
         if (user_GameResults_Chart_switch.getText().equals("Normal")) {
             loader_User_Statistics.setVisible(false);
-
-            for (int i = 0; i < 42; i++) {
-                local_User.getAchievements().append(i + "");
-            }
 
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
             series.getData().add(new XYChart.Data<>("0", local_User.getPlayed() / 8));
@@ -2868,7 +3133,7 @@ public class GUI extends SystemController {
 
     public void setUser_Achievements_Chart(){
         ObservableList<PieChart.Data> achievementsData = FXCollections.observableArrayList(
-                new PieChart.Data("übrig",64 - local_User.getAchievements().size()),
+                new PieChart.Data("übrig",amount_Achievements - local_User.getAchievements().size()),
                 new PieChart.Data("erzielt",local_User.getAchievements().size())
         );
         user_Achievements_Chart.setData(achievementsData);
@@ -2898,6 +3163,35 @@ public class GUI extends SystemController {
         user_Joker_Chart.getData().addAll(series3);
         user_Joker_Chart.getData().addAll(series4);
     }
+    public boolean check_AllCheatsUsed(){
+        boolean b = false;
+        if (temp_cheats_infJoker && temp_cheats_infTime && temp_cheats_infLife && temp_cheats_alwaysCall && temp_cheats_alwaysFiftyFifty){
+            b = true;
+        }
+        return b;
+    }
+
+    public boolean check_AllJokerUsed(User u){
+        boolean b = false;
+        if (u.getUsed_Joker_FiftyFifty() > 0 && u.getUsed_Joker_Audience() > 0 && u.getUsed_Joker_Call() > 0 && u.getUsed_Joker_Revive() > 0){
+            b = true;
+        }
+        return b;
+    }
+    public void showChangePassword() throws Exception{
+        loadScene("ChangePassword.fxml");
+    }
+    public void showError_ChangePassword() throws Exception{
+        loadScene("Error_ChangePassword.fxml");
+    }
+    public void changePassword() throws Exception {
+        if (!changePassword_Field1.getText().equals(local_User.getPassword())){showError_ChangePassword();}
+        if (!changePassword_Field2.getText().equals(changePassword_Field3.getText())){showError_ChangePassword();}
+        local_User.setPassword(changePassword_Field2.getText());
+        changePassword_Field1.setText("");
+        changePassword_Field2.setText("");
+        changePassword_Field3.setText("");
+    }
 
     public void close() throws IOException {
         super.saveData();
@@ -2908,7 +3202,6 @@ public class GUI extends SystemController {
         if (event.getSource() == gameMode_Normal){
             temp_gameMode = "Normal";
         }
-
         if (event.getSource() == gameMode_Reverse){
             temp_gameMode = "Reverse";
         }
@@ -2923,14 +3216,13 @@ public class GUI extends SystemController {
                 temp_FragenAnzahl = 20;
             }
         }
-
         if (event.getSource() == amount_Questions15){
             if (!temp_gameMode.equals("Multiplayer - Normal")){
                 temp_FragenAnzahl = 15;
             } else {
                 temp_FragenAnzahl = 30;
-            }        }
-
+            }
+        }
         if (event.getSource() == amount_Questions20){
             if (!temp_gameMode.equals("Multiplayer - Normal")){
                 temp_FragenAnzahl = 20;
@@ -2980,18 +3272,23 @@ public class GUI extends SystemController {
             loader_Top10.setVisible(false);
             setTop10("Normal");
         }
-
         if (event.getSource() == loader_Top10_Reverse){
             System.out.println("Reverse loader");
             loader_Top10_Reverse.setVisible(false);
             setTop10("Reverse");
         }
-
     }
 
     public void handle_cheats(MouseEvent event) throws Exception{
+        reward(local_User,"Hacker");
         if (event.getSource() == cheat1){
             temp_cheats_infJoker = cheat1.isSelected();
+            if (!cheat1.isSelected() && cheat4.isSelected()) {
+                cheat4.setSelected(false);
+            }
+            if (!cheat1.isSelected() && cheat5.isSelected()) {
+                cheat5.setSelected(false);
+            }
         }
         if (event.getSource() == cheat2){
             temp_cheats_infTime = cheat2.isSelected();
@@ -3013,6 +3310,9 @@ public class GUI extends SystemController {
             }
             temp_cheats_alwaysCall = cheat5.isSelected();
         }
+        if (check_AllCheatsUsed()){
+            reward(local_User,"Indischer Kundensupport");
+        }
     }
 
     public void handle_ProfileImages(MouseEvent event) throws Exception {
@@ -3020,98 +3320,71 @@ public class GUI extends SystemController {
         if (event.getSource() == profileImage1){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/1.PNG";
         }
-
         if (event.getSource() == profileImage2){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/2.PNG";
         }
-
         if (event.getSource() == profileImage3){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/3.PNG";
         }
-
         if (event.getSource() == profileImage4){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/4.PNG";
         }
-
         if (event.getSource() == profileImage5){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/5.PNG";
         }
-
         if (event.getSource() == profileImage6){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/6.PNG";
         }
-
         if (event.getSource() == profileImage7){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/7.PNG";
         }
-
         if (event.getSource() == profileImage8){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/8.PNG";
         }
-
         if (event.getSource() == profileImage9){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/9.PNG";
         }
-
         if (event.getSource() == profileImage10){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/10.PNG";
         }
-
         if (event.getSource() == profileImage11){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/11.PNG";
         }
-
         if (event.getSource() == profileImage12){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/12.PNG";
         }
-
         if (event.getSource() == profileImage13){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/13.PNG";
         }
-
         if (event.getSource() == profileImage14){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/14.PNG";
         }
-
         if (event.getSource() == profileImage15){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/15.PNG";
         }
-
         if (event.getSource() == profileImage16){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/16.PNG";
         }
-
         if (event.getSource() == profileImage17){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/17.PNG";
         }
-
         if (event.getSource() == profileImage18){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/18.PNG";
         }
-
         if (event.getSource() == profileImage19){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/19.PNG";
         }
-
         if (event.getSource() == profileImage20){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/20.PNG";
         }
-
         if (event.getSource() == profileImage22){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/22.PNG";
         }
-
         if (event.getSource() == profileImage23){
-            local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/GG.PNG";
-        }
-
-        if (event.getSource() == profileImage24){
             local_Profile_Picure = "src/main/resources/de/hebk/Profilbilder/Unbenannt.PNG";
         }
-
         local_User.setProfilePicture(local_Profile_Picure);
-        openMenu();
+        showAccountInformation();
         super.saveData();
-        loadScene("Menu.fxml");
     }
 }

@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1920.0" styleClass="main_Panel" stylesheets="@CSS/Themes/Default.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hebk.GUI">
    <children>
       <ImageView fitHeight="145.0" fitWidth="145.0" layoutX="1091.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -26,7 +26,7 @@
             <Font name="Sylfaen" size="84.0" />
          </font>
       </Text>
-      <Button layoutX="40.0" layoutY="1141.0" mnemonicParsing="false" onAction="#showPreviousScene" prefHeight="72.0" prefWidth="357.0" styleClass="button_close" text="ZURÜCK" textFill="WHITE">
+      <Button layoutX="30.0" layoutY="1131.0" mnemonicParsing="false" onAction="#showPreviousScene" prefHeight="72.0" prefWidth="357.0" styleClass="button_close" text="ZURÜCK" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="40.0" />
          </font>
@@ -57,5 +57,10 @@
          </font>
       </CheckBox>
       <Rectangle fx:id="loader_Cheats" arcHeight="5.0" arcWidth="5.0" height="1280.0" onMouseMoved="#loadCheats" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1920.0" />
+      <Text fill="WHITE" layoutX="313.0" layoutY="997.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text_Gespielt" text="*MIT CHEATS BEKOMMST DU KEINE PUNKTE*">
+         <font>
+            <Font name="Sylfaen" size="64.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

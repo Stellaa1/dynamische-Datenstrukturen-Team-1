@@ -10,7 +10,7 @@ public class User implements Serializable {
     private String name;
     private String password;
     private String profilePicture = "src/main/resources/de/hebk/Profilbilder/Unbenannt.PNG";
-    private List<String> achievements = new List<>();
+    private List<String> achievements;
     private int points, reversePoints = 0;
     private int played, won, lost = 0;
     private int played_Reverse, won_Reverse, lost_Reverse = 0;

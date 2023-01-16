@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -20,17 +21,12 @@
             <Font name="Sylfaen" size="40.0" />
          </font>
       </Button>
-      <Button layoutX="30.0" layoutY="1131.0" mnemonicParsing="false" onAction="#showMainMenu" prefHeight="72.0" prefWidth="357.0" styleClass="button_close" text="ZURÜCK" textFill="WHITE">
+      <Button layoutX="30.0" layoutY="1131.0" mnemonicParsing="false" onAction="#showPreviousScene" prefHeight="72.0" prefWidth="357.0" styleClass="button_close" text="ZURÜCK" textFill="WHITE">
          <font>
             <Font name="Sylfaen" size="40.0" />
          </font>
       </Button>
       <TextField fx:id="anmelden_Benutzername1" layoutX="697.0" layoutY="121.0" onKeyTyped="#logIn_showProfilePicture" prefHeight="83.0" prefWidth="930.0" promptText="Eingabe" styleClass="text-field1">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="anmelden_Password1" layoutX="697.0" layoutY="292.0" prefHeight="83.0" prefWidth="930.0" promptText="Eingabe" styleClass="text-field1">
          <font>
             <Font size="26.0" />
          </font>
@@ -45,11 +41,6 @@
             <Font size="30.0" />
          </font>
       </Text>
-      <TextField fx:id="anmelden_PasswortWiederholen1" layoutX="697.0" layoutY="469.0" prefHeight="83.0" prefWidth="930.0" promptText="Eingabe" styleClass="text-field1">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </TextField>
       <Text fill="#a4a4a4" layoutX="713.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PASSWORT WIEDERHOLEN - SPIELER 1">
          <font>
             <Font size="30.0" />
@@ -65,11 +56,6 @@
             <Font size="26.0" />
          </font>
       </TextField>
-      <TextField fx:id="anmelden_Password2" layoutX="697.0" layoutY="836.0" prefHeight="83.0" prefWidth="930.0" promptText="Eingabe" styleClass="text-field1">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </TextField>
       <Text fill="#a4a4a4" layoutX="713.0" layoutY="628.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BENUTZERNAME - SPIELER 2">
          <font>
             <Font size="30.0" />
@@ -80,15 +66,35 @@
             <Font size="30.0" />
          </font>
       </Text>
-      <TextField fx:id="anmelden_PasswortWiederholen2" layoutX="697.0" layoutY="1013.0" prefHeight="83.0" prefWidth="930.0" promptText="Eingabe" styleClass="text-field1">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </TextField>
       <Text fill="#a4a4a4" layoutX="713.0" layoutY="993.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PASSWORT WIEDERHOLEN - SPIELER 2">
          <font>
             <Font size="30.0" />
          </font>
       </Text>
+      <PasswordField fx:id="anmelden_Password1" layoutX="697.0" layoutY="292.0" prefHeight="83.0" prefWidth="930.0" promptText="Eingabe" styleClass="text-field1">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </PasswordField>
+      <PasswordField fx:id="anmelden_PasswortWiederholen1" layoutX="697.0" layoutY="469.0" prefHeight="83.0" prefWidth="930.0" promptText="Eingabe" styleClass="text-field1">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </PasswordField>
+      <PasswordField fx:id="anmelden_Password2" layoutX="697.0" layoutY="836.0" prefHeight="83.0" prefWidth="930.0" promptText="Eingabe" styleClass="text-field1">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </PasswordField>
+      <PasswordField fx:id="anmelden_PasswortWiederholen2" layoutX="697.0" layoutY="1013.0" prefHeight="83.0" prefWidth="930.0" promptText="Eingabe" styleClass="text-field1">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </PasswordField>
+      <ImageView accessibleRole="BUTTON" fitHeight="92.0" fitWidth="92.0" layoutX="42.0" layoutY="34.0" onMouseClicked="#openMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/speisekarte.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
