@@ -25,7 +25,7 @@
          </image>
       </ImageView>
       <Accordion />
-      <Button layoutX="576.0" layoutY="1030.0" mnemonicParsing="false" onAction="#showRegister" prefHeight="115.0" prefWidth="714.0" text="REGESTRIEREN" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="576.0" AnchorPane.rightAnchor="629.0">
+      <Button layoutX="576.0" layoutY="1030.0" mnemonicParsing="false" onAction="#showRegister" prefHeight="115.0" prefWidth="714.0" text="REGISTRIEREN" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="576.0" AnchorPane.rightAnchor="629.0">
          <font>
             <Font name="Sylfaen" size="61.0" />
          </font>

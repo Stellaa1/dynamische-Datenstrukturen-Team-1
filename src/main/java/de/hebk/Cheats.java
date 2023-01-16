@@ -5,7 +5,6 @@ public class Cheats {
     private boolean infTime;
     private boolean infLife;
     private boolean alwaysFiftyFifty;
-    private boolean alwaysAudiece;
     private boolean alwaysCall;
 
     public boolean isInfJoker() {
@@ -38,14 +37,6 @@ public class Cheats {
 
     public void setAlwaysFiftyFifty(boolean alwaysFiftyFifty) {
         this.alwaysFiftyFifty = alwaysFiftyFifty;
-    }
-
-    public boolean isAlwaysAudiece() {
-        return alwaysAudiece;
-    }
-
-    public void setAlwaysAudiece(boolean alwaysAudiece) {
-        this.alwaysAudiece = alwaysAudiece;
     }
 
     public boolean isAlwaysCall() {

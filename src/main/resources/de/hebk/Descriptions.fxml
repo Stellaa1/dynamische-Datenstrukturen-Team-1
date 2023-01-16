@@ -14,11 +14,6 @@
             <Image url="@Images/unterlagen.png" />
          </image>
       </ImageView>
-      <ImageView accessibleRole="BUTTON" fitHeight="92.0" fitWidth="92.0" layoutX="32.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/speisekarte.png" />
-         </image>
-      </ImageView>
       <Text fill="WHITE" layoutX="596.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ERKLÄRUNGEN">
          <font>
             <Font name="Sylfaen" size="84.0" />
@@ -77,5 +72,10 @@
             <Font name="Sylfaen" size="40.0" />
          </font>
       </Button>
+      <ImageView accessibleRole="BUTTON" fitHeight="92.0" fitWidth="92.0" layoutX="42.0" layoutY="34.0" onMouseClicked="#openMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/speisekarte.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
